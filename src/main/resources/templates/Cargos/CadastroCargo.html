@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="~{layout/LayoutPadrao}">
+
+<head>
+<title>Cadastro de Cargo</title>
+</head>
+
+<section layout:fragment="conteudo">
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-10">
+					<h1>Cadastro de Cargo</h1>
+					<!-- <h1 th:unless="${cerveja.nova}"
+						th:text="|Edição da ${cerveja.nome}|">Edição de Cargo</h1> -->
+				</div>
+
+				<div class="col-xs-2">
+					<div class="aw-page-header-controls">
+						<a class="btn  btn-default" th:href="@{/cargos}"> <i
+							class="glyphicon  glyphicon-plus-sign"></i> <span
+							class="hidden-xs  hidden-sm">Pesquisa</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+
+		<form class="form-horizontal" method="POST" th:action="@{/cargos}"
+			th:object="${cargo}">
+			<!-- <div layout:include="MensagemGeral"></div>
+    	<div layout:include="MensagemErro"></div> -->
+
+			<div class="panel-body">
+				<input type="hidden" th:field="*{id}" />
+
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('nome')} ? has-error">
+					<label for="nome" class="col-sm-2 control-label">Cargo</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="nome"
+							th:field="*{nome}" />
+					</div>
+				</div>
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('abreviacao')} ? has-error">
+					<label for="abreviacao" class="col-sm-2 control-label">Abreviação</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="abreviacao"
+							th:field="*{abreviacao}" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+					</div>
+				</div>
+			</div>
+
+		</form>
+	</div>
+</section>
+</html>
