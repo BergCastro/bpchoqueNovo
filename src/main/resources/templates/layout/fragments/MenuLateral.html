@@ -11,19 +11,11 @@
       		<ul class="aw-menu__list">
 
         		<li class="aw-menu__item" brewer:menu="@{/}">
-          			<a th:href="@{/}"><i class="fa  fa-fw  fa-home">
+          			<a th:href="@{/}"><i class="fa  fa-fw  fa-dashboard">
           				</i><span>Painel Principal</span>
           				
           			</a>
-          			<ul class="aw-menu__list  aw-menu__list--sublist">
-			            <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/vendas.+}">
-			            	<a th:href="@{/vendas/nova}">Cadastro de venda</a>
-			            </li>
-			            
-			            <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/vendas}">
-			            	<a th:href="@{/vendas}">Pesquisa de vendas</a>
-			            </li>
-			        </ul>
+          			
         		</li>
         		
         		<li class="aw-menu__item">
@@ -77,6 +69,9 @@
 			            </li>
 			            <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/cargos.*}">
 			            	<a th:href="@{/cargos}">Cargos</a>
+			            </li>
+			             <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/opms.*}">
+			            	<a th:href="@{/opms}">OPMs/Orgãos</a>
 			            </li>
           			</ul>
         		</li>	
