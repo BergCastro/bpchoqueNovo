@@ -65,7 +65,7 @@ public class OpmOrgaoController {
 		try {
 			opmOrgaoService.save(opm);
 			attributes.addFlashAttribute("mensagem", "OPM salva com sucesso!");
-			return "redirect:/opms/novo";
+			return "redirect:/opms";
 		} catch (IllegalArgumentException e) {
 			errors.rejectValue("dataVencimento", null, e.getMessage());
 			return CADASTRO_OPM;
