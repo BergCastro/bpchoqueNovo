@@ -85,6 +85,10 @@ public class PessoaController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar( @Validated PessoaDef pessoa, Errors errors, RedirectAttributes attributes) {
 		if (errors.hasErrors()) {
+			
+			System.out.println("Entrou no erro");
+			System.out.println(pessoa.toString());
+			
 			return CADASTRO_PESSOA;
 		}
 		
@@ -102,7 +106,7 @@ public class PessoaController {
 		try {
 			pessoaService.save(pessoa);
 			attributes.addFlashAttribute("mensagem", "Pessoa salva com sucesso!");
-			return "redirect:/pessoas";
+			return "redirect:/pessoasdef";
 		} catch (IllegalArgumentException e) {
 			errors.rejectValue("dataVencimento", null, e.getMessage());
 			return CADASTRO_PESSOA;
@@ -117,12 +121,13 @@ public class PessoaController {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		
-			mv.setViewName(CADASTRO_PESSOA);
+			System.out.println("entrou em edição");
+			mv.setViewName("pessoasdef/CadastroPessoa");
 		
 			
 		
-		mv.addObject(pessoa);
+		mv.addObject("pessoa", pessoa);
+		System.out.println(pessoa.toString());
 		return mv;
 	}
 	
@@ -132,7 +137,7 @@ public class PessoaController {
 		System.out.println("Entrou no delete");
 		
 		
-		return "redirect:/pessoas";
+		return "redirect:/pessoasdef";
 	}
 	
 	@ModelAttribute("sexos")

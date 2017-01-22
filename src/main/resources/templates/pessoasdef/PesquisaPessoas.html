@@ -37,6 +37,10 @@
 		</div>
 
 		<div class="container-fluid">
+			<div class="alert alert-success"
+				th:if="${!#strings.isEmpty(mensagem)}">
+				<span th:text="${mensagem}">Título salvo com sucesso!!!</span>
+			</div>
 			<div class="table-responsive">
 				<table id="example"
 					class="table table-bordered table-striped table-condensed"
@@ -63,7 +67,7 @@
 							<td th:text="${pessoa?.nome}">nome</td>
 							<td th:text="${pessoa?.opm_orgao.nome}">orgao</td>
 							<td class="text-center"><a class="btn btn-link btn-xs"
-								th:href="@{/pessoas/{id}(id=${pessoa.id})}" title="Editar"
+								th:href="@{/pessoasdef/{id}(id=${pessoa.id})}" title="Editar"
 								rel="tooltip" data-placement="top"> <span
 									class="glyphicon glyphicon-pencil"></span>
 							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
@@ -81,12 +85,37 @@
 
 
 		</div>
+		<div class="modal fade" id="myModalExclusao" tabindex="-1"
+			data-keyboard="false" data-backdrop="static">
+			<div class="modal-dialog">
+				<form
+					th:attr="data-url-base=@{/pessoasdef/delete/}, data-tipo='a pessoa '"
+					method="get">
+
+
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">Você tem certeza?</h4>
+						</div>
+
+						<div class="modal-body">
+							<span>Tem certeza que deseja apagar o pessoa?</span>
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>
+							<button type="submit" class="btn btn-primary">Excluir</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
 	</section>
 	<th:block layout:fragment="javascript-extra">
-	<script th:src="@{/javascripts/bpchoque.js}"></script>
-	<script th:src="@{/javascripts/datatable/jquery.dataTables.min.js}"></script>
-	<script th:src="@{/javascripts/datatable/dataTables.bootstrap.min.js}"></script>
-	<script th:src="@{/javascripts/datatable/iniciaAndTraduz.js}"></script>
-</th:block>
+		<script th:src="@{/javascripts/bpchoque.js}"></script>
+		<script th:src="@{/javascripts/datatable/jquery.dataTables.min.js}"></script>
+		<script th:src="@{/javascripts/datatable/dataTables.bootstrap.min.js}"></script>
+		<script th:src="@{/javascripts/datatable/iniciaAndTraduz.js}"></script>
+	</th:block>
 </body>
 </html>

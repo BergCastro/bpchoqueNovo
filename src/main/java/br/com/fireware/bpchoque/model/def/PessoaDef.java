@@ -141,7 +141,7 @@ public class PessoaDef{
 	@JoinColumn(name = "cargo")
 	private Cargo cargo;
 
-	//@NotEmpty(message = "O campo não pode estar vazio!")
+	@NotEmpty(message = "O campo não pode estar vazio!")
 	//@Digits(integer = 6, fraction = 0, message = "Digite apenas números neste campo!")
 	//@Length(max = 6, message = "O número tem que ter no máximo {max} caracteres")
 	@Column(name = "numero_pm", length = 6)
