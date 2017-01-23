@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -36,8 +37,10 @@ public class OpmOrgao{
 	@Length(max=40, message="O campo tem que ter no máximo {max} caracteres")
 	@Column(name="nome", nullable=false, length=40, unique=true)
 	private String nome;
+	
 	@Column(name="localizacao", nullable=true, length=60)
 	private String localizacao;
+	@NotNull(message="Escolha um tipo!")
 	@Enumerated(EnumType.STRING)
 	private TipoOpm tipo;
 	

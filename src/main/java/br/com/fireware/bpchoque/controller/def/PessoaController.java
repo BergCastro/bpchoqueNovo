@@ -69,17 +69,10 @@ public class PessoaController {
 	@RequestMapping("/novo")
 	public ModelAndView novo() {
 		
-		ModelAndView mv = new ModelAndView();
-		
+		ModelAndView mv = new ModelAndView("pessoasdef/CadastroPessoa");
+		mv.addObject( new PessoaDef());
+		return mv;
 			
-			
-			mv.setViewName("pessoasdef/CadastroPessoa");
-			
-			mv.addObject("pessoa", new PessoaDef());
-			return mv;
-			
-	
-		
 	}
 	
 	

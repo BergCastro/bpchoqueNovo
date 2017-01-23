@@ -3,8 +3,8 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:data="http://www.thymeleaf.org/extras/data"
-	xmlns:brewer="http://brewer.algaworks.com"
-	layout:decorate="~{layout/LayoutPadrao}">
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:brewer="http://brewer.algaworks.com">
 
 <head>
 <title>Cadastro de Pessoa</title>
@@ -33,7 +33,7 @@
 
 	<div class="container-fluid">
 
-		<form method="POST" th:object="${pessoa}" th:action="@{/pessoasdef}">
+		<form method="POST" th:object="${pessoaDef}" th:action="@{/pessoasdef}">
 			<brewer:message/>
 			
 
@@ -123,77 +123,32 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-4"
+				<div class="form-group col-sm-4 bw-required"
 					brewer:classforerror="datanasc">
-					<label for="data">Data Nascimento</label> <input type="text"
+					<label for="data" class="control-label">Data Nascimento</label> <input type="text"
 						class="form-control" id="dataNascimento" name="data"
 						th:field="*{datanasc}" data-provide="datepicker"
 						data-date-language="pt-BR" data-date-today-highlight="true"
 						data-date-orientation="bottom" />
 
 				</div>
-				<div class="form-group  col-sm-4">
-					<label for="estado">Post./Grad.</label> <select id="estado"
-						class="form-control" th:field="*{cargo}">
+				<div class="form-group  col-sm-4 bw-required">
+					<label for="cargo" class="control-label">Post./Grad.</label> <select id="cargo"
+						class="form-control" th:field="*{cargo}" name="cargo">
 						<option value="">Selecione uma opção</option>
 						<option th:each="cargo : ${cargos}" th:value="${cargo.id}"
 							th:text="${cargo.nome}"></option>
 					</select>
 				</div>
-				<div class="form-group  col-sm-4">
-					<label for="opm">OPM/Orgão</label> <select id="opm"
-						class="form-control" th:field="*{opm_orgao}">
+				<div class="form-group  col-sm-4 bw-required">
+					<label for="opm" class="control-label">OPM/Orgão</label> <select id="opm"
+						class="form-control" th:field="*{opm_orgao}" name="opm">
 						<option value="">Selecione uma opção</option>
 						<option th:each="opm : ${opms}" th:value="${opm.id}"
 							th:text="${opm.nome}"></option>
 					</select>
 				</div>
 			</div>
-
-			<!-- 			<div class="row"> -->
-			<!-- 				<div class="form-group  col-sm-4"> -->
-			<!-- 					<label for="logradouro">Logradouro</label> -->
-			<!-- 					<input type="text" class="form-control" id="logradouro" th:field="*{endereco.logradouro}"/> -->
-			<!-- 				</div> -->
-
-			<!-- 				<div class="form-group  col-sm-4"> -->
-			<!-- 					<label for="numero">Número</label> -->
-			<!-- 					<input type="text" class="form-control" id="numero" th:field="*{endereco.numero}"/> -->
-			<!-- 				</div> -->
-
-			<!-- 				<div class="form-group  col-sm-4"> -->
-			<!-- 					<label for="complemento">Complemento</label> -->
-			<!-- 					<input type="text" class="form-control" id="complemento" th:field="*{endereco.complemento}"/> -->
-			<!-- 				</div> -->
-			<!-- 			</div> -->
-
-			<!-- 			<div class="row"> -->
-			<!-- 				<div class="form-group  col-sm-4"> -->
-			<!-- 					<label for="cep">CEP</label> -->
-			<!-- 					<input type="text" class="form-control  js-cep" id="cep" th:field="*{endereco.cep}"/> -->
-			<!-- 				</div> -->
-
-			<!-- 				<div class="form-group  col-sm-4"> -->
-			<!-- 					<label for="estado">Estado</label> -->
-			<!-- 					<select id="estado" class="form-control" th:field="*{endereco.estado}"> -->
-			<!-- 	                    <option value="">Selecione o estado</option> -->
-			<!-- 	                    <option th:each="estado : ${estados}" th:value="${estado.codigo}" th:text="${estado.nome}">São Paulo</option> -->
-			<!-- 	                </select> -->
-			<!-- 				</div> -->
-
-			<!-- 				<div class="form-group  col-sm-4"> -->
-			<!-- 					<label  for="cidade">Cidade</label> -->
-			<!-- 					<div class="bw-field-action"> -->
-			<!-- 						<input type="hidden" id="inputHiddenCidadeSelecionada" th:value="*{endereco.cidade} != null ? *{endereco.cidade.codigo}"/> -->
-			<!-- 						<select id="cidade" class="form-control" data:url="@{/cidades}" th:field="*{endereco.cidade}"> -->
-			<!-- 						</select> -->
-
-			<!-- 						<div class="bw-field-action__icon  js-img-loading" style="display: none"> -->
-			<!-- 							<img th:src="@{/images/mini-loading.gif}"/> -->
-			<!-- 						</div> -->
-			<!-- 					</div> -->
-			<!-- 				</div> -->
-			<!-- 			</div> -->
 
 			<button type="submit" class="btn  btn-primary">Salvar</button>
 		</form>

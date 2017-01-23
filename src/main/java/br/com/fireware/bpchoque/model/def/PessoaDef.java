@@ -31,6 +31,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -65,25 +66,6 @@ public class PessoaDef{
 	}
 	
 	
-	/*public enum TipoPessoa {
-
-		MILITAR("Militar"),
-		CIVIL("Civil");
-		
-		private String descricao;
-		
-		TipoPessoa(String descricao) {
-			this.descricao = descricao;
-		}
-		
-		public String getDescricao() {
-			return descricao;
-		}
-		
-	}*/
-
-
-	
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name = "codigo")
@@ -93,7 +75,7 @@ public class PessoaDef{
 	@Column(name = "nome", nullable = false, length = 60)
 	private String nome;
 
-	@NotNull(message = "Selecione uma opção!")
+	@NotNull(message = "Selecione um Sexo!")
 	@Enumerated(EnumType.STRING)
 	@Column(name = "sexo")
 	private Sexo sexo;
@@ -112,10 +94,12 @@ public class PessoaDef{
 	@Column(name = "telefone2", length = 14)
 	private String telefone2;
 	
-
+	@NotBlank(message="Campo Data de Nasc. não pode estar vazio")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "datanasc", columnDefinition="DATE")
 	private LocalDate datanasc;
+	
+	
 
 	
 	@Email(message = "Insira um email válido!")
@@ -124,37 +108,37 @@ public class PessoaDef{
 	private String email;
 
 	
-	
+	@NotNull(message = "Selecione um tipo de pessoa!")
 	@Enumerated(EnumType.STRING)
 	@Column(name= "tipo")
 	private TipoPessoa tipo;
 
 	
-	@NotEmpty(message = "A matrícula não pode estar vazio!")
+	@NotEmpty(message = "Campo matrícula não pode estar vazio!")
 	//@Digits(integer = 9, fraction = 0, message = "Digite apenas números neste campo!")
 	//@Length(max = 10, min = 10, message = "A matrícula tem que ter {max} caracteres")
 	@Column(name = "matricula", nullable = false, length = 15, unique = true)
 	private String matricula;
 
-	//@NotNull(message = "Selecione uma opção!")
+	@NotNull(message = "Um cargo deve ser selecionado!")
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "cargo")
 	private Cargo cargo;
 
-	@NotEmpty(message = "O campo não pode estar vazio!")
+	@NotEmpty(message = "O númeroPM não pode estar vazio!")
 	//@Digits(integer = 6, fraction = 0, message = "Digite apenas números neste campo!")
 	//@Length(max = 6, message = "O número tem que ter no máximo {max} caracteres")
 	@Column(name = "numero_pm", length = 6)
 	private String numero_pm;
 
-	//@NotEmpty(message = "O campo não pode estar vazio!")
+	@NotEmpty(message = "O Nome de guerra não pode estar vazio!")
 	//@Length(max = 20, message = "O campo tem que ter no máximo {max} caracteres")
 	@Column(name = "nome_guerra", length = 20)
 	private String nome_guerra;
 
 	
 	
-	//@NotNull(message = "Selecione uma opção!")
+	@NotNull(message = "Uma OPM deve ser selecionada!")
 	@ManyToOne()
 	@JoinColumn(name = "opm_orgao")
 	private OpmOrgao opm_orgao;
