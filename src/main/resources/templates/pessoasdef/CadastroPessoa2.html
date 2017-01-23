@@ -1,29 +1,31 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:data="http://www.thymeleaf.org/extras/data"
-	xmlns:brewer="http://brewer.algaworks.com"
-	layout:decorate="~{layout/LayoutPadrao}">
-
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:brewer="http://brewer.algaworks.com">
+	
 <head>
-<title>Cadastro de Pessoa</title>
+	<title>Cadastro de cerveja</title>
+	
+	<link rel="stylesheet" th:href="@{/stylesheets/vendors/upload.min.css}"/>
 </head>
 
+<body>
 <section layout:fragment="conteudo">
 
 	<div class="page-header">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-sm-10">
-					<h1>Cadastro de Pessoa</h1>
+				<div class="col-xs-10">
+					<h1 th:if="${pessoadef.nova}">Cadastro de cerveja</h1>
+					<h1 th:unless="${pessoadef.nova}" th:text="|Edição da ${pessoadef.nome}|">Edição de cerveja</h1>
 				</div>
-
-				<div class="col-sm-2">
+			
+				<div class="col-xs-2">
 					<div class="aw-page-header-controls">
-						<a class="btn  btn-default" th:href="@{/pessoasdef}"> <i
-							class="glyphicon  glyphicon-plus-sign"></i> <span
-							class="hidden-xs  hidden-sm">Pesquisa</span>
+						<a class="btn  btn-default" th:href="@{/pessoasdef2}">
+							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Pesquisa</span>
 						</a>
 					</div>
 				</div>
@@ -33,10 +35,10 @@
 
 	<div class="container-fluid">
 
-		<form method="POST" th:object="${pessoa}" th:action="@{/pessoasdef}">
+		<form method="POST" th:object="${pessoadef}" class="form-vertical  js-form-loading" 
+				th:action="${pessoadef.nova} ? @{/pessoasdef2/nova} : @{/pessoasdef2/{id}(id=${pessoadef.id})}">
 			<brewer:message/>
 			
-
 			<input type="hidden" th:field="*{id}" />
 			<div class="row">
 				<div class="form-group  col-sm-8  bw-required"
@@ -195,9 +197,16 @@
 			<!-- 				</div> -->
 			<!-- 			</div> -->
 
-			<button type="submit" class="btn  btn-primary">Salvar</button>
+			
+			<div class="form-group">
+				<button class="btn  btn-primary" type="submit">Salvar</button>
+			</div>
+	
 		</form>
 	</div>
+	
+	<div th:replace="estilo/CadastroRapidoEstilo :: modal"></div>
+	<th:block th:replace="hbs/FotoCerveja"></th:block>
 </section>
 
 <th:block layout:fragment="javascript-extra">
@@ -205,6 +214,9 @@
 	<script th:src="@{/javascripts/vendors/uikit.min.js}"></script>
 	<script th:src="@{/javascripts/vendors/upload.min.js}"></script>
 	<script th:src="@{/javascripts/vendors/handlebars.min.js}"></script>
+	<script th:src="@{/javascripts/cerveja.upload-foto.js}"></script>
+	
 </th:block>
-
+	
+</body>
 </html>

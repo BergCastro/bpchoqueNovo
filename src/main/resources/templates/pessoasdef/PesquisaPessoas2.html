@@ -3,11 +3,10 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/LayoutPadrao}"
-	xmlns:brewer="http://brewer.algaworks.com"
-	xmlns:data="http://www.thymeleaf.org/extras/data">
+	xmlns:brewer="http://brewer.algaworks.com">
 
 <head>
-<title>Pesquisa de clientes</title>
+<title>Pesquisa de pessoasdef2</title>
 <th:block layout:fragment="css-extra">
 	<link rel="stylesheet" type="text/css"
 		th:href="@{/stylesheets/datatable/dataTables.bootstrap.min.css}" />
@@ -21,14 +20,14 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-10">
-						<h1>Pesquisa de Pessoas</h1>
+						<h1>Pesquisa de pessoasdef2</h1>
 					</div>
 
 					<div class="col-xs-2">
 						<div class="aw-page-header-controls">
-							<a class="btn  btn-default" th:href="@{/pessoasdef/novo}"> <i
+							<a class="btn  btn-default" th:href="@{/pessoasdef2/nova}"> <i
 								class="glyphicon  glyphicon-plus-sign"></i> <span
-								class="hidden-xs  hidden-sm">Nova pessoa</span>
+								class="hidden-xs  hidden-sm">Nova cerveja</span>
 							</a>
 						</div>
 					</div>
@@ -37,7 +36,6 @@
 		</div>
 
 		<div class="container-fluid">
-			
 			<div class="table-responsive">
 				<table id="example"
 					class="table table-bordered table-striped table-condensed"
@@ -79,34 +77,8 @@
 				</table>
 			</div>
 
-
-
 		</div>
-		<div class="modal fade" id="myModalExclusao" tabindex="-1"
-			data-keyboard="false" data-backdrop="static">
-			<div class="modal-dialog">
-				<form
-					th:attr="data-url-base=@{/pessoasdef/delete/}, data-tipo='a pessoa '"
-					method="get">
 
-
-					<div class="modal-content">
-						<div class="modal-header">
-							<h4 class="modal-title">Você tem certeza?</h4>
-						</div>
-
-						<div class="modal-body">
-							<span>Tem certeza que deseja apagar o pessoa?</span>
-						</div>
-
-						<div class="modal-footer">
-							<button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>
-							<button type="submit" class="btn btn-primary">Excluir</button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
 	</section>
 	<th:block layout:fragment="javascript-extra">
 		<script th:src="@{/javascripts/bpchoque.js}"></script>
