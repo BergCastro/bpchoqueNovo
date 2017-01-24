@@ -38,6 +38,8 @@
 			
 
 			<input type="hidden" th:field="*{id}" />
+			<input type="hidden" th:field="*{criadopor}" />
+			<input type="hidden" th:field="*{criadoem}" />
 			<div class="row">
 				<div class="form-group  col-sm-8  bw-required"
 					brewer:classforerror="nome">
@@ -132,7 +134,7 @@
 						data-date-orientation="bottom" />
 
 				</div>
-				<div class="form-group  col-sm-4 bw-required">
+				<div class="form-group  col-sm-4 bw-required" brewer:classforerror="cargo">
 					<label for="cargo" class="control-label">Post./Grad.</label> <select id="cargo"
 						class="form-control" th:field="*{cargo}" name="cargo">
 						<option value="">Selecione uma opção</option>
@@ -140,7 +142,7 @@
 							th:text="${cargo.nome}"></option>
 					</select>
 				</div>
-				<div class="form-group  col-sm-4 bw-required">
+				<div class="form-group  col-sm-4 bw-required" brewer:classforerror="opm_orgao">
 					<label for="opm" class="control-label">OPM/Orgão</label> <select id="opm"
 						class="form-control" th:field="*{opm_orgao}" name="opm">
 						<option value="">Selecione uma opção</option>

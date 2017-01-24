@@ -5,6 +5,7 @@ package br.com.fireware.bpchoque.model;
 
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,8 +17,7 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
-
-
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 @Data
@@ -43,6 +43,21 @@ public class Cargo implements Serializable{
     @Max(value = 8, message = "O formato da data está errado ex.: 12/12/2012")*/
 	@Column(name="abreviacao", nullable= false, length=10, unique=true)
 	private String abreviacao;
+	
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+	@Column(name = "criadoem")
+	private LocalDateTime criadoem;
+	
+	@Column(name = "criadopor")
+	private String criadopor;
+	
+	
+	@DateTimeFormat(pattern = "dd/MM/yyyy  HH:mm:ss")
+	@Column(name = "atualizadoem")
+	private LocalDateTime atualizadoem;
+	
+	@Column(name = "atualizadopor")
+	private String atualizadopor;
 	
 	
 		

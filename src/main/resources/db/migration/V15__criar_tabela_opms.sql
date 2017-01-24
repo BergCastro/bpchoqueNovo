@@ -1,5 +1,9 @@
 CREATE TABLE opms_orgaos (
     codigo BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+    criadoem DATETIME DEFAULT CURRENT_TIMESTAMP,
+    criadopor VARCHAR(50),
+    atualizadoem DATETIME,
+    atualizadopor VARCHAR(50),
     nome VARCHAR(50) NOT NULL,
     localizacao VARCHAR(60),
     tipo VARCHAR(50) NOT NULL

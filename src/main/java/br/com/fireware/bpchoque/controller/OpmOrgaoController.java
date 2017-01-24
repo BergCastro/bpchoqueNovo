@@ -1,10 +1,12 @@
 package br.com.fireware.bpchoque.controller;
 
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -19,7 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.fireware.bpchoque.model.OpmOrgao;
 import br.com.fireware.bpchoque.model.OpmOrgao.TipoOpm;
-
+import br.com.fireware.bpchoque.security.UsuarioSistema;
 import br.com.fireware.bpchoque.service.OpmOrgaoService;
 
 
@@ -55,12 +57,20 @@ public class OpmOrgaoController {
 	
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated OpmOrgao opm, Errors errors, RedirectAttributes attributes) {
+	public String salvar(@Validated OpmOrgao opm, Errors errors, RedirectAttributes attributes, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
 		if (errors.hasErrors()) {
 			return CADASTRO_OPM;
 		}
 		
 		opm.setNome(opm.getNome().toUpperCase());
+		opm.setNome(opm.getLocalizacao().toUpperCase());
+		opm.setAtualizadoem(LocalDateTime.now());
+		opm.setAtualizadopor(usuarioSistema.getUsername());
+		
+		if(opm.getCriadopor()==null || opm.getCriadopor().equals("")){
+			opm.setCriadoem(LocalDateTime.now());
+			opm.setCriadopor(usuarioSistema.getUsername());
+		}
 		
 		try {
 			opmOrgaoService.save(opm);

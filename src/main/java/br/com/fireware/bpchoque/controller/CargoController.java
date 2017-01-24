@@ -1,7 +1,10 @@
 package br.com.fireware.bpchoque.controller;
 
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.fireware.bpchoque.model.Cargo;
+import br.com.fireware.bpchoque.security.UsuarioSistema;
 import br.com.fireware.bpchoque.service.CargoService;
 
 @Controller
@@ -41,12 +45,19 @@ public class CargoController {
 	
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated Cargo cargo, Errors errors, RedirectAttributes attributes) {
+	public String salvar(@Validated Cargo cargo, Errors errors, RedirectAttributes attributes, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
 		if (errors.hasErrors()) {
 			return CADASTRO_VIEW;
 		}
 		cargo.setNome(cargo.getNome().toUpperCase());
 		cargo.setAbreviacao(cargo.getAbreviacao().toUpperCase());
+		cargo.setAtualizadoem(LocalDateTime.now());
+		cargo.setAtualizadopor(usuarioSistema.getUsername());
+		
+		if(cargo.getCriadopor()==null || cargo.getCriadopor().equals("")){
+			cargo.setCriadoem(LocalDateTime.now());
+			cargo.setCriadopor(usuarioSistema.getUsername());
+		}
 		
 		try {
 			cargoService.save(cargo);

@@ -2,12 +2,14 @@ package br.com.fireware.bpchoque.controller.def;
 
 
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -24,6 +26,7 @@ import br.com.fireware.bpchoque.model.Cargo;
 import br.com.fireware.bpchoque.model.OpmOrgao;
 import br.com.fireware.bpchoque.model.def.PessoaDef;
 import br.com.fireware.bpchoque.model.def.PessoaDef.EstadoCivil;
+import br.com.fireware.bpchoque.security.UsuarioSistema;
 import br.com.fireware.bpchoque.model.TipoPessoa;
 import br.com.fireware.bpchoque.model.Sexo;
 
@@ -67,22 +70,21 @@ public class PessoaController {
 	}
 	
 	@RequestMapping("/novo")
-	public ModelAndView novo() {
+	public ModelAndView novo(@AuthenticationPrincipal UsuarioSistema usuarioSistema) {
 		
 		ModelAndView mv = new ModelAndView("pessoasdef/CadastroPessoa");
-		mv.addObject( new PessoaDef());
+		PessoaDef pessoaDef = new PessoaDef();
+		
+		
+		mv.addObject(pessoaDef);
 		return mv;
 			
 	}
 	
 	
-	
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar( @Validated PessoaDef pessoa, Errors errors, RedirectAttributes attributes) {
+	public String salvar( @Validated PessoaDef pessoa, Errors errors, RedirectAttributes attributes, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
 		if (errors.hasErrors()) {
-			
-			System.out.println("Entrou no erro");
-			System.out.println(pessoa.toString());
 			
 			return CADASTRO_PESSOA;
 		}
@@ -93,9 +95,15 @@ public class PessoaController {
 		
 			pessoa.setNome(pessoa.getNome().toUpperCase());		
 			pessoa.setNome_guerra(pessoa.getNome_guerra().toUpperCase());
+			
 			pessoa.setEmail(pessoa.getEmail().toLowerCase());
+			pessoa.setAtualizadoem(LocalDateTime.now());
+			pessoa.setAtualizadopor(usuarioSistema.getUsername());
 			
-			
+			if(pessoa.getCriadopor()==null || pessoa.getAtualizadopor().equals("")){
+				pessoa.setCriadoem(LocalDateTime.now());
+				pessoa.setCriadopor(usuarioSistema.getUsername());
+			}
 			
 		
 		try {
@@ -121,7 +129,7 @@ public class PessoaController {
 		
 			
 		
-		mv.addObject("pessoa", pessoa);
+		mv.addObject("pessoaDef", pessoa);
 		System.out.println(pessoa.toString());
 		return mv;
 	}

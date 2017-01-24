@@ -9,7 +9,10 @@ package br.com.fireware.bpchoque.model.def;
 
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import java.time.Period;
+
 
 import javax.persistence.Column;
 
@@ -75,7 +78,7 @@ public class PessoaDef{
 	@Column(name = "nome", nullable = false, length = 60)
 	private String nome;
 
-	@NotNull(message = "Selecione um Sexo!")
+	@NotNull(message = "Um sexo deve ser selecionado!")
 	@Enumerated(EnumType.STRING)
 	@Column(name = "sexo")
 	private Sexo sexo;
@@ -84,19 +87,34 @@ public class PessoaDef{
 	//@Length(max = 30, message = "O logradouro tem que ter no máximo {max} caracteres")
 	
 	
-	@Length(max = 14,  message = "Celular inválido!")
-	@Column(name = "telefone1", length = 14, columnDefinition="VARCHAR(14) DEFAULT 'CEL. FALTANDO'")
+	@Length(max = 16,  message = "Número de telefone inválido!")
+	@Column(name = "telefone1", length = 16)
 	private String telefone1;
 	
 	
 
-	@Length(max = 14,  message = "Celular inválido!")
-	@Column(name = "telefone2", length = 14)
+	@Length(max = 16,  message = "Número de telefone inválido!")
+	@Column(name = "telefone2", length = 16)
 	private String telefone2;
 	
-	@NotBlank(message="Campo Data de Nasc. não pode estar vazio")
+	
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+	@Column(name = "criadoem")
+	private LocalDateTime criadoem;
+	
+	@Column(name = "criadopor")
+	private String criadopor;
+	
+	
+	@DateTimeFormat(pattern = "dd/MM/yyyy  HH:mm:ss")
+	@Column(name = "atualizadoem")
+	private LocalDateTime atualizadoem;
+	
+	@Column(name = "atualizadopor")
+	private String atualizadopor;
+	
+	@NotNull(message="A Data de Nasc. não pode estar vazia")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@Column(name = "datanasc", columnDefinition="DATE")
 	private LocalDate datanasc;
 	
 	
@@ -108,13 +126,13 @@ public class PessoaDef{
 	private String email;
 
 	
-	@NotNull(message = "Selecione um tipo de pessoa!")
+	@NotNull(message = "Um tipo de pessoa deve ser selecionado!")
 	@Enumerated(EnumType.STRING)
 	@Column(name= "tipo")
 	private TipoPessoa tipo;
 
 	
-	@NotEmpty(message = "Campo matrícula não pode estar vazio!")
+	@NotEmpty(message = "A matrícula não pode estar vazia!")
 	//@Digits(integer = 9, fraction = 0, message = "Digite apenas números neste campo!")
 	//@Length(max = 10, min = 10, message = "A matrícula tem que ter {max} caracteres")
 	@Column(name = "matricula", nullable = false, length = 15, unique = true)
@@ -131,7 +149,7 @@ public class PessoaDef{
 	@Column(name = "numero_pm", length = 6)
 	private String numero_pm;
 
-	@NotEmpty(message = "O Nome de guerra não pode estar vazio!")
+	@NotEmpty(message = "O nome de guerra não pode estar vazio!")
 	//@Length(max = 20, message = "O campo tem que ter no máximo {max} caracteres")
 	@Column(name = "nome_guerra", length = 20)
 	private String nome_guerra;

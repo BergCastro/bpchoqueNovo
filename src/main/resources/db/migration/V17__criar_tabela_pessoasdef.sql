@@ -2,7 +2,10 @@
 
 CREATE TABLE pessoasdef (
     codigo BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
-    
+    criadoem DATETIME DEFAULT CURRENT_TIMESTAMP,
+    criadopor VARCHAR(50),
+    atualizadoem DATETIME,
+    atualizadopor VARCHAR(50),
     nome VARCHAR(80) NOT NULL,
     sexo VARCHAR(20) NOT NULL,
     telefone1 VARCHAR(20),

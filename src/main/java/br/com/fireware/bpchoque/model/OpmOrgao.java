@@ -3,6 +3,8 @@ package br.com.fireware.bpchoque.model;
 
 
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -16,6 +18,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
@@ -44,6 +47,20 @@ public class OpmOrgao{
 	@Enumerated(EnumType.STRING)
 	private TipoOpm tipo;
 	
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+	@Column(name = "criadoem")
+	private LocalDateTime criadoem;
+	
+	@Column(name = "criadopor")
+	private String criadopor;
+	
+	
+	@DateTimeFormat(pattern = "dd/MM/yyyy  HH:mm:ss")
+	@Column(name = "atualizadoem")
+	private LocalDateTime atualizadoem;
+	
+	@Column(name = "atualizadopor")
+	private String atualizadopor;
 	
 	public enum TipoOpm {
 		CIVIL("Civil"),
