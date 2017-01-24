@@ -21,4 +21,3 @@ CREATE TABLE pessoasdef (
     FOREIGN KEY (cargo) REFERENCES cargos(codigo),
     FOREIGN KEY (opm_orgao) REFERENCES opms_orgaos(codigo)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
