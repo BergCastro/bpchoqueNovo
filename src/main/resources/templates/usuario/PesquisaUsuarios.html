@@ -51,7 +51,7 @@
 					<div>
 						<th:block th:each="grupo : ${grupos}">
 	  						<div class="checkbox  checkbox-inline"> 
-		    					<input type="checkbox" th:value="${grupo.codigo}" th:field="*{grupos}"/>
+		    					<input type="checkbox" th:value="${grupo.id}" th:field="*{grupos}"/>
 		    					<label th:for="${#ids.prev('grupos')}" th:text="${grupo.nome}">Administrador</label>
 	    					</div>
 	    				</th:block>
@@ -93,8 +93,8 @@
 	            <tbody>
 					<tr th:each="usuario : ${pagina.conteudo}">
 						<td>
-							<div class="checkbox  aw-checkbox-no-margin" th:if="${#authentication.principal.usuario.codigo != usuario.codigo}">
-	            				<input type="checkbox" class="js-selecao" data:codigo="${usuario.codigo}">
+							<div class="checkbox  aw-checkbox-no-margin" th:if="${#authentication.principal.usuario.id != usuario.id}">
+	            				<input type="checkbox" class="js-selecao" data:id="${usuario.id}">
 	            				<label></label>
 	            			</div>
 						</td>
@@ -112,7 +112,7 @@
 							</th:block>
 						</td>
 	                 	<td class="text-center">
-							<a class="btn  btn-link  btn-xs" title="Editar" th:href="@{/usuarios/{codigo}(codigo=${usuario.codigo})}"> 
+							<a class="btn  btn-link  btn-xs" title="Editar" th:href="@{/usuarios/{id}(id=${usuario.id})}"> 
 								<i class="glyphicon glyphicon-pencil"></i>
 							</a>
 							<a class="btn  btn-link  btn-xs" title="Excluir">

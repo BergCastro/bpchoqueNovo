@@ -8,10 +8,10 @@ import br.com.fireware.bpchoque.model.Estilo;
 public class EstiloConverter implements Converter<String, Estilo> {
 
 	@Override
-	public Estilo convert(String codigo) {
-		if (!StringUtils.isEmpty(codigo)) {
+	public Estilo convert(String id) {
+		if (!StringUtils.isEmpty(id)) {
 			Estilo estilo = new Estilo();
-			estilo.setCodigo(Long.valueOf(codigo));
+			estilo.setId(Long.valueOf(id));
 			return estilo;
 		}
 		

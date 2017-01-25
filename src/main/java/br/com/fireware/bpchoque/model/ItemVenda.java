@@ -19,7 +19,7 @@ public class ItemVenda {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
+	private Long id;
 
 	private Integer quantidade;
 
@@ -27,11 +27,11 @@ public class ItemVenda {
 	private BigDecimal valorUnitario;
 
 	@ManyToOne
-	@JoinColumn(name = "codigo_cerveja")
+	@JoinColumn(name = "id_cerveja")
 	private Cerveja cerveja;
 
 	@ManyToOne
-	@JoinColumn(name = "codigo_venda")
+	@JoinColumn(name = "id_venda")
 	private Venda venda;
 
 	

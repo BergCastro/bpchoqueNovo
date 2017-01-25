@@ -49,7 +49,7 @@ public class CervejasImpl implements CervejasQueries {
 	
 	@Override
 	public List<CervejaDTO> porSkuOuNome(String skuOuNome) {
-		String jpql = "select new br.com.fireware.bpchoque.dto.CervejaDTO(codigo, sku, nome, origem, valor, foto) "
+		String jpql = "select new br.com.fireware.bpchoque.dto.CervejaDTO(id, sku, nome, origem, valor, foto) "
 				+ "from Cerveja where lower(sku) like lower(:skuOuNome) or lower(nome) like lower(:skuOuNome)";
 		List<CervejaDTO> cervejasFiltradas = manager.createQuery(jpql, CervejaDTO.class)
 					.setParameter("skuOuNome", skuOuNome + "%")
@@ -104,7 +104,7 @@ public class CervejasImpl implements CervejasQueries {
 	}
 	
 	private boolean isEstiloPresente(CervejaFilter filtro) {
-		return filtro.getEstilo() != null && filtro.getEstilo().getCodigo() != null;
+		return filtro.getEstilo() != null && filtro.getEstilo().getId() != null;
 	}
 
 }

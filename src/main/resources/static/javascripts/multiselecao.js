@@ -20,16 +20,16 @@ Brewer.MultiSelecao = (function() {
 		var url = botaoClicado.data('url');
 		
 		var checkBoxSelecionados = this.selecaoCheckbox.filter(':checked');
-		var codigos = $.map(checkBoxSelecionados, function(c) {
-			return $(c).data('codigo');
+		var ids = $.map(checkBoxSelecionados, function(c) {
+			return $(c).data('id');
 		});
 		
-		if (codigos.length > 0) {
+		if (ids.length > 0) {
 			$.ajax({
 				url: url,
 				method: 'PUT',
 				data: {
-					codigos: codigos,
+					ids: ids,
 					status: status
 				}, 
 				success: function() {

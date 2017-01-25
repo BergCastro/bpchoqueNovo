@@ -34,7 +34,7 @@ public class OpmOrgao{
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	@Column(name="codigo")
+	
 	private Long id;
 	@NotEmpty(message="O campo não pode estar vazio!")
 	@Length(max=40, message="O campo tem que ter no máximo {max} caracteres")

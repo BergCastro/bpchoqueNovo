@@ -7,14 +7,14 @@ public enum StatusUsuario {
 	ATIVAR {
 		@Override
 		public void executar(Long[] codigos, Usuarios usuarios) {
-			usuarios.findByCodigoIn(codigos).forEach(u -> u.setAtivo(true));
+			usuarios.findByIdIn(codigos).forEach(u -> u.setAtivo(true));
 		}
 	},
 	
 	DESATIVAR {
 		@Override
 		public void executar(Long[] codigos, Usuarios usuarios) {
-			usuarios.findByCodigoIn(codigos).forEach(u -> u.setAtivo(false));
+			usuarios.findByIdIn(codigos).forEach(u -> u.setAtivo(false));
 		}
 	};
 	

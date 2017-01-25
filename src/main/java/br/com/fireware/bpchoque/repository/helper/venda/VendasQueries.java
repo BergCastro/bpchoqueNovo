@@ -15,7 +15,7 @@ public interface VendasQueries {
 
 	public Page<Venda> filtrar(VendaFilter filtro, Pageable pageable);
 	
-	public Venda buscarComItens(Long codigo);
+	public Venda buscarComItens(Long id);
 	
 	public BigDecimal valorTotalNoAno();
 	public BigDecimal valorTotalNoMes();

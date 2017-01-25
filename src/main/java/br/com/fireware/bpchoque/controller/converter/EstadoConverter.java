@@ -8,10 +8,10 @@ import br.com.fireware.bpchoque.model.Estado;
 public class EstadoConverter implements Converter<String, Estado> {
 
 	@Override
-	public Estado convert(String codigo) {
-		if (!StringUtils.isEmpty(codigo)) {
+	public Estado convert(String id) {
+		if (!StringUtils.isEmpty(id)) {
 			Estado estado = new Estado();
-			estado.setCodigo(Long.valueOf(codigo));
+			estado.setId(Long.valueOf(id));
 			return estado;
 		}
 		

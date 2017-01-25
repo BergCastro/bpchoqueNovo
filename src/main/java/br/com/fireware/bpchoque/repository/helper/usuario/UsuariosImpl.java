@@ -69,10 +69,10 @@ public class UsuariosImpl implements UsuariosQueries {
 	
 	@Transactional(readOnly = true)
 	@Override
-	public Usuario buscarComGrupos(Long codigo) {
+	public Usuario buscarComGrupos(Long id) {
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(Usuario.class);
 		criteria.createAlias("grupos", "g", JoinType.LEFT_OUTER_JOIN);
-		criteria.add(Restrictions.eq("codigo", codigo));
+		criteria.add(Restrictions.eq("id", id));
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		return (Usuario) criteria.uniqueResult();
 	}
@@ -96,12 +96,12 @@ public class UsuariosImpl implements UsuariosQueries {
 			
 			if (filtro.getGrupos() != null && !filtro.getGrupos().isEmpty()) {
 				List<Criterion> subqueries = new ArrayList<>();
-				for (Long codigoGrupo : filtro.getGrupos().stream().mapToLong(Grupo::getCodigo).toArray()) {
+				for (Long idGrupo : filtro.getGrupos().stream().mapToLong(Grupo::getId).toArray()) {
 					DetachedCriteria dc = DetachedCriteria.forClass(UsuarioGrupo.class);
-					dc.add(Restrictions.eq("id.grupo.codigo", codigoGrupo));
+					dc.add(Restrictions.eq("id.grupo.id", idGrupo));
 					dc.setProjection(Projections.property("id.usuario"));
 					
-					subqueries.add(Subqueries.propertyIn("codigo", dc));
+					subqueries.add(Subqueries.propertyIn("id", dc));
 				}
 				
 				Criterion[] criterions = new Criterion[subqueries.size()];

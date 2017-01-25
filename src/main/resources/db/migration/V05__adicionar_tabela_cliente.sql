@@ -1,5 +1,5 @@
 CREATE TABLE cliente (
-    codigo BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+    id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(80) NOT NULL,
     tipo_pessoa VARCHAR(15) NOT NULL,
     cpf_cnpj VARCHAR(30),
@@ -9,6 +9,6 @@ CREATE TABLE cliente (
     numero VARCHAR(15),
     complemento VARCHAR(20),
     cep VARCHAR(15),
-    codigo_cidade BIGINT(20),
-    FOREIGN KEY (codigo_cidade) REFERENCES cidade(codigo)
+    id_cidade BIGINT(20),
+    FOREIGN KEY (id_cidade) REFERENCES cidade(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

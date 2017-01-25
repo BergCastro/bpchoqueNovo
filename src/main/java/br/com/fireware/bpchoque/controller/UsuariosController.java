@@ -87,9 +87,9 @@ public class UsuariosController {
 		cadastroUsuarioService.alterarStatus(codigos, statusUsuario);
 	}
 	
-	@GetMapping("/{codigo}")
-	public ModelAndView editar(@PathVariable Long codigo) {
-		Usuario usuario = usuarios.buscarComGrupos(codigo);
+	@GetMapping("/{id}")
+	public ModelAndView editar(@PathVariable Long id) {
+		Usuario usuario = usuarios.buscarComGrupos(id);
 		ModelAndView mv = novo(usuario);
 		mv.addObject(usuario);
 		return mv;

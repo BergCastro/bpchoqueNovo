@@ -14,11 +14,11 @@ public class UsuarioGrupoId implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@ManyToOne
-	@JoinColumn(name = "codigo_usuario")
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 	
 	@ManyToOne
-	@JoinColumn(name = "codigo_grupo")
+	@JoinColumn(name = "id_grupo")
 	private Grupo grupo;
 
 	

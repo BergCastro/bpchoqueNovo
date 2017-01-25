@@ -85,8 +85,8 @@ public class CervejasController {
 		return cervejas.porSkuOuNome(skuOuNome);
 	}
 	
-	@DeleteMapping("/{codigo}")
-	public @ResponseBody ResponseEntity<?> excluir(@PathVariable("codigo") Cerveja cerveja) {
+	@DeleteMapping("/{id}")
+	public @ResponseBody ResponseEntity<?> excluir(@PathVariable("id") Cerveja cerveja) {
 		try {
 			cadastroCervejaService.excluir(cerveja);
 		} catch (ImpossivelExcluirEntidadeException e) {
@@ -95,8 +95,8 @@ public class CervejasController {
 		return ResponseEntity.ok().build();
 	}
 	
-	@GetMapping("/{codigo}")
-	public ModelAndView editar(@PathVariable("codigo") Cerveja cerveja) {
+	@GetMapping("/{id}")
+	public ModelAndView editar(@PathVariable("id") Cerveja cerveja) {
 		ModelAndView mv = nova(cerveja);
 		mv.addObject(cerveja);
 		return mv;

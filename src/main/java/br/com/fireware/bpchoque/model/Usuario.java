@@ -37,7 +37,7 @@ public class Usuario implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
+	private Long id;
 
 	@NotBlank(message = "Nome é obrigatório")
 	private String nome;
@@ -55,8 +55,8 @@ public class Usuario implements Serializable {
 
 	@Size(min = 1, message = "Selecione pelo menos um grupo")
 	@ManyToMany
-	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "codigo_usuario")
-				, inverseJoinColumns = @JoinColumn(name = "codigo_grupo"))	
+	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "id_usuario")
+				, inverseJoinColumns = @JoinColumn(name = "id_grupo"))	
 	private List<Grupo> grupos;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -71,7 +71,7 @@ public class Usuario implements Serializable {
 	
 	
 	public boolean isNovo() {
-		return codigo == null;
+		return id == null;
 	}
 	
 	

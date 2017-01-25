@@ -39,7 +39,7 @@ public class Cerveja implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
+	private Long id;
 
 	@SKU
 	@NotBlank
@@ -85,7 +85,7 @@ public class Cerveja implements Serializable {
 
 	@NotNull(message = "O estilo é obrigatório")
 	@ManyToOne
-	@JoinColumn(name = "codigo_estilo")
+	@JoinColumn(name = "id_estilo")
 	private Estilo estilo;
 
 	private String foto;
@@ -108,6 +108,20 @@ public class Cerveja implements Serializable {
 		sku = sku.toUpperCase();
 	}
 	
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
 	public String getSku() {
 		return sku;
 	}
@@ -132,13 +146,7 @@ public class Cerveja implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Long getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(Long codigo) {
-		this.codigo = codigo;
-	}
+	
 
 	public BigDecimal getValor() {
 		return valor;
@@ -221,7 +229,7 @@ public class Cerveja implements Serializable {
 	}
 
 	public boolean isNova() {
-		return codigo == null;
+		return id == null;
 	}
 
 	public boolean isNovaFoto() {
@@ -252,7 +260,7 @@ public class Cerveja implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -265,10 +273,10 @@ public class Cerveja implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Cerveja other = (Cerveja) obj;
-		if (codigo == null) {
-			if (other.codigo != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!codigo.equals(other.codigo))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

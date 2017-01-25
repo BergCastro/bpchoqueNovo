@@ -38,7 +38,7 @@ public class Cliente implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
+	private Long id;
 
 	@NotBlank(message = "Nome é obrigatório")
 	private String nome;

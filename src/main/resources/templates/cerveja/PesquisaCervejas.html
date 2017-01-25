@@ -48,7 +48,7 @@
 					<label class="control-label" for="estilo">Estilo</label>
 					<select id="estilo" class="form-control" th:field="*{estilo}">
 	                    <option value="">Todos os estilos</option>
-	                    <option th:each="estilo : ${estilos}" th:text="${estilo.nome}" th:value="${estilo.codigo}"></option>
+	                    <option th:each="estilo : ${estilos}" th:text="${estilo.nome}" th:value="${estilo.id}"></option>
 	                </select>
 				</div>
 				
@@ -122,11 +122,11 @@
 						<td class="text-right" th:text="|R$ ${{cerveja.valor}}|">R$ 8.00</td>
 						<td class="text-center">
 							<a class="btn  btn-link  btn-xs  js-tooltip" title="Editar" 
-									th:href="@{/cervejas/{codigo}(codigo=${cerveja.codigo})}"> 
+									th:href="@{/cervejas/{id}(id=${cerveja.id})}"> 
 								<i class="glyphicon glyphicon-pencil"></i>
 							</a>
 							<a class="btn  btn-link  btn-xs  js-tooltip  js-exclusao-btn" title="Excluir" href="#" 
-									data:url="@{/cervejas/{codigo}(codigo=${cerveja.codigo})}"
+									data:url="@{/cervejas/{id}(id=${cerveja.id})}"
 									data:objeto="${cerveja.nome}">
 								<i class="glyphicon glyphicon-remove"></i>
 							</a>

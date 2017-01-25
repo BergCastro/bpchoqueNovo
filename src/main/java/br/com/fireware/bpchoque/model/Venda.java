@@ -35,7 +35,7 @@ public class Venda {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
+	private Long id;
 
 	@Column(name = "data_criacao")
 	private LocalDateTime dataCriacao;
@@ -55,11 +55,11 @@ public class Venda {
 	private LocalDateTime dataHoraEntrega;
 
 	@ManyToOne
-	@JoinColumn(name = "codigo_cliente")
+	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
 
 	@ManyToOne
-	@JoinColumn(name = "codigo_usuario")
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
 	@Enumerated(EnumType.STRING)
@@ -82,7 +82,7 @@ public class Venda {
 	
 
 	public boolean isNova() {
-		return codigo == null;
+		return id == null;
 	}
 	
 	public void adicionarItens(List<ItemVenda> itens) {

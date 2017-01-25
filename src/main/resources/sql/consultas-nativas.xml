@@ -23,8 +23,8 @@
 				     from item_venda i
 				        , cerveja c
 				        , venda v1
-				     where i.codigo_venda = v1.codigo 
-				       and i.codigo_cerveja = c.codigo
+				     where i.id_venda = v1.id 
+				       and i.id_cerveja = c.id
 				       and c.origem = 'NACIONAL'
 				       and date_format(v1.data_criacao, '%Y/%m') = date_format(v.data_criacao, '%Y/%m')
 				   )) total_nacional
@@ -32,8 +32,8 @@
 				     from item_venda i
 				        , cerveja c
 				        , venda v1
-				     where i.codigo_venda = v1.codigo 
-				       and i.codigo_cerveja = c.codigo
+				     where i.id_venda = v1.id 
+				       and i.id_cerveja = c.id
 				       and c.origem = 'INTERNACIONAL'
 				       and date_format(v1.data_criacao, '%Y/%m') = date_format(v.data_criacao, '%Y/%m')
 				   )) total_internacional

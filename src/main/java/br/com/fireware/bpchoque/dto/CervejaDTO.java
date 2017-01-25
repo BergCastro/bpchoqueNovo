@@ -8,7 +8,7 @@ import br.com.fireware.bpchoque.model.Origem;
 
 public class CervejaDTO {
 
-	private Long codigo;
+	private Long id;
 	private String sku;
 	private String nome;
 	private String origem;
@@ -16,8 +16,8 @@ public class CervejaDTO {
 	private String foto;
 	private String urlThumbnailFoto;
 
-	public CervejaDTO(Long codigo, String sku, String nome, Origem origem, BigDecimal valor, String foto) {
-		this.codigo = codigo;
+	public CervejaDTO(Long id, String sku, String nome, Origem origem, BigDecimal valor, String foto) {
+		this.id = id;
 		this.sku = sku;
 		this.nome = nome;
 		this.origem = origem.getDescricao();
@@ -25,12 +25,12 @@ public class CervejaDTO {
 		this.foto = StringUtils.isEmpty(foto) ? "cerveja-mock.png" : foto;
 	}
 
-	public Long getCodigo() {
-		return codigo;
+	public Long getId() {
+		return id;
 	}
 
-	public void setCodigo(Long codigo) {
-		this.codigo = codigo;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getSku() {

@@ -8,10 +8,10 @@ import br.com.fireware.bpchoque.model.Grupo;
 public class GrupoConverter implements Converter<String, Grupo> {
 
 	@Override
-	public Grupo convert(String codigo) {
-		if (!StringUtils.isEmpty(codigo)) {
+	public Grupo convert(String id) {
+		if (!StringUtils.isEmpty(id)) {
 			Grupo grupo = new Grupo();
-			grupo.setCodigo(Long.valueOf(codigo));
+			grupo.setId(Long.valueOf(id));
 			return grupo;
 		}
 		

@@ -19,7 +19,7 @@
 			<tr style="border-bottom: 1px solid #ccc; border-top: 1px solid #ccc">
 				<td style="width: 50px; padding-bottom: 10px; padding-top: 10px">
 					<img style="width: 40px" src="../../static/images/cerveja-mock.png" th:src="|cid:${mockCerveja}|" th:unless="${item.cerveja.temFoto()}"/>
-					<img style="width: 40px" src="../../static/images/cerveja-mock.png" th:src="|cid:foto-${item.cerveja.codigo}|" th:if="${item.cerveja.temFoto()}"/>
+					<img style="width: 40px" src="../../static/images/cerveja-mock.png" th:src="|cid:foto-${item.cerveja.id}|" th:if="${item.cerveja.temFoto()}"/>
 				</td>
 				<td style="vertical-align: top; padding-bottom: 10px; padding-top: 10px">
 					<div style="display: block; font-weight: bold; font-size: 16px" th:text="${item.cerveja.nome}">Bhrama Lata 350 ml</div>

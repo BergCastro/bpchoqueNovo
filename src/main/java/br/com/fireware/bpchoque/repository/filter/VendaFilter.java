@@ -7,7 +7,7 @@ import br.com.fireware.bpchoque.model.StatusVenda;
 
 public class VendaFilter {
 
-	private Long codigo;
+	private Long id;
 	private StatusVenda status;
 
 	private LocalDate desde;
@@ -18,12 +18,12 @@ public class VendaFilter {
 	private String nomeCliente;
 	private String cpfOuCnpjCliente;
 
-	public Long getCodigo() {
-		return codigo;
+	public Long getId() {
+		return id;
 	}
 
-	public void setCodigo(Long codigo) {
-		this.codigo = codigo;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public StatusVenda getStatus() {

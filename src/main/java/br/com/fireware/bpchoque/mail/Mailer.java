@@ -50,7 +50,7 @@ public class Mailer {
 		for (ItemVenda item : venda.getItens()) {
 			Cerveja cerveja = item.getCerveja();
 			if (cerveja.temFoto()) {
-				String cid = "foto-" + cerveja.getCodigo();
+				String cid = "foto-" + cerveja.getId();
 				context.setVariable(cid, cid);
 				
 				fotos.put(cid, cerveja.getFoto() + "|" + cerveja.getContentType());
@@ -67,7 +67,7 @@ public class Mailer {
 			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 			helper.setFrom("teste@algaworks.com");
 			helper.setTo(venda.getCliente().getEmail());
-			helper.setSubject(String.format("Brewer - Venda nº %d", venda.getCodigo()));
+			helper.setSubject(String.format("Brewer - Venda nº %d", venda.getId()));
 			helper.setText(email, true);
 			
 			helper.addInline("logo", new ClassPathResource("static/images/logo-gray.png"));

@@ -17,7 +17,7 @@ public class VendaListener {
 	@EventListener
 	public void vendaEmitida(VendaEvent vendaEvent) {
 		for (ItemVenda item : vendaEvent.getVenda().getItens()) {
-			Cerveja cerveja = cervejas.findOne(item.getCerveja().getCodigo());
+			Cerveja cerveja = cervejas.findOne(item.getCerveja().getId());
 			cerveja.setQuantidadeEstoque(cerveja.getQuantidadeEstoque() - item.getQuantidade());
 			cervejas.save(cerveja);
 		}

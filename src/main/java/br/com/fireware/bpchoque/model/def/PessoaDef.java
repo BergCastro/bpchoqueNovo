@@ -34,7 +34,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
+
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -71,7 +71,7 @@ public class PessoaDef{
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	@Column(name = "codigo")
+	
 	private Long id;
 	@NotEmpty(message = "O nome não pode estar vazio!")
 	@Length(max = 60, message = "O nome tem que ter no máximo {max} caracteres")

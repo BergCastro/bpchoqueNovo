@@ -71,7 +71,7 @@ Brewer.TabelaClientePesquisaRapida = (function() {
 		
 		var clienteSelecionado = $(evento.currentTarget);
 		$('#nomeCliente').val(clienteSelecionado.data('nome'));
-		$('#codigoCliente').val(clienteSelecionado.data('codigo'));
+		$('#idCliente').val(clienteSelecionado.data('id'));
 	}
 	
 	return TabelaClientePesquisaRapida;

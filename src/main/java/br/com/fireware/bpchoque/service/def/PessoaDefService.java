@@ -10,14 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.fireware.bpchoque.model.def.PessoaDef;
 
-import br.com.fireware.bpchoque.repository.def.PessoaRepository;
+import br.com.fireware.bpchoque.repository.def.PessoaDefRepository;
 
 @Service
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
-public class PessoaService {
+public class PessoaDefService {
 
 	@Autowired
-	private PessoaRepository repository;
+	private PessoaDefRepository repository;
 
 	@Transactional(readOnly = false)
 	public void save(PessoaDef pessoa) {

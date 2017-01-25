@@ -8,11 +8,11 @@ import org.springframework.data.jpa.repository.Query;
 
 import br.com.fireware.bpchoque.model.def.PessoaDef;
 
-public interface PessoaRepository extends JpaRepository<PessoaDef, Long>{
+public interface PessoaDefRepository extends JpaRepository<PessoaDef, Long>{
 
 	List<PessoaDef> findAll();
 	List<PessoaDef> findByNome(String nome);
-	@Query("select p from PessoaDef p where p.id=?1")
+	@Query("select p from Pessoa p where p.id=?1")
 	PessoaDef buscaById(Long id);
 	
 }

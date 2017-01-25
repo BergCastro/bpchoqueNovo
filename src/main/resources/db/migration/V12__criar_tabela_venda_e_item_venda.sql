@@ -1,5 +1,5 @@
 CREATE TABLE venda (
-    codigo BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+    id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
     data_criacao DATETIME NOT NULL,
     valor_frete DECIMAL(10,2),
     valor_desconto DECIMAL(10,2),
@@ -7,18 +7,18 @@ CREATE TABLE venda (
     status VARCHAR(30) NOT NULL,
     observacao VARCHAR(200),
     data_hora_entrega DATETIME,
-    codigo_cliente BIGINT(20) NOT NULL,
-    codigo_usuario BIGINT(20) NOT NULL,
-    FOREIGN KEY (codigo_cliente) REFERENCES cliente(codigo),
-    FOREIGN KEY (codigo_usuario) REFERENCES usuario(codigo)
+    id_cliente BIGINT(20) NOT NULL,
+    id_usuario BIGINT(20) NOT NULL,
+    FOREIGN KEY (id_cliente) REFERENCES cliente(id),
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE item_venda (
-    codigo BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+    id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
     quantidade INTEGER NOT NULL,
     valor_unitario DECIMAL(10,2) NOT NULL,
-    codigo_cerveja BIGINT(20) NOT NULL,
-    codigo_venda BIGINT(20) NOT NULL,
-    FOREIGN KEY (codigo_cerveja) REFERENCES cerveja(codigo),
-    FOREIGN KEY (codigo_venda) REFERENCES venda(codigo)
+    id_cerveja BIGINT(20) NOT NULL,
+    id_venda BIGINT(20) NOT NULL,
+    FOREIGN KEY (id_cerveja) REFERENCES cerveja(id),
+    FOREIGN KEY (id_venda) REFERENCES venda(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

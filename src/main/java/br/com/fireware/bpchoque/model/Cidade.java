@@ -27,14 +27,14 @@ public class Cidade implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
+	private Long id;
 	
 	@NotBlank(message = "Nome é obrigatório")
 	private String nome;
 	
 	@NotNull(message = "Estado é obrigatório")
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "codigo_estado")
+	@JoinColumn(name = "id_estado")
 	@JsonIgnore
 	private Estado estado;
 

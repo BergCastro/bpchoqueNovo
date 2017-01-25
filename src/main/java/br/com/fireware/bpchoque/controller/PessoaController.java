@@ -1,4 +1,4 @@
-package br.com.fireware.bpchoque.controller.def;
+package br.com.fireware.bpchoque.controller;
 
 
 
@@ -24,8 +24,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.fireware.bpchoque.model.Cargo;
 
 import br.com.fireware.bpchoque.model.OpmOrgao;
-import br.com.fireware.bpchoque.model.def.PessoaDef;
-import br.com.fireware.bpchoque.model.def.PessoaDef.EstadoCivil;
+import br.com.fireware.bpchoque.model.Pessoa;
+import br.com.fireware.bpchoque.model.Pessoa.EstadoCivil;
 import br.com.fireware.bpchoque.security.UsuarioSistema;
 import br.com.fireware.bpchoque.model.TipoPessoa;
 import br.com.fireware.bpchoque.model.Sexo;
@@ -34,13 +34,13 @@ import br.com.fireware.bpchoque.model.Sexo;
 import br.com.fireware.bpchoque.service.CargoService;
 
 import br.com.fireware.bpchoque.service.OpmOrgaoService;
-import br.com.fireware.bpchoque.service.def.PessoaService;
+import br.com.fireware.bpchoque.service.PessoaService;
 
 @Controller
-@RequestMapping("/pessoasdef")
+@RequestMapping("/pessoas")
 public class PessoaController {
 	
-	private static final String CADASTRO_PESSOA = "pessoasdef/CadastroPessoa";
+	private static final String CADASTRO_PESSOA = "pessoas/CadastroPessoa";
 		
 	@Autowired
 	private PessoaService pessoaService;
@@ -55,16 +55,16 @@ public class PessoaController {
 	
 	@RequestMapping
 	public ModelAndView pessoas() {
-		Iterable<PessoaDef> todosPessoas = pessoaService.findAll();
-		ModelAndView mv = new ModelAndView("pessoasdef/PesquisaPessoas");
+		Iterable<Pessoa> todosPessoas = pessoaService.findAll();
+		ModelAndView mv = new ModelAndView("pessoas/PesquisaPessoas");
 		mv.addObject("pessoas", todosPessoas);
 		
 		return mv;
 	}
 	
 	@RequestMapping("/lista")
-	public List<PessoaDef> listaPessoas() {
-		List<PessoaDef> todosPessoas = pessoaService.findAll();
+	public List<Pessoa> listaPessoas() {
+		List<Pessoa> todosPessoas = pessoaService.findAll();
 		
 		return todosPessoas;
 	}
@@ -72,18 +72,18 @@ public class PessoaController {
 	@RequestMapping("/novo")
 	public ModelAndView novo(@AuthenticationPrincipal UsuarioSistema usuarioSistema) {
 		
-		ModelAndView mv = new ModelAndView("pessoasdef/CadastroPessoa");
-		PessoaDef pessoaDef = new PessoaDef();
+		ModelAndView mv = new ModelAndView("pessoas/CadastroPessoa");
+		Pessoa pessoa = new Pessoa();
 		
 		
-		mv.addObject(pessoaDef);
+		mv.addObject(pessoa);
 		return mv;
 			
 	}
 	
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar( @Validated PessoaDef pessoa, Errors errors, RedirectAttributes attributes, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
+	public String salvar( @Validated Pessoa pessoa, Errors errors, RedirectAttributes attributes, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
 		if (errors.hasErrors()) {
 			
 			return CADASTRO_PESSOA;
@@ -109,7 +109,7 @@ public class PessoaController {
 		try {
 			pessoaService.save(pessoa);
 			attributes.addFlashAttribute("mensagem", "Pessoa salva com sucesso!");
-			return "redirect:/pessoasdef";
+			return "redirect:/pessoas";
 		} catch (IllegalArgumentException e) {
 			errors.rejectValue("dataVencimento", null, e.getMessage());
 			return CADASTRO_PESSOA;
@@ -120,16 +120,16 @@ public class PessoaController {
 	
 	
 	@RequestMapping("{id}")
-	public ModelAndView edicao(@PathVariable("id") PessoaDef pessoa) {
+	public ModelAndView edicao(@PathVariable("id") Pessoa pessoa) {
 		
 		ModelAndView mv = new ModelAndView();
 		
 			System.out.println("entrou em edição");
-			mv.setViewName("pessoasdef/CadastroPessoa");
+			mv.setViewName("pessoas/CadastroPessoa");
 		
 			
 		
-		mv.addObject("pessoaDef", pessoa);
+		mv.addObject("pessoa", pessoa);
 		System.out.println(pessoa.toString());
 		return mv;
 	}
@@ -140,7 +140,7 @@ public class PessoaController {
 		System.out.println("Entrou no delete");
 		
 		
-		return "redirect:/pessoasdef";
+		return "redirect:/pessoas";
 	}
 	
 	@ModelAttribute("sexos")

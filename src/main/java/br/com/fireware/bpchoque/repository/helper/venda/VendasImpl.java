@@ -54,10 +54,10 @@ public class VendasImpl implements VendasQueries {
 	
 	@Transactional(readOnly = true)
 	@Override
-	public Venda buscarComItens(Long codigo) {
+	public Venda buscarComItens(Long id) {
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(Venda.class);
 		criteria.createAlias("itens", "i", JoinType.LEFT_OUTER_JOIN);
-		criteria.add(Restrictions.eq("codigo", codigo));
+		criteria.add(Restrictions.eq("id", id));
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		return (Venda) criteria.uniqueResult();
 	}
@@ -142,8 +142,8 @@ public class VendasImpl implements VendasQueries {
 		criteria.createAlias("cliente", "c");
 		
 		if (filtro != null) {
-			if (!StringUtils.isEmpty(filtro.getCodigo())) {
-				criteria.add(Restrictions.eq("codigo", filtro.getCodigo()));
+			if (!StringUtils.isEmpty(filtro.getId())) {
+				criteria.add(Restrictions.eq("id", filtro.getId()));
 			}
 			
 			if (filtro.getStatus() != null) {

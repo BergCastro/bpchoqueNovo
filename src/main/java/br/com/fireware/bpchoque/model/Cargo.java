@@ -30,7 +30,7 @@ public class Cargo implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	@Column(name="codigo")
+	
 	private Long id;
 	@NotEmpty(message="O campo não pode estar vazio")
 	@Length(max=15, message="A patente tem que ter no máximo {max} caracteres")

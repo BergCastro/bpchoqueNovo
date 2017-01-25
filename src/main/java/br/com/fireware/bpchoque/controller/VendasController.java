@@ -123,26 +123,26 @@ public class VendasController {
 		venda = cadastroVendaService.salvar(venda);
 		mailer.enviar(venda);
 		
-		attributes.addFlashAttribute("mensagem", String.format("Venda nº %d salva com sucesso e e-mail enviado", venda.getCodigo()));
+		attributes.addFlashAttribute("mensagem", String.format("Venda nº %d salva com sucesso e e-mail enviado", venda.getId()));
 		return new ModelAndView("redirect:/vendas/nova");
 	}
 	
 	@PostMapping("/item")
-	public ModelAndView adicionarItem(Long codigoCerveja, String uuid) {
-		Cerveja cerveja = cervejas.findOne(codigoCerveja);
+	public ModelAndView adicionarItem(Long idCerveja, String uuid) {
+		Cerveja cerveja = cervejas.findOne(idCerveja);
 		tabelaItens.adicionarItem(uuid, cerveja, 1);
 		return mvTabelaItensVenda(uuid);
 	}
 	
-	@PutMapping("/item/{codigoCerveja}")
-	public ModelAndView alterarQuantidadeItem(@PathVariable("codigoCerveja") Cerveja cerveja
+	@PutMapping("/item/{idCerveja}")
+	public ModelAndView alterarQuantidadeItem(@PathVariable("idCerveja") Cerveja cerveja
 			, Integer quantidade, String uuid) {
 		tabelaItens.alterarQuantidadeItens(uuid, cerveja, quantidade);
 		return mvTabelaItensVenda(uuid);
 	}
 	
-	@DeleteMapping("/item/{uuid}/{codigoCerveja}")
-	public ModelAndView excluirItem(@PathVariable("codigoCerveja") Cerveja cerveja
+	@DeleteMapping("/item/{uuid}/{idCerveja}")
+	public ModelAndView excluirItem(@PathVariable("idCerveja") Cerveja cerveja
 			, @PathVariable String uuid) {
 		tabelaItens.excluirItem(uuid, cerveja);
 		return mvTabelaItensVenda(uuid);
@@ -161,9 +161,9 @@ public class VendasController {
 		return mv;
 	}
 	
-	@GetMapping("/{codigo}")
-	public ModelAndView editar(@PathVariable Long codigo) {
-		Venda venda = vendas.buscarComItens(codigo);
+	@GetMapping("/{id}")
+	public ModelAndView editar(@PathVariable Long id) {
+		Venda venda = vendas.buscarComItens(id);
 		
 		setUuid(venda);
 		for (ItemVenda item : venda.getItens()) {
@@ -185,7 +185,7 @@ public class VendasController {
 		}
 		
 		attributes.addFlashAttribute("mensagem", "Venda cancelada com sucesso");
-		return new ModelAndView("redirect:/vendas/" + venda.getCodigo());
+		return new ModelAndView("redirect:/vendas/" + venda.getId());
 	}
 	
 	@GetMapping("/totalPorMes")

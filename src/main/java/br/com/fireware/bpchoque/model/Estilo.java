@@ -23,7 +23,7 @@ public class Estilo implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
+	private Long id;
 
 	@NotBlank(message = "O nome é obrigatório")
 	@Size(max = 20, message = "O tamanho do nome não pode ser maior que {max} caracteres")

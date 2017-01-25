@@ -8,10 +8,10 @@ import br.com.fireware.bpchoque.model.Cidade;
 public class CidadeConverter implements Converter<String, Cidade> {
 
 	@Override
-	public Cidade convert(String codigo) {
-		if (!StringUtils.isEmpty(codigo)) {
+	public Cidade convert(String id) {
+		if (!StringUtils.isEmpty(id)) {
 			Cidade cidade = new Cidade();
-			cidade.setCodigo(Long.valueOf(codigo));
+			cidade.setId(Long.valueOf(id));
 			return cidade;
 		}
 		
