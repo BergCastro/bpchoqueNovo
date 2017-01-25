@@ -21,7 +21,7 @@
 
 				<div class="col-sm-2">
 					<div class="aw-page-header-controls">
-						<a class="btn  btn-default" th:href="@{/avaliadores}"> <i
+						<a class="btn  btn-primary" th:href="@{/avaliadores}"> <i
 							class="glyphicon  glyphicon-plus-sign"></i> <span
 							class="hidden-xs  hidden-sm">Pesquisa</span>
 						</a>
@@ -33,7 +33,7 @@
 
 	<div class="container-fluid">
 
-		<form method="POST" th:object="${avaliador}" th:action="@{/avaliadores">
+		<form method="POST" th:object="${avaliador}" th:action="@{/avaliadores}">
 			<brewer:message/>
 			
 
@@ -42,10 +42,10 @@
 			<input type="hidden" th:field="*{criadoem}" />
 			<div class="row">
 				<div class="form-group  col-sm-4  bw-required"
-					brewer:classforerror="pessoa">
-					<label for="nome_guerra" class="control-label">Avaliador</label> 
+					brewer:classforerror="pessoadef">
+					<label for="avaliador" class="control-label">Avaliador</label> 
 					<select
-						data-placeholder="Pesquisar" th:field="*{pessoa}" id="avaliador"
+						data-placeholder="Pesquisar" th:field="*{pessoadef}" id="avaliador"
 						class="chosen-select form-control" tabindex="7">
 						<option value=""></option>
 						<option th:each="pessoa : ${pessoas}" th:value="${pessoa.id}"
@@ -57,6 +57,7 @@
 
 
 			<button type="submit" class="btn  btn-primary">Salvar</button>
+			<a class="btn  btn-primary" th:href="@{/avaliadores}">Voltar</a>
 		</form>
 	</div>
 </section>

@@ -29,8 +29,10 @@ import br.com.fireware.bpchoque.model.def.AvaliacaoIndividual.Duracao;
 import br.com.fireware.bpchoque.model.def.AvaliacaoIndividual.Frequencia;
 import br.com.fireware.bpchoque.model.def.AvaliacaoIndividual.Objetivos;
 import br.com.fireware.bpchoque.model.def.AvaliacaoIndividual.Problemas;
+import br.com.fireware.bpchoque.model.def.Avaliador;
 import br.com.fireware.bpchoque.service.def.PessoaDefService;
 import br.com.fireware.bpchoque.service.def.AvaliacaoIndividualService;
+import br.com.fireware.bpchoque.service.def.AvaliadorService;
 
 @Controller
 @RequestMapping("/avaliacoesIndividuais")
@@ -45,6 +47,8 @@ public class AvaliacaoIndividualController {
 	@Autowired
 	private PessoaDefService pessoaDefService;
 	
+	@Autowired
+	private AvaliadorService avaliadorService;
 	
 	@RequestMapping
 	public ModelAndView avaliacaoIndividuais() {
@@ -130,8 +134,8 @@ public class AvaliacaoIndividualController {
 	}
 	
 	@ModelAttribute("avaliadores")
-	public Iterable<PessoaDef> avaliadores() {
-		return pessoaDefService.findAll();
+	public Iterable<Avaliador> avaliadores() {
+		return avaliadorService.findAll();
 	}
 	
 }

@@ -26,7 +26,7 @@
 
 					<div class="col-xs-2">
 						<div class="aw-page-header-controls">
-							<a class="btn  btn-default" th:href="@{/avaliadores/novo}"> <i
+							<a class="btn  btn-primary" th:href="@{/avaliadores/novo}"> <i
 								class="glyphicon  glyphicon-plus-sign"></i> <span
 								class="hidden-xs  hidden-sm">Novo Avaliador</span>
 							</a>
@@ -58,18 +58,18 @@
 					<tbody>
 						<tr th:each="avaliador : ${avaliadores}">
 							<td th:text="${avaliador?.id}">1</td>
-							<td th:text="${avaliador?.pessoa.matricula}">Matricula</td>
-							<td th:text="${avaliador?.pessoa.numero_pm}">numero</td>
-							<td th:text="${avaliador?.pessoa.cargo.abreviacao}">cargo</td>
-							<td th:text="${avaliador?.pessoa.nome_guerra}">nome</td>
-							<td th:text="${avaliador?.pessoa.opm_orgao.nome}">orgao</td>
+							<td th:text="${avaliador?.pessoadef.matricula}">Matricula</td>
+							<td th:text="${avaliador?.pessoadef.numero_pm}">numero</td>
+							<td th:text="${avaliador?.pessoadef.cargo.abreviacao}">cargo</td>
+							<td th:text="${avaliador?.pessoadef.nome_guerra}">nome</td>
+							<td th:text="${avaliador?.pessoadef.opm_orgao.nome}">orgao</td>
 							<td class="text-center"><a class="btn btn-link btn-xs"
 								th:href="@{/avaliadores/{id}(id=${avaliador.id})}" title="Editar"
 								rel="tooltip" data-placement="top"> <span
 									class="glyphicon glyphicon-pencil"></span>
 							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
 								data-target="#myModalExclusao"
-								th:attr="data-id=${avaliador.id}, data-nome=${avaliador.nome}"
+								th:attr="data-id=${avaliador.id}, data-nome=${avaliador.pessoadef.nome}"
 								title="Excluir" rel="tooltip" data-placement="top"> <span
 									class="glyphicon glyphicon-remove"></span>
 							</a></td>

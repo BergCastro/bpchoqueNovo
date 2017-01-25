@@ -28,7 +28,7 @@
 
 				<div class="col-sm-2">
 					<div class="aw-page-header-controls">
-						<a class="btn  btn-default" th:href="@{/avaliacoesIndividuais}">
+						<a class="btn  btn-primary" th:href="@{/avaliacoesIndividuais}">
 							<i class="glyphicon  glyphicon-plus-sign"></i> <span
 							class="hidden-xs  hidden-sm">Pesquisa</span>
 						</a>
@@ -94,13 +94,14 @@
 				
 
 				<button type="submit" class="btn  btn-primary">Salvar</button>
+				<a class="btn  btn-primary" th:href="@{/avaliacoesIndividuais}">Voltar</a>
 		</form>
 	</div>
 </section>
 
 <th:block layout:fragment="javascript-extra">
 	
-	<script th:src="@{/javascripts/pesquisa/choose.jquery.min.js}"></script>
+	<script th:src="@{/javascripts/pesquisa/chosen.jquery.min.js}"></script>
 	<script th:src="@{/javascripts/multiselect/bootstrap-select.js}"></script>
 	<script>
 		$('.chosen-select').chosen();

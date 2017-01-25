@@ -52,7 +52,7 @@ public class AvaliadorController {
 
 		mv.setViewName(CADASTRO_AVALIADOR);
 		Avaliador avaliador = new Avaliador();
-		mv.addObject(avaliador);
+		mv.addObject("avaliador", avaliador);
 		return mv;
 
 	}
