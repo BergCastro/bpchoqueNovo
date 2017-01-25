@@ -56,10 +56,27 @@ public class Avaliador{
 	@Column(name = "atualizadopor")
 	private String atualizadopor;
 	
+	private String cref;
+	
+	private Escolaridade escolaridade;
+	
 	@ManyToOne()
 	@JoinColumn(name="pessoadef")
 	private PessoaDef pessoadef;
 	
+	
+	public enum Escolaridade {
+		TECNICO("TÉCNICO"), GRADUADO("GRADUADO"), POSGRADUADO("PÓS-GRADUADO"),
+		MESTRADO("MESTRADO"), DOUTORADO("DOUTORADO");
+		
+		private String descricao;
+		Escolaridade(String descricao){
+			this.descricao = descricao;
+		}
+		public String getDescricao(){
+			return descricao;
+		}
+	}
 	
 	
 

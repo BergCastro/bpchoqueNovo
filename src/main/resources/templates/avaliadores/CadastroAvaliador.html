@@ -8,6 +8,13 @@
 
 <head>
 <title>Cadastro de Avaliador</title>
+<th:block layout:fragment="css-extra">
+	<link rel="stylesheet" type="text/css"
+		th:href="@{/stylesheets/multiselect/bootstrap-select.min.css}" />
+		<link rel="stylesheet" type="text/css"
+		th:href="@{/stylesheets/pesquisa/bootstrap-chosen.css}" />
+
+</th:block>
 </head>
 
 <section layout:fragment="conteudo">
@@ -53,6 +60,19 @@
 
 					</select>
 				</div>
+				<div class="form-group  col-sm-4">
+					<label for="telefone">CREF</label> <input type="text"
+						class="form-control" id="cref"
+						th:field="*{cref}" />
+				</div>
+				<div class="form-group  col-sm-4" brewer:classforerror="escolaridade">
+					<label for="escolaridade" class="control-label">Escolaridade</label> 
+					<select id="escolaridade" class="form-control" th:field="*{escolaridade}" name="escolaridade">
+						<option value="">Selecione uma opção</option>
+						<option th:each="escolaridade : ${escolaridades}" th:value="${escolaridade}"
+							th:text="${escolaridade.descricao}"></option>
+					</select>
+				</div>
 			</div>
 
 
@@ -63,10 +83,11 @@
 </section>
 
 <th:block layout:fragment="javascript-extra">
-	<script th:src="@{/javascripts/estilo.cadastro-rapido.js}"></script>
-	<script th:src="@{/javascripts/vendors/uikit.min.js}"></script>
-	<script th:src="@{/javascripts/vendors/upload.min.js}"></script>
-	<script th:src="@{/javascripts/vendors/handlebars.min.js}"></script>
+		<script th:src="@{/javascripts/pesquisa/chosen.jquery.min.js}"></script>
+	<script th:src="@{/javascripts/multiselect/bootstrap-select.js}"></script>
+	<script>
+		$('.chosen-select').chosen();
+	</script>
 </th:block>
 
 </html>

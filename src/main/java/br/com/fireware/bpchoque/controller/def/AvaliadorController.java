@@ -1,6 +1,8 @@
 package br.com.fireware.bpchoque.controller.def;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -19,7 +21,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.fireware.bpchoque.security.UsuarioSistema;
 import br.com.fireware.bpchoque.model.def.Avaliador;
+import br.com.fireware.bpchoque.model.def.Avaliador.Escolaridade;
 import br.com.fireware.bpchoque.model.def.PessoaDef;
+import br.com.fireware.bpchoque.model.def.AvaliacaoIndividual.Problemas;
 import br.com.fireware.bpchoque.service.def.AvaliadorService;
 import br.com.fireware.bpchoque.service.def.PessoaDefService;
 
@@ -99,6 +103,11 @@ public class AvaliadorController {
 	@ModelAttribute("pessoas")
 	public Iterable<PessoaDef> pessoas() {
 		return pessoaDefService.findAll();
+	}
+	
+	@ModelAttribute("escolaridades")
+	public List<Escolaridade> problemas() {
+		return Arrays.asList(Escolaridade.values());
 	}
 
 }

@@ -5,8 +5,11 @@ CREATE TABLE avaliadores(
     atualizadoem DATETIME,
     atualizadopor VARCHAR(50),
 	pessoadef BIGINT(20) NOT NULL,
+	cref VARCHAR(15),
+	escolaridade VARCHAR(20),
 	FOREIGN KEY (pessoadef) REFERENCES pessoasdef(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE avaliacoes_individuais (
     id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,

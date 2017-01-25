@@ -105,6 +105,9 @@ public class AvaliacaoIndividual{
 	@Column(name="avaliacao_problemas") // Column name in person_interest
 	private List<Problemas> problemas;
 	
+	
+	
+	
 	private String problemaOutro;
 	
 	private String problemaArticulacaoQual;
