@@ -50,7 +50,7 @@
 							<th>Número</th>
 							<th>Post./Grad.</th>
 							<th>Nome</th>
-							<th>Opm/Orgão</th>
+							<th>PEF</th>
 							<th></th>
 
 
@@ -60,18 +60,18 @@
 						<tr th:each="avaliacao : ${avaliacoes}">
 							<td th:text="${avaliacao?.id}">1</td>
 							<td th:text="${avaliacao?.dataAvaliacao}">Data</td>
-							<td th:text="${avaliacao?.pessoa.matricula}">Matricula</td>
-							<td th:text="${avaliacao?.pessoa.numero_pm}">numero</td>
-							<td th:text="${avaliacao?.pessoa.cargo.abreviacao}">cargo</td>
-							<td th:text="${avaliacao?.pessoa.nome_guerra}">nome</td>
-							<td th:text="${avaliacao?.pessoa.opm_orgao.nome}">orgao</td>
+							<td th:text="${avaliacao?.pessoadef.matricula}">Matricula</td>
+							<td th:text="${avaliacao?.pessoadef.numero_pm}">numero</td>
+							<td th:text="${avaliacao?.pessoadef.cargo.abreviacao}">cargo</td>
+							<td th:text="${avaliacao?.pessoadef.nome_guerra}">nome</td>
+							<td th:text="|${avaliacao?.avaliador.pessoadef.cargo.abreviacao} ${avaliacao?.avaliador.pessoadef.nome_guerra}|">orgao</td>
 							<td class="text-center"><a class="btn btn-link btn-xs"
 								th:href="@{/avaliacoesIndividuais/{id}(id=${avaliacao.id})}" title="Editar"
 								rel="tooltip" data-placement="top"> <span
 									class="glyphicon glyphicon-pencil"></span>
 							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
 								data-target="#myModalExclusao"
-								th:attr="data-id=${avaliacao.id}, data-nome=${avaliacao.nome}"
+								th:attr="data-id=${avaliacao.id}, data-nome=${avaliacao.pessoadef.nome}"
 								title="Excluir" rel="tooltip" data-placement="top"> <span
 									class="glyphicon glyphicon-remove"></span>
 							</a></td>
@@ -88,7 +88,7 @@
 			data-keyboard="false" data-backdrop="static">
 			<div class="modal-dialog">
 				<form
-					th:attr="data-url-base=@{/avaliacoesIndividuais/delete/}, data-tipo='a avaliação '"
+					th:attr="data-url-base=@{/avaliacoesIndividuais/delete/}, data-tipo='a avaliação de '"
 					method="get">
 
 
@@ -98,7 +98,7 @@
 						</div>
 
 						<div class="modal-body">
-							<span>Tem certeza que deseja apagar a avaliação?</span>
+							<span>Tem certeza que deseja apagar a avaliação de?</span>
 						</div>
 
 						<div class="modal-footer">

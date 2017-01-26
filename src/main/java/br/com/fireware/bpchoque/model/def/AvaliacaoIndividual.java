@@ -99,10 +99,12 @@ public class AvaliacaoIndividual{
 	
 	private String medicamentoMotivo;
 	
+	private String medicamentoDosagem;
+	
 	@ElementCollection(targetClass=Problemas.class)
 	@Enumerated(EnumType.STRING) // Possibly optional (I'm not sure) but defaults to ORDINAL.
 	@CollectionTable(name="avaliacao_problemas", joinColumns = @JoinColumn(name = "id", referencedColumnName = "id"))
-	@Column(name="avaliacao_problemas") // Column name in person_interest
+	@Column(name="problemas") // Column name in person_interest
 	private List<Problemas> problemas;
 	
 	

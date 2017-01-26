@@ -11,7 +11,7 @@
 <th:block layout:fragment="css-extra">
 	<link rel="stylesheet" type="text/css"
 		th:href="@{/stylesheets/multiselect/bootstrap-select.min.css}" />
-		<link rel="stylesheet" type="text/css"
+	<link rel="stylesheet" type="text/css"
 		th:href="@{/stylesheets/pesquisa/bootstrap-chosen.css}" />
 
 </th:block>
@@ -58,8 +58,7 @@
 				</div>
 				<div class="form-group  col-sm-4  bw-required"
 					brewer:classforerror="pessoadef">
-					<label for="nome_guerra" class="control-label">Avaliado</label> 
-					<select
+					<label for="nome_guerra" class="control-label">Avaliado</label> <select
 						data-placeholder="Pesquisar" th:field="*{pessoadef}" id="avaliado"
 						class="chosen-select form-control" tabindex="7">
 						<option value=""></option>
@@ -70,37 +69,231 @@
 				</div>
 				<div class="form-group  col-sm-4  bw-required"
 					brewer:classforerror="avaliador">
-					<label for="avaliador" class="control-label">Avaliador</label> 
-					<select
-						data-placeholder="Pesquisar" th:field="*{avaliador}" id="avaliador"
-						class="chosen-select form-control" tabindex="7">
+					<label for="avaliador" class="control-label">Avaliador</label> <select
+						data-placeholder="Pesquisar" th:field="*{avaliador}"
+						id="avaliador" class="chosen-select form-control" tabindex="7">
 						<option value=""></option>
-						<option th:each="avaliador : ${avaliadores}" th:value="${avaliador.id}"
+						<option th:each="avaliador : ${avaliadores}"
+							th:value="${avaliador.id}"
 							th:text="|${avaliador.pessoadef.matricula} - ${avaliador.pessoadef.nome}|"></option>
 
 					</select>
 				</div>
-				</div>
-				<div class="row">
-					<ul class="nav nav-tabs">
+			</div>
+			<div class="row">
+
+				<ul class="nav nav-tabs">
 					<li class="active"><a data-toggle="tab"
 						href="#atividadeFisica">Atividade Física</a></li>
 					<li><a data-toggle="tab" href="#comportamento">Comportamentos</a></li>
 
-					</ul>
+				</ul>
+			</div>
+
+			<div class="tab-content">
+				<div id="atividadeFisica" class="tab-pane fade in active">
+					<br />
+					<div class="row">
+						<div class="form-group  col-sm-3  bw-required"
+							brewer:classforerror="praticaTipoAtividade">
+							<label class="control-label">Pratica algum tipo de
+								Atividade Fisica?</label>
+							<div>
+								<div class="radio  radio-inline">
+									<input type="radio" th:id="civil"
+										th:field="*{praticaTipoAtividade}" th:value="true"> <label
+										class="control-label" th:for="sim">Sim</label>
+								</div>
+								<div class="radio  radio-inline">
+									<input type="radio" th:id="militar"
+										th:field="*{praticaTipoAtividade}" th:value="false"> <label
+										class="control-label" th:for="nao">Não</label>
+								</div>
+							</div>
+
+						</div>
+						<div class="form-group col-sm-3">
+							<label class="control-label">Qual Atividade?</label> <input
+								type="text" class="form-control" id="atividadeQual"
+								th:field="*{praticaTipoAtividadeQual}" />
+
+						</div>
+						<div class="form-group  col-sm-3 bw-required"
+							brewer:classforerror="frequencia">
+							<label for="frequencia" class="control-label">Qual
+								frequência?</label> <select id="opm" class="form-control"
+								th:field="*{frequencia}" name="frequencia">
+								<option value="">Selecione uma opção</option>
+								<option th:each="frequencia : ${frequencias}"
+									th:value="${frequencia}" th:text="${frequencia.descricao}"></option>
+							</select>
+						</div>
+						<div class="form-group  col-sm-3 bw-required"
+							brewer:classforerror="duracao">
+							<label for="duracao" class="control-label">Qual duração
+								por sessão?</label> <select id="duracao" class="form-control"
+								th:field="*{duracao}" name="duracao">
+								<option value="">Selecione uma opção</option>
+								<option th:each="duracao : ${duracoes}" th:value="${duracao}"
+									th:text="${duracao.descricao}"></option>
+							</select>
+						</div>
+						
+
+
+					</div>
+					<div class="row">
+						<div class="form-group  col-sm-3 bw-required"
+							brewer:classforerror="objetivo">
+							<label for="objetivo" class="control-label">Quais
+								objetivos a serem alcançados?</label> <select id="objetivo"
+								class="form-control" th:field="*{objetivo}" name="objetivo">
+								<option value="">Selecione uma opção</option>
+								<option th:each="objetivo : ${objetivos}" th:value="${objetivo}"
+									th:text="${objetivo.descricao}"></option>
+							</select>
+						</div>
+						
+						<div class="form-group col-sm-3"
+							>
+							<label class="control-label">Outro objetivo:</label> <input
+								type="text" class="form-control" id="objetivoOutro"
+								th:field="*{objetivoOutro}" />
+
+						</div>
+						<div class="form-group  col-sm-3  bw-required"
+							brewer:classforerror="restricao">
+							<label class="control-label">Possui alguma restrição da
+								prática de atividade física?</label>
+							<div>
+								<div class="radio  radio-inline">
+									<input type="radio" th:id="restricaoSim"
+										th:field="*{restricao}" th:value="true"> <label
+										class="control-label" th:for="sim">Sim</label>
+								</div>
+								<div class="radio  radio-inline">
+									<input type="radio" th:id="restricaoNao"
+										th:field="*{restricao}" th:value="false"> <label
+										class="control-label" th:for="nao">Não</label>
+								</div>
+							</div>
+
+						</div>
+						<div class="form-group col-sm-3">
+							<label class="control-label">Qual restrição?</label> <input
+								type="text" class="form-control" id="restricaoQual"
+								th:field="*{restricaoQual}" />
+
+						</div>
+					</div>
+
+					
 				</div>
-				
+				<div id="comportamento" class="tab-pane fade">
+					<br />
+					<div class="row">
+						<div class="form-group  col-sm-4  bw-required"
+							brewer:classforerror="fuma">
+							<label class="control-label">Você fuma?</label>
+							<div>
+								<div class="radio  radio-inline">
+									<input type="radio" th:id="fumaSim" th:field="*{fuma}"
+										th:value="true"> <label class="control-label"
+										th:for="fumaSim">Sim</label>
+								</div>
+								<div class="radio  radio-inline">
+									<input type="radio" th:id="restricaoNao" th:field="*{fuma}"
+										th:value="false"> <label class="control-label"
+										th:for="fumaNao">Não</label>
+								</div>
+							</div>
 
-				
+						</div>
+						<div class="form-group  col-sm-4  bw-required"
+							brewer:classforerror="bebidaAlcoolica">
+							<label class="control-label">Faz uso de bebidas
+								alcoólicas?</label>
+							<div>
+								<div class="radio  radio-inline">
+									<input type="radio" th:id="bebidaSim"
+										th:field="*{bebidaAlcoolica}" th:value="true"> <label
+										class="control-label" th:for="bebidaSim">Sim</label>
+								</div>
+								<div class="radio  radio-inline">
+									<input type="radio" th:id="bebidaNao"
+										th:field="*{bebidaAlcoolica}" th:value="false"> <label
+										class="control-label" th:for="bebidaNao">Não</label>
+								</div>
+							</div>
 
-				<button type="submit" class="btn  btn-primary">Salvar</button>
-				<a class="btn  btn-primary" th:href="@{/avaliacoesIndividuais}">Voltar</a>
+						</div>
+						<div class="form-group  col-sm-4  bw-required"
+							brewer:classforerror="medicamento">
+							<label class="control-label">Faz uso de algum
+								medicamento?</label>
+							<div>
+								<div class="radio  radio-inline">
+									<input type="radio" th:id="medicamentoSim"
+										th:field="*{medicamento}" th:value="true"> <label
+										class="control-label" th:for="medicamentoSim">Sim</label>
+								</div>
+								<div class="radio  radio-inline">
+									<input type="radio" th:id="medicamentoNao"
+										th:field="*{medicamento}" th:value="false"> <label
+										class="control-label" th:for="medicamentoNao">Não</label>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-sm-4  bw-required"
+							brewer:classforerror="medicamentoMotivo">
+							<label class="control-label">Qual motivo da medicação?</label> <input
+								type="text" class="form-control" id="medicamentoMotivo"
+								th:field="*{medicamentoMotivo}" />
+
+						</div>
+						<div class="form-group col-sm-4  bw-required"
+							brewer:classforerror="medicamentoQual">
+							<label class="control-label">Qual a medicação?</label> <input
+								type="text" class="form-control" id="medicamentoQual"
+								th:field="*{medicamentoQual}" />
+
+						</div>
+						<div class="form-group col-sm-4  bw-required"
+							brewer:classforerror="medicamentoDosagem">
+							<label class="control-label">Qual a Dosagem?</label> <input
+								type="text" class="form-control" id="medicamentoDosagem"
+								th:field="*{medicamentoDosagem}" />
+
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group  col-sm-4 bw-required"
+							brewer:classforerror="problemas">
+							<label for="objetivo" class="control-label">Selecione os
+								problemas que possuir!</label> <select id="problemas"
+								class="selectpicker form-control" data-width="fit"
+								multiple="true" th:field="*{problemas}" name="problemas"
+								title="Escolha os problemas...">
+								<option value="">Selecione uma opção</option>
+								<option th:each="problema : ${problemas}" th:value="${problema}"
+									th:text="${problema.descricao}"></option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<button type="submit" class="btn  btn-primary">Salvar</button>
+			<a class="btn  btn-primary" th:href="@{/avaliacoesIndividuais}">Voltar</a>
 		</form>
 	</div>
 </section>
 
 <th:block layout:fragment="javascript-extra">
-	
+
 	<script th:src="@{/javascripts/pesquisa/chosen.jquery.min.js}"></script>
 	<script th:src="@{/javascripts/multiselect/bootstrap-select.js}"></script>
 	<script>

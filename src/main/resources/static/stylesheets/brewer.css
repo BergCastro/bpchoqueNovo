@@ -20,6 +20,12 @@ input{
 	text-transform: lowercase;
 }
 
+#logo-login{
+	 max-width: 200px;   /* Máximo da largura da imagem */
+          width: 100%;
+          max-height: 244px;  /* Máximo da altura da imagem */
+          min-height: auto;  
+}
 /*
 ######################
 # COMPONENTES

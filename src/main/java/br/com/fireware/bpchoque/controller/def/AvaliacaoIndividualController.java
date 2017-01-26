@@ -105,7 +105,7 @@ public class AvaliacaoIndividualController {
 		System.out.println("Entrou no delete");
 		
 		
-		return "redirect:/avaliacaoIndividuais";
+		return "redirect:/avaliacoesIndividuais";
 	}
 	
 	@ModelAttribute("frequencias")
