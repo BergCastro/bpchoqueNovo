@@ -48,3 +48,28 @@ CREATE TABLE avaliacao_problemas(
 	problemas VARCHAR(40),
 	FOREIGN KEY (id) REFERENCES avaliacoes_individuais(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE medicoes(
+	id BIGINT(20) NOT NULL,
+	criadoem DATETIME DEFAULT CURRENT_TIMESTAMP,
+    criadopor VARCHAR(50),
+    atualizadoem DATETIME,
+    atualizadopor VARCHAR(50),
+	torax DECIMAL(5,2),
+	cintura DECIMAL(5,2),
+	abdominal DECIMAL(5,2),
+	quadril DECIMAL(5,2),
+	bracoe DECIMAL(5,2),
+	bracod DECIMAL(5,2),
+	antibracoe DECIMAL(5,2),
+	antibracod DECIMAL(5,2),
+	coxae DECIMAL(5,2),
+	coxad DECIMAL(5,2),
+	pernad DECIMAL(5,2),
+	pernae DECIMAL(5,2),
+	avaliacaoindividual BIGINT(20) NOT NULL,
+	FOREIGN KEY (avaliacaoindividual) REFERENCES avaliacoes_individuais(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+

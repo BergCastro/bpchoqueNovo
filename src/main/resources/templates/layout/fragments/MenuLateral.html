@@ -20,18 +20,19 @@
         		
         		<li class="aw-menu__item">
           			<a href="#">
-            			<i class="fa  fa-fw  fa-credit-card"></i><span>Avaliação individual</span>
+            			<i class="fa  fa-fw  fa-credit-card"></i><span>Testes Físicos</span>
             			<i class="aw-menu__navigation-icon  fa"></i>
           			</a>
       
           			<ul class="aw-menu__list  aw-menu__list--sublist">
-			            <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/vendas.+}">
-			            	<a th:href="@{/vendas/nova}">Testes</a>
+			            <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/avaliacoesIndividuais.*}">
+			            	<a th:href="@{/avaliacoesIndividuais}">Avaliações Individuais</a>
 			            </li>
 			            
-			            <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/vendas}">
-			            	<a th:href="@{/vendas}">Doações</a>
+			            <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/avaliadores.*}">
+			            	<a th:href="@{/avaliadores}">Avaliadores</a>
 			            </li>
+			           
 			        </ul>
 			    </li>
 

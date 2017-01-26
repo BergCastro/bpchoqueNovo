@@ -3,9 +3,10 @@ package br.com.fireware.bpchoque.model.def;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -18,11 +19,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import br.com.fireware.bpchoque.model.ItemVenda;
 import br.com.fireware.bpchoque.model.def.PessoaDef;
 import lombok.Data;
 
@@ -107,7 +110,8 @@ public class AvaliacaoIndividual{
 	@Column(name="problemas") // Column name in person_interest
 	private List<Problemas> problemas;
 	
-	
+	@OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<MedicaoAvaliacaoIndividual> medicoes = new ArrayList<>();
 	
 	
 	private String problemaOutro;
