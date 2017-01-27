@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import br.com.fireware.bpchoque.model.def.AvaliacaoIndividual;
 import br.com.fireware.bpchoque.model.def.MedicaoAvaliacaoIndividual;
 import br.com.fireware.bpchoque.repository.def.MedicaoAvaliacaoIndividualRepository;
 
@@ -43,6 +45,11 @@ public class MedicaoAvaliacaoIndividualService {
 
 	public List<MedicaoAvaliacaoIndividual> findAll() {
 		return repository.findAll();
+	}
+
+	public Iterable<MedicaoAvaliacaoIndividual> findByAvaliacaoindividual(AvaliacaoIndividual ava) {
+		
+		return repository.findByAvaliacaoindividual(ava);
 	}
 	
 	

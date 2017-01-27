@@ -26,6 +26,7 @@ import br.com.fireware.bpchoque.model.Cargo;
 import br.com.fireware.bpchoque.model.OpmOrgao;
 import br.com.fireware.bpchoque.model.def.PessoaDef;
 import br.com.fireware.bpchoque.model.def.PessoaDef.EstadoCivil;
+import br.com.fireware.bpchoque.model.def.PessoaDef.Etnia;
 import br.com.fireware.bpchoque.security.UsuarioSistema;
 import br.com.fireware.bpchoque.model.TipoPessoa;
 import br.com.fireware.bpchoque.model.Sexo;
@@ -173,6 +174,12 @@ public class PessoaDefController {
 	public Iterable<OpmOrgao> orgaos() {
 		return opmOrgaoService.findByTipoCivil();
 	}
+	
+	@ModelAttribute("etnias")
+	public List<Etnia> etnias() {
+		return Arrays.asList(Etnia.values());
+	}
+	
 	
 	
 }

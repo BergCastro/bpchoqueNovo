@@ -68,6 +68,25 @@ public class PessoaDef{
 		}
 	}
 	
+	public enum Etnia {
+		MESTICO("Mestiço"),
+		BRANCO("Branco"),
+		NEGRO("Negro"),
+		ORIENTAL("Oriental"),
+		INDIO("Índio"),
+		ESPANICO("Espánico");
+		
+		private String descricao;
+		
+		Etnia(String descricao) {
+			this.descricao = descricao;
+		}
+		
+		public String getDescricao() {
+			return descricao;
+		}
+	}
+	
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -117,6 +136,8 @@ public class PessoaDef{
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate datanasc;
 	
+	@NotNull(message="A altura não pode estar em branco")
+	private Double altura;
 	
 
 	
@@ -130,6 +151,12 @@ public class PessoaDef{
 	@Enumerated(EnumType.STRING)
 	@Column(name= "tipo")
 	private TipoPessoa tipo;
+	
+	
+	@NotNull(message = "Uma etnia deve ser selecionada!")
+	@Enumerated(EnumType.STRING)
+	@Column(name= "etnia")
+	private Etnia etnia;
 
 	
 	@NotEmpty(message = "A matrícula não pode estar vazia!")

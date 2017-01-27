@@ -108,24 +108,33 @@
 
 
 			<div class="row">
-				<div class="form-group  col-sm-4">
+				<div class="form-group  col-sm-3 bw-required" brewer:classforerror="etnia">
+					<label for="etnia" class="control-label">Etnia</label> <select id="etnia"
+						class="form-control" th:field="*{etnia}" name="cargo">
+						<option value="">Selecione uma opção</option>
+						<option th:each="etnia : ${etnias}" th:value="${etnia}"
+							th:text="${etnia.descricao}"></option>
+					</select>
+				</div>
+			
+				<div class="form-group  col-sm-3">
 					<label for="telefone">Telefone</label> <input type="text"
 						class="form-control  js-phone-number" id="telefone"
 						th:field="*{telefone1}" />
 				</div>
-				<div class="form-group  col-sm-4">
+				<div class="form-group  col-sm-3">
 					<label for="telefone">Celular</label> <input type="text"
 						class="form-control  js-phone-number" id="telefone"
 						th:field="*{telefone2}" />
 				</div>
 
-				<div class="form-group  col-sm-4">
+				<div class="form-group  col-sm-3">
 					<label for="email" class="control-label">E-mail</label> <input
 						type="text" class="form-control" id="email" th:field="*{email}" />
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-4 bw-required"
+				<div class="form-group col-sm-3 bw-required"
 					brewer:classforerror="datanasc">
 					<label for="data" class="control-label">Data Nascimento</label> <input type="text"
 						class="form-control" id="dataNascimento" name="data"
@@ -134,7 +143,13 @@
 						data-date-orientation="bottom" />
 
 				</div>
-				<div class="form-group  col-sm-4 bw-required" brewer:classforerror="cargo">
+				<div class="form-group  col-sm-3 bw-required"
+					>
+					<label for="numero" class="control-label">Altura</label> <input
+						type="text" class="form-control" id="numero"
+						th:field="*{numero_pm}" />
+				</div>
+				<div class="form-group  col-sm-3 bw-required" brewer:classforerror="cargo">
 					<label for="cargo" class="control-label">Post./Grad.</label> <select id="cargo"
 						class="form-control" th:field="*{cargo}" name="cargo">
 						<option value="">Selecione uma opção</option>
@@ -142,7 +157,7 @@
 							th:text="${cargo.nome}"></option>
 					</select>
 				</div>
-				<div class="form-group  col-sm-4 bw-required" brewer:classforerror="opm_orgao">
+				<div class="form-group  col-sm-3 bw-required" brewer:classforerror="opm_orgao">
 					<label for="opm" class="control-label">OPM/Orgão</label> <select id="opm"
 						class="form-control" th:field="*{opm_orgao}" name="opm">
 						<option value="">Selecione uma opção</option>

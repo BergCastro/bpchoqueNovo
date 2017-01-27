@@ -21,7 +21,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -61,41 +61,44 @@ public class AvaliacaoIndividual{
 	private String atualizadopor;
 	
 	
-	
+	@NotNull(message="Um avaliado deve ser selecionado")
 	@ManyToOne()
 	@JoinColumn(name="pessoadef")
 	private PessoaDef pessoadef;
 	
+	@NotNull(message="Um avaliador deve ser selecionado")
 	@ManyToOne()
 	@JoinColumn(name="avaliador")
 	private Avaliador avaliador;
 	
+	@NotNull(message="Uma pergunta não foi respondida!")
 	private Boolean praticaTipoAtividade;
 	
 	private String praticaTipoAtividadeQual;
 	
-	
+	@NotNull(message="Uma pergunta não foi respondida!")
 	@Enumerated(EnumType.STRING)
 	private Frequencia frequencia;
 	
+	@NotNull(message="Uma pergunta não foi respondida!")
 	@Enumerated(EnumType.STRING)
 	private Duracao duracao;
 	
-	
+	@NotNull(message="Uma pergunta não foi respondida!")
 	@Enumerated(EnumType.STRING)
 	private Objetivos objetivo;
 	
 	private String objetivoOutro;
 	
-		
+	@NotNull(message="Uma pergunta não foi respondida!")	
 	private Boolean restricao;
 	
 	private String restricaoQual;
-	
+	@NotNull(message="Uma pergunta não foi respondida!")
 	private Boolean fuma;
-	
+	@NotNull(message="Uma pergunta não foi respondida!")
 	private Boolean bebidaAlcoolica;
-	
+	@NotNull(message="Uma pergunta não foi respondida!")
 	private Boolean medicamento;
 	
 	private String medicamentoQual;
@@ -110,7 +113,7 @@ public class AvaliacaoIndividual{
 	@Column(name="problemas") // Column name in person_interest
 	private List<Problemas> problemas;
 	
-	@OneToMany(mappedBy = "venda", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "avaliacaoindividual", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<MedicaoAvaliacaoIndividual> medicoes = new ArrayList<>();
 	
 	
@@ -147,7 +150,7 @@ public class AvaliacaoIndividual{
 	}
 	
 	public enum Objetivos {
-		EMAGRECIMENTO("Emagrecimento"), QUALIDADE_DE_VIDA("Quaidade de vida"), GANHO_DE_MASSA_MUSCULAR("Ganho de massa muscular"), 
+		EMAGRECIMENTO("Emagrecimento"), QUALIDADE_DE_VIDA("Qualidade de vida"), GANHO_DE_MASSA_MUSCULAR("Ganho de massa muscular"), 
 		CONDICIONAMENTO("Condicionamento"), REABILITACAO("Reabilitação"),
 		TREINAMENTO_ESPORTIVO("Treinamento Esportivos"), LAZER("Lazer"), OUTROS("Outros");
 		

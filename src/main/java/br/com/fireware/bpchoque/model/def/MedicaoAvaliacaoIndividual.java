@@ -77,7 +77,7 @@ public class MedicaoAvaliacaoIndividual{
 	private Double pernad;
 	
 	@ManyToOne
-	@JoinColumn(name = "avalicaoIndividual")
-	private Venda avaliacaoindividual;
+	@JoinColumn(name = "avaliacaoindividual")
+	private AvaliacaoIndividual avaliacaoindividual;
 
 }

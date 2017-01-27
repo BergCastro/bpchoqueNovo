@@ -7,21 +7,27 @@ import java.util.Arrays;
 
 import java.util.List;
 
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import br.com.fireware.bpchoque.model.def.PessoaDef;
+import br.com.fireware.bpchoque.model.Estilo;
 import br.com.fireware.bpchoque.model.def.AvaliacaoIndividual;
 
 
@@ -30,9 +36,11 @@ import br.com.fireware.bpchoque.model.def.AvaliacaoIndividual.Frequencia;
 import br.com.fireware.bpchoque.model.def.AvaliacaoIndividual.Objetivos;
 import br.com.fireware.bpchoque.model.def.AvaliacaoIndividual.Problemas;
 import br.com.fireware.bpchoque.model.def.Avaliador;
+import br.com.fireware.bpchoque.model.def.MedicaoAvaliacaoIndividual;
 import br.com.fireware.bpchoque.service.def.PessoaDefService;
 import br.com.fireware.bpchoque.service.def.AvaliacaoIndividualService;
 import br.com.fireware.bpchoque.service.def.AvaliadorService;
+import br.com.fireware.bpchoque.service.def.MedicaoAvaliacaoIndividualService;
 
 @Controller
 @RequestMapping("/avaliacoesIndividuais")
@@ -43,6 +51,9 @@ public class AvaliacaoIndividualController {
 	
 	@Autowired
 	private AvaliacaoIndividualService avaliacaoIndividualService;
+	
+	@Autowired
+	private MedicaoAvaliacaoIndividualService medicaoAvaliacaoIndividualService;
 	
 	@Autowired
 	private PessoaDefService pessoaDefService;
@@ -58,6 +69,7 @@ public class AvaliacaoIndividualController {
 		
 		return mv;
 	}
+	
 	
 	@RequestMapping("/novo")
 	public ModelAndView novo() {
@@ -90,12 +102,23 @@ public class AvaliacaoIndividualController {
 		}
 	}
 	
+	@RequestMapping(value="/medicoes", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	public @ResponseBody ResponseEntity<?> salvar(@RequestBody @Valid MedicaoAvaliacaoIndividual medicao, BindingResult result) {
+		if (result.hasErrors()) {
+			return ResponseEntity.badRequest().body(result.getFieldError("nome").getDefaultMessage());
+		}
+		
+		medicaoAvaliacaoIndividualService.save(medicao);
+		return ResponseEntity.ok(medicao);
+	}
 	
 	
 	@RequestMapping("{id}")
 	public ModelAndView edicao(@PathVariable("id") AvaliacaoIndividual avaliacaoIndividual) {
 		ModelAndView mv = new ModelAndView(CADASTRO_AVALIACAO); 
 		mv.addObject(avaliacaoIndividual);
+		Iterable<MedicaoAvaliacaoIndividual> medicoes = medicaoAvaliacaoIndividualService.findByAvaliacaoindividual(avaliacaoIndividual);
+		mv.addObject(medicoes);
 		return mv;
 	}
 	
