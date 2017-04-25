@@ -1,5 +1,7 @@
 package br.com.fireware.bpchoque.controller.def;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +10,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
@@ -23,10 +26,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
-
+import br.com.fireware.bpchoque.model.def.Avaliador;
 import br.com.fireware.bpchoque.model.def.Doacao;
 import br.com.fireware.bpchoque.model.def.Doacao.DoacaoTipo;
+import br.com.fireware.bpchoque.security.UsuarioSistema;
 import br.com.fireware.bpchoque.model.def.DoacaoDetalhe;
 import br.com.fireware.bpchoque.service.def.DoacaoDetalheService;
 import br.com.fireware.bpchoque.service.def.DoacaoService;
@@ -35,8 +38,8 @@ import br.com.fireware.bpchoque.service.def.DoacaoService;
 @RequestMapping("/doacoes")
 public class DoacaoController {
 	
-	private static final String CADASTRO_OBJETO = "Doacoes/CadastroDoacaoObjeto";
-	private static final String CADASTRO_VALOR = "Doacoes/CadastroDoacaoValor";
+	private static final String CADASTRO_DOACAO = "doacoes/CadastroDoacoes";
+	private static final String CADASTRO_VALOR = "doacoes/CadastroDoacaoValor";
 	
 	@Autowired
 	private DoacaoService doacaoService;
@@ -51,7 +54,7 @@ public class DoacaoController {
 	@RequestMapping
 	public ModelAndView doacoes() {
 		Iterable<Doacao> todosDoacoes = doacaoService.findAll();
-		ModelAndView mv = new ModelAndView("Doacoes/Doacoes");
+		ModelAndView mv = new ModelAndView("doacoes/doacoes");
 		mv.addObject("doacoes", todosDoacoes);
 		
 		return mv;
@@ -65,18 +68,47 @@ public class DoacaoController {
 	}
 	
 	@RequestMapping("/novo")
-	public ModelAndView novo(@RequestParam(required=false) String tipo) {
-		
+	public ModelAndView novo() {
+
 		ModelAndView mv = new ModelAndView();
-		detalhes = new ArrayList<DoacaoDetalhe>();
-		doacao = new Doacao();
-		mv.addObject(doacao);	
-		
-			
+
+		mv.setViewName(CADASTRO_DOACAO);
+		Doacao doacao = new Doacao();
+		doacao.setDataDoacao(LocalDate.now());
+		mv.addObject("doacao", doacao);
 		return mv;
-			
-		
-		
+
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public String salvar(@Validated Doacao doacao, Errors errors, RedirectAttributes attributes,
+			@AuthenticationPrincipal UsuarioSistema usuarioSistema) {
+		if (errors.hasErrors()) {
+			return CADASTRO_DOACAO;
+		}
+		doacao.setAtualizadoem(LocalDateTime.now());
+		doacao.setAtualizadopor(usuarioSistema.getUsername());
+
+		if (doacao.getCriadopor() == null || doacao.getAtualizadopor().equals("")) {
+			doacao.setCriadoem(LocalDateTime.now());
+			doacao.setCriadopor(usuarioSistema.getUsername());
+		}
+
+		try {
+			doacaoService.save(doacao);
+			attributes.addFlashAttribute("mensagem", "Doação salva com sucesso!");
+			return "redirect:/doacoes";
+		} catch (IllegalArgumentException e) {
+
+			return CADASTRO_DOACAO;
+		}
+	}
+	
+	@RequestMapping("{id}")
+	public ModelAndView edicao(@PathVariable("id") Doacao doacao) {
+		ModelAndView mv = new ModelAndView(CADASTRO_DOACAO);
+		mv.addObject(doacao);
+		return mv;
 	}
 	
 	public List<DoacaoDetalhe> listaDetalhes(){
@@ -86,7 +118,7 @@ public class DoacaoController {
 	@PostMapping("/item")
 	public ModelAndView adicionarItem(Long idDoacao, DoacaoDetalhe detalhe ) {
 		Doacao doacao = doacaoService.findById(idDoacao);
-		ModelAndView mv = new ModelAndView("Doacoes/Doacoes");
+		ModelAndView mv = new ModelAndView("doacoes/doacoes");
 		return mv;
 	}
 	
@@ -108,7 +140,7 @@ public class DoacaoController {
 	@RequestMapping(value="/salvar" ,method = RequestMethod.POST)
 	public String salvar( @Validated Doacao doacao, @Validated DoacaoDetalhe doacaoDetalhe, Errors errors, RedirectAttributes attributes) {
 		if (errors.hasErrors()) {
-			return CADASTRO_OBJETO;
+			return CADASTRO_DOACAO;
 		}
 		
 		
@@ -126,7 +158,7 @@ public class DoacaoController {
 			return "redirect:/doacoes";
 		} catch (IllegalArgumentException e) {
 			errors.rejectValue("dataVencimento", null, e.getMessage());
-			return CADASTRO_OBJETO;
+			return CADASTRO_DOACAO;
 		}
 	}
 	
@@ -140,14 +172,7 @@ public class DoacaoController {
 	
 	
 	
-	@RequestMapping("{id}")
-	public ModelAndView edicao(@PathVariable("id") Doacao doacao) {
-		
-		ModelAndView mv = new ModelAndView();
-		
-		
-		return mv;
-	}
+	
 	
 	@RequestMapping(value="/delete/{id}")
 	public String excluir(@PathVariable Long id) {

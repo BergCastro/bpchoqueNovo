@@ -8,8 +8,7 @@ import java.util.List;
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -53,8 +52,8 @@ public class Doacao {
 
 	private String doador;
 
-	@OneToMany(orphanRemoval=true)
-	private List<DoacaoDetalhe> doacaoDetalhe;
+//	@OneToMany(orphanRemoval=true)
+//	private List<DoacaoDetalhe> doacaoDetalhe;
 
 	//private double valor;
 	

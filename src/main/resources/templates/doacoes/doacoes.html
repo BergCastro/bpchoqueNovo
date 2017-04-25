@@ -63,7 +63,7 @@
 								class="glyphicon glyphicon-pencil"></span>
 						</a> <a class="btn btn-link btn-xs" data-toggle="modal"
 							data-target="#myModalExclusao"
-							th:attr="data-id=${doacao.id}, data-nome=${doacao.nome}"
+							th:attr="data-id=${doacao.id}, data-nome=${doacao.doador}"
 							title="Excluir" rel="tooltip" data-placement="top"> <span
 								class="glyphicon glyphicon-remove"></span>
 						</a></td>
@@ -77,7 +77,7 @@
 		data-keyboard="false" data-backdrop="static">
 		<div class="modal-dialog">
 			<form
-				th:attr="data-url-base=@{/doacoes/delete/}, data-tipo='o cargo '"
+				th:attr="data-url-base=@{/doacoes/delete/}, data-tipo='a doação feita por '"
 				method="get">
 
 
