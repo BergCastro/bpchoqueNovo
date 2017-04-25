@@ -1,0 +1,18 @@
+CREATE TABLE doacoes(
+	id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+	criadoem DATETIME DEFAULT CURRENT_TIMESTAMP,
+    criadopor VARCHAR(50),
+    atualizadoem DATETIME,
+    atualizadopor VARCHAR(50),
+	doador VARCHAR(60) NOT NULL,
+	dataDoacao DATE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE doacoes_detalhes(
+	id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+	doador VARCHAR(60) NOT NULL,
+	quantidade DECIMAL(10,2) NOT NULL,
+	tipo VARCHAR(40) NOT NULL,
+	descricao VARCHAR(60),
+	FOREIGN KEY (id) REFERENCES doacoes(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

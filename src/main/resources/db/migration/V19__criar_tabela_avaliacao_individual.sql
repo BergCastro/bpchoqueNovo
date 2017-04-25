@@ -4,13 +4,12 @@ CREATE TABLE avaliadores(
     criadopor VARCHAR(50),
     atualizadoem DATETIME,
     atualizadopor VARCHAR(50),
-	pessoadef BIGINT(20) NOT NULL,
-	cref VARCHAR(15),
-	escolaridade VARCHAR(20),
+    cref VARCHAR(20),
+    escolaridade VARCHAR(20),
+    pessoadef BIGINT(20) NOT NULL,
 	FOREIGN KEY (pessoadef) REFERENCES pessoasdef(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO avaliadores (criadopor, pessoadef, cref, escolaridade) VALUES ('fireberg2500@hotmail.com',18, '123123', 2);
 
 
 CREATE TABLE avaliacoes_individuais (
