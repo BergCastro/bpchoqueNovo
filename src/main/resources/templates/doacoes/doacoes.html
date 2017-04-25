@@ -55,7 +55,7 @@
 				<tbody>
 					<tr th:each="doacao : ${doacoes}">
 						<td th:text="${doacao?.id}">1</td>
-						<td th:text="${doacao?.dataDoacao}">data</td>
+						<td th:text="${{doacao?.dataDoacao}}">data</td>
 						<td th:text="${doacao?.doador}">doador</td>
 						<td class="text-center"><a class="btn btn-link btn-xs"
 							th:href="@{/doacoes/{id}(id=${doacao.id})}" title="Editar"

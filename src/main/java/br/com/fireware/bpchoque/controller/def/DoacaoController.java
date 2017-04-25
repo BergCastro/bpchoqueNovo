@@ -75,7 +75,9 @@ public class DoacaoController {
 		mv.setViewName(CADASTRO_DOACAO);
 		Doacao doacao = new Doacao();
 		doacao.setDataDoacao(LocalDate.now());
+		
 		mv.addObject("doacao", doacao);
+		mv.addObject("tipos", DoacaoTipo.values());
 		return mv;
 
 	}

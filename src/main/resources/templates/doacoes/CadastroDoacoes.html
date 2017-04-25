@@ -15,7 +15,7 @@
 			<div class="row">
 				<div class="col-xs-10">
 					<h1>Cadastro de Cargo</h1>
-					
+
 				</div>
 
 				<div class="col-xs-2">
@@ -58,6 +58,46 @@
 
 			</div>
 
+
+			<div class="table-responsive  bw-tabela-simples">
+				<table class="table  table-hover">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Tipo</th>
+							<th>Valor</th>
+							<th>Descrição</th>
+							<th></th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr th:each="detalhe : ${doacao.detalhes}">
+							<td class="text-center" th:text="${detalhe.id}">1</td>
+							<td th:text="${detalhe.tipo}">Tipo</td>
+							<td th:text="${detalhe.quantidade}">Tipo</td>
+							<td th:text="${detalhe.descricao}">Descrição</td>
+							<td class="text-center"><a class="btn  btn-link  btn-xs"
+								title="Editar"> <i class="glyphicon glyphicon-pencil"></i>
+							</a> <a class="btn  btn-link  btn-xs" title="Excluir"> <i
+									class="glyphicon glyphicon-remove"></i>
+							</a></td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+
+
+			<div class="bw-field-action__icon">
+				<a href="#" data-toggle="modal"
+					data-target="#modalCadastroItemDoacao"> <i
+					class="glyphicon  glyphicon-plus-sign"></i> <span
+					class="hidden-xs  hidden-sm">Adicionar Item</span>
+				</a>
+			</div>
+			<br>
+
 			<div class="row">
 				<div class="form-group col-sm-12">
 
@@ -72,5 +112,11 @@
 
 		</form>
 	</div>
+	<div th:replace="doacoes/CadastroItemDoacao :: modal"></div>
+	<th:block layout:fragment="javascript-extra">
+		<script th:src="@{/javascripts/detalhe-doacao.cadastro.js}"></script>
+		
+
+	</th:block>
 </section>
 </html>

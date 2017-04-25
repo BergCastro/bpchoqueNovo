@@ -59,7 +59,7 @@
 					<tbody>
 						<tr th:each="avaliacao : ${avaliacoes}">
 							<td th:text="${avaliacao?.id}">1</td>
-							<td th:text="${avaliacao?.dataAvaliacao}">Data</td>
+							<td th:text="${{avaliacao?.dataAvaliacao}}">Data</td>
 							<td th:text="${avaliacao?.pessoadef.matricula}">Matricula</td>
 							<td th:text="${avaliacao?.pessoadef.numero_pm}">numero</td>
 							<td th:text="${avaliacao?.pessoadef.cargo.abreviacao}">cargo</td>
