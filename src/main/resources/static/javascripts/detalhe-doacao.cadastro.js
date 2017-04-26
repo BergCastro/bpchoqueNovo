@@ -40,13 +40,8 @@ Brewer.DetalheCadastro = (function() {
 			url: this.url,
 			method: 'POST',
 			contentType: 'application/json',
-			data: JSON.stringify({ 
-				tipo: tipo,
-				quantidade: quantidade,
-				descricao: descricao
-				}
-				}),
-			}
+			data: JSON.stringify({tipo: tipo, quantidade: quantidade, descricao: descricao}),
+			
 			error: onErroSalvandoEstilo.bind(this),
 			success: onEstiloSalvo.bind(this)
 		});
@@ -71,6 +66,6 @@ Brewer.DetalheCadastro = (function() {
 }());
 
 $(function() {
-	var estiloCadastroRapido = new Brewer.DetalheCadastro();
-	estiloCadastroRapido.iniciar();
+	var detalheCadastro = new Brewer.DetalheCadastro();
+	detalheCadastro.iniciar();
 });

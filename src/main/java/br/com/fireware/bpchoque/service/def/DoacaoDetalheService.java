@@ -21,9 +21,10 @@ public class DoacaoDetalheService {
 	private DoacaoDetalheRepository repository;
 
 	@Transactional(readOnly = false)
-	public void save(DoacaoDetalhe doacaoDetalhe) {
+	public DoacaoDetalhe save(DoacaoDetalhe doacaoDetalhe) {
 		
-		repository.save(doacaoDetalhe);
+		
+		return repository.saveAndFlush(doacaoDetalhe);
 
 	}
 

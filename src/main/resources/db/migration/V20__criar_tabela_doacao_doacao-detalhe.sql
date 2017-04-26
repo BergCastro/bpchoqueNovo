@@ -10,9 +10,9 @@ CREATE TABLE doacoes(
 
 CREATE TABLE doacoes_detalhes(
 	id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
-	doador VARCHAR(60) NOT NULL,
+	doacao BIGINT(20) NOT NULL,
 	quantidade DECIMAL(10,2) NOT NULL,
 	tipo VARCHAR(40) NOT NULL,
 	descricao VARCHAR(60),
-	FOREIGN KEY (id) REFERENCES doacoes(id)
+	FOREIGN KEY (doacao) REFERENCES doacoes(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

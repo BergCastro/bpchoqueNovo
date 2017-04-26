@@ -2,7 +2,7 @@ package br.com.fireware.bpchoque.controller.def;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.validation.Valid;
@@ -21,12 +21,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.fireware.bpchoque.model.def.Avaliador;
+
+
+
 import br.com.fireware.bpchoque.model.def.Doacao;
 import br.com.fireware.bpchoque.model.def.Doacao.DoacaoTipo;
 import br.com.fireware.bpchoque.security.UsuarioSistema;
@@ -49,7 +51,7 @@ public class DoacaoController {
 	
 	List<DoacaoDetalhe> detalhes;
 	
-	Doacao doacao;
+	private Doacao doacao;
 	
 	@RequestMapping
 	public ModelAndView doacoes() {
@@ -104,6 +106,20 @@ public class DoacaoController {
 
 			return CADASTRO_DOACAO;
 		}
+	}
+	
+	@RequestMapping(value="/detalheNovo", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	public @ResponseBody ResponseEntity<?> salvarDetalhe(@RequestBody @Valid DoacaoDetalhe detalhe , Doacao doacao, BindingResult result) {
+		System.out.println("Entrou no detalhe Novo");
+		System.out.println(detalhe.toString());
+		System.out.println(doacao.toString());
+		if (result.hasErrors()) {
+			return ResponseEntity.badRequest().body(result.getFieldError("nome").getDefaultMessage());
+		}
+		
+		detalhe.setDoacao(doacao);
+		detalhe = doacaoDetalheService.save(detalhe);
+		return ResponseEntity.ok(detalhe);
 	}
 	
 	@RequestMapping("{id}")
