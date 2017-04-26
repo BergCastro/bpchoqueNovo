@@ -43,6 +43,7 @@ Brewer.DetalheCadastro = (function() {
 			data: JSON.stringify({ 
 				tipo: tipo,
 				quantidade: quantidade,
+				descricao: descricao
 				}
 				}),
 			}
