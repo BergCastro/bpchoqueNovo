@@ -2,11 +2,12 @@ package br.com.fireware.bpchoque.controller.def;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
+import org.apache.lucene.queryparser.flexible.standard.builders.FieldQueryNodeBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -49,15 +50,20 @@ public class DoacaoController {
 	@Autowired
 	private DoacaoDetalheService doacaoDetalheService;
 	
-	List<DoacaoDetalhe> detalhes;
+	private List<DoacaoDetalhe> detalhes;
 	
 	private Doacao doacao;
 	
 	@RequestMapping
 	public ModelAndView doacoes() {
+		/*if(detalhes.get(0).getDoacao()==null){
+			attributes.addFlashAttribute("mensagem", "Doação salva com sucesso!");
+		}*/
+		
 		Iterable<Doacao> todosDoacoes = doacaoService.findAll();
 		ModelAndView mv = new ModelAndView("doacoes/doacoes");
 		mv.addObject("doacoes", todosDoacoes);
+		
 		
 		return mv;
 	}
@@ -73,9 +79,9 @@ public class DoacaoController {
 	public ModelAndView novo() {
 
 		ModelAndView mv = new ModelAndView();
-
+		detalhes = new ArrayList<DoacaoDetalhe>();
 		mv.setViewName(CADASTRO_DOACAO);
-		Doacao doacao = new Doacao();
+		this.doacao = new Doacao();
 		doacao.setDataDoacao(LocalDate.now());
 		
 		mv.addObject("doacao", doacao);
@@ -99,7 +105,16 @@ public class DoacaoController {
 		}
 
 		try {
+			
+			System.out.println("Entrou no salvar");
 			doacaoService.save(doacao);
+			System.out.println("Salvou doacao");
+			for(DoacaoDetalhe detalhe: detalhes){
+				System.out.println(detalhe.toString());
+				detalhe.setDoacao(doacao);
+				System.out.println(detalhe.toString());
+				doacaoDetalheService.save(detalhe);
+			}
 			attributes.addFlashAttribute("mensagem", "Doação salva com sucesso!");
 			return "redirect:/doacoes";
 		} catch (IllegalArgumentException e) {
@@ -109,16 +124,18 @@ public class DoacaoController {
 	}
 	
 	@RequestMapping(value="/detalheNovo", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
-	public @ResponseBody ResponseEntity<?> salvarDetalhe(@RequestBody @Valid DoacaoDetalhe detalhe , Doacao doacao, BindingResult result) {
-		System.out.println("Entrou no detalhe Novo");
+	public @ResponseBody ResponseEntity<?> salvarDetalhe(@RequestBody @Valid DoacaoDetalhe detalhe , BindingResult result) {
+		/*System.out.println("Entrou no detalhe Novo");
 		System.out.println(detalhe.toString());
-		System.out.println(doacao.toString());
+		System.out.println(doacao.toString());*/
+		
 		if (result.hasErrors()) {
 			return ResponseEntity.badRequest().body(result.getFieldError("nome").getDefaultMessage());
 		}
 		
 		detalhe.setDoacao(doacao);
-		detalhe = doacaoDetalheService.save(detalhe);
+		
+		detalhes.add(detalhe);
 		return ResponseEntity.ok(detalhe);
 	}
 	
@@ -126,6 +143,11 @@ public class DoacaoController {
 	public ModelAndView edicao(@PathVariable("id") Doacao doacao) {
 		ModelAndView mv = new ModelAndView(CADASTRO_DOACAO);
 		mv.addObject(doacao);
+		List<DoacaoDetalhe> detalhesBusca = doacaoDetalheService.findByDoacao(doacao);
+		detalhes = new ArrayList<DoacaoDetalhe>();
+		detalhes.addAll(detalhesBusca);
+		mv.addObject("detalhes", detalhes);
+		mv.addObject("tipos", DoacaoTipo.values());
 		return mv;
 	}
 	
@@ -141,44 +163,12 @@ public class DoacaoController {
 	}
 	
 	
-	@RequestMapping(method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
-	public @ResponseBody ResponseEntity<?> salvar(@RequestBody @Valid DoacaoDetalhe detalhe, BindingResult result) {
-		if (result.hasErrors()) {
-			return ResponseEntity.badRequest().body(result.getFieldError("descricao").getDefaultMessage());
-		}
-		
-		//doacao = doacaoService.findById(id);
-		
-		return ResponseEntity.ok(detalhe);
-	}
 	
 	
 	
 	
-	@RequestMapping(value="/salvar" ,method = RequestMethod.POST)
-	public String salvar( @Validated Doacao doacao, @Validated DoacaoDetalhe doacaoDetalhe, Errors errors, RedirectAttributes attributes) {
-		if (errors.hasErrors()) {
-			return CADASTRO_DOACAO;
-		}
-		
-		
-	/*	Locale BRAZIL = new Locale("pt", "BR");
-		LocalDate dataNascimento = LocalDate.parse(data.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy").withLocale(BRAZIL));
-		doacao.setDatanasc(dataNascimento);*/
-		
-			
-			
-		
-		try {
-			doacaoService.save(doacao);
-			attributes.addFlashAttribute("mensagem", "Doação salva com sucesso!");
-			
-			return "redirect:/doacoes";
-		} catch (IllegalArgumentException e) {
-			errors.rejectValue("dataVencimento", null, e.getMessage());
-			return CADASTRO_DOACAO;
-		}
-	}
+	
+	
 	
 //	@PostMapping("/item")
 //	public ModelAndView adicionarItem(Long id, Integer quantidade) {
@@ -194,7 +184,10 @@ public class DoacaoController {
 	
 	@RequestMapping(value="/delete/{id}")
 	public String excluir(@PathVariable Long id) {
+		Doacao doacao = doacaoService.findById(id);
+		doacaoDetalheService.deleteByDoacao(doacao);
 		doacaoService.delete(id);
+		
 		
 		
 		

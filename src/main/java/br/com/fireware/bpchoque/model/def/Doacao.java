@@ -52,8 +52,8 @@ public class Doacao {
 
 	private String doador;
 
-	@OneToMany(orphanRemoval=true)
-	private List<DoacaoDetalhe> detalhes;
+	//@OneToMany(orphanRemoval=true, mappedBy="doacao")
+	//private List<DoacaoDetalhe> detalhes;
 
 	//private double valor;
 	
