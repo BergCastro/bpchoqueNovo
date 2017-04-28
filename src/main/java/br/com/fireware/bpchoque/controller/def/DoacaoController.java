@@ -116,7 +116,7 @@ public class DoacaoController {
 				doacaoDetalheService.save(detalhe);
 			}
 			attributes.addFlashAttribute("mensagem", "Doação salva com sucesso!");
-			return "redirect:/doacoes";
+			return "redirect:/doacoes/"+doacao.getId();
 		} catch (IllegalArgumentException e) {
 
 			return CADASTRO_DOACAO;
@@ -142,6 +142,7 @@ public class DoacaoController {
 	@RequestMapping("{id}")
 	public ModelAndView edicao(@PathVariable("id") Doacao doacao) {
 		ModelAndView mv = new ModelAndView(CADASTRO_DOACAO);
+		this.doacao = doacao;
 		mv.addObject(doacao);
 		List<DoacaoDetalhe> detalhesBusca = doacaoDetalheService.findByDoacao(doacao);
 		detalhes = new ArrayList<DoacaoDetalhe>();
@@ -194,6 +195,18 @@ public class DoacaoController {
 		return "redirect:/doacoes";
 	}
 	
+	@RequestMapping(value="/deleteDetalhe/{id}")
+	public String excluirDetalhe(@PathVariable Long id) {
+	
+		if(id != null){
+			doacaoDetalheService.delete(id);
+		}
+		
+		
+		
+		
+		return "redirect:/doacoes/"+doacao.getId();
+	}
 	
 	
 	

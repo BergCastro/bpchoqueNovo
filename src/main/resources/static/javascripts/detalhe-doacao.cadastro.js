@@ -57,17 +57,14 @@ Brewer.DetalheCadastro = (function() {
 	function onEstiloSalvo(estilo) {
 		var comboEstilo = $('#listaDetalhe');
 		comboEstilo.append(
-				           '<tr>'+
+				           '<tr style="background:#ffb3b3;">'+
 								'<td>'+estilo.tipo+'</td>'+
 								'<td>'+estilo.quantidade+'.00</td>'+
 								'<td>'+estilo.descricao+'</td>'+
 								'<td class="text-center">'+
-									'<a class="btn  btn-link  btn-xs"'+
-									'title="Editar"> <i class="glyphicon glyphicon-pencil"></i>'+
-									'</a>'+ 
-									'<a class="btn  btn-link  btn-xs" title="Excluir">'+ 
-									'<i class="glyphicon glyphicon-remove"></i>'+
-									'</a>'+
+									 '<i class="glyphicon glyphicon-floppy-remove"></i>'+
+									 
+									
 								'</td>'+
 								'</tr>');
 		comboEstilo.val(estilo.id);
@@ -78,7 +75,22 @@ Brewer.DetalheCadastro = (function() {
 	
 }());
 
+
+
+
 $(function() {
 	var detalheCadastro = new Brewer.DetalheCadastro();
 	detalheCadastro.iniciar();
 });
+
+(function($) {
+	  remove = function(item) {
+	    var tr = $(item).closest('tr');
+
+	    tr.fadeOut(400, function() {
+	      tr.remove();  
+	    });
+
+	    return false;
+	  }
+	})(jQuery);
