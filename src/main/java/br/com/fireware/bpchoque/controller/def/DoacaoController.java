@@ -99,20 +99,20 @@ public class DoacaoController {
 		doacao.setAtualizadoem(LocalDateTime.now());
 		doacao.setAtualizadopor(usuarioSistema.getUsername());
 
-		if (doacao.getCriadopor() == null || doacao.getAtualizadopor().equals("")) {
+		if (doacao.getCriadopor() == null || doacao.getCriadopor().equals("")) {
 			doacao.setCriadoem(LocalDateTime.now());
 			doacao.setCriadopor(usuarioSistema.getUsername());
 		}
 
 		try {
 			
-			System.out.println("Entrou no salvar");
+			
 			doacaoService.save(doacao);
-			System.out.println("Salvou doacao");
+			
 			for(DoacaoDetalhe detalhe: detalhes){
-				System.out.println(detalhe.toString());
+				
 				detalhe.setDoacao(doacao);
-				System.out.println(detalhe.toString());
+				
 				doacaoDetalheService.save(detalhe);
 			}
 			attributes.addFlashAttribute("mensagem", "Doação salva com sucesso!");
@@ -128,9 +128,13 @@ public class DoacaoController {
 		/*System.out.println("Entrou no detalhe Novo");
 		System.out.println(detalhe.toString());
 		System.out.println(doacao.toString());*/
-		
-		if (result.hasErrors()) {
-			return ResponseEntity.badRequest().body(result.getFieldError("nome").getDefaultMessage());
+		System.out.println(detalhe.toString());
+		if(result.getFieldValue("tipo").equals("VAZIO")){
+			return ResponseEntity.badRequest().body("Selecione um tipo de doação!");
+		}else if (result.hasFieldErrors("quantidade")) {
+			return ResponseEntity.badRequest().body(result.getFieldError("quantidade").getDefaultMessage());
+		}else if(result.hasFieldErrors("descricao")){
+			return ResponseEntity.badRequest().body(result.getFieldError("descricao").getDefaultMessage());
 		}
 		
 		detalhe.setDoacao(doacao);

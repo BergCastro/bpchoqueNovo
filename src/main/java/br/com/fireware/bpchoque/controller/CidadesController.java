@@ -1,5 +1,6 @@
 package br.com.fireware.bpchoque.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +28,7 @@ import br.com.fireware.bpchoque.model.Cidade;
 import br.com.fireware.bpchoque.repository.Cidades;
 import br.com.fireware.bpchoque.repository.Estados;
 import br.com.fireware.bpchoque.repository.filter.CidadeFilter;
+import br.com.fireware.bpchoque.security.UsuarioSistema;
 import br.com.fireware.bpchoque.service.CadastroCidadeService;
 import br.com.fireware.bpchoque.service.exception.NomeCidadeJaCadastradaException;
 
@@ -61,9 +64,16 @@ public class CidadesController {
 	
 	@PostMapping("/nova")
 	@CacheEvict(value = "cidades", key = "#cidade.estado.id", condition = "#cidade.temEstado()")
-	public ModelAndView salvar(@Valid Cidade cidade, BindingResult result, RedirectAttributes attributes) {
+	public ModelAndView salvar(@Valid Cidade cidade, BindingResult result, RedirectAttributes attributes, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
 		if (result.hasErrors()) {
 			return nova(cidade);
+		}
+		cidade.setAtualizadoem(LocalDateTime.now());
+		cidade.setAtualizadopor(usuarioSistema.getUsername());
+		
+		if(cidade.getCriadopor()==null || cidade.getCriadopor().equals("")){
+			cidade.setCriadoem(LocalDateTime.now());
+			cidade.setCriadopor(usuarioSistema.getUsername());
 		}
 		
 		try {

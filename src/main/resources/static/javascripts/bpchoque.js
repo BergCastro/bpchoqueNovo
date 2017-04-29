@@ -22,7 +22,7 @@ $('#myModalExclusaoDetalhe').on('show.bs.modal', function(event) {
 	var button = $(event.relatedTarget);
 	
 	var detalheId = button.data('id');
-	var detalheNome = button.data('nome');
+	var detalheNome = button.data('descricao');
 	
 	var modal = $(this);
 	var form = modal.find('form');

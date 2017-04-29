@@ -1,11 +1,19 @@
 CREATE TABLE estado (
     id BIGINT(20) PRIMARY KEY,
+    criadoem DATETIME DEFAULT CURRENT_TIMESTAMP,
+    criadopor VARCHAR(50),
+    atualizadoem DATETIME,
+    atualizadopor VARCHAR(50),
     nome VARCHAR(50) NOT NULL,
     sigla VARCHAR(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE cidade (
     id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+    criadoem DATETIME DEFAULT CURRENT_TIMESTAMP,
+    criadopor VARCHAR(50),
+    atualizadoem DATETIME,
+    atualizadopor VARCHAR(50),
     nome VARCHAR(50) NOT NULL,
     id_estado BIGINT(20) NOT NULL,
     FOREIGN KEY (id_estado) REFERENCES estado(id)

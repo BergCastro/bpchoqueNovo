@@ -77,13 +77,9 @@
 							<td th:text="${detalhe.tipo}">Tipo</td>
 							<td th:text="${detalhe.quantidade}">Quantidade</td>
 							<td th:text="${detalhe.descricao}">Descrição</td>
-							<td class="text-center"><a class="btn btn-link btn-xs"
-							data-toggle="modal"	data-target="#modalCadastroItemDoacao"
-							title="Editar"	rel="tooltip" data-placement="top"> <span
-									class="glyphicon glyphicon-pencil"></span>
-							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
+							<td class="text-center"><a class="btn btn-link btn-xs" data-toggle="modal"
 							data-target="#myModalExclusaoDetalhe"
-							th:attr="data-id=${detalhe.id}, data-nome=${detalhe.tipo}"
+							th:attr="data-id=${detalhe.id}, data-descricao=${detalhe.descricao}"
 							title="Excluir" rel="tooltip" data-placement="top"> <span
 								class="glyphicon glyphicon-remove"></span>
 						</a></td>

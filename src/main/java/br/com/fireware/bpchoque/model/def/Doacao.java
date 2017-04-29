@@ -14,9 +14,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
+import br.com.fireware.bpchoque.security.UsuarioSistema;
 import lombok.Data;
 
 @Data
@@ -27,7 +35,6 @@ public class Doacao {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	
 	
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
@@ -49,7 +56,9 @@ public class Doacao {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(columnDefinition = "DATE")
 	private LocalDate dataDoacao;
-
+	
+	@NotBlank(message="Um doador deve ser inserido!")
+	@Length(max = 40, message = "O doador tem que ter no máximo {max} caracteres")
 	private String doador;
 
 	//@OneToMany(orphanRemoval=true, mappedBy="doacao")
@@ -57,11 +66,18 @@ public class Doacao {
 
 	//private double valor;
 	
-	
+	@PrePersist
+	@PreUpdate
+	private void prePersistUpdate() {
+		doador = doador.toUpperCase();
+		
+	}
 	
 	public enum DoacaoTipo {
+		VAZIO("Selecione uma Opção"),
 		OBJETO("Objeto"),
 		VALOR("Valor");
+		
 		
 		private String descricao;
 		
@@ -72,6 +88,7 @@ public class Doacao {
 		public String getDescricao() {
 			return descricao;
 		}
-	}
+		
+			}
 
 }

@@ -101,7 +101,7 @@ public class PessoaDefController {
 			pessoa.setAtualizadoem(LocalDateTime.now());
 			pessoa.setAtualizadopor(usuarioSistema.getUsername());
 			
-			if(pessoa.getCriadopor()==null || pessoa.getAtualizadopor().equals("")){
+			if(pessoa.getCriadopor()==null || pessoa.getCriadopor().equals("")){
 				pessoa.setCriadoem(LocalDateTime.now());
 				pessoa.setCriadopor(usuarioSistema.getUsername());
 			}

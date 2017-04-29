@@ -70,7 +70,7 @@ public class AvaliadorController {
 		avaliador.setAtualizadoem(LocalDateTime.now());
 		avaliador.setAtualizadopor(usuarioSistema.getUsername());
 
-		if (avaliador.getCriadopor() == null || avaliador.getAtualizadopor().equals("")) {
+		if (avaliador.getCriadopor() == null || avaliador.getCriadopor().equals("")) {
 			avaliador.setCriadoem(LocalDateTime.now());
 			avaliador.setCriadopor(usuarioSistema.getUsername());
 		}

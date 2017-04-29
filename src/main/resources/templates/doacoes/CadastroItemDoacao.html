@@ -18,17 +18,18 @@
 					<div
 						class="alert  alert-danger  hidden  js-mensagem-cadastro-detalhe"
 						role="alert"></div>
-
+					
 					<form th:action="@{/doacoes/detalheNovo}">
+						
 						<div class="form-group">
-							<div class="bw-required">
+							
 								<label for="tipo" class="control-label">Tipo</label> <select
 									id="tipo" class="form-control">
-									<option value="">Selecione um tipo</option>
+<!-- 									<option value="">Selecione um tipo</option> -->
 									<option th:each="tipo : ${tipos}" th:value="${tipo}"
-										th:text="${tipo.descricao}">Adocicada</option>
+										th:text="${tipo.descricao}">Descricao</option>
 								</select>
-							</div>
+							
 						</div>
 						<div class="form-group">
 							<label class="control-label" for="quantidade">Quantidade</label>

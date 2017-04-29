@@ -60,7 +60,7 @@ Brewer.DetalheCadastro = (function() {
 				           '<tr style="background:#ffb3b3;">'+
 								'<td>'+estilo.tipo+'</td>'+
 								'<td>'+estilo.quantidade+'.00</td>'+
-								'<td>'+estilo.descricao+'</td>'+
+								'<td style="text-transform: uppercase;">'+estilo.descricao+'</td>'+
 								'<td class="text-center">'+
 									 '<i class="glyphicon glyphicon-floppy-remove"></i>'+
 									 
