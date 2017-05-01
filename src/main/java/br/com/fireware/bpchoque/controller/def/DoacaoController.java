@@ -7,7 +7,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.apache.lucene.queryparser.flexible.standard.builders.FieldQueryNodeBuilder;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,7 +42,7 @@ import br.com.fireware.bpchoque.service.def.DoacaoService;
 public class DoacaoController {
 	
 	private static final String CADASTRO_DOACAO = "doacoes/CadastroDoacoes";
-	private static final String CADASTRO_VALOR = "doacoes/CadastroDoacaoValor";
+	
 	
 	@Autowired
 	private DoacaoService doacaoService;
@@ -56,9 +56,7 @@ public class DoacaoController {
 	
 	@RequestMapping
 	public ModelAndView doacoes() {
-		/*if(detalhes.get(0).getDoacao()==null){
-			attributes.addFlashAttribute("mensagem", "Doação salva com sucesso!");
-		}*/
+		
 		
 		Iterable<Doacao> todosDoacoes = doacaoService.findAll();
 		ModelAndView mv = new ModelAndView("doacoes/doacoes");
@@ -125,13 +123,11 @@ public class DoacaoController {
 	
 	@RequestMapping(value="/detalheNovo", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public @ResponseBody ResponseEntity<?> salvarDetalhe(@RequestBody @Valid DoacaoDetalhe detalhe , BindingResult result) {
-		/*System.out.println("Entrou no detalhe Novo");
-		System.out.println(detalhe.toString());
-		System.out.println(doacao.toString());*/
-		System.out.println(detalhe.toString());
+		
 		if(result.getFieldValue("tipo").equals("VAZIO")){
 			return ResponseEntity.badRequest().body("Selecione um tipo de doação!");
 		}else if (result.hasFieldErrors("quantidade")) {
+			
 			return ResponseEntity.badRequest().body(result.getFieldError("quantidade").getDefaultMessage());
 		}else if(result.hasFieldErrors("descricao")){
 			return ResponseEntity.badRequest().body(result.getFieldError("descricao").getDefaultMessage());
@@ -159,28 +155,6 @@ public class DoacaoController {
 	public List<DoacaoDetalhe> listaDetalhes(){
 		return detalhes;
 	}
-	
-	@PostMapping("/item")
-	public ModelAndView adicionarItem(Long idDoacao, DoacaoDetalhe detalhe ) {
-		Doacao doacao = doacaoService.findById(idDoacao);
-		ModelAndView mv = new ModelAndView("doacoes/doacoes");
-		return mv;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-//	@PostMapping("/item")
-//	public ModelAndView adicionarItem(Long id, Integer quantidade) {
-//		Doacao doacao = doacaoService.findById(id);
-//		//tabelaItens.adicionarItem(doacao, 1);
-//		return mv;
-//	}
 	
 	
 	
