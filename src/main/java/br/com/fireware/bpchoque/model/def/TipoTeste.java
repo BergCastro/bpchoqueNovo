@@ -8,7 +8,7 @@ import java.util.List;
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
-
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -53,7 +53,9 @@ public class TipoTeste {
 	
 	private String nome;
 	
-	@ManyToMany
+	private String descricao;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable ( name ="tiposteste_provas",
 	joinColumns = @JoinColumn ( name ="tipoTesteId"),
 	inverseJoinColumns = @JoinColumn ( name ="provaId"))
@@ -62,7 +64,7 @@ public class TipoTeste {
 	@PrePersist
 	@PreUpdate
 	private void prePersistUpdate() {
-	
+		nome = nome.toUpperCase();
 		
 	}
 	

@@ -63,7 +63,7 @@ public class TesteFisico {
 	@PrePersist
 	@PreUpdate
 	private void prePersistUpdate() {
-	
+	 objetivo = objetivo.toUpperCase();
 		
 	}
 	

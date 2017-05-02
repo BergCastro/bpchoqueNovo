@@ -59,7 +59,7 @@ public class DoacaoController {
 		
 		
 		Iterable<Doacao> todosDoacoes = doacaoService.findAll();
-		ModelAndView mv = new ModelAndView("doacoes/doacoes");
+		ModelAndView mv = new ModelAndView("doacoes/Doacoes");
 		mv.addObject("doacoes", todosDoacoes);
 		
 		

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:brewer="http://brewer.algaworks.com">
+
+<head>
+<title>Cadastro de Tipo de Teste</title>
+</head>
+<body>
+	<section layout:fragment="conteudo">
+		<div class="page-header">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-xs-10">
+						<h1>Cadastro de Tipo de Teste</h1>
+
+					</div>
+
+					<div class="col-xs-2">
+						<div class="aw-page-header-controls">
+							<a class="btn  btn-primary" th:href="@{/tiposTeste}"> <i
+								class="glyphicon  glyphicon-search"></i> <span
+								class="hidden-xs  hidden-sm">Pesquisa</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid">
+
+			<form method="POST" th:action="@{/tiposTeste}"
+				th:object="${tipoTeste}">
+				<brewer:message />
+				<!-- <div layout:include="MensagemGeral"></div>
+    	<div layout:include="MensagemErro"></div> -->
+
+
+				<input type="hidden" th:field="*{id}" /> <input type="hidden"
+					th:field="*{criadopor}" /> <input type="hidden"
+					th:field="*{criadoem}" /> <input type="hidden"
+					th:field="*{provas}" />
+				<div class="row">
+
+
+					<div class="form-group  col-sm-4  bw-required"
+						brewer:classforerror="nome">
+						<label for="nome" class="control-label">Nome</label> <input
+							type="text" class="form-control" id="nome" autofocus="autofocus"
+							th:field="*{nome}" />
+					</div>
+					<div class="form-group  col-sm-8  bw-required"
+						brewer:classforerror="descricao">
+						<label for="descricao" class="control-label">Descrição</label> <input
+							type="text" class="form-control" id="descricao"
+							th:field="*{descricao}" />
+					</div>
+
+				</div>
+
+				<div th:if="${testeFisicoSalvo}">
+					<div class="table-responsive">
+						<table class="table  table-hover table-condensed table-striped">
+							<thead>
+								<tr>
+
+									<th>Prova</th>
+									<th>Descrição</th>
+									<th></th>
+								</tr>
+							</thead>
+
+							<tbody id="listaDetalhe">
+								<tr th:each="prova : *{provas}">
+
+									<td th:text="${prova.nome}">Nome</td>
+									<td th:text="${prova.descricao}">Descricao</td>
+
+									<td class="text-center"><a class="btn btn-link btn-xs"
+										data-toggle="modal" data-target="#myModalExclusaoProva"
+										th:attr="data-id=${prova.id}, data-descricao=${prova.nome}"
+										title="Excluir" rel="tooltip" data-placement="top"> <span
+											class="glyphicon glyphicon-remove"></span>
+									</a></td>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+
+
+					<div class="bw-field-action__icon">
+						<a href="#" data-toggle="modal"
+							data-target="#modalCadastroProvaTipo"> <i
+							class="glyphicon  glyphicon-plus-sign"></i> <span
+							class="hidden-xs  hidden-sm">Adicionar Prova</span>
+						</a>
+					</div>
+				</div>
+				<br>
+
+				<div class="row">
+					<div class="form-group col-sm-12">
+
+						<button type="submit" class="btn btn-primary">Salvar</button>
+						<a class="btn  btn-primary" th:href="@{/tiposTeste}">Voltar</a>
+
+					</div>
+				</div>
+
+
+
+
+			</form>
+		</div>
+		<div th:replace="tiposTeste/CadastroProvaTipo :: modal"></div>
+		<div th:replace="tiposTeste/ConfirmaExclusaoProvaTipo :: modalDetalhe"></div>
+	</section>
+	<th:block layout:fragment="javascript-extra">
+		<script th:src="@{/javascripts/provas-tipoteste-cadastro.js}"></script>
+		<script th:src="@{/javascripts/bpchoque.js}"></script>
+
+
+	</th:block>
+</body>
+</html>

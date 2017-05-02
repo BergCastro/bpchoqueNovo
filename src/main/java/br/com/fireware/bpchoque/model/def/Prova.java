@@ -34,7 +34,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "provas_teste")
+@Table(name = "provas")
 public class Prova {
 
 	@Id
@@ -56,8 +56,10 @@ public class Prova {
 	@Column(name = "atualizadopor")
 	private String atualizadopor;
 	
-	
+	@NotBlank(message="Um nome de prova deve ser inserido!")
 	private String nome;
+	@NotBlank(message="Uma descrição de prova deve ser inserida!")
+	private String descricao;
 	
 	@NotNull(message="Um tipo deve ser selecionado!")
 	@Enumerated(EnumType.STRING)
@@ -92,7 +94,7 @@ public class Prova {
 	@PrePersist
 	@PreUpdate
 	private void prePersistUpdate() {
-		
+		nome = nome.toUpperCase();
 		
 	}
 	
