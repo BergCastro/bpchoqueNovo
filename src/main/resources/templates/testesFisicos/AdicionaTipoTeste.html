@@ -11,7 +11,7 @@
 					<button type="button" class="close" data-dismiss="modal">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title">Inclusão de Prova</h4>
+					<h4 class="modal-title">Inclusão de Tipo de Teste</h4>
 				</div>
 
 				<div class="modal-body">
@@ -19,15 +19,15 @@
 						class="alert  alert-danger  hidden  js-mensagem-cadastro-prova"
 						role="alert"></div>
 					
-					<form th:action="@{/tiposTeste/provaNovo}">
+					<form th:action="@{/testesFisicos/tipoNovo}">
 						
 						<div class="form-group">
 							
-								<label for="prova" class="control-label">Prova</label> <select
+								<label for="prova" class="control-label">Tipo de Teste</label> <select
 									id="prova" class="form-control">
 <!-- 									<option value="">Selecione um tipo</option> -->
-									<option th:each="prova : ${provasIncluir}" th:value="${prova.id}"
-										th:text="${prova.nome}">Prova</option>
+									<option th:each="tipo : ${tiposIncluir}" th:value="${tipo.id}"
+										th:text="${tipo.nome}">Prova</option>
 								</select>
 							
 						</div>

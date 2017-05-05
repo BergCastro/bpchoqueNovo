@@ -5,6 +5,7 @@ package br.com.fireware.bpchoque.model.def;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
@@ -14,7 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -60,6 +61,9 @@ public class TipoTeste {
 	joinColumns = @JoinColumn ( name ="tipoTesteId"),
 	inverseJoinColumns = @JoinColumn ( name ="provaId"))
 	private List<Prova> provas;
+	
+	/*@OneToMany(mappedBy="tipoTeste", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<ResultadoTeste> resultados;*/
 	
 	@PrePersist
 	@PreUpdate

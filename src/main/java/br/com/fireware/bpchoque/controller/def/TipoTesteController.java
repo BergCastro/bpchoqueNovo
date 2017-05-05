@@ -122,7 +122,7 @@ public class TipoTesteController {
 		prova = provaService.findById(prova.getId());
 		
 		
-		System.out.println("Tipo Teste"+tipoTeste.toString());
+		
 		tipoTeste.getProvas().add(prova);
 		mv.addObject("tipoTeste", tipoTeste);
 	
@@ -146,6 +146,7 @@ public class TipoTesteController {
 	public ModelAndView edicao(@PathVariable("id") TipoTeste tipoTeste) {
 		ModelAndView mv = new ModelAndView(CADASTRO_TIPO_TESTE);
 		this.tipoTeste = tipoTeste;
+		System.out.println("entrou edição");
 		mv.addObject(tipoTeste);
 		
 		List<Prova> provasIncluir = provaService.findAll();
@@ -157,7 +158,7 @@ public class TipoTesteController {
 			}
 		}
 		testeFisicoSalvo = true;
-		provasIncluir.remove(tipoTeste.getProvas());
+		//provasIncluir.remove(tipoTeste.getProvas());
 		
 		mv.addObject("provasIncluir", provasIncluir);
 		mv.addObject("testeFisicoSalvo", testeFisicoSalvo);

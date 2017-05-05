@@ -6,7 +6,7 @@
 	xmlns:brewer="http://brewer.algaworks.com">
 
 <head>
-<title>Cadastro de Tipo de Teste</title>
+<title>Cadastro de Avaliação Coletiva</title>
 </head>
 <body>
 	<section layout:fragment="conteudo">
@@ -14,13 +14,13 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-10">
-						<h1>Cadastro de Tipo de Teste</h1>
+						<h1>Cadastro de Avaliação Coletiva</h1>
 
 					</div>
 
 					<div class="col-xs-2">
 						<div class="aw-page-header-controls">
-							<a class="btn  btn-primary" th:href="@{/tiposTeste}"> <i
+							<a class="btn  btn-primary" th:href="@{/testesFisicos}"> <i
 								class="glyphicon  glyphicon-search"></i> <span
 								class="hidden-xs  hidden-sm">Pesquisa</span>
 							</a>
@@ -31,8 +31,8 @@
 		</div>
 		<div class="container-fluid">
 
-			<form method="POST" th:action="@{/tiposTeste}"
-				th:object="${tipoTeste}">
+			<form method="POST" th:action="@{/testesFisicos}"
+				th:object="${testeFisico}">
 				<brewer:message />
 				<!-- <div layout:include="MensagemGeral"></div>
     	<div layout:include="MensagemErro"></div> -->
@@ -40,47 +40,53 @@
 
 				<input type="hidden" th:field="*{id}" /> <input type="hidden"
 					th:field="*{criadopor}" /> <input type="hidden"
-					th:field="*{criadoem}" /> <input type="hidden"
-					th:field="*{provas}" />
+					th:field="*{criadoem}" /> <!-- <input type="hidden" th:field="*{tipos}" /> -->
 				<div class="row">
 
+					<div class="form-group  col-sm-4  bw-required">
+						<label for="data" class="control-label">Data</label> <input
+							type="text" class="form-control" id="data" name="data"
+							th:field="*{data}" data-provide="datepicker"
+							data-date-language="pt-BR" data-date-autoclose="true"
+							data-date-today-highlight="true" data-date-orientation="bottom" />
+					</div>
+					<div class="form-group  col-sm-6  bw-required"
+						brewer:classforerror="objetivo">
+						<label for="nome" class="control-label">Objetivo</label> <input
+							type="text" class="form-control" id="objetivo"
+							autofocus="autofocus" th:field="*{objetivo}" />
+					</div>
+					<div class="form-group  col-sm-2  bw-required"
+						brewer:classforerror="notaAprovacao">
+						<label for="notaAprovacao" class="control-label">Nota de Aprovação</label> <input
+							type="text" class="form-control js-decimal" id="notaAprovacao"
+							th:field="*{notaAprovacao}" />
+					</div>
 
-					<div class="form-group  col-sm-4  bw-required"
-						brewer:classforerror="nome">
-						<label for="nome" class="control-label">Nome</label> <input
-							type="text" class="form-control" id="nome" autofocus="autofocus"
-							th:field="*{nome}" />
-					</div>
-					<div class="form-group  col-sm-8  bw-required"
-						brewer:classforerror="descricao">
-						<label for="descricao" class="control-label">Descrição</label> <input
-							type="text" class="form-control" id="descricao"
-							th:field="*{descricao}" />
-					</div>
 
 				</div>
 
 				<div th:if="${testeFisicoSalvo}">
 					<div class="table-responsive">
-						<table class="table  table-hover table-condensed table-striped">
+						<table class="table  table-hover table-condensed table-resultados">
 							<thead>
 								<tr>
 
-									<th>Prova</th>
+									<th>Tipo de Teste</th>
 									<th>Descrição</th>
 									<th></th>
 								</tr>
 							</thead>
 
 							<tbody id="listaDetalhe">
-								<tr th:each="prova : *{provas}">
+								<tr th:each="tipo : *{tipos}">
 
-									<td th:text="${prova.nome}">Nome</td>
-									<td th:text="${prova.descricao}">Descricao</td>
+									<td th:text="${tipo.nome}">Nome</td>
+									<td th:text="${tipo.descricao}">Descricao</td>
 
 									<td class="text-center"><a class="btn btn-link btn-xs"
-										data-toggle="modal" data-target="#myModalExclusaoProva"
-										th:attr="data-id=${prova.id}, data-descricao=${prova.nome}"
+										data-toggle="modal" data-target="#myModalExclusaoTipo"
+										th:attr="data-id=${tipo.id}, data-nome=${tipo.nome}"
 										title="Excluir" rel="tooltip" data-placement="top"> <span
 											class="glyphicon glyphicon-remove"></span>
 									</a></td>
@@ -95,17 +101,76 @@
 						<a href="#" data-toggle="modal"
 							data-target="#modalCadastroProvaTipo"> <i
 							class="glyphicon  glyphicon-plus-sign"></i> <span
-							class="hidden-xs  hidden-sm">Adicionar Prova</span>
+							class="hidden-xs  hidden-sm">Adicionar Tipo</span>
 						</a>
 					</div>
 				</div>
 				<br>
+				<div class="" th:if="${temTipo}">
+					<ul class="nav nav-tabs">
 
+						<li th:class="${iter.first}? 'active'"
+							th:each="tipo,iter : *{tipos}"><a data-toggle="tab"
+							th:href="|#${tipo.id}|"><span th:utext="${tipo.nome}"></span></a>
+						</li>
+
+					</ul>
+
+					<div class="tab-content">
+
+						<div th:each="tipo,iter: *{tipos}" th:id="${tipo.id}"
+							class="tab-pane fade"
+							th:class="${iter.first}? 'tab-pane fade in active': 'tab-pane fade'">
+
+							<div class="table-responsive">
+								<table class="table  table-hover table-condensed table-striped table-resultados">
+									<thead>
+										<tr>
+											<th>Matrícula</th>
+											<th>Nome</th>
+											<th th:each="prova : ${tipo.provas}"><span th:utext="${prova.nome}"></span></th>
+											<th>Nota</th>
+											<th></th>
+										</tr>
+									</thead>
+
+									<tbody id="listaDetalhe">
+								
+										<tr th:each="pessoa : ${pessoas}">
+
+											<td  th:text="${pessoa.matricula}">Matricula</td>
+											<td  th:text="${pessoa.nome}">Nome</td>
+											<td  th:each="resultado : ${resultados}" th:if="${resultado.pessoa.id}==${pessoa.id} and ${resultado.tipoTeste.id}==${tipo.id}"
+											th:text="${resultado.valor}"></td>
+											<td>Nota</td>
+											<td class="text-center"><a class="btn btn-link btn-xs"
+												data-toggle="modal" data-target="#myModalExclusaoTipo"
+												th:attr="data-id=${pessoa.id}, data-nome=${pessoa.nome}"
+												title="Excluir" rel="tooltip" data-placement="top"> <span
+													class="glyphicon glyphicon-remove"></span>
+											</a></td>
+										</tr>
+
+									</tbody>
+								</table>
+								<div class="bw-field-action__icon">
+									<a href="#" data-toggle="modal"
+										data-target="#modalCadastroResultado"> <i
+										class="glyphicon  glyphicon-plus-sign"></i> <span
+										class="hidden-xs  hidden-sm">Adicionar Resultado</span>
+									</a>
+								</div>
+								<br>
+							</div>
+						</div>
+
+					</div>
+				</div>
 				<div class="row">
 					<div class="form-group col-sm-12">
 
 						<button type="submit" class="btn btn-primary">Salvar</button>
-						<a class="btn  btn-primary" th:href="@{/tiposTeste}">Voltar</a>
+						<a class="btn  btn-primary" th:href="@{/testesFisicos}">Voltar</a>
 
 					</div>
 				</div>
@@ -115,8 +180,10 @@
 
 			</form>
 		</div>
-		<div th:replace="tiposTeste/CadastroProvaTipo :: modal"></div>
-		<div th:replace="tiposTeste/ConfirmaExclusaoProvaTipo :: modalDetalhe"></div>
+		<div th:replace="testesFisicos/AdicionaTipoTeste :: modal"></div>
+		<div
+			th:replace="testesFisicos/ConfirmaExclusaoTipoTeste :: modalDetalhe"></div>
+
 	</section>
 	<th:block layout:fragment="javascript-extra">
 		<script th:src="@{/javascripts/provas-tipoteste-cadastro.js}"></script>

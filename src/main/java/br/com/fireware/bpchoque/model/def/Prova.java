@@ -83,7 +83,8 @@ public class Prova {
 	
 	private Integer intervaloIdade;
 	
-	
+	/*@OneToMany(mappedBy="prova")
+	private List<ResultadoTeste> resultados;*/
 	
 
 	//@OneToMany(orphanRemoval=true, mappedBy="doacao")

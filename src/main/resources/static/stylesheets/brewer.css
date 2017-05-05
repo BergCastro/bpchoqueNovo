@@ -88,6 +88,18 @@ input{
 # PÃ�GINAS DO SISTEMA
 ###################
 */
+.table-resultados{
+	font-size: 10px;
+	
+}
+.table-resultados td{
+	
+	line-height: 15px !important;
+}
+
+
+
+
 
 /* Colunas comuns */
 .table-col-acoes {

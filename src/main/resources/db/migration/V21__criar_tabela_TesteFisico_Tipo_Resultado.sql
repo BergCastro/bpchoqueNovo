@@ -5,16 +5,24 @@ CREATE TABLE testes_fisicos(
     atualizadoem DATETIME,
     atualizadopor VARCHAR(50),
 	data DATE,
-	objetivo VARCHAR(40) NOT NULL
+	objetivo VARCHAR(40) NOT NULL,
+	notaAprovacao DECIMAL(10,2)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
 
 CREATE TABLE tiposteste_provas(
 	tipoTesteId BIGINT(20) NOT NULL,
 	provaId BIGINT(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE testes_tipos(
+	testeFisicoId BIGINT(20) NOT NULL,
+	tipoTesteId BIGINT(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE testesFisicos_pessoas(
+	testeFisicoId BIGINT(20) NOT NULL,
+	pessoaId BIGINT(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE provas(

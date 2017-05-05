@@ -5,7 +5,7 @@
 	layout:decorator="~{layout/LayoutPadrao}">
 
 <head>
-<title>Tipos de Teste</title>
+<title>Avaliações Coletivas</title>
 	<th:block layout:fragment="css-extra">
 		<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/datatable/dataTables.bootstrap.min.css}"/>
 
@@ -18,23 +18,20 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-xs-10">
-					<h1>Pesquisa de Tipos de Testes</h1>
+					<h1>Pesquisa de Avaliações Coletivas</h1>
 				</div>
 
 				<div class="col-xs-2">
 					<div class="aw-page-header-controls">
-						<a class="btn  btn-default" th:href="@{/tiposTeste/novo}"> <i
+						<a class="btn  btn-default" th:href="@{/testesFisicos/novo}"> <i
 							class="glyphicon  glyphicon-plus-sign"></i> <span
-							class="hidden-xs  hidden-sm">Novo Tipo de Teste</span>
+							class="hidden-xs  hidden-sm">Nova Avaliação</span>
 						</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-
-
 
 	<div class="container-fluid">
 
@@ -45,25 +42,25 @@
 				<thead>
 					<tr>
 						<th>Id</th>
-						<th>Nome</th>
-						<th>Descrição</th>
+						<th>Data</th>
+						<th>Objetivo</th>
 						<th></th>
 
 
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="tipo : ${tipos}">
-						<td th:text="${tipo?.id}">1</td>
-						<td th:text="${{tipo?.nome}}">Nome</td>
-						<td th:text="${{tipo?.descricao}}">Descrição</td>
+					<tr th:each="teste : ${testes}">
+						<td th:text="${teste?.id}">1</td>
+						<td th:text="${{teste?.data}}">Data</td>
+						<td th:text="${{teste?.objetivo}}">Objetivo</td>
 						<td class="text-center"><a class="btn btn-link btn-xs"
-							th:href="@{/tiposTeste/{id}(id=${tipo.id})}" title="Editar"
+							th:href="@{/testesFisicos/{id}(id=${teste.id})}" title="Editar"
 							rel="tooltip" data-placement="top"> <span
 								class="glyphicon glyphicon-pencil"></span>
 						</a> <a class="btn btn-link btn-xs" data-toggle="modal"
 							data-target="#myModalExclusao"
-							th:attr="data-id=${tipo.id}, data-nome=${tipo.nome}"
+							th:attr="data-id=${teste.id}, data-nome=${teste.objetivo}"
 							title="Excluir" rel="tooltip" data-placement="top"> <span
 								class="glyphicon glyphicon-remove"></span>
 						</a></td>
@@ -77,7 +74,7 @@
 		data-keyboard="false" data-backdrop="static">
 		<div class="modal-dialog">
 			<form
-				th:attr="data-url-base=@{/tiposTeste/delete/}, data-tipo='o tipo de teste '"
+				th:attr="data-url-base=@{/testesFisicos/delete/}, data-tipo='o teste '"
 				method="get">
 
 
@@ -87,7 +84,7 @@
 					</div>
 
 					<div class="modal-body">
-						<span>Tem certeza que deseja apagar o tipo de teste?</span>
+						<span>Tem certeza que deseja apagar o teste?</span>
 					</div>
 
 					<div class="modal-footer">
