@@ -19,8 +19,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-
+import javax.persistence.Transient;
 import javax.persistence.JoinColumn;
+
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -62,13 +63,21 @@ public class TipoTeste {
 	inverseJoinColumns = @JoinColumn ( name ="provaId"))
 	private List<Prova> provas;
 	
-	/*@OneToMany(mappedBy="tipoTeste", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<ResultadoTeste> resultados;*/
+	@OneToMany(mappedBy="tipoTeste", fetch = FetchType.EAGER)
+	private List<ResultadoTeste> resultados;
+	
+	@Transient
+	private Integer qtdProvas;
+	
+	public Integer getQtdProvas(){
+		return provas.size();
+	}
 	
 	@PrePersist
 	@PreUpdate
 	private void prePersistUpdate() {
 		nome = nome.toUpperCase();
+		descricao = descricao.toUpperCase();
 		
 	}
 	

@@ -51,18 +51,54 @@ public class ResultadoTeste {
 	private TesteFisico teste;
 	
 	@ManyToOne
-	@JoinColumn(name="prova")
-	private Prova prova;
-	
-	@ManyToOne
 	@JoinColumn(name="tipoTeste")
 	private TipoTeste tipoTeste;
 	
-	private BigDecimal valor;
+	@ManyToOne
+	@JoinColumn(name="prova1")
+	private Prova prova1;
 	
 	
+	private BigDecimal valorProva1;
 	
+	
+	private BigDecimal pontuacaoProva1;
+	
+	@ManyToOne
+	@JoinColumn(name="prova2")
+	private Prova prova2;
+	
+	
+	private BigDecimal valorProva2;
+	
+	
+	private BigDecimal pontuacaoProva2;
+	
+	@ManyToOne
+	@JoinColumn(name="prova3")
+	private Prova prova3;
+	
+	
+	private BigDecimal valorProva3;
+	
+	private BigDecimal pontuacaoProva3;
 
+	@ManyToOne
+	@JoinColumn(name="prova4")
+	private Prova prova4;
+	
+	private BigDecimal valorProva4;
+	
+	private BigDecimal pontuacaoProva4;
+	
+	@ManyToOne
+	@JoinColumn(name="prova5")
+	private Prova prova5;
+	
+	private BigDecimal valorProva5;
+	
+	private BigDecimal pontuacaoProva5;
+	
 	
 	@PrePersist
 	@PreUpdate

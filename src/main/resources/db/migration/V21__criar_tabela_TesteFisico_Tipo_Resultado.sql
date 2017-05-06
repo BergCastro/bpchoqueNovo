@@ -44,6 +44,13 @@ CREATE TABLE provas(
 	intervaloIdade INT(3)	
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `bpchoquenovo`.`provas` (`nome`, `descricao`, `tipo`) VALUES ('FLEXÃO BARRA', 'FDFGDFGDF', 'NOTA');
+INSERT INTO `bpchoquenovo`.`provas` (`nome`, `descricao`, `tipo`) VALUES ('FLEXÃO SOLO', 'FDFGDFGDF', 'NOTA');
+INSERT INTO `bpchoquenovo`.`provas` (`nome`, `descricao`, `tipo`) VALUES ('ABDOMINAL', 'FDFGDFGDF', 'NOTA');
+INSERT INTO `bpchoquenovo`.`provas` (`nome`, `descricao`, `tipo`) VALUES ('CORRIDA 12MIN', 'FDFGDFGDF', 'NOTA');
+INSERT INTO `bpchoquenovo`.`provas` (`nome`, `descricao`, `tipo`) VALUES ('CORRIDA 50M', 'FDFGDFGDF', 'NOTA');
+INSERT INTO `bpchoquenovo`.`provas` (`nome`, `descricao`, `tipo`) VALUES ('FLUTUAÇÃO', 'FDFGDFGDF', 'APTOINAPTO');
+INSERT INTO `bpchoquenovo`.`provas` (`nome`, `descricao`, `tipo`) VALUES ('LANÇAR GRANADA', 'FDFGDFGDF', 'APTOINAPTO');
 
 CREATE TABLE tipos_teste(
 	id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
@@ -58,21 +65,5 @@ CREATE TABLE tipos_teste(
 
 
 
-CREATE TABLE resultados_teste(
-	id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
-	criadoem DATETIME DEFAULT CURRENT_TIMESTAMP,
-    criadopor VARCHAR(50),
-    atualizadoem DATETIME,
-    atualizadopor VARCHAR(50),
-	pessoa BIGINT(20) NOT NULL,
-	teste BIGINT(20) NOT NULL,
-	prova BIGINT(20) NOT NULL,
-	tipoteste BIGINT(20) NOT NULL,
-	valor DECIMAL(10,2) NOT NULL,
-	FOREIGN KEY (pessoa) REFERENCES pessoasdef(id),
-	FOREIGN KEY (teste) REFERENCES testes_fisicos(id),
-	FOREIGN KEY (prova) REFERENCES provas(id),
-	FOREIGN KEY (tipoTeste) REFERENCES tipos_teste(id)	
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

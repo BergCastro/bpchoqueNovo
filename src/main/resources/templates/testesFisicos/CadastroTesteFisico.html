@@ -40,7 +40,7 @@
 
 				<input type="hidden" th:field="*{id}" /> <input type="hidden"
 					th:field="*{criadopor}" /> <input type="hidden"
-					th:field="*{criadoem}" /> <!-- <input type="hidden" th:field="*{tipos}" /> -->
+					th:field="*{criadoem}" /> <input type="hidden" th:field="*{tipos}" />
 				<div class="row">
 
 					<div class="form-group  col-sm-4  bw-required">
@@ -128,7 +128,7 @@
 										<tr>
 											<th>Matrícula</th>
 											<th>Nome</th>
-											<th th:each="prova : ${tipo.provas}"><span th:utext="${prova.nome}"></span></th>
+											<th th:each="prova, iterProvas : ${tipo.provas}"><span th:utext="${prova.nome}"></span></th>
 											<th>Nota</th>
 											<th></th>
 										</tr>
@@ -136,16 +136,21 @@
 
 									<tbody id="listaDetalhe">
 								
-										<tr th:each="pessoa : ${pessoas}">
+										<tr th:each="resultado : ${tipo.resultados}">
 
-											<td  th:text="${pessoa.matricula}">Matricula</td>
-											<td  th:text="${pessoa.nome}">Nome</td>
-											<td  th:each="resultado : ${resultados}" th:if="${resultado.pessoa.id}==${pessoa.id} and ${resultado.tipoTeste.id}==${tipo.id}"
-											th:text="${resultado.valor}"></td>
+											<td  th:text="${resultado.pessoa.matricula}">Matricula</td>
+											<td  th:text="${resultado.pessoa.nome}">Nome</td>
+											<td  th:text="${resultado.valorProva1}" th:if="${tipo.qtdProvas}>=1">Nome</td>
+											<td  th:text="${resultado.valorProva2}" th:if="${tipo.qtdProvas}>=2">Nome</td>
+											<td  th:text="${resultado.valorProva3}" th:if="${tipo.qtdProvas}>=3">Nome</td>
+											<td  th:text="${resultado.valorProva4}" th:if="${tipo.qtdProvas}>=4">Nome</td>
+											<td  th:text="${resultado.valorProva5}" th:if="${tipo.qtdProvas}>=5">Nome</td>
+											
+											
 											<td>Nota</td>
 											<td class="text-center"><a class="btn btn-link btn-xs"
 												data-toggle="modal" data-target="#myModalExclusaoTipo"
-												th:attr="data-id=${pessoa.id}, data-nome=${pessoa.nome}"
+												th:attr="data-id=${resultado.id}, data-nome=${resultado.pessoa.nome}"
 												title="Excluir" rel="tooltip" data-placement="top"> <span
 													class="glyphicon glyphicon-remove"></span>
 											</a></td>

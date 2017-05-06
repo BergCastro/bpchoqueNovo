@@ -33,14 +33,14 @@ import br.com.fireware.bpchoque.model.def.Doacao.DoacaoTipo;
 import br.com.fireware.bpchoque.security.UsuarioSistema;
 import lombok.Data;
 
-@Data
-@Entity
-@Table(name = "resultadosAgrupados")
+
+
 public class ResultadoAgrupado {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	
 	private ResultadoTeste prova1;
 	

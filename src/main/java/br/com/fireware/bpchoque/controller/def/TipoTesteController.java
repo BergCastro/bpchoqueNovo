@@ -3,7 +3,9 @@ package br.com.fireware.bpchoque.controller.def;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -29,8 +31,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.fireware.bpchoque.model.def.TipoTeste;
 
 import br.com.fireware.bpchoque.security.UsuarioSistema;
+import br.com.fireware.bpchoque.model.def.PessoaDef;
 import br.com.fireware.bpchoque.model.def.Prova;
+import br.com.fireware.bpchoque.model.def.ResultadoTeste;
 import br.com.fireware.bpchoque.service.def.ProvaService;
+import br.com.fireware.bpchoque.service.def.ResultadoTesteService;
 import br.com.fireware.bpchoque.service.def.TesteFisicoService;
 import br.com.fireware.bpchoque.service.def.TipoTesteService;
 
@@ -45,6 +50,9 @@ public class TipoTesteController {
 
 	@Autowired
 	private ProvaService provaService;
+	
+	@Autowired
+	private ResultadoTesteService resultadoService;
 
 	private List<Prova> provas;
 
@@ -103,6 +111,7 @@ public class TipoTesteController {
 		try {
 			
 			tipoTesteService.save(tipoTeste);
+			this.tipoTeste = tipoTeste;
 			testeFisicoSalvo = true;
 			attributes.addFlashAttribute("mensagem", "Tipo salvo com sucesso!");
 			return "redirect:/tiposTeste/" + tipoTeste.getId();
@@ -189,6 +198,7 @@ public class TipoTesteController {
 		tipoTeste.getProvas().remove(provaRemover);
 		
 		tipoTesteService.save(tipoTeste);
+		
 		
 		mv.addObject("tipoTeste", tipoTeste);
 		mv.setViewName("redirect:/tiposTeste/" + tipoTeste.getId());
