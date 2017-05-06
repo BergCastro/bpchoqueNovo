@@ -1,6 +1,5 @@
 package br.com.fireware.bpchoque.controller.def;
 
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -53,21 +52,24 @@ public class TesteFisicoController {
 
 	@Autowired
 	private TipoTesteService tipoTesteService;
-	
+
 	@Autowired
 	private ResultadoTesteService resultadoTesteService;
-	
+
 	@Autowired
 	private PessoaDefService pessoaDefService;
+	
+	@Autowired
+	private ProvaService provaService;
 
 	private List<TipoTeste> tiposTestes;
 
 	private TesteFisico testeFisico;
-	
+
 	private boolean testeFisicoSalvo = false;
-	
+
 	private boolean temTipo = false;
-	
+
 	@RequestMapping
 	public ModelAndView tiposTeste() {
 
@@ -77,8 +79,6 @@ public class TesteFisicoController {
 
 		return mv;
 	}
-
-	
 
 	@RequestMapping("/novo")
 	public ModelAndView novo() {
@@ -100,7 +100,7 @@ public class TesteFisicoController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String salvar(@Validated TesteFisico testeFisico, Errors errors, RedirectAttributes attributes,
 			@AuthenticationPrincipal UsuarioSistema usuarioSistema) {
-		
+
 		if (errors.hasErrors()) {
 			return CADASTRO_TESTE_FISICO;
 		}
@@ -111,9 +111,9 @@ public class TesteFisicoController {
 			testeFisico.setCriadoem(LocalDateTime.now());
 			testeFisico.setCriadopor(usuarioSistema.getUsername());
 		}
-		
+
 		try {
-			
+
 			testeFisicoService.save(testeFisico);
 			this.testeFisico = testeFisico;
 			testeFisicoSalvo = true;
@@ -126,76 +126,110 @@ public class TesteFisicoController {
 	}
 
 	@RequestMapping(value = "/tipoNovo", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
-	public ModelAndView salvarTipo(@RequestBody @Valid TipoTeste tipoTeste, BindingResult result, RedirectAttributes attributes,
-			Errors errors, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
-		
+	public ModelAndView salvarTipo(@RequestBody @Valid TipoTeste tipoTeste, BindingResult result,
+			RedirectAttributes attributes, Errors errors, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
+
 		ModelAndView mv = new ModelAndView();
-		
+
 		// detalhe.setTipoTeste(tipoTeste);
 		tipoTeste = tipoTesteService.findById(tipoTeste.getId());
-		
-		
-		
-		testeFisico.getTipos().add(tipoTeste);
-		
-		mv.addObject("tipoTeste", tipoTeste);
-	
-		//provas = tipoTeste.getProvas();
-		
-			
-			
-			testeFisicoService.save(testeFisico);
-			
 
-			attributes.addFlashAttribute("mensagem", "Teste salvo com sucesso!");
-			mv.setViewName("redirect:/testesFisicos/" + testeFisico.getId());
-			return mv;
-		
-		
+		testeFisico.getTipos().add(tipoTeste);
+
+		mv.addObject("tipoTeste", tipoTeste);
+
+		// provas = tipoTeste.getProvas();
+
+		testeFisicoService.save(testeFisico);
+
+		attributes.addFlashAttribute("mensagem", "Teste salvo com sucesso!");
+		mv.setViewName("redirect:/testesFisicos/" + testeFisico.getId());
+		return mv;
+
 	}
 
-	
+	@RequestMapping(value = "/resultadoNovo", method = RequestMethod.POST, consumes = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public ModelAndView salvarResultado(@RequestBody @Valid ResultadoTeste resultadoTeste, BindingResult result,
+			RedirectAttributes attributes, Errors errors, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
+
+		ModelAndView mv = new ModelAndView();
+
+		// detalhe.setTipoTeste(tipoTeste);
+		// resultadoTeste = resultadoTesteService.findById(tipoTeste.getId());
+
+		testeFisico.getTipos().get(0).getResultados();
+
+		// mv.addObject("tipoTeste", tipoTeste);
+
+		// provas = tipoTeste.getProvas();
+
+		testeFisicoService.save(testeFisico);
+
+		attributes.addFlashAttribute("mensagem", "Teste salvo com sucesso!");
+		mv.setViewName("redirect:/testesFisicos/" + testeFisico.getId());
+		return mv;
+
+	}
 
 	@RequestMapping("{id}")
 	public ModelAndView edicao(@PathVariable("id") TesteFisico testeFisico) {
 		ModelAndView mv = new ModelAndView(CADASTRO_TESTE_FISICO);
 		this.testeFisico = testeFisico;
 		mv.addObject(testeFisico);
-		
+
 		List<TipoTeste> tiposIncluir = tipoTesteService.findAll();
-		
-		if(testeFisico.getTipos().size() > 0){
+
+		if (testeFisico.getTipos().size() > 0) {
 			System.out.println("entrou edção antes if");
-		for(int i = 0; i <  tiposIncluir.size(); i++){
-			for(int j = 0; j < testeFisico.getTipos().size();j++){
-				if(testeFisico.getTipos().get(j).getId() == tiposIncluir.get(i).getId()){
-					tiposIncluir.remove(i);
+			for (int i = 0; i < tiposIncluir.size(); i++) {
+				for (int j = 0; j < testeFisico.getTipos().size(); j++) {
+					if (testeFisico.getTipos().get(j).getId() == tiposIncluir.get(i).getId()) {
+						tiposIncluir.remove(i);
+					}
 				}
 			}
+
 		}
+		List<PessoaDef> pessoasIncluir = pessoaDefService.findAll();
+		if (testeFisico.getPessoas().size() > 0) {
+			System.out.println("entrou edção antes if");
+			for (int i = 0; i < pessoasIncluir.size(); i++) {
+				for (int j = 0; j < testeFisico.getPessoas().size(); j++) {
+					if (testeFisico.getPessoas().get(j).getId() == pessoasIncluir.get(i).getId()) {
+						pessoasIncluir.remove(i);
+					}
+				}
+			}
+
 		}
-		if(testeFisico.getTipos().size() > 0){
+		List<Prova> provas = new ArrayList<>();
+				for (int i = 0; i < testeFisico.getTipos().size(); i++) {
+					provas.addAll(testeFisico.getTipos().get(0).getProvas());
+				}
+		if (testeFisico.getTipos().size() > 0) {
 			temTipo = true;
 		}
 		testeFisicoSalvo = true;
-		//provasIncluir.remove(tipoTeste.getProvas());
-		
+		// provasIncluir.remove(tipoTeste.getProvas());
+
 		List<ResultadoTeste> resultados = resultadoTesteService.findByTeste(testeFisico);
-		
-		Set<PessoaDef> pessoas	= new HashSet<>(); //Não Permite objetos repetidos
-		for (ResultadoTeste resultado : resultados){
-				pessoas.add(resultado.getPessoa());
-			}
+
+		Set<PessoaDef> pessoas = new HashSet<>(); // Não Permite objetos
+													// repetidos
+		for (ResultadoTeste resultado : resultados) {
+			pessoas.add(resultado.getPessoa());
+		}
+		mv.addObject("provas", provas);
 		mv.addObject("pessoas", pessoas);
 		mv.addObject("resultados", resultados);
 		mv.addObject("tiposIncluir", tiposIncluir);
+		mv.addObject("pessoasIncluir", pessoasIncluir);
 		mv.addObject("testeFisicoSalvo", testeFisicoSalvo);
 		mv.addObject("temTipo", temTipo);
-		
+
 		return mv;
 	}
-
-	
 
 	@RequestMapping(value = "/delete/{id}")
 	public String excluir(@PathVariable Long id) {
@@ -209,19 +243,17 @@ public class TesteFisicoController {
 	@RequestMapping(value = "/deleteTipo/{id}")
 	public ModelAndView excluirTipo(@PathVariable Long id) {
 		ModelAndView mv = new ModelAndView();
-		
-		
-		TipoTeste tipoRemover = tipoTesteService.findById(id); 
-		
-		
-		for(int i = 0; i < testeFisico.getTipos().size();i++){
-			if(testeFisico.getTipos().get(i).getId() == tipoRemover.getId()){
+
+		TipoTeste tipoRemover = tipoTesteService.findById(id);
+
+		for (int i = 0; i < testeFisico.getTipos().size(); i++) {
+			if (testeFisico.getTipos().get(i).getId() == tipoRemover.getId()) {
 				testeFisico.getTipos().remove(i);
 			}
 		}
-		
+
 		testeFisicoService.save(testeFisico);
-		
+
 		mv.addObject("testeFisico", testeFisico);
 		mv.setViewName("redirect:/testesFisicos/" + testeFisico.getId());
 		return mv;

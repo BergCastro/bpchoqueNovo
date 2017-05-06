@@ -81,7 +81,7 @@
 							<tbody id="listaDetalhe">
 								<tr th:each="tipo : *{tipos}">
 
-									<td th:text="${tipo.nome}">Nome</td>
+									<td th:text="${tipo.nome}">NOME</td>
 									<td th:text="${tipo.descricao}">Descricao</td>
 
 									<td class="text-center"><a class="btn btn-link btn-xs"
@@ -126,10 +126,10 @@
 								<table class="table  table-hover table-condensed table-striped table-resultados">
 									<thead>
 										<tr>
-											<th>Matrícula</th>
-											<th>Nome</th>
+											<th>MATRÍCULA</th>
+											<th>NOME</th>
 											<th th:each="prova, iterProvas : ${tipo.provas}"><span th:utext="${prova.nome}"></span></th>
-											<th>Nota</th>
+											<th>NOTA</th>
 											<th></th>
 										</tr>
 									</thead>
@@ -159,9 +159,10 @@
 									</tbody>
 								</table>
 								<div class="bw-field-action__icon">
-									<a href="#" data-toggle="modal"
-										data-target="#modalCadastroResultado"> <i
-										class="glyphicon  glyphicon-plus-sign"></i> <span
+									<a href="#" data-toggle="modal" 
+										data-target="#modalAdicionaResultado"> <i
+										class="glyphicon  glyphicon-plus-sign"
+										th:attr="data-tipoid=${tipo.id}"></i> <span
 										class="hidden-xs  hidden-sm">Adicionar Resultado</span>
 									</a>
 								</div>
@@ -186,12 +187,14 @@
 			</form>
 		</div>
 		<div th:replace="testesFisicos/AdicionaTipoTeste :: modal"></div>
+		<div th:replace="testesFisicos/AdicionaResultado :: modal"></div>
 		<div
 			th:replace="testesFisicos/ConfirmaExclusaoTipoTeste :: modalDetalhe"></div>
 
 	</section>
 	<th:block layout:fragment="javascript-extra">
 		<script th:src="@{/javascripts/provas-tipoteste-cadastro.js}"></script>
+		<script th:src="@{/javascripts/adiciona-resultado.js}"></script>
 		<script th:src="@{/javascripts/bpchoque.js}"></script>
 
 
