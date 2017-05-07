@@ -7,6 +7,12 @@
 
 <head>
 <title>Cadastro de Avaliação Coletiva</title>
+<th:block layout:fragment="css-extra">
+	<link rel="stylesheet" type="text/css"
+		th:href="@{/stylesheets/pesquisa/bootstrap-select.css}" />
+	
+
+</th:block>
 </head>
 <body>
 	<section layout:fragment="conteudo">
@@ -58,9 +64,9 @@
 					</div>
 					<div class="form-group  col-sm-2  bw-required"
 						brewer:classforerror="notaAprovacao">
-						<label for="notaAprovacao" class="control-label">Nota de Aprovação</label> <input
-							type="text" class="form-control js-decimal" id="notaAprovacao"
-							th:field="*{notaAprovacao}" />
+						<label for="notaAprovacao" class="control-label">Nota de
+							Aprovação</label> <input type="text" class="form-control js-decimal"
+							id="notaAprovacao" th:field="*{notaAprovacao}" />
 					</div>
 
 
@@ -123,30 +129,37 @@
 							th:class="${iter.first}? 'tab-pane fade in active': 'tab-pane fade'">
 
 							<div class="table-responsive">
-								<table class="table  table-hover table-condensed table-striped table-resultados">
+								<table
+									class="table  table-hover table-condensed table-striped table-resultados">
 									<thead>
 										<tr>
 											<th>MATRÍCULA</th>
 											<th>NOME</th>
-											<th th:each="prova, iterProvas : ${tipo.provas}"><span th:utext="${prova.nome}"></span></th>
+											<th th:each="prova, iterProvas : ${tipo.provas}"><span
+												th:utext="${prova.nome}"></span></th>
 											<th>NOTA</th>
 											<th></th>
 										</tr>
 									</thead>
 
 									<tbody id="listaDetalhe">
-								
+
 										<tr th:each="resultado : ${tipo.resultados}">
 
-											<td  th:text="${resultado.pessoa.matricula}">Matricula</td>
-											<td  th:text="${resultado.pessoa.nome}">Nome</td>
-											<td  th:text="${resultado.valorProva1}" th:if="${tipo.qtdProvas}>=1">Nome</td>
-											<td  th:text="${resultado.valorProva2}" th:if="${tipo.qtdProvas}>=2">Nome</td>
-											<td  th:text="${resultado.valorProva3}" th:if="${tipo.qtdProvas}>=3">Nome</td>
-											<td  th:text="${resultado.valorProva4}" th:if="${tipo.qtdProvas}>=4">Nome</td>
-											<td  th:text="${resultado.valorProva5}" th:if="${tipo.qtdProvas}>=5">Nome</td>
-											
-											
+											<td th:text="${resultado.pessoa.matricula}">Matricula</td>
+											<td th:text="${resultado.pessoa.nome}">Nome</td>
+											<td th:text="${resultado.valorProva1}"
+												th:if="${tipo.qtdProvas}>=1">Nome</td>
+											<td th:text="${resultado.valorProva2}"
+												th:if="${tipo.qtdProvas}>=2">Nome</td>
+											<td th:text="${resultado.valorProva3}"
+												th:if="${tipo.qtdProvas}>=3">Nome</td>
+											<td th:text="${resultado.valorProva4}"
+												th:if="${tipo.qtdProvas}>=4">Nome</td>
+											<td th:text="${resultado.valorProva5}"
+												th:if="${tipo.qtdProvas}>=5">Nome</td>
+
+
 											<td>Nota</td>
 											<td class="text-center"><a class="btn btn-link btn-xs"
 												data-toggle="modal" data-target="#myModalExclusaoTipo"
@@ -159,10 +172,10 @@
 									</tbody>
 								</table>
 								<div class="bw-field-action__icon">
-									<a href="#" data-toggle="modal" 
-										data-target="#modalAdicionaResultado"> <i
-										class="glyphicon  glyphicon-plus-sign"
-										th:attr="data-tipoid=${tipo.id}"></i> <span
+									<a href="#" data-toggle="modal"
+										data-target="#modalAdicionaResultado"
+										th:attr="data-tipo=${tipo.id}"> <i
+										class="glyphicon  glyphicon-plus-sign"></i> <span
 										class="hidden-xs  hidden-sm">Adicionar Resultado</span>
 									</a>
 								</div>
@@ -196,7 +209,10 @@
 		<script th:src="@{/javascripts/provas-tipoteste-cadastro.js}"></script>
 		<script th:src="@{/javascripts/adiciona-resultado.js}"></script>
 		<script th:src="@{/javascripts/bpchoque.js}"></script>
-
+		<script th:src="@{/javascripts/pesquisa/bootstrap-select.js}"></script>
+		
+		
+		
 
 	</th:block>
 </body>

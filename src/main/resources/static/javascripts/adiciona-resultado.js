@@ -1,3 +1,20 @@
+/*$('#modalAdicionaResultado').on('show.bs.modal', function(event) {
+	
+	var button = $(event.relatedTarget);
+	
+	var idTipo = button.data('tipo');
+	var divProvas = $('.div-provas');
+	console.log('valor do tipo'+idTipo);
+	
+	divProvas.append('<label th:if="${tipo.id}=='+idTipo+'" class="control-label" th:for="${prova.id}" th:text="${prova.nome}"></label>'+
+					 '<input th:if="${tipo.id}=='+idTipo+'" th:id="${prova.id}" type="text" class="form-control">');
+	
+	//modal.find('.modal-body span').html('Tem certeza que deseja excluir '+tipo+'<strong>' + detalheNome + '</strong>?');
+//location.reload();
+});
+*/
+
+
 var Brewer = Brewer || {};
 
 Brewer.DetalheCadastro = (function() {

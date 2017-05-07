@@ -203,10 +203,10 @@ public class TesteFisicoController {
 			}
 
 		}
-		List<Prova> provas = new ArrayList<>();
+		/*List<TipoTeste> tipos = new ArrayList<>();
 				for (int i = 0; i < testeFisico.getTipos().size(); i++) {
-					provas.addAll(testeFisico.getTipos().get(0).getProvas());
-				}
+					tipos.add(testeFisico.getTipos().get(i));
+				}*/
 		if (testeFisico.getTipos().size() > 0) {
 			temTipo = true;
 		}
@@ -220,7 +220,7 @@ public class TesteFisicoController {
 		for (ResultadoTeste resultado : resultados) {
 			pessoas.add(resultado.getPessoa());
 		}
-		mv.addObject("provas", provas);
+		mv.addObject("tipos", testeFisico.getTipos());
 		mv.addObject("pessoas", pessoas);
 		mv.addObject("resultados", resultados);
 		mv.addObject("tiposIncluir", tiposIncluir);
