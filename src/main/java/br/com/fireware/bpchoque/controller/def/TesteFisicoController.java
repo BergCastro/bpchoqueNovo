@@ -1,5 +1,6 @@
 package br.com.fireware.bpchoque.controller.def;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ import br.com.fireware.bpchoque.model.def.TipoTeste;
 import br.com.fireware.bpchoque.security.UsuarioSistema;
 import br.com.fireware.bpchoque.model.def.PessoaDef;
 import br.com.fireware.bpchoque.model.def.Prova;
+import br.com.fireware.bpchoque.model.def.Resultado;
 import br.com.fireware.bpchoque.model.def.ResultadoTeste;
 import br.com.fireware.bpchoque.model.def.TesteFisico;
 import br.com.fireware.bpchoque.service.def.PessoaDefService;
@@ -58,7 +60,7 @@ public class TesteFisicoController {
 
 	@Autowired
 	private PessoaDefService pessoaDefService;
-	
+
 	@Autowired
 	private ProvaService provaService;
 
@@ -150,21 +152,65 @@ public class TesteFisicoController {
 
 	@RequestMapping(value = "/resultadoNovo", method = RequestMethod.POST, consumes = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ModelAndView salvarResultado(@RequestBody @Valid ResultadoTeste resultadoTeste, BindingResult result,
+	public ModelAndView salvarResultado(@RequestBody @Valid Resultado resultado, BindingResult result,
 			RedirectAttributes attributes, Errors errors, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
 
 		ModelAndView mv = new ModelAndView();
 
+		System.out.println("Resultado: " + resultado);
+		//List<ResultadoTeste> resultadosTeste = new ArrayList<>();
+		ResultadoTeste resultadoPronto;
+		PessoaDef pessoa = pessoaDefService.findById(resultado.getPessoa());
+
+		Integer idProvas = 0;
+		//System.out.println("Teste Fisico: "+testeFisico.getTipos());
+		for (int i = 0; i < testeFisico.getTipos().size(); i++) {
+			resultadoPronto = new ResultadoTeste();
+			// for(int j = 0; j <
+			// testeFisico.getTipos().get(i).getProvas().size(); j++){
+			resultadoPronto.setPessoa(pessoa);
+			resultadoPronto.setTeste(testeFisico);
+			resultadoPronto.setTipoTeste(testeFisico.getTipos().get(i));
+			if (testeFisico.getTipos().get(i).getProvas().size() >= idProvas + 1) {
+				resultadoPronto.setValorProva1(resultado.getValores().get(idProvas));
+				idProvas++;
+			}
+
+			if (testeFisico.getTipos().get(i).getProvas().size() >= idProvas + 1) {
+				resultadoPronto.setValorProva2(resultado.getValores().get(idProvas));
+				idProvas++;
+			} 
+			if (testeFisico.getTipos().get(i).getProvas().size() >= idProvas + 1) {
+				resultadoPronto.setValorProva3(resultado.getValores().get(idProvas));
+				idProvas++;
+			} 
+			if (testeFisico.getTipos().get(i).getProvas().size() >= idProvas + 1) {
+				resultadoPronto.setValorProva4(resultado.getValores().get(idProvas));
+				idProvas++;
+			} 
+
+			if (testeFisico.getTipos().get(i).getProvas().size() >= idProvas + 1) {
+				resultadoPronto.setValorProva5(resultado.getValores().get(idProvas));
+				idProvas++;
+			}
+
+			
+
+			// }
+
+			resultadoTesteService.save(resultadoPronto);
+		}
+
 		// detalhe.setTipoTeste(tipoTeste);
 		// resultadoTeste = resultadoTesteService.findById(tipoTeste.getId());
 
-		testeFisico.getTipos().get(0).getResultados();
+		// testeFisico.getTipos().get(0).getResultados();
 
 		// mv.addObject("tipoTeste", tipoTeste);
 
 		// provas = tipoTeste.getProvas();
 
-		testeFisicoService.save(testeFisico);
+		// testeFisicoService.save(testeFisico);
 
 		attributes.addFlashAttribute("mensagem", "Teste salvo com sucesso!");
 		mv.setViewName("redirect:/testesFisicos/" + testeFisico.getId());
@@ -203,10 +249,11 @@ public class TesteFisicoController {
 			}
 
 		}
-		/*List<TipoTeste> tipos = new ArrayList<>();
-				for (int i = 0; i < testeFisico.getTipos().size(); i++) {
-					tipos.add(testeFisico.getTipos().get(i));
-				}*/
+		/*
+		 * List<TipoTeste> tipos = new ArrayList<>(); for (int i = 0; i <
+		 * testeFisico.getTipos().size(); i++) {
+		 * tipos.add(testeFisico.getTipos().get(i)); }
+		 */
 		if (testeFisico.getTipos().size() > 0) {
 			temTipo = true;
 		}
@@ -220,7 +267,14 @@ public class TesteFisicoController {
 		for (ResultadoTeste resultado : resultados) {
 			pessoas.add(resultado.getPessoa());
 		}
+		Integer qtdProvas = 0;
+
+		for (int i = 0; i < testeFisico.getTipos().size(); i++) {
+			qtdProvas += testeFisico.getTipos().get(i).getQtdProvas();
+		}
+
 		mv.addObject("tipos", testeFisico.getTipos());
+		mv.addObject("qtdProvas", qtdProvas);
 		mv.addObject("pessoas", pessoas);
 		mv.addObject("resultados", resultados);
 		mv.addObject("tiposIncluir", tiposIncluir);
