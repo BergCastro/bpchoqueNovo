@@ -27,7 +27,7 @@
 							class="alert  alert-danger  hidden  js-mensagem-cadastro-prova"
 							role="alert"></div>
 
-						<form th:action="@{/testesFisicos/resultadoNovo}">
+						<form th:action="@{/testesFisicos/resultadoNovo}" method="post">
 							<div class="row">
 								<div class="form-group col-sm-12">
 									<label for="participante" class="control-label">PARTICIPANTE</label>
@@ -43,7 +43,7 @@
 								</div>
 								<div class="form-group col-sm-12">
 									<input th:id="qtdProvas"
-											type="text" class="form-control" th:value="${qtdProvas}">
+											type="hidden" class="form-control" th:value="${qtdProvas}">
 								</div>
 								<div th:each="tipo, iter : ${tipos}">
 									<div class="form-group col-sm-12"

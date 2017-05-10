@@ -59,7 +59,7 @@ public class ResultadoTeste {
 	
 	
 	
-	
+	private Long prova1;
 	
 	
 	private BigDecimal valorProva1;
@@ -69,7 +69,7 @@ public class ResultadoTeste {
 	
 	
 	
-	
+	private Long prova2;
 	
 	
 	private BigDecimal valorProva2;
@@ -79,7 +79,7 @@ public class ResultadoTeste {
 	
 	
 	
-	
+	private Long prova3;
 	
 	
 	private BigDecimal valorProva3;
@@ -88,7 +88,7 @@ public class ResultadoTeste {
 
 	
 	
-	
+	private Long prova4;
 	
 	private BigDecimal valorProva4;
 	
@@ -96,7 +96,7 @@ public class ResultadoTeste {
 	
 	
 	
-	
+	private Long prova5;
 	
 	private BigDecimal valorProva5;
 	

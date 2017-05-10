@@ -63,8 +63,8 @@ public class TipoTeste {
 	inverseJoinColumns = @JoinColumn ( name ="provaId"))
 	private List<Prova> provas;
 	
-	@OneToMany(mappedBy="tipoTeste", fetch = FetchType.EAGER)
-	private List<ResultadoTeste> resultados;
+	/*@OneToMany(mappedBy="tipoTeste", fetch = FetchType.EAGER)
+	private List<ResultadoTeste> resultados;*/
 	
 	@Transient
 	private Integer qtdProvas;

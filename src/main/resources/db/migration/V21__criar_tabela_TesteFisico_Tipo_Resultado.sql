@@ -19,10 +19,7 @@ CREATE TABLE testes_tipos(
 	tipoTesteId BIGINT(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE testesFisicos_pessoas(
-	testeFisicoId BIGINT(20) NOT NULL,
-	pessoaId BIGINT(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 CREATE TABLE provas(

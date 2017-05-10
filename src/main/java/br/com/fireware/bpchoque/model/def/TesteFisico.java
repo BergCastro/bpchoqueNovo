@@ -65,11 +65,11 @@ public class TesteFisico {
 	inverseJoinColumns = @JoinColumn ( name ="tipoTesteId"))
 	private List<TipoTeste> tipos;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	/*@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable ( name ="testesFisicos_pessoas",
 	joinColumns = @JoinColumn ( name ="testeFisicoId"),
 	inverseJoinColumns = @JoinColumn ( name ="pessoaId"))
-	private List<PessoaDef> pessoas;
+	private List<PessoaDef> pessoas;*/
 
 	private BigDecimal notaAprovacao;
 	

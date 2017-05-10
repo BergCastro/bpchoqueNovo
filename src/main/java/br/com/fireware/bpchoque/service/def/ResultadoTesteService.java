@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import br.com.fireware.bpchoque.model.def.PessoaDef;
 import br.com.fireware.bpchoque.model.def.ResultadoTeste;
 import br.com.fireware.bpchoque.model.def.TesteFisico;
 import br.com.fireware.bpchoque.repository.def.ResultadoTesteRepository;
@@ -44,6 +46,12 @@ public class ResultadoTesteService {
 	public List<ResultadoTeste> findByTeste(TesteFisico testeFisico) {
 
 		return repository.findByTeste(testeFisico);
+
+	}
+	
+	public List<ResultadoTeste> findByPessoa(PessoaDef pessoa) {
+
+		return repository.findByPessoa(pessoa);
 
 	}
 	

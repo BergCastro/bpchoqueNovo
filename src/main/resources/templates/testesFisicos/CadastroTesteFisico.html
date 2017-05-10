@@ -84,7 +84,7 @@
 								</tr>
 							</thead>
 
-							<tbody id="listaDetalhe">
+							<tbody id="listaTipos">
 								<tr th:each="tipo : *{tipos}">
 
 									<td th:text="${tipo.nome}">NOME</td>
@@ -144,25 +144,25 @@
 
 									<tbody id="listaDetalhe">
 
-										<tr th:each="resultado : ${tipo.resultados}">
-
-											<td th:text="${resultado.pessoa.matricula}">Matricula</td>
-											<td th:text="${resultado.pessoa.nome}">Nome</td>
+										<tr th:each="resultado : ${resultados}">
+											
+											<td th:text="${resultado.pessoa.matricula}" th:if="${resultado.tipoTeste.id}==${tipo.id}">Matricula</td>
+											<td th:text="${resultado.pessoa.nome}" th:if="${resultado.tipoTeste.id}==${tipo.id}">Nome</td>
 											<td th:text="${resultado.valorProva1}"
-												th:if="${tipo.qtdProvas}>=1">Nome</td>
+												th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id}">Nome</td>
 											<td th:text="${resultado.valorProva2}"
-												th:if="${tipo.qtdProvas}>=2">Nome</td>
+												th:if="${tipo.qtdProvas}>=2 and ${resultado.tipoTeste.id}==${tipo.id}"  >Nome</td>
 											<td th:text="${resultado.valorProva3}"
-												th:if="${tipo.qtdProvas}>=3">Nome</td>
+												th:if="${tipo.qtdProvas}>=3 and ${resultado.tipoTeste.id}==${tipo.id}">Nome</td>
 											<td th:text="${resultado.valorProva4}"
-												th:if="${tipo.qtdProvas}>=4">Nome</td>
+												th:if="${tipo.qtdProvas}>=4 and ${resultado.tipoTeste.id}==${tipo.id}">Nome</td>
 											<td th:text="${resultado.valorProva5}"
-												th:if="${tipo.qtdProvas}>=5">Nome</td>
+												th:if="${tipo.qtdProvas}>=5 and ${resultado.tipoTeste.id}==${tipo.id}">Nome</td>
+											
 
-
-											<td>Nota</td>
-											<td class="text-center"><a class="btn btn-link btn-xs"
-												data-toggle="modal" data-target="#myModalExclusaoTipo"
+											<td th:if="${resultado.tipoTeste.id}==${tipo.id}">Nota</td>
+											<td class="text-center" th:if="${resultado.tipoTeste.id}==${tipo.id}"><a class="btn btn-link btn-xs"
+												data-toggle="modal" data-target="#myModalExclusaoResultado"
 												th:attr="data-id=${resultado.id}, data-nome=${resultado.pessoa.nome}"
 												title="Excluir" rel="tooltip" data-placement="top"> <span
 													class="glyphicon glyphicon-remove"></span>
@@ -203,12 +203,15 @@
 		<div th:replace="testesFisicos/AdicionaResultado :: modal"></div>
 		<div
 			th:replace="testesFisicos/ConfirmaExclusaoTipoTeste :: modalDetalhe"></div>
+		<div
+			th:replace="testesFisicos/ConfirmaExclusaoResultado :: modalExclusao"></div>
 
 	</section>
 	<th:block layout:fragment="javascript-extra">
 		<script th:src="@{/javascripts/provas-tipoteste-cadastro.js}"></script>
 		<script th:src="@{/javascripts/resultado-teste-cadastro.js}"></script>
 		<script th:src="@{/javascripts/adiciona-resultado.js}"></script>
+		<script th:src="@{/javascripts/excluir-resultado.js}"></script>
 		<script th:src="@{/javascripts/bpchoque.js}"></script>
 		<script th:src="@{/javascripts/pesquisa/bootstrap-select.js}"></script>
 		

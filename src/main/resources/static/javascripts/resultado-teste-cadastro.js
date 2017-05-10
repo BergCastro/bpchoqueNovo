@@ -75,17 +75,35 @@ Brewer.ResultadoCadastro = (function() {
 		this.form.find('.form-group').addClass('has-error');
 	}
 
-	function onEstiloSalvo(estilo) {
-		/*var comboEstilo = $('#listaDetalhe');
-		comboEstilo.append('<tr style="background:#ffb3b3;">' + '<td>'
-				+ estilo.tipo + '</td>' + '<td>' + estilo.quantidade
-				+ '.00</td>' + '<td style="text-transform: uppercase;">'
-				+ estilo.descricao + '</td>' + '<td class="text-center">'
-				+ '<i class="glyphicon glyphicon-floppy-remove"></i>' +
+	function onEstiloSalvo() {
+		var corpoTabela = $('#listaDetalhe');
+		/*corpoTabela.html('<tr th:each="resultado : ${resultados}">'+
+											
+											'<td th:text="${resultado.pessoa.matricula}" th:if="${resultado.tipoTeste.id}==${tipo.id}">Matricula</td>'+
+											'<td th:text="${resultado.pessoa.nome}" th:if="${resultado.tipoTeste.id}==${tipo.id}">Nome</td>'+
+											'<td th:text="${resultado.valorProva1}"'+
+											'	th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id}">Nome</td>'+
+											'<td th:text="${resultado.valorProva2}"'+
+											'	th:if="${tipo.qtdProvas}>=2 and ${resultado.tipoTeste.id}==${tipo.id}"  >Nome</td>'+
+											'<td th:text="${resultado.valorProva3}"'+
+											'	th:if="${tipo.qtdProvas}>=3 and ${resultado.tipoTeste.id}==${tipo.id}">Nome</td>'+
+											'<td th:text="${resultado.valorProva4}"'+
+											'	th:if="${tipo.qtdProvas}>=4 and ${resultado.tipoTeste.id}==${tipo.id}">Nome</td>'+
+											'<td th:text="${resultado.valorProva5}"'+
+											'	th:if="${tipo.qtdProvas}>=5 and ${resultado.tipoTeste.id}==${tipo.id}">Nome</td>'+
+											
 
-				'</td>' + '</tr>');
-		comboEstilo.val(estilo.id);*/
+											'<td th:if="${resultado.tipoTeste.id}==${tipo.id}">Nota</td>'+
+											'<td class="text-center" th:if="${resultado.tipoTeste.id}==${tipo.id}"><a class="btn btn-link btn-xs"'+
+											'	data-toggle="modal" data-target="#myModalExclusaoResultado"'+
+											'	th:attr="data-id=${resultado.id}, data-nome=${resultado.pessoa.nome}"'+
+											'	title="Excluir" rel="tooltip" data-placement="top"> <span'+
+											'		class="glyphicon glyphicon-remove"></span>'+
+											'</a></td>'+
+										'</tr>');*/
+		
 		this.modal.modal('hide');
+		location.reload();
 	}
 
 	return ResultadoCadastro;
