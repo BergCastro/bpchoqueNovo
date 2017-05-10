@@ -30,7 +30,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.fireware.bpchoque.model.def.TipoTeste;
-
+import br.com.fireware.bpchoque.model.def.Prova.AptoInapto;
+import br.com.fireware.bpchoque.model.def.Prova.CampoTipo;
 import br.com.fireware.bpchoque.security.UsuarioSistema;
 import br.com.fireware.bpchoque.model.def.PessoaDef;
 import br.com.fireware.bpchoque.model.def.Prova;
@@ -84,8 +85,8 @@ public class TesteFisicoController {
 
 	@RequestMapping("/novo")
 	public ModelAndView novo() {
-
 		ModelAndView mv = new ModelAndView();
+		
 		List<TipoTeste> todosTipos = tipoTesteService.findAll();
 		tiposTestes = new ArrayList<TipoTeste>();
 		mv.setViewName(CADASTRO_TESTE_FISICO);
@@ -159,60 +160,12 @@ public class TesteFisicoController {
 
 		System.out.println("Resultado: " + resultado);
 		//List<ResultadoTeste> resultadosTeste = new ArrayList<>();
-		ResultadoTeste resultadoPronto;
-		PessoaDef pessoa = pessoaDefService.findById(resultado.getPessoa());
-
-		Integer idProvas = 0;
-		Integer auxProvas = 0;
-		//System.out.println("Teste Fisico: "+testeFisico.getTipos());
-		for (int i = 0; i < testeFisico.getTipos().size(); i++) {
-			auxProvas = 0;
-			resultadoPronto = new ResultadoTeste();
-			// for(int j = 0; j <
-			// testeFisico.getTipos().get(i).getProvas().size(); j++){
-			resultadoPronto.setPessoa(pessoa);
-			resultadoPronto.setTeste(testeFisico);
-			resultadoPronto.setTipoTeste(testeFisico.getTipos().get(i));
-			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
-				resultadoPronto.setValorProva1(resultado.getValores().get(idProvas));
-				idProvas++;
-				auxProvas++;
-			}
-			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
-				resultadoPronto.setValorProva2(resultado.getValores().get(idProvas));
-				idProvas++;
-				auxProvas++;
-			}
-			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
-				resultadoPronto.setValorProva3(resultado.getValores().get(idProvas));
-				idProvas++;
-				auxProvas++;
-			
-			} 
-			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
-				resultadoPronto.setValorProva4(resultado.getValores().get(idProvas));
-				idProvas++;
-				auxProvas++;
-			}
-			
-	
-
-			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
-				resultadoPronto.setValorProva5(resultado.getValores().get(idProvas));
-				idProvas++;
-				auxProvas++;
-			}
-
+		testeFisicoService.salvaResultado(resultado, testeFisico);
 		
 
-			resultadoTesteService.save(resultadoPronto);
-		}
-
-		List<ResultadoTeste> resultados = resultadoTesteService.findByTeste(testeFisico);
-
-		//attributes.addFlashAttribute("mensagem", "Teste salvo com sucesso!");
+		
 		mv.setViewName("redirect:/testesFisicos/" + testeFisico.getId());
-		return ResponseEntity.ok(resultados);
+		return ResponseEntity.ok(resultado);
 
 	}
 
@@ -282,6 +235,8 @@ public class TesteFisicoController {
 		mv.addObject("tiposIncluir", tiposIncluir);
 		mv.addObject("pessoasIncluir", pessoasIncluir);
 		mv.addObject("testeFisicoSalvo", testeFisicoSalvo);
+		
+		mv.addObject("resultadosBooleanos", AptoInapto.values());
 		mv.addObject("temTipo", temTipo);
 
 		return mv;

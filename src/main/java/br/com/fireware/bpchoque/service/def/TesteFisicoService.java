@@ -5,6 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import br.com.fireware.bpchoque.model.def.PessoaDef;
+import br.com.fireware.bpchoque.model.def.Resultado;
+import br.com.fireware.bpchoque.model.def.ResultadoTeste;
 import br.com.fireware.bpchoque.model.def.TesteFisico;
 import br.com.fireware.bpchoque.repository.def.TesteFisicoRepository;
 
@@ -15,6 +19,12 @@ public class TesteFisicoService {
 	@Autowired
 	private TesteFisicoRepository repository;
 
+	@Autowired
+	private PessoaDefService pessoaDefService;
+	
+	@Autowired
+	private ResultadoTesteService resultadoTesteService;
+	
 	@Transactional(readOnly = false)
 	public void save(TesteFisico testeFisico) {
 
@@ -47,6 +57,60 @@ public class TesteFisicoService {
 		return repository.findAll();
 	}
 	
+	
+	public void salvaResultado(Resultado resultado, TesteFisico testeFisico) {
+		ResultadoTeste resultadoPronto;
+		PessoaDef pessoa = pessoaDefService.findById(resultado.getPessoa());
+
+		Integer idProvas = 0;
+		Integer auxProvas = 0;
+		//System.out.println("Teste Fisico: "+testeFisico.getTipos());
+		for (int i = 0; i < testeFisico.getTipos().size(); i++) {
+			auxProvas = 0;
+			resultadoPronto = new ResultadoTeste();
+			// for(int j = 0; j <
+			// testeFisico.getTipos().get(i).getProvas().size(); j++){
+			resultadoPronto.setPessoa(pessoa);
+			resultadoPronto.setTeste(testeFisico);
+			resultadoPronto.setTipoTeste(testeFisico.getTipos().get(i));
+			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
+				
+				resultadoPronto.setValorProva1(resultado.getValores().get(idProvas));
+				idProvas++;
+				auxProvas++;
+				
+			}
+			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
+				resultadoPronto.setValorProva2(resultado.getValores().get(idProvas));
+				idProvas++;
+				auxProvas++;
+			}
+			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
+				resultadoPronto.setValorProva3(resultado.getValores().get(idProvas));
+				idProvas++;
+				auxProvas++;
+			
+			} 
+			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
+				resultadoPronto.setValorProva4(resultado.getValores().get(idProvas));
+				idProvas++;
+				auxProvas++;
+			}
+			
+	
+
+			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
+				resultadoPronto.setValorProva5(resultado.getValores().get(idProvas));
+				idProvas++;
+				auxProvas++;
+			}
+
+		
+
+			resultadoTesteService.save(resultadoPronto);
+		}
+		
+	}
 	
 
 }

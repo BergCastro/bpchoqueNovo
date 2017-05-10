@@ -116,5 +116,27 @@ public class Prova {
 		}
 		
 			}
+	
+	public enum AptoInapto {
+		APTO(1.00,"Apto"),
+		INAPTO(0.00,"Inapto");
+		
+		
+		private Double valor;
+		private String descricao;
+		
+		AptoInapto(Double valor, String descricao) {
+			this.descricao = descricao;
+			this.valor = valor;
+		}
+		
+		public String getDescricao() {
+			return descricao;
+		}
+		public Double getValor() {
+			return valor;
+		}
+		
+		}
 
 }
