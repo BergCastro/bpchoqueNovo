@@ -15,10 +15,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
-
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,6 +50,7 @@ import br.com.fireware.bpchoque.service.def.TipoTesteService;
 public class TesteFisicoController {
 
 	private static final String CADASTRO_TESTE_FISICO = "testesFisicos/CadastroTesteFisico";
+	
 
 	@Autowired
 	private TesteFisicoService testeFisicoService;
@@ -127,6 +129,16 @@ public class TesteFisicoController {
 			return CADASTRO_TESTE_FISICO;
 		}
 	}
+	
+	@RequestMapping("/resultados")
+	public String ajaxBrands(Model model) {
+		List<ResultadoTeste> resultados = resultadoTesteService.findByTeste(testeFisico);
+		
+		model.addAttribute("resultados", resultados);
+		model.addAttribute("tipos", testeFisico.getTipos());
+		return "testesFisicos/CadastroTesteFisico :: resultadosFrag";
+	}
+	
 
 	@RequestMapping(value = "/tipoNovo", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public ModelAndView salvarTipo(@RequestBody @Valid TipoTeste tipoTeste, BindingResult result,
@@ -134,14 +146,14 @@ public class TesteFisicoController {
 
 		ModelAndView mv = new ModelAndView();
 
-		// detalhe.setTipoTeste(tipoTeste);
+	
 		tipoTeste = tipoTesteService.findById(tipoTeste.getId());
 
 		testeFisico.getTipos().add(tipoTeste);
 
 		mv.addObject("tipoTeste", tipoTeste);
 
-		// provas = tipoTeste.getProvas();
+		
 
 		testeFisicoService.save(testeFisico);
 
@@ -158,12 +170,10 @@ public class TesteFisicoController {
 
 		ModelAndView mv = new ModelAndView();
 
-		System.out.println("Resultado: " + resultado);
-		//List<ResultadoTeste> resultadosTeste = new ArrayList<>();
+		
 		testeFisicoService.salvaResultado(resultado, testeFisico);
 		
 
-		
 		mv.setViewName("redirect:/testesFisicos/" + testeFisico.getId());
 		return ResponseEntity.ok(resultado);
 
@@ -179,7 +189,7 @@ public class TesteFisicoController {
 		List<TipoTeste> tiposIncluir = tipoTesteService.findAll();
 
 		if (testeFisico.getTipos().size() > 0) {
-			System.out.println("entrou edção antes if");
+			
 			for (int i = 0; i < tiposIncluir.size(); i++) {
 				for (int j = 0; j < testeFisico.getTipos().size(); j++) {
 					if (testeFisico.getTipos().get(j).getId() == tiposIncluir.get(i).getId()) {
@@ -209,7 +219,7 @@ public class TesteFisicoController {
 		}
 		
 		if (pessoasIncluir.size() > 0) {
-			System.out.println("entrou edção antes if");
+			
 			for (int i = 0; i < pessoasIncluir.size(); i++) {
 				for (int j = 0; j < pessoas.size(); j++) {
 					if (pessoas.get(j).getId() == pessoasIncluir.get(i).getId()) {
@@ -278,26 +288,22 @@ public class TesteFisicoController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/deleteResultado/{id}")
-	public ModelAndView excluirResultado(@PathVariable Long id) {
-		ModelAndView mv = new ModelAndView();
+	@DeleteMapping(value = "/deleteResultado/{id}")
+	public String excluirResultado(@PathVariable Long id, Model model) {
+		
 		ResultadoTeste resultado = resultadoTesteService.findById(id);
 		PessoaDef pessoa = pessoaDefService.findById(resultado.getPessoa().getId());
-		System.out.println("Entrou no delete");
-		System.out.println("Resultado: "+resultado.toString());
-		System.out.println("Resultado Pessoa: "+pessoa);
-		List<ResultadoTeste> resultados = resultadoTesteService.findByPessoa(pessoa);
+	
+		List<ResultadoTeste> resultadosDeletar = resultadoTesteService.findByPessoa(pessoa);
 		
 		
-		for (int i = 0; i < resultados.size(); i++) {
-			resultadoTesteService.delete(resultados.get(i).getId());
+		for (int i = 0; i < resultadosDeletar.size(); i++) {
+			resultadoTesteService.delete(resultadosDeletar.get(i).getId());
 		}
-
-		//testeFisicoService.save(testeFisico);
-
-		//mv.addObject("testeFisico", testeFisico);
-		mv.setViewName("redirect:/testesFisicos/" + testeFisico.getId());
-		return mv;
+		List<ResultadoTeste> resultados = resultadoTesteService.findByTeste(testeFisico);
+		model.addAttribute("resultados", resultados);
+		model.addAttribute("tipos", testeFisico.getTipos());
+		return "testesFisicos/CadastroTesteFisico :: resultadosFrag";
 	}
 
 }
