@@ -46,7 +46,8 @@ Brewer.ResultadoCadastro = (function() {
 		
 		
 		$('.input-prova').each(function() {
-			inputValorProvas.push($(this).val());
+			var input = $(this).val().replace('"', '.');
+			inputValorProvas.push(input);
 		});
 		$('.input-id-prova').each(function() {
 			inputIdProvas.push($(this).val());

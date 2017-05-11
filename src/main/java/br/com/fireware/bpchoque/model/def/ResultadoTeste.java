@@ -61,6 +61,7 @@ public class ResultadoTeste {
 	
 	private Long prova1;
 	
+	private String tipoPontuacaoProva1;
 	
 	private BigDecimal valorProva1;
 	
@@ -71,6 +72,7 @@ public class ResultadoTeste {
 	
 	private Long prova2;
 	
+	private String tipoPontuacaoProva2;
 	
 	private BigDecimal valorProva2;
 	
@@ -81,6 +83,7 @@ public class ResultadoTeste {
 	
 	private Long prova3;
 	
+	private String tipoPontuacaoProva3;
 	
 	private BigDecimal valorProva3;
 	
@@ -90,13 +93,18 @@ public class ResultadoTeste {
 	
 	private Long prova4;
 	
+	private String tipoPontuacaoProva4;
+	
 	private BigDecimal valorProva4;
+	
 	
 	private BigDecimal pontuacaoProva4;
 	
 	
 	
 	private Long prova5;
+	
+	private String tipoPontuacaoProva5;
 	
 	private BigDecimal valorProva5;
 	

@@ -101,7 +101,8 @@ public class Prova {
 	
 	public enum CampoTipo {
 		NOTA("Nota"),
-		APTOINAPTO("Apto / Inapto");
+		APTOINAPTO("Apto / Inapto"),
+		TEMPO("Tempo (s)");
 		
 		
 		

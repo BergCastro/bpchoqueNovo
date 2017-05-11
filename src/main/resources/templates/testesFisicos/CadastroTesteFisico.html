@@ -148,16 +148,42 @@
 											
 											<td th:text="${resultado.pessoa.matricula}" th:if="${resultado.tipoTeste.id}==${tipo.id}">Matricula</td>
 											<td th:text="${resultado.pessoa.nome}" th:if="${resultado.tipoTeste.id}==${tipo.id}">Nome</td>
+											
 											<td th:text="${resultado.valorProva1}"
-												th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id}">Nome</td>
+												th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva1}=='NOTA'">Nome</td>
+											<td th:text="(${resultado.valorProva1}==1 ? APTO : INAPTO)"
+												th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva1}=='APTOINAPTO'">Nome</td>
+											<td th:text="${#strings.replace(resultado.valorProva1, '.', '&#8221')}"
+												th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva1}=='TEMPO'">Nome</td>
+											
 											<td th:text="${resultado.valorProva2}"
-												th:if="${tipo.qtdProvas}>=2 and ${resultado.tipoTeste.id}==${tipo.id}"  >Nome</td>
+												th:if="${tipo.qtdProvas}>=2 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva2}=='NOTA'"  >Nome</td>
+											<td th:text="(${resultado.valorProva2}==1 ? APTO : INAPTO)"
+												th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva2}=='APTOINAPTO'">Nome</td>
+											<td th:text="${#strings.replace(resultado.valorProva2, '.', '&#8221')}"
+												th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva2}=='TEMPO'">Nome</td>
+											
 											<td th:text="${resultado.valorProva3}"
-												th:if="${tipo.qtdProvas}>=3 and ${resultado.tipoTeste.id}==${tipo.id}">Nome</td>
+												th:if="${tipo.qtdProvas}>=3 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva3}=='NOTA'">Nome</td>
+											<td th:text="(${resultado.valorProva3}==1 ? APTO : INAPTO)"
+												th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva3}=='APTOINAPTO'">Nome</td>
+											<td th:text="${#strings.replace(resultado.valorProva3, '.', '&#8221')}"
+												th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva3}=='TEMPO'">Nome</td>
+											
 											<td th:text="${resultado.valorProva4}"
-												th:if="${tipo.qtdProvas}>=4 and ${resultado.tipoTeste.id}==${tipo.id}">Nome</td>
+												th:if="${tipo.qtdProvas}>=4 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva4}=='NOTA'">Nome</td>
+											<td th:text="(${resultado.valorProva4}==1 ? APTO : INAPTO)"
+												th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva4}=='APTOINAPTO'">Nome</td>	
+											<td th:text="${#strings.replace(resultado.valorProva4, '.', '&#8221')}"
+												th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva4}=='TEMPO'">Nome</td>
+											
+												
 											<td th:text="${resultado.valorProva5}"
-												th:if="${tipo.qtdProvas}>=5 and ${resultado.tipoTeste.id}==${tipo.id}">Nome</td>
+												th:if="${tipo.qtdProvas}>=5 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva5}=='NOTA'">Nome</td>
+											<td th:text="(${resultado.valorProva5}==1 ? APTO : INAPTO)"
+												th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva5}=='APTOINAPTO'">Nome</td>
+											<td th:text="${#strings.replace(resultado.valorProva5, '.', '&#8221')}"
+												th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva5}=='TEMPO'">Nome</td>
 											
 
 											<td th:if="${resultado.tipoTeste.id}==${tipo.id}">Nota</td>
@@ -208,12 +234,14 @@
 
 	</section>
 	<th:block layout:fragment="javascript-extra">
+		<script th:src="@{/javascripts/vendors/uikit.min.js}"></script>
 		<script th:src="@{/javascripts/provas-tipoteste-cadastro.js}"></script>
 		<script th:src="@{/javascripts/resultado-teste-cadastro.js}"></script>
 		<script th:src="@{/javascripts/adiciona-resultado.js}"></script>
 		<script th:src="@{/javascripts/excluir-resultado.js}"></script>
 		<script th:src="@{/javascripts/bpchoque.js}"></script>
 		<script th:src="@{/javascripts/pesquisa/bootstrap-select.js}"></script>
+		<script th:src="@{/javascripts/formata-campo-tempo.js}"></script>
 		
 		
 		

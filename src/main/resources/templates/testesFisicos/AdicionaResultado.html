@@ -57,15 +57,24 @@
 												th:id="${iterProva.index}" type="text"
 												class="input-prova form-control">
 										</div>
-										<div th:if="${prova.tipo.descricao}!='Nota'">
+										<div th:if="${prova.tipo.descricao}=='Tempo (s)'">
 											<input th:id="${iter.index}" type="hidden"
 												class="input-id-prova form-control" th:value="${prova.id}">
-											<label th:for="${prova.id}" class="control-label" th:text="${prova.nome}">
-											</label> 
-											<select th:id="${iter.index}"
-												 name="tipoCampo" class="input-prova form-control">
+											<label class="control-label" th:for="${prova.id}"
+												th:text="${prova.nome}"></label> <input
+												th:id="${iterProva.index}" type="text"
+												class="input-prova form-control js-time">
+										</div>
+										<div th:if="${prova.tipo.descricao}=='Apto / Inapto'">
+											<input th:id="${iter.index}" type="hidden"
+												class="input-id-prova form-control" th:value="${prova.id}">
+											<label th:for="${prova.id}" class="control-label"
+												th:text="${prova.nome}"> </label> <select
+												th:id="${iter.index}" name="tipoCampo"
+												class="input-prova form-control">
 												<option value="">Selecione uma opção</option>
-												<option th:each="resultado : ${resultadosBooleanos}" th:value="${resultado.valor}"
+												<option th:each="resultado : ${resultadosBooleanos}"
+													th:value="${resultado.valor}"
 													th:text="${resultado.descricao}"></option>
 											</select>
 										</div>

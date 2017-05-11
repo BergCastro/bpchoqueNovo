@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.fireware.bpchoque.model.def.PessoaDef;
+import br.com.fireware.bpchoque.model.def.Prova;
 import br.com.fireware.bpchoque.model.def.Resultado;
 import br.com.fireware.bpchoque.model.def.ResultadoTeste;
 import br.com.fireware.bpchoque.model.def.TesteFisico;
@@ -24,6 +25,9 @@ public class TesteFisicoService {
 	
 	@Autowired
 	private ResultadoTesteService resultadoTesteService;
+	
+	@Autowired
+	private ProvaService provaService;
 	
 	@Transactional(readOnly = false)
 	public void save(TesteFisico testeFisico) {
@@ -61,7 +65,7 @@ public class TesteFisicoService {
 	public void salvaResultado(Resultado resultado, TesteFisico testeFisico) {
 		ResultadoTeste resultadoPronto;
 		PessoaDef pessoa = pessoaDefService.findById(resultado.getPessoa());
-
+		Prova prova;
 		Integer idProvas = 0;
 		Integer auxProvas = 0;
 		//System.out.println("Teste Fisico: "+testeFisico.getTipos());
@@ -74,6 +78,8 @@ public class TesteFisicoService {
 			resultadoPronto.setTeste(testeFisico);
 			resultadoPronto.setTipoTeste(testeFisico.getTipos().get(i));
 			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
+				prova = provaService.findById(resultado.getProvas().get(idProvas));
+				resultadoPronto.setTipoPontuacaoProva1(prova.getTipo()+"");
 				
 				resultadoPronto.setValorProva1(resultado.getValores().get(idProvas));
 				idProvas++;
@@ -81,17 +87,23 @@ public class TesteFisicoService {
 				
 			}
 			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
+				prova = provaService.findById(resultado.getProvas().get(idProvas));
+				resultadoPronto.setTipoPontuacaoProva2(prova.getTipo()+"");
 				resultadoPronto.setValorProva2(resultado.getValores().get(idProvas));
 				idProvas++;
 				auxProvas++;
 			}
 			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
+				prova = provaService.findById(resultado.getProvas().get(idProvas));
+				resultadoPronto.setTipoPontuacaoProva3(prova.getTipo()+"");
 				resultadoPronto.setValorProva3(resultado.getValores().get(idProvas));
 				idProvas++;
 				auxProvas++;
 			
 			} 
 			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
+				prova = provaService.findById(resultado.getProvas().get(idProvas));
+				resultadoPronto.setTipoPontuacaoProva4(prova.getTipo()+"");
 				resultadoPronto.setValorProva4(resultado.getValores().get(idProvas));
 				idProvas++;
 				auxProvas++;
@@ -100,6 +112,8 @@ public class TesteFisicoService {
 	
 
 			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
+				prova = provaService.findById(resultado.getProvas().get(idProvas));
+				resultadoPronto.setTipoPontuacaoProva5(prova.getTipo()+"");
 				resultadoPronto.setValorProva5(resultado.getValores().get(idProvas));
 				idProvas++;
 				auxProvas++;
