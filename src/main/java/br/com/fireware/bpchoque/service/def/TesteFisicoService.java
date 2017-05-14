@@ -1,5 +1,6 @@
 package br.com.fireware.bpchoque.service.def;
 
+import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,6 +63,8 @@ public class TesteFisicoService {
 	}
 	
 	
+	
+	
 	public void salvaResultado(Resultado resultado, TesteFisico testeFisico) {
 		ResultadoTeste resultadoPronto;
 		PessoaDef pessoa = pessoaDefService.findById(resultado.getPessoa());
@@ -80,7 +83,7 @@ public class TesteFisicoService {
 			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
 				prova = provaService.findById(resultado.getProvas().get(idProvas));
 				resultadoPronto.setTipoPontuacaoProva1(prova.getTipo()+"");
-				
+				resultadoPronto.setPontuacaoProva1(19.00);
 				resultadoPronto.setValorProva1(resultado.getValores().get(idProvas));
 				idProvas++;
 				auxProvas++;
@@ -125,6 +128,32 @@ public class TesteFisicoService {
 		}
 		
 	}
+	
+	public Double calculaPontuacao(Prova prova, Double valor, Integer idade){
+		Double referenciaInicialMasc = prova.getRefInicialMasc();
+		Double referenciaFinalMasc = prova.getRefFinalMasc();
+		Double referenciaInicialFem = prova.getRefInicialFem();
+		Double referenciaFinalFem = prova.getRefFinalFem();
+		Double intervaloReferencia = prova.getIntervaloRef();
+		Integer idadeInicial = prova.getIdadeInicial();
+		Integer idadeFinal = prova.getIdadeFinal();
+		Integer intervaloIdade = prova.getIntervaloIdade();
+		Integer faixaInicioPontuacao = 3; 
+
+		Double resultado = 0.00;
+		
+		
+		
+		for(int j = 1; j < 7; j++){
+			for(int i = faixaInicioPontuacao; i < (referenciaFinalMasc-(referenciaInicialMasc-1))/intervaloReferencia;i++){
+			
+			
+				
+			}
+		}
+		
+		return resultado;
+	} 
 	
 
 }

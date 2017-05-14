@@ -41,7 +41,7 @@ public class Resultado {
 	
 	private List<Long> provas;
 
-	private List<BigDecimal> valores;
+	private List<Double> valores;
 
 	
 	

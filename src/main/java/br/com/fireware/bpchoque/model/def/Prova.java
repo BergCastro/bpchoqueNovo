@@ -67,15 +67,15 @@ public class Prova {
 	
 	//private BigDecimal valorProva;
 	
-	private BigDecimal refInicialMasc;
+	private Double refInicialMasc;
 	
-	private BigDecimal refFinalMasc;
+	private Double refFinalMasc;
 	
-	private BigDecimal refInicialFem;
+	private Double refInicialFem;
 	
-	private BigDecimal refFinalFem;
+	private Double refFinalFem;
 	
-	private BigDecimal intervaloRef;
+	private Double intervaloRef;
 	
 	private Integer idadeInicial;
 	

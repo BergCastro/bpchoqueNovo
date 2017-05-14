@@ -63,10 +63,10 @@ public class ResultadoTeste {
 	
 	private String tipoPontuacaoProva1;
 	
-	private BigDecimal valorProva1;
+	private Double valorProva1;
 	
 	
-	private BigDecimal pontuacaoProva1;
+	private Double pontuacaoProva1;
 	
 	
 	
@@ -74,10 +74,10 @@ public class ResultadoTeste {
 	
 	private String tipoPontuacaoProva2;
 	
-	private BigDecimal valorProva2;
+	private Double valorProva2;
 	
 	
-	private BigDecimal pontuacaoProva2;
+	private Double pontuacaoProva2;
 	
 	
 	
@@ -85,9 +85,9 @@ public class ResultadoTeste {
 	
 	private String tipoPontuacaoProva3;
 	
-	private BigDecimal valorProva3;
+	private Double valorProva3;
 	
-	private BigDecimal pontuacaoProva3;
+	private Double pontuacaoProva3;
 
 	
 	
@@ -95,10 +95,10 @@ public class ResultadoTeste {
 	
 	private String tipoPontuacaoProva4;
 	
-	private BigDecimal valorProva4;
+	private Double valorProva4;
 	
 	
-	private BigDecimal pontuacaoProva4;
+	private Double pontuacaoProva4;
 	
 	
 	
@@ -106,9 +106,9 @@ public class ResultadoTeste {
 	
 	private String tipoPontuacaoProva5;
 	
-	private BigDecimal valorProva5;
+	private Double valorProva5;
 	
-	private BigDecimal pontuacaoProva5;
+	private Double pontuacaoProva5;
 	
 	
 	@PrePersist

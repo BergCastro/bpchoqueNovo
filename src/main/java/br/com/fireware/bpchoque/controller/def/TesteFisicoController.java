@@ -133,12 +133,18 @@ public class TesteFisicoController {
 	@RequestMapping("/resultados")
 	public String ajaxBrands(Model model) {
 		List<ResultadoTeste> resultados = resultadoTesteService.findByTeste(testeFisico);
-		
+		System.out.println("Entrou no ajaxResultados");
 		model.addAttribute("resultados", resultados);
 		model.addAttribute("tipos", testeFisico.getTipos());
 		return "testesFisicos/CadastroTesteFisico :: resultadosFrag";
 	}
 	
+	
+	@RequestMapping("/atualizaJavaScript")
+	public String atualizaJavaScript() {
+		System.out.println("Entrou no atualiza java script");
+		return "layout/LayoutPadrao :: javascriptFrag";
+	}
 
 	@RequestMapping(value = "/tipoNovo", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public ModelAndView salvarTipo(@RequestBody @Valid TipoTeste tipoTeste, BindingResult result,

@@ -78,93 +78,35 @@ Brewer.ResultadoCadastro = (function() {
 
 	function onEstiloSalvo() {
 		var corpoTabela = $('#resultsBlock');
-		/*corpoTabela.html('<div  id="1" class="tab-pane fade in active">'+
-
-							'<div class="table-responsive">'+
-								'<table'+
-									'class="table  table-hover table-condensed table-striped table-resultados">'+
-									'<thead>'+
-										'<tr>'+
-											'<th>MATRÍCULA</th>
-											<th>NOME</th>
-											<th th:each="prova, iterProvas : ${tipo.provas}"><span
-												th:utext="${prova.nome}"></span></th>
-											<th>NOTA</th>
-											<th></th>
-										</tr>
-									</thead>
-
-									<tbody id="listaDetalhe">
-
-										<tr th:each="resultado : ${resultados}">
-											
-											<td th:text="${resultado.pessoa.matricula}" th:if="${resultado.tipoTeste.id}==${tipo.id}">Matricula</td>
-											<td th:text="${resultado.pessoa.nome}" th:if="${resultado.tipoTeste.id}==${tipo.id}">Nome</td>
-											
-											<td th:text="${resultado.valorProva1}"
-												th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva1}=='NOTA'">Nome</td>
-											<td th:text="(${resultado.valorProva1}==1 ? APTO : INAPTO)"
-												th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva1}=='APTOINAPTO'">Nome</td>
-											<td th:text="${#strings.replace(resultado.valorProva1, '.', '&#8221')}"
-												th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva1}=='TEMPO'">Nome</td>
-											
-											<td th:text="${resultado.valorProva2}"
-												th:if="${tipo.qtdProvas}>=2 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva2}=='NOTA'"  >Nome</td>
-											<td th:text="(${resultado.valorProva2}==1 ? APTO : INAPTO)"
-												th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva2}=='APTOINAPTO'">Nome</td>
-											<td th:text="${#strings.replace(resultado.valorProva2, '.', '&#8221')}"
-												th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva2}=='TEMPO'">Nome</td>
-											
-											<td th:text="${resultado.valorProva3}"
-												th:if="${tipo.qtdProvas}>=3 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva3}=='NOTA'">Nome</td>
-											<td th:text="(${resultado.valorProva3}==1 ? APTO : INAPTO)"
-												th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva3}=='APTOINAPTO'">Nome</td>
-											<td th:text="${#strings.replace(resultado.valorProva3, '.', '&#8221')}"
-												th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva3}=='TEMPO'">Nome</td>
-											
-											<td th:text="${resultado.valorProva4}"
-												th:if="${tipo.qtdProvas}>=4 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva4}=='NOTA'">Nome</td>
-											<td th:text="(${resultado.valorProva4}==1 ? APTO : INAPTO)"
-												th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva4}=='APTOINAPTO'">Nome</td>	
-											<td th:text="${#strings.replace(resultado.valorProva4, '.', '&#8221')}"
-												th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva4}=='TEMPO'">Nome</td>
-											
-												
-											<td th:text="${resultado.valorProva5}"
-												th:if="${tipo.qtdProvas}>=5 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva5}=='NOTA'">Nome</td>
-											<td th:text="(${resultado.valorProva5}==1 ? APTO : INAPTO)"
-												th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva5}=='APTOINAPTO'">Nome</td>
-											<td th:text="${#strings.replace(resultado.valorProva5, '.', '&#8221')}"
-												th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva5}=='TEMPO'">Nome</td>
-											
-
-											<td th:if="${resultado.tipoTeste.id}==${tipo.id}">Nota</td>
-											<td class="text-center" th:if="${resultado.tipoTeste.id}==${tipo.id}"><a class="btn btn-link btn-xs"
-												data-toggle="modal" data-target="#myModalExclusaoResultado"
-												th:attr="data-id=${resultado.id}, data-nome=${resultado.pessoa.nome}"
-												title="Excluir" rel="tooltip" data-placement="top"> <span
-													class="glyphicon glyphicon-remove"></span>
-											</a></td>
-										</tr>
-
-									</tbody>
-								</table>
-								<div class="bw-field-action__icon">
-									<a href="#" data-toggle="modal"
-										data-target="#modalAdicionaResultado"
-										th:attr="data-tipo=${tipo.id}"> <i
-										class="glyphicon  glyphicon-plus-sign"></i> <span
-										class="hidden-xs  hidden-sm">Adicionar Resultado</span>
-									</a>
-								</div>
-								<br>
-							</div>
-						</div>');
-*/		
+		
+	
 		this.modal.modal('hide');
 		$("#resultsBlock").load('/testesFisicos/resultados');
+		$("#javascriptBloco").load('/testesFisicos/atualizaJavaScript');
 		
-		console.log();
+		this.viewCtrl.dismiss();
+		
+		/*$.getScript('/layout/javascripts/vendors.min.js');
+		$.getScript('/layout/javascripts/algaworks.min.js');
+		$.getScript('/javascripts/vendors/jquery.masknumber.min.js');
+		$.getScript('/javascripts/vendors/jquery.mask.min.js');
+		$.getScript('/javascripts/vendors/bootstrap-datepicker.min.js');
+		$.getScript('/javascripts/vendors/bootstrap-datepicker.pt-BR.min.js');
+		$.getScript('/javascripts/vendors/numeral.min.js');
+		$.getScript('/javascripts/vendors/pt-br.min.js');
+		
+		$.getScript('/javascripts/brewer.js');
+		
+		$.getScript('/javascripts/brewer.dialogo-excluir.js');
+		
+		$.getScript('/javascripts/vendors/uikit.min.js');
+		$.getScript('/javascripts/provas-tipoteste-cadastro.js');
+		$.getScript('/javascripts/resultado-teste-cadastro.js');
+		
+		$.getScript('/javascripts/bpchoque.js');
+		$.getScript('/javascripts/pesquisa/bootstrap-select.js');
+		$.getScript('/javascripts/formata-campo-tempo.js');*/
+		
 	//	location.reload();
 	}
 

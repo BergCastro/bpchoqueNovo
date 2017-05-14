@@ -26,7 +26,7 @@ Brewer.DialogoExcluir = (function() {
 			showCancelButton: true,
 			confirmButtonColor: '#DD6B55',
 			confirmButtonText: 'Sim, exclua agora!',
-			closeOnConfirm: false
+			closeOnConfirm: true
 		}, onExcluirConfirmado.bind(this, url));
 	}
 	
@@ -35,16 +35,45 @@ Brewer.DialogoExcluir = (function() {
 			url: url,
 			method: 'DELETE',
 			success: onExcluidoSucesso.bind(this),
-			error: onErroExcluir.bind(this)
+			error: onErroExcluir.bind(this),
+			complete: atualizaScript.bind(this)
 		});
 	}
 	
 	function onExcluidoSucesso() {
-		var urlAtual = window.location.href;
+		/*var urlAtual = window.location.href;
 		var separador = urlAtual.indexOf('?') > -1 ? '&' : '?';
 		var novaUrl = urlAtual.indexOf('excluido') > -1 ? urlAtual : urlAtual + separador + 'excluido';
 		
-		window.location = novaUrl;
+		window.location = novaUrl;*/
+		$("#resultsBlock").load('/testesFisicos/resultados');
+		$("#javascriptBloco").load('/testesFisicos/atualizaJavaScript');
+		
+	}
+	
+	function atualizaScript() {
+		
+	/*	$.getScript('/layout/javascripts/vendors.min.js');
+		$.getScript('/layout/javascripts/algaworks.min.js');
+		$.getScript('/javascripts/vendors/jquery.masknumber.min.js');
+		$.getScript('/javascripts/vendors/jquery.mask.min.js');
+		$.getScript('/javascripts/vendors/bootstrap-datepicker.min.js');
+		$.getScript('/javascripts/vendors/bootstrap-datepicker.pt-BR.min.js');
+		$.getScript('/javascripts/vendors/numeral.min.js');
+		$.getScript('/javascripts/vendors/pt-br.min.js');
+		
+		$.getScript('/javascripts/brewer.js');
+		
+		$.getScript('/javascripts/brewer.dialogo-excluir.js');
+		
+		$.getScript('/javascripts/vendors/uikit.min.js');
+		$.getScript('/javascripts/provas-tipoteste-cadastro.js');
+		$.getScript('/javascripts/resultado-teste-cadastro.js');
+		
+		$.getScript('/javascripts/bpchoque.js');
+		$.getScript('/javascripts/pesquisa/bootstrap-select.js');
+		$.getScript('/javascripts/formata-campo-tempo.js');
+		*/
 	}
 	
 	function onErroExcluir(e) {

@@ -196,9 +196,9 @@
 												<td class="text-center"
 													th:if="${resultado.tipoTeste.id}==${tipo.id}"><a
 													class="btn  btn-link  btn-xs  js-tooltip  js-exclusao-btn"
-													title="Excluir" href="#"
-													data:url="@{/testesFisicos/deleteResultado/{id}(id=${resultado.id})}"
-													data:objeto="|o resultado de ${resultado.pessoa.nome}|"> <i
+													th:title="Excluir" href="#"
+													th:attr="data-url=@{/testesFisicos/deleteResultado/{id}(id=${resultado.id})}, data-objeto=|o resultado de ${resultado.pessoa.nome}|"
+													> <i
 														class="glyphicon glyphicon-remove"></i>
 												</a></td>
 											</tr>
@@ -241,21 +241,26 @@
 			th:replace="testesFisicos/ConfirmaExclusaoTipoTeste :: modalDetalhe"></div>
 		<div
 			th:replace="testesFisicos/ConfirmaExclusaoResultado :: modalExclusao"></div>
-
+	
+	
+	
+	
+	
 	</section>
-	<th:block layout:fragment="javascript-extra">
+	
+	<th:block layout:fragment="javascript-extra" >
+	
 		<script th:src="@{/javascripts/vendors/uikit.min.js}"></script>
 		<script th:src="@{/javascripts/provas-tipoteste-cadastro.js}"></script>
 		<script th:src="@{/javascripts/resultado-teste-cadastro.js}"></script>
-		<script th:src="@{/javascripts/adiciona-resultado.js}"></script>
-<!-- 		<script th:src="@{/javascripts/excluir-resultado.js}"></script> -->
 		<script th:src="@{/javascripts/bpchoque.js}"></script>
 		<script th:src="@{/javascripts/pesquisa/bootstrap-select.js}"></script>
 		<script th:src="@{/javascripts/formata-campo-tempo.js}"></script>
-
+	
 
 
 
 	</th:block>
+	
 </body>
 </html>
