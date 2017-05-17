@@ -110,6 +110,7 @@ public class ResultadoTeste {
 	
 	private Double pontuacaoProva5;
 	
+	private Double notaFinal;
 	
 	@PrePersist
 	@PreUpdate

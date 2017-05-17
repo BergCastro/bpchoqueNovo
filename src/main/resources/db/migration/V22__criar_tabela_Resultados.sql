@@ -27,6 +27,7 @@ CREATE TABLE resultados_teste(
 	tipoPontuacaoProva5 VARCHAR(20),
 	valorProva5 DECIMAL(10,2),
 	pontuacaoProva5 DECIMAL(10,2),
+	notaFinal DECIMAL(10,2),
 	FOREIGN KEY (pessoa) REFERENCES pessoasdef(id),
 	FOREIGN KEY (teste) REFERENCES testes_fisicos(id),
 	FOREIGN KEY (tipoTeste) REFERENCES tipos_teste(id)

@@ -79,9 +79,10 @@ public class TesteFisicoService {
 			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
 				prova = provaService.findById(resultado.getProvas().get(idProvas));
 				resultadoPronto.setTipoPontuacaoProva1(prova.getTipo() + "");
-
+				
 				resultadoPronto.setValorProva1(resultado.getValores().get(idProvas));
-				resultadoPronto.setPontuacaoProva1(calculaPontuacao(prova, resultadoPronto.getValorProva1(), 19));
+				resultadoPronto.setPontuacaoProva1(calculaPontuacao(prova, resultadoPronto.getValorProva1(), 35));
+				resultadoPronto.setNotaFinal(resultadoPronto.getPontuacaoProva1()/10);
 				idProvas++;
 				auxProvas++;
 
@@ -90,6 +91,8 @@ public class TesteFisicoService {
 				prova = provaService.findById(resultado.getProvas().get(idProvas));
 				resultadoPronto.setTipoPontuacaoProva2(prova.getTipo() + "");
 				resultadoPronto.setValorProva2(resultado.getValores().get(idProvas));
+				resultadoPronto.setPontuacaoProva2(calculaPontuacao(prova, resultadoPronto.getValorProva2(), 35));
+				resultadoPronto.setNotaFinal(((resultadoPronto.getPontuacaoProva1()+resultadoPronto.getPontuacaoProva2())/2)/10);
 				idProvas++;
 				auxProvas++;
 			}
@@ -97,6 +100,8 @@ public class TesteFisicoService {
 				prova = provaService.findById(resultado.getProvas().get(idProvas));
 				resultadoPronto.setTipoPontuacaoProva3(prova.getTipo() + "");
 				resultadoPronto.setValorProva3(resultado.getValores().get(idProvas));
+				resultadoPronto.setPontuacaoProva3(calculaPontuacao(prova, resultadoPronto.getValorProva3(), 35));
+				resultadoPronto.setNotaFinal(((resultadoPronto.getPontuacaoProva1()+resultadoPronto.getPontuacaoProva2()+resultadoPronto.getPontuacaoProva3())/3)/10);
 				idProvas++;
 				auxProvas++;
 
@@ -105,6 +110,8 @@ public class TesteFisicoService {
 				prova = provaService.findById(resultado.getProvas().get(idProvas));
 				resultadoPronto.setTipoPontuacaoProva4(prova.getTipo() + "");
 				resultadoPronto.setValorProva4(resultado.getValores().get(idProvas));
+				resultadoPronto.setPontuacaoProva4(calculaPontuacao(prova, resultadoPronto.getValorProva4(), 35));
+				resultadoPronto.setNotaFinal(((resultadoPronto.getPontuacaoProva1()+resultadoPronto.getPontuacaoProva2()+resultadoPronto.getPontuacaoProva3()+resultadoPronto.getPontuacaoProva4())/4)/10);
 				idProvas++;
 				auxProvas++;
 			}
@@ -113,6 +120,8 @@ public class TesteFisicoService {
 				prova = provaService.findById(resultado.getProvas().get(idProvas));
 				resultadoPronto.setTipoPontuacaoProva5(prova.getTipo() + "");
 				resultadoPronto.setValorProva5(resultado.getValores().get(idProvas));
+				resultadoPronto.setPontuacaoProva5(calculaPontuacao(prova, resultadoPronto.getValorProva5(), 35));
+				resultadoPronto.setNotaFinal(((resultadoPronto.getPontuacaoProva1()+resultadoPronto.getPontuacaoProva2()+resultadoPronto.getPontuacaoProva3()+resultadoPronto.getPontuacaoProva4()+resultadoPronto.getPontuacaoProva5())/5)/10);
 				idProvas++;
 				auxProvas++;
 			}
@@ -210,6 +219,319 @@ public class TesteFisicoService {
 				auxIdade += intervaloIdade;
 				auxResultado = auxResultado - 100;
 				auxReferencia -= 11;
+			}
+
+		}
+		
+		if (prova.getId() == 2) {// FLEXÃO SOLO
+			faixaInicioPontuacao = 7;
+			Double auxResultado = 10.00;
+			Double auxReferencia = 26.00;
+			Integer auxIdade = idadeInicial;
+			Double auxMaxRefIdade = referenciaFinalMasc; 
+			System.out.println("valor é: " + valor);
+			Boolean paraLoop = false;
+			for (int j = 0; j < 7; j++) {
+				if (paraLoop) {
+					break;
+				}
+				for (int i = faixaInicioPontuacao; i <= (referenciaFinalMasc - (referenciaInicialMasc - 1))
+						/ intervaloReferencia; i++) {
+					System.out.println("Valor: " + valor);
+					System.out.println("Idade: " + idade);
+					System.out.println("FaixaIdade: " + auxIdade+"-"+(auxIdade+intervaloIdade) );
+					System.out.println("AuxReferencia: " + auxReferencia);
+					System.out.println("AuxResultado: " + auxResultado);
+					System.out.println("AuxMaxREferencia: " + auxMaxRefIdade);
+					if (valor.compareTo(0.00) == 0 ? true : false) {
+						resultado = 0.00;
+						paraLoop = true;
+						break;
+					} else if (valor >= referenciaFinalMasc) {
+						resultado = 100.00;
+						paraLoop = true;
+						break;
+
+					} else if ((idade >= auxIdade && idade < auxIdade + intervaloIdade)) {
+						System.out.println("entrou if resultado");
+
+						if (valor < auxReferencia) {
+							resultado = 0.00;
+							paraLoop = true;
+							break;
+
+						} else if ((valor >= auxReferencia && valor < auxReferencia + intervaloReferencia)) {
+							resultado = auxResultado;
+							paraLoop = true;
+							break;
+						}
+						else if (valor >= auxMaxRefIdade) {
+							resultado = 100.00;
+							paraLoop = true;
+							break;
+						}
+
+					}else if(idade < idadeInicial){
+						if (valor < auxReferencia) {
+							resultado = 0.00;
+							paraLoop = true;
+							break;
+
+						} else if ((valor.compareTo(auxReferencia) == 0 ? true : false)) {
+							resultado = auxResultado;
+							paraLoop = true;
+							break;
+						}
+						else if (valor >= auxMaxRefIdade) {
+							resultado = 100.00;
+							paraLoop = true;
+							break;
+						}
+					}
+
+					auxResultado += 10;
+					auxReferencia += intervaloReferencia;
+					
+
+				}
+				auxMaxRefIdade -= intervaloReferencia;
+				auxIdade += intervaloIdade;
+				auxResultado = auxResultado - 100;
+				auxReferencia -= 11*intervaloReferencia;
+			}
+
+		}
+		if (prova.getId() == 3) {// ABDOMINAL
+			faixaInicioPontuacao = 7;
+			Double auxResultado = 10.00;
+			Double auxReferencia = 30.00;
+			Integer auxIdade = idadeInicial;
+			Double auxMaxRefIdade = referenciaFinalMasc; 
+			System.out.println("valor é: " + valor);
+			Boolean paraLoop = false;
+			for (int j = 0; j < 7; j++) {
+				if (paraLoop) {
+					break;
+				}
+				for (int i = faixaInicioPontuacao; i <= (referenciaFinalMasc - (referenciaInicialMasc - 1))
+						/ intervaloReferencia; i++) {
+					System.out.println("Valor: " + valor);
+					System.out.println("Idade: " + idade);
+					System.out.println("FaixaIdade: " + auxIdade+"-"+(auxIdade+intervaloIdade) );
+					System.out.println("AuxReferencia: " + auxReferencia);
+					System.out.println("AuxResultado: " + auxResultado);
+					System.out.println("AuxMaxREferencia: " + auxMaxRefIdade);
+					if (valor.compareTo(0.00) == 0 ? true : false) {
+						resultado = 0.00;
+						paraLoop = true;
+						break;
+					} else if (valor >= referenciaFinalMasc) {
+						resultado = 100.00;
+						paraLoop = true;
+						break;
+
+					} else if ((idade >= auxIdade && idade < auxIdade + intervaloIdade)) {
+						System.out.println("entrou if resultado");
+
+						if (valor < auxReferencia) {
+							resultado = 0.00;
+							paraLoop = true;
+							break;
+
+						} else if ((valor >= auxReferencia && valor < auxReferencia + intervaloReferencia)) {
+							resultado = auxResultado;
+							paraLoop = true;
+							break;
+						}
+						else if (valor >= auxMaxRefIdade) {
+							resultado = 100.00;
+							paraLoop = true;
+							break;
+						}
+
+					}else if(idade < idadeInicial){
+						if (valor < auxReferencia) {
+							resultado = 0.00;
+							paraLoop = true;
+							break;
+
+						} else if ((valor.compareTo(auxReferencia) == 0 ? true : false)) {
+							resultado = auxResultado;
+							paraLoop = true;
+							break;
+						}
+						else if (valor >= auxMaxRefIdade) {
+							resultado = 100.00;
+							paraLoop = true;
+							break;
+						}
+					}
+
+					auxResultado += 10;
+					auxReferencia += intervaloReferencia;
+					
+
+				}
+				auxMaxRefIdade -= intervaloReferencia;
+				auxIdade += intervaloIdade;
+				auxResultado = auxResultado - 100;
+				auxReferencia -= 11*intervaloReferencia;
+			}
+
+		}
+		if (prova.getId() == 4) {// CORRIDA 12MIN
+			faixaInicioPontuacao = 7;
+			Double auxResultado = 10.00;
+			Double auxReferencia = 2000.00;
+			Integer auxIdade = idadeInicial;
+			Double auxMaxRefIdade = referenciaFinalMasc; 
+			System.out.println("valor é: " + valor);
+			Boolean paraLoop = false;
+			for (int j = 0; j < 7; j++) {
+				if (paraLoop) {
+					break;
+				}
+				for (int i = faixaInicioPontuacao; i <= (referenciaFinalMasc - (referenciaInicialMasc - 1))
+						/ intervaloReferencia; i++) {
+					System.out.println("Valor: " + valor);
+					System.out.println("Idade: " + idade);
+					System.out.println("FaixaIdade: " + auxIdade+"-"+(auxIdade+intervaloIdade) );
+					System.out.println("AuxReferencia: " + auxReferencia);
+					System.out.println("AuxResultado: " + auxResultado);
+					System.out.println("AuxMaxREferencia: " + auxMaxRefIdade);
+					if (valor.compareTo(0.00) == 0 ? true : false) {
+						resultado = 0.00;
+						paraLoop = true;
+						break;
+					} else if (valor >= referenciaFinalMasc) {
+						resultado = 100.00;
+						paraLoop = true;
+						break;
+
+					} else if ((idade >= auxIdade && idade < auxIdade + intervaloIdade)) {
+						System.out.println("entrou if resultado");
+
+						if (valor < auxReferencia) {
+							resultado = 0.00;
+							paraLoop = true;
+							break;
+
+						} else if ((valor >= auxReferencia && valor < auxReferencia + intervaloReferencia)) {
+							resultado = auxResultado;
+							paraLoop = true;
+							break;
+						}
+						else if (valor >= auxMaxRefIdade) {
+							resultado = 100.00;
+							paraLoop = true;
+							break;
+						}
+
+					}else if(idade < idadeInicial){
+						if (valor < auxReferencia) {
+							resultado = 0.00;
+							paraLoop = true;
+							break;
+
+						} else if ((valor.compareTo(auxReferencia) == 0 ? true : false)) {
+							resultado = auxResultado;
+							paraLoop = true;
+							break;
+						}
+						else if (valor >= auxMaxRefIdade) {
+							resultado = 100.00;
+							paraLoop = true;
+							break;
+						}
+					}
+
+					auxResultado += 10;
+					auxReferencia += intervaloReferencia;
+					
+
+				}
+				auxMaxRefIdade -= intervaloReferencia;
+				auxIdade += intervaloIdade;
+				auxResultado = auxResultado - 100;
+				auxReferencia -= 11*intervaloReferencia;
+			}
+
+		}
+		if (prova.getId() == 5) {// CORRIDA 50 M
+			faixaInicioPontuacao = 7;
+			Double auxResultado = 10.00;
+			Double auxReferencia = 9.00;
+			Integer auxIdade = idadeInicial;
+			Double auxMaxRefIdade = referenciaFinalMasc; 
+			System.out.println("valor é: " + valor);
+			Boolean paraLoop = false;
+			for (int j = 0; j < 7; j++) {
+				if (paraLoop) {
+					break;
+				}
+				for (int i = faixaInicioPontuacao; i <= (referenciaFinalMasc - (referenciaInicialMasc - 1))
+						/ intervaloReferencia; i++) {
+					System.out.println("Valor: " + valor);
+					System.out.println("Idade: " + idade);
+					System.out.println("FaixaIdade: " + auxIdade+"-"+(auxIdade+intervaloIdade) );
+					System.out.println("AuxReferencia: " + auxReferencia);
+					System.out.println("AuxResultado: " + auxResultado);
+					System.out.println("AuxMaxREferencia: " + auxMaxRefIdade);
+					if (valor.compareTo(0.00) == 0 ? true : false) {
+						resultado = 0.00;
+						paraLoop = true;
+						break;
+					} else if (valor >= referenciaFinalMasc) {
+						resultado = 100.00;
+						paraLoop = true;
+						break;
+
+					} else if ((idade >= auxIdade && idade < auxIdade + intervaloIdade)) {
+						System.out.println("entrou if resultado");
+
+						if (valor < auxReferencia) {
+							resultado = 0.00;
+							paraLoop = true;
+							break;
+
+						} else if ((valor >= auxReferencia && valor < auxReferencia + intervaloReferencia)) {
+							resultado = auxResultado;
+							paraLoop = true;
+							break;
+						}
+						else if (valor >= auxMaxRefIdade) {
+							resultado = 100.00;
+							paraLoop = true;
+							break;
+						}
+
+					}else if(idade < idadeInicial){
+						if (valor < auxReferencia) {
+							resultado = 0.00;
+							paraLoop = true;
+							break;
+
+						} else if ((valor.compareTo(auxReferencia) == 0 ? true : false)) {
+							resultado = auxResultado;
+							paraLoop = true;
+							break;
+						}
+						else if (valor >= auxMaxRefIdade) {
+							resultado = 100.00;
+							paraLoop = true;
+							break;
+						}
+					}
+
+					auxResultado += 10;
+					auxReferencia -= intervaloReferencia;
+					
+
+				}
+				auxMaxRefIdade += intervaloReferencia;
+				auxIdade += intervaloIdade;
+				auxResultado = auxResultado - 100;
+				auxReferencia += 11*intervaloReferencia;
 			}
 
 		}
