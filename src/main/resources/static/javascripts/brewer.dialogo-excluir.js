@@ -46,21 +46,22 @@ Brewer.DialogoExcluir = (function() {
 		var novaUrl = urlAtual.indexOf('excluido') > -1 ? urlAtual : urlAtual + separador + 'excluido';
 		
 		window.location = novaUrl;*/
-		$("#resultsBlock").load('/testesFisicos/resultados');
-		$("#javascriptBloco").load('/testesFisicos/atualizaJavaScript');
+		//$("#resultsBlock").load('/testesFisicos/resultados');
+		//$("#javascriptBloco").load('/testesFisicos/atualizaJavaScript');
+		location.reload();
 		
 	}
 	
 	function atualizaScript() {
 		
-	/*	$.getScript('/layout/javascripts/vendors.min.js');
+		/*$.getScript('/layout/javascripts/vendors.min.js');
 		$.getScript('/layout/javascripts/algaworks.min.js');
 		$.getScript('/javascripts/vendors/jquery.masknumber.min.js');
 		$.getScript('/javascripts/vendors/jquery.mask.min.js');
 		$.getScript('/javascripts/vendors/bootstrap-datepicker.min.js');
-		$.getScript('/javascripts/vendors/bootstrap-datepicker.pt-BR.min.js');
-		$.getScript('/javascripts/vendors/numeral.min.js');
-		$.getScript('/javascripts/vendors/pt-br.min.js');
+		//$.getScript('/javascripts/vendors/bootstrap-datepicker.pt-BR.min.js');
+		//$.getScript('/javascripts/vendors/numeral.min.js');
+		//$.getScript('/javascripts/vendors/pt-br.min.js');
 		
 		$.getScript('/javascripts/brewer.js');
 		
@@ -72,8 +73,7 @@ Brewer.DialogoExcluir = (function() {
 		
 		$.getScript('/javascripts/bpchoque.js');
 		$.getScript('/javascripts/pesquisa/bootstrap-select.js');
-		$.getScript('/javascripts/formata-campo-tempo.js');
-		*/
+		$.getScript('/javascripts/formata-campo-tempo.js');*/
 	}
 	
 	function onErroExcluir(e) {

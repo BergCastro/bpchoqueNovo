@@ -136,9 +136,21 @@ public class TesteFisicoController {
 		System.out.println("Entrou no ajaxResultados");
 		model.addAttribute("resultados", resultados);
 		model.addAttribute("tipos", testeFisico.getTipos());
+		model.addAttribute("pessoasIncluir", testeFisicoService.pessoasIncluir(resultados));
 		return "testesFisicos/CadastroTesteFisico :: resultadosFrag";
 	}
 	
+	@RequestMapping("/atualizaModais")
+	public String atualizaModais(Model model) {
+		System.out.println("Entrou no atualiza modais");
+		List<ResultadoTeste> resultados = resultadoTesteService.findByTeste(testeFisico);
+		System.out.println("Entrou no atualizaModais");
+		model.addAttribute("resultados", resultados);
+		model.addAttribute("tipos", testeFisico.getTipos());
+		model.addAttribute("pessoasIncluir", testeFisicoService.pessoasIncluir(resultados));
+		System.out.println(testeFisicoService.pessoasIncluir(resultados).size());
+		return "testesFisicos/CadastroTesteFisico :: modaisFrag";
+	}
 	
 	@RequestMapping("/atualizaJavaScript")
 	public String atualizaJavaScript() {
@@ -215,26 +227,7 @@ public class TesteFisicoController {
 		
 
 		List<ResultadoTeste> resultados = resultadoTesteService.findByTeste(testeFisico);
-		List<PessoaDef> pessoasIncluir = pessoaDefService.findAll();
-		
-		
-		List<PessoaDef> pessoas = new ArrayList<>(); // Não Permite objetos
-													// repetidos
-		for (ResultadoTeste resultado : resultados) {
-			pessoas.add(resultado.getPessoa());
-		}
-		
-		if (pessoasIncluir.size() > 0) {
-			
-			for (int i = 0; i < pessoasIncluir.size(); i++) {
-				for (int j = 0; j < pessoas.size(); j++) {
-					if (pessoas.get(j).getId() == pessoasIncluir.get(i).getId()) {
-						pessoasIncluir.remove(i);
-					}
-				}
-			}
-
-		}
+		List<PessoaDef> pessoasIncluir = testeFisicoService.pessoasIncluir(resultados);
 		
 		
 		

@@ -18,7 +18,7 @@ Brewer.ResultadoCadastro = (function() {
 		this.form.on('submit', function(event) {
 			event.preventDefault()
 		});
-		this.modal.on('shown.bs.modal', onModalShow.bind(this));
+		this.modal.on('show.bs.modal', onModalShow.bind(this));
 		this.modal.on('hide.bs.modal', onModalClose.bind(this))
 		this.botaoSalvar.on('click', onBotaoSalvarClick.bind(this));
 	}
@@ -28,7 +28,10 @@ Brewer.ResultadoCadastro = (function() {
 	}
 
 	function onModalClose() {
-		this.inputParticipante.val('');
+		//this.inputParticipante.val('');
+		
+		
+		    // Also clear loaded content, otherwise it would flash before new one is loaded.
 		
 		this.containerMensagemErro.addClass('hidden');
 		this.form.find('.form-group').removeClass('has-error');
@@ -79,13 +82,18 @@ Brewer.ResultadoCadastro = (function() {
 	function onEstiloSalvo() {
 		var corpoTabela = $('#resultsBlock');
 		
-	
+		
 		this.modal.modal('hide');
-		$("#resultsBlock").load('/testesFisicos/resultados');
-		$("#javascriptBloco").load('/testesFisicos/atualizaJavaScript');
 		
-		this.viewCtrl.dismiss();
+		//$("#resultsBlock").load('/testesFisicos/resultados');
+		//$.getScript('/stylesheets/pesquisa/bootstrap-select.css');
 		
+		//$("#modaisBloco").load('/testesFisicos/atualizaModais');
+		//$("#modaisBloco").css('/stylesheets/pesquisa/bootstrap-select.css');
+		
+		//$("#javascriptBloco").load('/testesFisicos/atualizaJavaScript');
+		
+				
 		/*$.getScript('/layout/javascripts/vendors.min.js');
 		$.getScript('/layout/javascripts/algaworks.min.js');
 		$.getScript('/javascripts/vendors/jquery.masknumber.min.js');
@@ -107,7 +115,9 @@ Brewer.ResultadoCadastro = (function() {
 		$.getScript('/javascripts/pesquisa/bootstrap-select.js');
 		$.getScript('/javascripts/formata-campo-tempo.js');*/
 		
-	//	location.reload();
+		
+		
+		location.reload();
 	}
 
 	return ResultadoCadastro;
