@@ -57,6 +57,8 @@ public class TipoTeste {
 	
 	private String descricao;
 	
+	private Integer qtdProvasMedia;
+	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable ( name ="tiposteste_provas",
 	joinColumns = @JoinColumn ( name ="tipoTesteId"),

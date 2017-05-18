@@ -25,6 +25,9 @@ Brewer.ResultadoCadastro = (function() {
 
 	function onModalShow() {
 		this.inputParticipante.focus();
+		$('.input-prova').val('0');
+		$('.js-time').val('0"00');
+		
 	}
 
 	function onModalClose() {
@@ -49,6 +52,7 @@ Brewer.ResultadoCadastro = (function() {
 		
 		
 		$('.input-prova').each(function() {
+			
 			var input = $(this).val().replace('"', '.');
 			inputValorProvas.push(input);
 		});
