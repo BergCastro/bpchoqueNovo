@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 import br.com.fireware.bpchoque.model.def.PessoaDef;
 import br.com.fireware.bpchoque.model.def.ResultadoTeste;
 import br.com.fireware.bpchoque.model.def.TesteFisico;
@@ -24,7 +23,7 @@ public class ResultadoTesteService {
 		repository.save(resultadoTeste);
 
 	}
-	
+
 	@Transactional(readOnly = false)
 	public void delete(Long id) {
 		repository.delete(id);
@@ -43,24 +42,21 @@ public class ResultadoTesteService {
 		return repository.findOne(id);
 
 	}
+
 	public List<ResultadoTeste> findByTeste(TesteFisico testeFisico) {
 
 		return repository.findByTeste(testeFisico);
 
 	}
-	
+
 	public List<ResultadoTeste> findByPessoa(PessoaDef pessoa) {
 
 		return repository.findByPessoa(pessoa);
 
 	}
-	
-	
 
 	public List<ResultadoTeste> findAll() {
 		return repository.findAll();
 	}
-	
-	
 
 }

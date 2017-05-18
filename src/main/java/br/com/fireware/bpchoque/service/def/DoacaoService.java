@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-
 import br.com.fireware.bpchoque.model.def.Doacao;
-
 import br.com.fireware.bpchoque.repository.def.DoacaoRepository;
 
 @Service
@@ -26,8 +23,6 @@ public class DoacaoService {
 		repository.save(doacao);
 
 	}
-	
-	
 
 	@Transactional(readOnly = false)
 	public void delete(Long id) {
@@ -47,13 +42,9 @@ public class DoacaoService {
 		return repository.findOne(id);
 
 	}
-	
-	
 
 	public List<Doacao> findAll() {
 		return repository.findAll();
 	}
-	
-	
 
 }

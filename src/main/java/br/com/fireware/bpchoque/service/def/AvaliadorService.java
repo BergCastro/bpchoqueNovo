@@ -1,15 +1,10 @@
 package br.com.fireware.bpchoque.service.def;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-
-import br.com.fireware.bpchoque.model.def.AvaliacaoIndividual;
 import br.com.fireware.bpchoque.model.def.Avaliador;
 import br.com.fireware.bpchoque.repository.def.AvaliadorRepository;
 
@@ -49,7 +44,5 @@ public class AvaliadorService {
 	public List<Avaliador> findAll() {
 		return repository.findAll();
 	}
-	
-	
 
 }

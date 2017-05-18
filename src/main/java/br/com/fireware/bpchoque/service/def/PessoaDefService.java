@@ -1,15 +1,11 @@
 package br.com.fireware.bpchoque.service.def;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 import br.com.fireware.bpchoque.model.def.PessoaDef;
-
 import br.com.fireware.bpchoque.repository.def.PessoaDefRepository;
 
 @Service
@@ -49,16 +45,14 @@ public class PessoaDefService {
 
 		return repository.findAll();
 	}
-	
-	public PessoaDef findOne(Long id){
+
+	public PessoaDef findOne(Long id) {
 		return repository.findOne(id);
 	}
-	
-	public PessoaDef buscaById(Long id){
-		
-		
+
+	public PessoaDef buscaById(Long id) {
+
 		return repository.buscaById(id);
 	}
-	
 
 }
