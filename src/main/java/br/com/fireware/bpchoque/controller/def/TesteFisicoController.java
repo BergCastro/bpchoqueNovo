@@ -250,6 +250,58 @@ public class TesteFisicoController {
 
 		return mv;
 	}
+	
+	@RequestMapping("/resultado/{id}")
+	public ModelAndView edicaoResultado(@PathVariable("id") ResultadoTeste resultado) {
+		ModelAndView mv = new ModelAndView(CADASTRO_TESTE_FISICO);
+		
+		this.testeFisico = testeFisico;
+		mv.addObject(testeFisico);
+
+		List<TipoTeste> tiposIncluir = tipoTesteService.findAll();
+
+		if (testeFisico.getTipos().size() > 0) {
+			
+			for (int i = 0; i < tiposIncluir.size(); i++) {
+				for (int j = 0; j < testeFisico.getTipos().size(); j++) {
+					if (testeFisico.getTipos().get(j).getId() == tiposIncluir.get(i).getId()) {
+						tiposIncluir.remove(i);
+					}
+				}
+			}
+
+		}
+		
+		
+		
+		if (testeFisico.getTipos().size() > 0) {
+			temTipo = true;
+		}
+		testeFisicoSalvo = true;
+		
+
+		List<ResultadoTeste> resultados = resultadoTesteService.findByTeste(testeFisico);
+		List<PessoaDef> pessoasIncluir = testeFisicoService.pessoasIncluir(resultados);
+		
+		
+		
+		Integer qtdProvas = 0;
+
+		for (int i = 0; i < testeFisico.getTipos().size(); i++) {
+			qtdProvas += testeFisico.getTipos().get(i).getQtdProvas();
+		}
+
+		mv.addObject("tipos", testeFisico.getTipos());
+		mv.addObject("qtdProvas", qtdProvas);
+		mv.addObject("resultados", resultados);
+		mv.addObject("tiposIncluir", tiposIncluir);
+		mv.addObject("pessoasIncluir", pessoasIncluir);
+		mv.addObject("testeFisicoSalvo", testeFisicoSalvo);
+		mv.addObject("resultadosBooleanos", AptoInapto.values());
+		mv.addObject("temTipo", temTipo);
+
+		return mv;
+	}
 
 	@RequestMapping(value = "/delete/{id}")
 	public String excluir(@PathVariable Long id) {

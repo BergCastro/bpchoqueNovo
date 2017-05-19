@@ -26,19 +26,19 @@
 						<div class="aw-box__icon">
 							<i class="fa  fa-heartbeat  fa-3x"></i>
 						</div>
-						<div class="aw-box__value">[[${{valorItensEstoque.valor}}]]</div>
-						<div class="aw-box__title">Avaliações Fisicas realizadas</div>
+						<div class="aw-box__value" th:text="${testesColetivos}"></div>
+						<div class="aw-box__title">Avaliações Coletivas Realizadas</div>
 					</div>
 				</div>
 
 				<div class="col-sm-4">
 					<div class="aw-box">
 						<div class="aw-box__icon">
-							<i class="fa  fa-hashtag  fa-3x"></i>
+							<i class="fa  fa-heartbeat  fa-3x"></i>
 						</div>
 						<div class="aw-box__value"
-							th:text="${valorItensEstoque.totalItens}">123</div>
-						<div class="aw-box__title">Itens no estoque</div>
+							th:text="${testesIndividuais}"></div>
+						<div class="aw-box__title">Avaliações Individuais Realizadas</div>
 					</div>
 				</div>
 
@@ -47,8 +47,8 @@
 						<div class="aw-box__icon">
 							<i class="fa  fa-users  fa-3x"></i>
 						</div>
-						<div class="aw-box__value" th:text="${totalClientes}">9</div>
-						<div class="aw-box__title">Total de clientes</div>
+						<div class="aw-box__value" th:text="${totalPessoas}">9</div>
+						<div class="aw-box__title">Pessoas Cadastradas</div>
 					</div>
 				</div>
 			</div>
