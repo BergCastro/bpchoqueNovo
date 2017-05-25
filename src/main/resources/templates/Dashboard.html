@@ -27,7 +27,7 @@
 							<i class="fa  fa-heartbeat  fa-3x"></i>
 						</div>
 						<div class="aw-box__value" th:text="${testesColetivos}"></div>
-						<div class="aw-box__title">Avaliações Coletivas Realizadas</div>
+						<div class="aw-box__title"><a th:href="@{/testesFisicos}">Avaliações Coletivas Realizadas</a></div>
 					</div>
 				</div>
 
@@ -45,10 +45,10 @@
 				<div class="col-sm-4">
 					<div class="aw-box">
 						<div class="aw-box__icon">
-							<i class="fa  fa-users  fa-3x"></i>
+							<i class="fa  fa-heartbeat  fa-3x"></i>
 						</div>
-						<div class="aw-box__value" th:text="${totalPessoas}">9</div>
-						<div class="aw-box__title">Pessoas Cadastradas</div>
+						<div class="aw-box__value" th:text="${pessoasAvaliadas}">9</div>
+						<div class="aw-box__title">Pessoas Avaliadas</div>
 					</div>
 				</div>
 			</div>
@@ -57,10 +57,10 @@
 				<div class="col-sm-4">
 					<div class="aw-box">
 						<div class="aw-box__icon">
-							<i class="fa  fa-usd  fa-3x"></i>
+							<i class="fa  fa-users  fa-3x"></i>
 						</div>
-						<div class="aw-box__value">R$[[${{vendasNoAno}}]]</div>
-						<div class="aw-box__title">Vendas no ano</div>
+						<div class="aw-box__value" th:text="${totalPessoas}"></div>
+						<div class="aw-box__title"><a th:href="@{/pessoasdef}">Pessoas Cadastradas</a></div>
 					</div>
 				</div>
 
@@ -69,18 +69,18 @@
 						<div class="aw-box__icon">
 							<i class="fa  fa-signal  fa-3x"></i>
 						</div>
-						<div class="aw-box__value">R$[[${{vendasNoMes}}]]</div>
-						<div class="aw-box__title">Vendas no mês</div>
+						<div class="aw-box__value" th:text="${doacoes}"></div>
+						<div class="aw-box__title"><a th:href="@{/doacoes}">Doações</a></div>
 					</div>
 				</div>
 
 				<div class="col-sm-4">
 					<div class="aw-box">
 						<div class="aw-box__icon">
-							<i class="fa  fa-shopping-cart  fa-3x"></i>
+							<i class="fa  fa-users  fa-3x"></i>
 						</div>
-						<div class="aw-box__value">R$[[${{ticketMedio}}]]</div>
-						<div class="aw-box__title">Ticket médio</div>
+						<div class="aw-box__value" th:text="${avaliadores}"></div>
+						<div class="aw-box__title"><a th:href="@{/avaliadores}">Avaliadores</a></div>
 					</div>
 				</div>
 			</div>
@@ -90,7 +90,7 @@
 					<div class="aw-graph-box">
 						<div class="aw-graph-box__header">
 							<h2 class="aw-graph-box__title">
-								Vendas por mês <small>últimos 6 meses</small>
+								Avaliações Coletivas por mês <small>últimos 6 meses</small>
 							</h2>
 						</div>
 						<div class="aw-graph-box__content">
@@ -109,7 +109,7 @@
 					<div class="aw-graph-box">
 						<div class="aw-graph-box__header">
 							<h2 class="aw-graph-box__title">
-								Vendas por origem <small>últimos 6 meses</small>
+								Avaliações Individuais <small>últimos 6 meses</small>
 							</h2>
 						</div>
 						<div class="aw-graph-box__content">

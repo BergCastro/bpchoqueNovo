@@ -1,9 +1,9 @@
-var BpChoqueEdita = BpChoqueEdita || {};
+var BpChoque = BpChoque || {};
 
-BpChoqueEdita.ResultadoEdita = (function() {
+BpChoque.ResultadoCadastro = (function() {
 
-	function ResultadoEdita() {
-		this.modal = $('#modalEditaResultado');
+	function ResultadoCadastro() {
+		this.modal = $('#modalAdicionaResultado');
 		this.botaoSalvar = this.modal
 				.find('.js-modal-cadastro-resultado-salvar-btn');
 		this.form = this.modal.find('form');
@@ -14,7 +14,7 @@ BpChoqueEdita.ResultadoEdita = (function() {
 		this.containerMensagemErro = $('.js-mensagem-cadastro-detalhe');
 	}
 
-	ResultadoEdita.prototype.iniciar = function() {
+	ResultadoCadastro.prototype.iniciar = function() {
 		this.form.on('submit', function(event) {
 			event.preventDefault()
 		});
@@ -124,11 +124,11 @@ BpChoqueEdita.ResultadoEdita = (function() {
 		location.reload();
 	}
 
-	return ResultadoEdita;
+	return ResultadoCadastro;
 
 }());
 
 $(function() {
-	var resultadoEdita = new BpChoqueEdita.ResultadoCadastro();
-	resultadoEdita.iniciar();
+	var resultadoCadastro = new BpChoque.ResultadoCadastro();
+	resultadoCadastro.iniciar();
 });

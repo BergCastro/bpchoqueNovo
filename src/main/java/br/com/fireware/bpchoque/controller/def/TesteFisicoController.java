@@ -20,6 +20,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,6 +35,7 @@ import br.com.fireware.bpchoque.model.def.TipoTeste;
 import br.com.fireware.bpchoque.model.def.Prova.AptoInapto;
 import br.com.fireware.bpchoque.model.def.Prova.CampoTipo;
 import br.com.fireware.bpchoque.security.UsuarioSistema;
+import br.com.fireware.bpchoque.dto.VendaMes;
 import br.com.fireware.bpchoque.model.def.PessoaDef;
 import br.com.fireware.bpchoque.model.def.Prova;
 import br.com.fireware.bpchoque.model.def.Resultado;
@@ -356,5 +358,7 @@ public class TesteFisicoController {
 		model.addAttribute("tipos", testeFisico.getTipos());
 		return "testesFisicos/CadastroTesteFisico :: resultadosFrag";
 	}
+	
+	
 
 }

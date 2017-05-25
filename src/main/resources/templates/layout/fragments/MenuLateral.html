@@ -17,19 +17,43 @@
           			</a>
           			
         		</li>
-        		
         		<li class="aw-menu__item">
           			<a href="#">
-            			<i class="fa  fa-fw  fa-heartbeat"></i><span>Avaliações Físicas</span>
+            			<i class="fa  fa-fw  fa-heartbeat"></i><span>Avaliações Individuais</span>
             			<i class="aw-menu__navigation-icon  fa"></i>
           			</a>
       
           			<ul class="aw-menu__list  aw-menu__list--sublist">
-			            <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/avaliacoesIndividuais.*}">
-			            	<a th:href="@{/avaliacoesIndividuais}">Avaliações Individuais</a>
-			            </li>
+			           
 			            <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/testesFisicos.*}">
-			            	<a th:href="@{/testesFisicos}">Avaliações Coletivas</a>
+			            	<a th:href="@{/indiceAtividades}">Índice de Atividade</a>
+			            </li>
+			            
+			            <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/tiposTeste.*}">
+			            	<a th:href="@{/tiposTeste}">Tipos de Testes</a>
+			            </li>
+			            
+			            
+			            <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/avaliadores.*}">
+			            	<a th:href="@{/avaliadores}">Avaliadores</a>
+			            </li>
+			             <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/provas.*}">
+			            	<a th:href="@{/provas}">Provas Físicas</a>
+			            </li>
+			           
+			        </ul>
+			    </li>
+        		
+        		<li class="aw-menu__item">
+          			<a href="#">
+            			<i class="fa  fa-fw  fa-heartbeat"></i><span>Avaliações Coletiva</span>
+            			<i class="aw-menu__navigation-icon  fa"></i>
+          			</a>
+      
+          			<ul class="aw-menu__list  aw-menu__list--sublist">
+			            
+			            <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/testesFisicos.*}">
+			            	<a th:href="@{/testesFisicos}">Avaliações</a>
 			            </li>
 			            
 			            <li class="aw-menu__item  aw-menu__item--link" brewer:menu="@{/tiposTeste.*}">

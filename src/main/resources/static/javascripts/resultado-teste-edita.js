@@ -1,9 +1,9 @@
-var BpChoque = BpChoque || {};
+var BpChoqueEdita = BpChoqueEdita || {};
 
-Brewer.ResultadoCadastro = (function() {
+BpChoqueEdita.ResultadoEdita = (function() {
 
-	function ResultadoCadastro() {
-		this.modal = $('#modalAdicionaResultado');
+	function ResultadoEdita() {
+		this.modal = $('#modalEditaResultado');
 		this.botaoSalvar = this.modal
 				.find('.js-modal-cadastro-resultado-salvar-btn');
 		this.form = this.modal.find('form');
@@ -14,7 +14,7 @@ Brewer.ResultadoCadastro = (function() {
 		this.containerMensagemErro = $('.js-mensagem-cadastro-detalhe');
 	}
 
-	ResultadoCadastro.prototype.iniciar = function() {
+	ResultadoEdita.prototype.iniciar = function() {
 		this.form.on('submit', function(event) {
 			event.preventDefault()
 		});
@@ -124,11 +124,11 @@ Brewer.ResultadoCadastro = (function() {
 		location.reload();
 	}
 
-	return ResultadoCadastro;
+	return ResultadoEdita;
 
 }());
 
 $(function() {
-	var resultadoCadastro = new BpChoque.ResultadoCadastro();
-	resultadoCadastro.iniciar();
+	var resultadoEdita = new BpChoqueEdita.ResultadoCadastro();
+	resultadoEdita.iniciar();
 });

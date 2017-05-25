@@ -27,7 +27,7 @@ Brewer.GraficoVendaPorMes = (function() {
 		    data: {
 		    	labels: meses,
 		    	datasets: [{
-		    		label: 'Vendas por mês',
+		    		label: 'Avaliações por mês',
 		    		backgroundColor: "rgba(26,179,148,0.5)",
 	                pointBorderColor: "rgba(26,179,148,1)",
 	                pointBackgroundColor: "#fff",
@@ -71,12 +71,12 @@ Brewer.GraficoVendaPorOrigem = (function() {
 		    data: {
 		    	labels: meses,
 		    	datasets: [{
-		    		label: 'Nacional',
+		    		label: 'Individuais',
 		    		backgroundColor: "rgba(220,220,220,0.5)",
 	                data: cervejasNacionais
 		    	},
 		    	{
-		    		label: 'Internacional',
+		    		label: 'Coletivas',
 		    		backgroundColor: "rgba(26,179,148,0.5)",
 	                data: cervejasInternacionais
 		    	}]
