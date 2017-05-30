@@ -1,6 +1,6 @@
 CREATE TABLE avaliadores(
 	id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
-	criadoem DATETIME DEFAULT CURRENT_TIMESTAMP,
+	criadoem DATETIME,
     criadopor VARCHAR(50),
     atualizadoem DATETIME,
     atualizadopor VARCHAR(50),
@@ -14,7 +14,7 @@ CREATE TABLE avaliadores(
 
 CREATE TABLE avaliacoes_individuais (
     id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
-    criadoem DATETIME DEFAULT CURRENT_TIMESTAMP,
+    criadoem DATETIME,
     criadopor VARCHAR(50),
     atualizadoem DATETIME,
     atualizadopor VARCHAR(50),    
@@ -50,7 +50,7 @@ CREATE TABLE avaliacao_problemas(
 
 CREATE TABLE medicoes(
 	id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
-	criadoem DATETIME DEFAULT CURRENT_TIMESTAMP,
+	criadoem DATETIME,
     criadopor VARCHAR(50),
     atualizadoem DATETIME,
     atualizadopor VARCHAR(50),

@@ -15,7 +15,10 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 import javax.persistence.JoinColumn;
+
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 import lombok.Data;
 
@@ -41,11 +44,11 @@ public class TipoTeste {
 
 	@Column(name = "atualizadopor")
 	private String atualizadopor;
-
+	//@NotBlank(message="Um nome deve ser inserido!")
 	private String nome;
-
+	//@NotBlank(message="Uma descrição deve ser inserida!")
 	private String descricao;
-
+	@NotNull(message="O número de provas para a média não pode está vazio!")
 	private Integer qtdProvasMedia;
 
 	@ManyToMany(fetch = FetchType.EAGER)

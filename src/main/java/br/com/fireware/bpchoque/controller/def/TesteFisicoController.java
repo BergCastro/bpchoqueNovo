@@ -161,13 +161,14 @@ public class TesteFisicoController {
 	}
 
 	@RequestMapping(value = "/tipoNovo", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
-	public ModelAndView salvarTipo(@RequestBody @Valid TipoTeste tipoTeste, BindingResult result,
+	public ModelAndView salvarTipo(@RequestBody TipoTeste tipoTeste, BindingResult result,
 			RedirectAttributes attributes, Errors errors, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
-
+		System.out.println("Entrou no Tipo Novo");
 		ModelAndView mv = new ModelAndView();
 
 	
 		tipoTeste = tipoTesteService.findById(tipoTeste.getId());
+		System.out.println("Tipo teste: "+tipoTeste);
 
 		testeFisico.getTipos().add(tipoTeste);
 
@@ -212,9 +213,14 @@ public class TesteFisicoController {
 			
 			for (int i = 0; i < tiposIncluir.size(); i++) {
 				for (int j = 0; j < testeFisico.getTipos().size(); j++) {
-					if (testeFisico.getTipos().get(j).getId() == tiposIncluir.get(i).getId()) {
-						tiposIncluir.remove(i);
+					try {
+						if (testeFisico.getTipos().get(j).getId() == tiposIncluir.get(i).getId()) {
+							tiposIncluir.remove(i);
+						}
+					} catch (Exception e) {
+						// TODO: handle exception
 					}
+					
 				}
 			}
 

@@ -1,6 +1,6 @@
 CREATE TABLE estado (
     id BIGINT(20) PRIMARY KEY,
-    criadoem DATETIME DEFAULT CURRENT_TIMESTAMP,
+    criadoem DATETIME,
     criadopor VARCHAR(50),
     atualizadoem DATETIME,
     atualizadopor VARCHAR(50),
@@ -10,7 +10,7 @@ CREATE TABLE estado (
 
 CREATE TABLE cidade (
     id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
-    criadoem DATETIME DEFAULT CURRENT_TIMESTAMP,
+    criadoem DATETIME,
     criadopor VARCHAR(50),
     atualizadoem DATETIME,
     atualizadopor VARCHAR(50),

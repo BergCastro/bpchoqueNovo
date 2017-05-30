@@ -587,6 +587,84 @@ public class TesteFisicoService {
 			}
 
 		}
+		if (prova.getId() >= 5 && prova.getTipo()==CampoTipo.NOTA && prova.getIdadeInicial()==null) {// função genérica
+			faixaInicioPontuacao = 1;
+			Double auxResultado = 10.00;
+			Double auxReferencia = referenciaInicialMasc;
+			
+			
+				for (int i = 1;i<10; i++) {
+					
+					 System.out.println("Valor: " + valor);
+					 
+					
+					 System.out.println("AuxReferencia: " + auxReferencia);
+					 System.out.println("AuxResultado: " + auxResultado);
+					
+					 
+					if (valor.compareTo(0.00) == 0 ? true : false) {
+						resultado = 0.00;
+						
+						break;
+					} else if (valor > referenciaFinalMasc-intervaloReferencia) {
+						resultado = 100.00;
+						
+						break;
+
+					} else if ((valor >= auxReferencia && valor < auxReferencia + intervaloReferencia)) {
+						resultado = auxResultado;
+						
+						break;
+					}
+
+					auxResultado += 10;
+					auxReferencia += intervaloReferencia;
+
+				}
+				
+				
+				
+			}
+		if (prova.getId() >= 5 && prova.getTipo()==CampoTipo.TEMPO && prova.getIdadeInicial()==null) {//GENÉRICA , SEM IDADE, TEMPO
+			faixaInicioPontuacao = 1;
+			Double auxResultado = 10.00;
+			Double auxReferencia = referenciaInicialMasc;
+			
+			
+				for (int i = 1;i<10; i++) {
+					
+					 System.out.println("Valor: " + valor);
+					 
+					
+					 System.out.println("AuxReferencia: " + auxReferencia);
+					 System.out.println("AuxResultado: " + auxResultado);
+					
+					 if (valor > referenciaInicialMasc) {
+							resultado = 0.00;
+							
+							break;
+
+					}else if (valor <= referenciaFinalMasc) {
+						resultado = 100.00;
+						
+						break;
+
+					} else if ((valor > auxReferencia - intervaloReferencia && valor <= auxReferencia)) {
+						resultado = auxResultado;
+						
+						break;
+					}
+
+					auxResultado += 10;
+					auxReferencia -= intervaloReferencia;
+
+				}
+				
+				
+				
+			}
+
+		
 
 		return resultado;
 

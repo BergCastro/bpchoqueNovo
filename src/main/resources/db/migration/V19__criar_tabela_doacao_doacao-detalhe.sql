@@ -1,6 +1,6 @@
 CREATE TABLE doacoes(
 	id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
-	criadoem DATETIME DEFAULT CURRENT_TIMESTAMP,
+	criadoem DATETIME,
     criadopor VARCHAR(50),
     atualizadoem DATETIME,
     atualizadopor VARCHAR(50),

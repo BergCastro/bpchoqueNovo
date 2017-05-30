@@ -159,16 +159,25 @@ public class TipoTesteController {
 		mv.addObject(tipoTeste);
 		
 		List<Prova> provasIncluir = provaService.findAll();
+		
+		System.out.println("Tipo TestProvas: "+tipoTeste.getProvas().size());
 		for(int i = 0; i <  provasIncluir.size(); i++){
 			for(int j = 0; j < tipoTeste.getProvas().size();j++){
-				if(tipoTeste.getProvas().get(j).getId() == provasIncluir.get(i).getId()){
-					provasIncluir.remove(i);
+				System.out.println("J: "+j+" Id prova inclusa: "+tipoTeste.getProvas().get(j).getId());
+				//System.out.println("I: "+i+" Id prova incluir: "+provasIncluir.get(i).getId());
+				try {
+					if(tipoTeste.getProvas().get(j).getId() == provasIncluir.get(i).getId()){
+						provasIncluir.remove(i);
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
 				}
+				
 			}
 		}
 		testeFisicoSalvo = true;
 		//provasIncluir.remove(tipoTeste.getProvas());
-		
+		System.out.println("Provas incluir: "+provasIncluir.size());
 		mv.addObject("provasIncluir", provasIncluir);
 		mv.addObject("testeFisicoSalvo", testeFisicoSalvo);
 		

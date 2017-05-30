@@ -2,7 +2,7 @@
 
 CREATE TABLE pessoasdef (
     id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
-    criadoem DATETIME DEFAULT CURRENT_TIMESTAMP,
+    criadoem DATETIME,
     criadopor VARCHAR(50),
     atualizadoem DATETIME,
     atualizadopor VARCHAR(50),
@@ -26,8 +26,7 @@ CREATE TABLE pessoasdef (
 
 CREATE TABLE pessoas (
     id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
-    criadoem DATETIME DEFAULT CURRENT_TIMESTAMP,
-    criadopor VARCHAR(50),
+    criadoem DATETIME,
     atualizadoem DATETIME,
     atualizadopor VARCHAR(50),
     nome VARCHAR(80) NOT NULL,

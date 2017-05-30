@@ -27,7 +27,7 @@
 									id="prova" class="form-control">
 <!-- 									<option value="">Selecione um tipo</option> -->
 									<option th:each="prova : ${provasIncluir}" th:value="${prova.id}"
-										th:text="${prova.nome}">Prova</option>
+										th:text="|${prova.nome} - ${prova.descricao}|">Prova</option>
 								</select>
 							
 						</div>
