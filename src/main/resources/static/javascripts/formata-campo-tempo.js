@@ -4,13 +4,14 @@ Brewer.MaskTime = (function() {
 	
 	function MaskTime() {
 		this.time = $('.js-time');
-		
+		//this.timeMinutos = $('.js-time-min');
+		//this.inteiro = $('.inteiro');
 	}
 	
 	MaskTime.prototype.enable = function() {
-//		this.decimal.maskMoney({ decimal: ',', thousands: '.' });
-//		this.plain.maskMoney({ precision: 0, thousands: '.' });
-		this.time.maskNumber({ decimal: '"', thousands: '.' });
+
+		this.time.mask("00''00");
+		
 		
 	}
 	
@@ -18,10 +19,26 @@ Brewer.MaskTime = (function() {
 	
 }());
 
+Brewer.MaskTimeMin = (function() {
+	
+	function MaskTimeMin() {
+		this.inputTimeMin = $('.js-time-min');
+	}
+	
+	MaskTimeMin.prototype.enable = function() {
+		this.inputTimeMin.mask("00'00''00");
+	}
+	
+	return MaskTimeMin;
+	
+}());
+
 $(function() {
 	var maskTime = new Brewer.MaskTime();
 	maskTime.enable();
 	
+	var maskTimeMin = new Brewer.MaskTimeMin();
+	maskTimeMin.enable();
 	
 	
 });

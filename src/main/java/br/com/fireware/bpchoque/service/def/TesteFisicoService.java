@@ -587,7 +587,7 @@ public class TesteFisicoService {
 			}
 
 		}
-		if (prova.getId() >= 5 && prova.getTipo()==CampoTipo.NOTA && prova.getIdadeInicial()==null) {// função genérica
+		if (prova.getId() >= 5 && prova.getTipo()==CampoTipo.INTEIRO && prova.getIdadeInicial()==null) {// função genérica
 			faixaInicioPontuacao = 1;
 			Double auxResultado = 10.00;
 			Double auxReferencia = referenciaInicialMasc;

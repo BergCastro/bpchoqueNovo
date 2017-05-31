@@ -56,6 +56,8 @@ Brewer.MaskCep = (function() {
 	
 }());
 
+
+
 Brewer.MaskDate = (function() {
 	
 	function MaskDate() {
@@ -117,5 +119,7 @@ $(function() {
 	
 	var security = new Brewer.Security();
 	security.enable();
+	
+	
 	
 });

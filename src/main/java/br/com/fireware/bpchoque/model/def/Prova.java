@@ -84,7 +84,7 @@ public class Prova {
 	}
 
 	public enum CampoTipo {
-		NOTA("Nota"), APTOINAPTO("Apto / Inapto"), TEMPO("Tempo (s)");
+		INTEIRO("Inteiro"), APTOINAPTO("Apto / Inapto"), TEMPO("Tempo (s)"), TEMPO_MIN("Tempo (m)");
 
 		private String descricao;
 

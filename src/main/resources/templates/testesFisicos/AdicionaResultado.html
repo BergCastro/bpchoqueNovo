@@ -49,7 +49,7 @@
 								<div th:each="tipo, iter : ${tipos}">
 									<div class="form-group col-sm-12"
 										th:each="prova, iterProva : ${tipo.provas}">
-										<div th:if="${prova.tipo.descricao}=='Nota'">
+										<div th:if="${prova.tipo.descricao}=='Inteiro'">
 											<input th:id="${iter.index}" type="hidden"
 												class="input-id-prova form-control" th:value="${prova.id}">
 											<label class="control-label" th:for="${prova.id}"
