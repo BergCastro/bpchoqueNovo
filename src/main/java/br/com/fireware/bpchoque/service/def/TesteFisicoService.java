@@ -88,7 +88,7 @@ public class TesteFisicoService {
 				resultadoPronto.setValorProva1(resultado.getValores().get(idProvas));
 
 				if (prova.getTipo() == CampoTipo.APTOINAPTO) {
-					if (resultadoPronto.getValorProva1() == 1.00) {
+					if (resultadoPronto.getValorProva1().equals("Apto")) {
 						resultadoPronto.setPontuacaoProva1(100.00);
 					} else {
 						resultadoPronto.setPontuacaoProva1(0.00);
@@ -107,7 +107,7 @@ public class TesteFisicoService {
 				resultadoPronto.setValorProva2(resultado.getValores().get(idProvas));
 
 				if (prova.getTipo() == CampoTipo.APTOINAPTO) {
-					if (resultadoPronto.getValorProva2() == 1.00) {
+					if (resultadoPronto.getValorProva2().equals("Apto")) {
 						resultadoPronto.setPontuacaoProva2(100.00);
 					} else {
 						resultadoPronto.setPontuacaoProva2(0.00);
@@ -126,7 +126,7 @@ public class TesteFisicoService {
 				resultadoPronto.setValorProva3(resultado.getValores().get(idProvas));
 
 				if (prova.getTipo() == CampoTipo.APTOINAPTO) {
-					if (resultadoPronto.getValorProva3() == 1.00) {
+					if (resultadoPronto.getValorProva3().equals("Apto")) {
 						resultadoPronto.setPontuacaoProva3(100.00);
 					} else {
 						resultadoPronto.setPontuacaoProva3(0.00);
@@ -145,7 +145,7 @@ public class TesteFisicoService {
 				resultadoPronto.setValorProva4(resultado.getValores().get(idProvas));
 
 				if (prova.getTipo() == CampoTipo.APTOINAPTO) {
-					if (resultadoPronto.getValorProva4() == 1.00) {
+					if (resultadoPronto.getValorProva4().equals("Apto")) {
 						resultadoPronto.setPontuacaoProva4(100.00);
 					} else {
 						resultadoPronto.setPontuacaoProva4(0.00);
@@ -164,7 +164,7 @@ public class TesteFisicoService {
 				resultadoPronto.setValorProva5(resultado.getValores().get(idProvas));
 
 				if (prova.getTipo() == CampoTipo.APTOINAPTO) {
-					if (resultadoPronto.getValorProva5() == 1.00) {
+					if (resultadoPronto.getValorProva5().equals("Apto")) {
 						resultadoPronto.setPontuacaoProva5(100.00);
 					} else {
 						resultadoPronto.setPontuacaoProva5(0.00);
@@ -185,12 +185,13 @@ public class TesteFisicoService {
 
 	}
 
-	public Double calculaPontuacao(Prova prova, Double valor, Integer idade) {
-		Double referenciaInicialMasc = prova.getRefInicialMasc();
-		Double referenciaFinalMasc = prova.getRefFinalMasc();
-		Double referenciaInicialFem = prova.getRefInicialFem();
-		Double referenciaFinalFem = prova.getRefFinalFem();
-		Double intervaloReferencia = prova.getIntervaloRef();
+	public Double calculaPontuacao(Prova prova, String valor, Integer idade) {
+		Double referenciaInicialMasc = 0.00;
+		Double referenciaFinalMasc = 0.00; 
+		Double referenciaInicialFem = 0.00; 
+		Double referenciaFinalFem = 0.00; 
+		Double intervaloReferencia = 0.00;
+		Double valorFormatado = 0.00;
 		Integer idadeInicial = prova.getIdadeInicial();
 		Integer idadeFinal = prova.getIdadeFinal();
 		Integer intervaloIdade = prova.getIntervaloIdade();
@@ -199,6 +200,12 @@ public class TesteFisicoService {
 		Double resultado = 0.00;
 
 		if (prova.getId() == 1) {// FLEXÃO BARRA
+			referenciaInicialMasc = Double.parseDouble(prova.getRefInicialMasc());
+			referenciaFinalMasc = Double.parseDouble(prova.getRefFinalMasc());
+			referenciaInicialFem = Double.parseDouble(prova.getRefInicialFem());
+			referenciaFinalFem = Double.parseDouble(prova.getRefFinalFem());
+			intervaloReferencia = Double.parseDouble(prova.getIntervaloRef());
+			valorFormatado = Double.parseDouble(valor);
 			faixaInicioPontuacao = 3;
 			Double auxResultado = 10.00;
 			Double auxReferencia = 3.00;
@@ -222,11 +229,11 @@ public class TesteFisicoService {
 					 * System.out.println("AuxMaxREferencia: " +
 					 * auxMaxRefIdade);
 					 */
-					if (valor.compareTo(0.00) == 0 ? true : false) {
+					if (valor.equals("0")) {
 						resultado = 0.00;
 						paraLoop = true;
 						break;
-					} else if (valor >= referenciaFinalMasc) {
+					} else if (valorFormatado >= referenciaFinalMasc) {
 						resultado = 100.00;
 						paraLoop = true;
 						break;
@@ -234,32 +241,32 @@ public class TesteFisicoService {
 					} else if ((idade >= auxIdade && idade < auxIdade + intervaloIdade)) {
 						System.out.println("entrou if resultado");
 
-						if (valor < auxReferencia) {
+						if (valorFormatado < auxReferencia) {
 							resultado = 0.00;
 							paraLoop = true;
 							break;
 
-						} else if ((valor.compareTo(auxReferencia) == 0 ? true : false)) {
+						} else if ((valorFormatado.compareTo(auxReferencia) == 0 ? true : false)) {
 							resultado = auxResultado;
 							paraLoop = true;
 							break;
-						} else if (valor >= auxMaxRefIdade) {
+						} else if (valorFormatado >= auxMaxRefIdade) {
 							resultado = 100.00;
 							paraLoop = true;
 							break;
 						}
 
 					} else if (idade < idadeInicial) {
-						if (valor < auxReferencia) {
+						if (valorFormatado < auxReferencia) {
 							resultado = 0.00;
 							paraLoop = true;
 							break;
 
-						} else if ((valor.compareTo(auxReferencia) == 0 ? true : false)) {
+						} else if ((valorFormatado.compareTo(auxReferencia) == 0 ? true : false)) {
 							resultado = auxResultado;
 							paraLoop = true;
 							break;
-						} else if (valor >= auxMaxRefIdade) {
+						} else if (valorFormatado >= auxMaxRefIdade) {
 							resultado = 100.00;
 							paraLoop = true;
 							break;
@@ -279,6 +286,13 @@ public class TesteFisicoService {
 		}
 
 		if (prova.getId() == 2) {// FLEXÃO SOLO
+			referenciaInicialMasc = Double.parseDouble(prova.getRefInicialMasc());
+			referenciaFinalMasc = Double.parseDouble(prova.getRefFinalMasc());
+			referenciaInicialFem = Double.parseDouble(prova.getRefInicialFem());
+			referenciaFinalFem = Double.parseDouble(prova.getRefFinalFem());
+			intervaloReferencia = Double.parseDouble(prova.getIntervaloRef());
+			valorFormatado = Double.parseDouble(valor);
+			
 			faixaInicioPontuacao = 7;
 			Double auxResultado = 10.00;
 			Double auxReferencia = 26.00;
@@ -302,11 +316,11 @@ public class TesteFisicoService {
 					 * System.out.println("AuxMaxREferencia: " +
 					 * auxMaxRefIdade);
 					 */
-					if (valor.compareTo(0.00) == 0 ? true : false) {
+					if (valorFormatado.compareTo(0.00) == 0 ? true : false) {
 						resultado = 0.00;
 						paraLoop = true;
 						break;
-					} else if (valor >= referenciaFinalMasc) {
+					} else if (valorFormatado >= referenciaFinalMasc) {
 						resultado = 100.00;
 						paraLoop = true;
 						break;
@@ -314,32 +328,32 @@ public class TesteFisicoService {
 					} else if ((idade >= auxIdade && idade < auxIdade + intervaloIdade)) {
 						System.out.println("entrou if resultado");
 
-						if (valor < auxReferencia) {
+						if (valorFormatado < auxReferencia) {
 							resultado = 0.00;
 							paraLoop = true;
 							break;
 
-						} else if ((valor >= auxReferencia && valor < auxReferencia + intervaloReferencia)) {
+						} else if ((valorFormatado >= auxReferencia && valorFormatado < auxReferencia + intervaloReferencia)) {
 							resultado = auxResultado;
 							paraLoop = true;
 							break;
-						} else if (valor >= auxMaxRefIdade) {
+						} else if (valorFormatado >= auxMaxRefIdade) {
 							resultado = 100.00;
 							paraLoop = true;
 							break;
 						}
 
 					} else if (idade < idadeInicial) {
-						if (valor < auxReferencia) {
+						if (valorFormatado < auxReferencia) {
 							resultado = 0.00;
 							paraLoop = true;
 							break;
 
-						} else if ((valor.compareTo(auxReferencia) == 0 ? true : false)) {
+						} else if ((valorFormatado.compareTo(auxReferencia) == 0 ? true : false)) {
 							resultado = auxResultado;
 							paraLoop = true;
 							break;
-						} else if (valor >= auxMaxRefIdade) {
+						} else if (valorFormatado >= auxMaxRefIdade) {
 							resultado = 100.00;
 							paraLoop = true;
 							break;
@@ -358,6 +372,12 @@ public class TesteFisicoService {
 
 		}
 		if (prova.getId() == 3) {// ABDOMINAL
+			referenciaInicialMasc = Double.parseDouble(prova.getRefInicialMasc());
+			referenciaFinalMasc = Double.parseDouble(prova.getRefFinalMasc());
+			referenciaInicialFem = Double.parseDouble(prova.getRefInicialFem());
+			referenciaFinalFem = Double.parseDouble(prova.getRefFinalFem());
+			intervaloReferencia = Double.parseDouble(prova.getIntervaloRef());
+			valorFormatado = Double.parseDouble(valor);
 			faixaInicioPontuacao = 7;
 			Double auxResultado = 10.00;
 			Double auxReferencia = 30.00;
@@ -381,11 +401,11 @@ public class TesteFisicoService {
 					 * System.out.println("AuxMaxREferencia: " +
 					 * auxMaxRefIdade);
 					 */
-					if (valor.compareTo(0.00) == 0 ? true : false) {
+					if (valorFormatado.compareTo(0.00) == 0 ? true : false) {
 						resultado = 0.00;
 						paraLoop = true;
 						break;
-					} else if (valor >= referenciaFinalMasc) {
+					} else if (valorFormatado >= referenciaFinalMasc) {
 						resultado = 100.00;
 						paraLoop = true;
 						break;
@@ -393,32 +413,32 @@ public class TesteFisicoService {
 					} else if ((idade >= auxIdade && idade < auxIdade + intervaloIdade)) {
 						System.out.println("entrou if resultado");
 
-						if (valor < auxReferencia) {
+						if (valorFormatado < auxReferencia) {
 							resultado = 0.00;
 							paraLoop = true;
 							break;
 
-						} else if ((valor >= auxReferencia && valor < auxReferencia + intervaloReferencia)) {
+						} else if ((valorFormatado >= auxReferencia && valorFormatado < auxReferencia + intervaloReferencia)) {
 							resultado = auxResultado;
 							paraLoop = true;
 							break;
-						} else if (valor >= auxMaxRefIdade) {
+						} else if (valorFormatado >= auxMaxRefIdade) {
 							resultado = 100.00;
 							paraLoop = true;
 							break;
 						}
 
 					} else if (idade < idadeInicial) {
-						if (valor < auxReferencia) {
+						if (valorFormatado < auxReferencia) {
 							resultado = 0.00;
 							paraLoop = true;
 							break;
 
-						} else if ((valor.compareTo(auxReferencia) == 0 ? true : false)) {
+						} else if ((valorFormatado.compareTo(auxReferencia) == 0 ? true : false)) {
 							resultado = auxResultado;
 							paraLoop = true;
 							break;
-						} else if (valor >= auxMaxRefIdade) {
+						} else if (valorFormatado >= auxMaxRefIdade) {
 							resultado = 100.00;
 							paraLoop = true;
 							break;
@@ -437,6 +457,12 @@ public class TesteFisicoService {
 
 		}
 		if (prova.getId() == 4) {// CORRIDA 12MIN
+			referenciaInicialMasc = Double.parseDouble(prova.getRefInicialMasc());
+			referenciaFinalMasc = Double.parseDouble(prova.getRefFinalMasc());
+			referenciaInicialFem = Double.parseDouble(prova.getRefInicialFem());
+			referenciaFinalFem = Double.parseDouble(prova.getRefFinalFem());
+			intervaloReferencia = Double.parseDouble(prova.getIntervaloRef());
+			valorFormatado = Double.parseDouble(valor);
 			faixaInicioPontuacao = 7;
 			Double auxResultado = 10.00;
 			Double auxReferencia = 2000.00;
@@ -460,11 +486,11 @@ public class TesteFisicoService {
 					 * System.out.println("AuxMaxREferencia: " +
 					 * auxMaxRefIdade);
 					 */
-					if (valor.compareTo(0.00) == 0 ? true : false) {
+					if (valorFormatado.compareTo(0.00) == 0 ? true : false) {
 						resultado = 0.00;
 						paraLoop = true;
 						break;
-					} else if (valor >= referenciaFinalMasc) {
+					} else if (valorFormatado >= referenciaFinalMasc) {
 						resultado = 100.00;
 						paraLoop = true;
 						break;
@@ -472,32 +498,32 @@ public class TesteFisicoService {
 					} else if ((idade >= auxIdade && idade < auxIdade + intervaloIdade)) {
 						System.out.println("entrou if resultado");
 
-						if (valor < auxReferencia) {
+						if (valorFormatado < auxReferencia) {
 							resultado = 0.00;
 							paraLoop = true;
 							break;
 
-						} else if ((valor >= auxReferencia && valor < auxReferencia + intervaloReferencia)) {
+						} else if ((valorFormatado >= auxReferencia && valorFormatado < auxReferencia + intervaloReferencia)) {
 							resultado = auxResultado;
 							paraLoop = true;
 							break;
-						} else if (valor >= auxMaxRefIdade) {
+						} else if (valorFormatado >= auxMaxRefIdade) {
 							resultado = 100.00;
 							paraLoop = true;
 							break;
 						}
 
 					} else if (idade < idadeInicial) {
-						if (valor < auxReferencia) {
+						if (valorFormatado < auxReferencia) {
 							resultado = 0.00;
 							paraLoop = true;
 							break;
 
-						} else if ((valor.compareTo(auxReferencia) == 0 ? true : false)) {
+						} else if ((valorFormatado.compareTo(auxReferencia) == 0 ? true : false)) {
 							resultado = auxResultado;
 							paraLoop = true;
 							break;
-						} else if (valor >= auxMaxRefIdade) {
+						} else if (valorFormatado >= auxMaxRefIdade) {
 							resultado = 100.00;
 							paraLoop = true;
 							break;
@@ -516,6 +542,12 @@ public class TesteFisicoService {
 
 		}
 		if (prova.getId() == 5) {// CORRIDA 50 M
+			referenciaInicialMasc = formataSegundos(prova.getRefInicialMasc());
+			referenciaFinalMasc = formataSegundos(prova.getRefFinalMasc());
+			referenciaInicialFem = formataSegundos(prova.getRefInicialFem());
+			referenciaFinalFem = formataSegundos(prova.getRefFinalFem());
+			intervaloReferencia = formataSegundos(prova.getIntervaloRef());
+			valorFormatado = formataSegundos(valor);
 			faixaInicioPontuacao = 7;
 			Double auxResultado = 10.00;
 			Double auxReferencia = 9.00;
@@ -536,7 +568,7 @@ public class TesteFisicoService {
 					System.out.println("AuxResultado: " + auxResultado);
 					System.out.println("AuxMaxREferencia: " + auxMaxRefIdade);
 
-					if (valor <= referenciaFinalMasc) {
+					if (valorFormatado <= referenciaFinalMasc) {
 						resultado = 100.00;
 						paraLoop = true;
 						break;
@@ -544,32 +576,32 @@ public class TesteFisicoService {
 					} else if ((idade >= auxIdade && idade < auxIdade + intervaloIdade)) {
 						System.out.println("entrou if resultado");
 
-						if (valor > auxReferencia) {
+						if (valorFormatado > auxReferencia) {
 							resultado = 0.00;
 							paraLoop = true;
 							break;
 
-						} else if ((valor > auxReferencia - intervaloReferencia && valor <= auxReferencia)) {
+						} else if ((valorFormatado > auxReferencia - intervaloReferencia && valorFormatado <= auxReferencia)) {
 							resultado = auxResultado;
 							paraLoop = true;
 							break;
-						} else if (valor <= auxMaxRefIdade) {
+						} else if (valorFormatado <= auxMaxRefIdade) {
 							resultado = 100.00;
 							paraLoop = true;
 							break;
 						}
 
 					} else if (idade < idadeInicial) {
-						if (valor > auxReferencia) {
+						if (valorFormatado > auxReferencia) {
 							resultado = 0.00;
 							paraLoop = true;
 							break;
 
-						} else if ((valor.compareTo(auxReferencia) == 0 ? true : false)) {
+						} else if ((valorFormatado.compareTo(auxReferencia) == 0 ? true : false)) {
 							resultado = auxResultado;
 							paraLoop = true;
 							break;
-						} else if (valor <= auxMaxRefIdade) {
+						} else if (valorFormatado <= auxMaxRefIdade) {
 							resultado = 100.00;
 							paraLoop = true;
 							break;
@@ -588,6 +620,12 @@ public class TesteFisicoService {
 
 		}
 		if (prova.getId() >= 5 && prova.getTipo()==CampoTipo.INTEIRO && prova.getIdadeInicial()==null) {// função genérica
+			referenciaInicialMasc = Double.parseDouble(prova.getRefInicialMasc());
+			referenciaFinalMasc = Double.parseDouble(prova.getRefFinalMasc());
+			referenciaInicialFem = Double.parseDouble(prova.getRefInicialFem());
+			referenciaFinalFem = Double.parseDouble(prova.getRefFinalFem());
+			intervaloReferencia = Double.parseDouble(prova.getIntervaloRef());
+			valorFormatado = Double.parseDouble(valor);
 			faixaInicioPontuacao = 1;
 			Double auxResultado = 10.00;
 			Double auxReferencia = referenciaInicialMasc;
@@ -602,16 +640,16 @@ public class TesteFisicoService {
 					 System.out.println("AuxResultado: " + auxResultado);
 					
 					 
-					if (valor.compareTo(0.00) == 0 ? true : false) {
+					if (valorFormatado.compareTo(0.00) == 0 ? true : false) {
 						resultado = 0.00;
 						
 						break;
-					} else if (valor > referenciaFinalMasc-intervaloReferencia) {
+					} else if (valorFormatado > referenciaFinalMasc-intervaloReferencia) {
 						resultado = 100.00;
 						
 						break;
 
-					} else if ((valor >= auxReferencia && valor < auxReferencia + intervaloReferencia)) {
+					} else if ((valorFormatado >= auxReferencia && valorFormatado < auxReferencia + intervaloReferencia)) {
 						resultado = auxResultado;
 						
 						break;
@@ -626,6 +664,12 @@ public class TesteFisicoService {
 				
 			}
 		if (prova.getId() >= 5 && prova.getTipo()==CampoTipo.TEMPO && prova.getIdadeInicial()==null) {//GENÉRICA , SEM IDADE, TEMPO
+			referenciaInicialMasc = formataSegundos(prova.getRefInicialMasc());
+			referenciaFinalMasc = formataSegundos(prova.getRefFinalMasc());
+			referenciaInicialFem = formataSegundos(prova.getRefInicialFem());
+			referenciaFinalFem = formataSegundos(prova.getRefFinalFem());
+			intervaloReferencia = formataSegundos(prova.getIntervaloRef());
+			valorFormatado = formataSegundos(valor);
 			faixaInicioPontuacao = 1;
 			Double auxResultado = 10.00;
 			Double auxReferencia = referenciaInicialMasc;
@@ -639,17 +683,17 @@ public class TesteFisicoService {
 					 System.out.println("AuxReferencia: " + auxReferencia);
 					 System.out.println("AuxResultado: " + auxResultado);
 					
-					 if (valor > referenciaInicialMasc) {
+					 if (valorFormatado > referenciaInicialMasc) {
 							resultado = 0.00;
 							
 							break;
 
-					}else if (valor <= referenciaFinalMasc) {
+					}else if (valorFormatado <= referenciaFinalMasc) {
 						resultado = 100.00;
 						
 						break;
 
-					} else if ((valor > auxReferencia - intervaloReferencia && valor <= auxReferencia)) {
+					} else if ((valorFormatado > auxReferencia - intervaloReferencia && valorFormatado <= auxReferencia)) {
 						resultado = auxResultado;
 						
 						break;
@@ -668,6 +712,12 @@ public class TesteFisicoService {
 
 		return resultado;
 
+	}
+
+	private Double formataSegundos(String valor) {
+		Double resultado = 0.00;
+		resultado = Double.parseDouble(valor.replace("''", ""));
+		return resultado;
 	}
 
 	public List<PessoaDef> pessoasIncluir(List<ResultadoTeste> resultados) {

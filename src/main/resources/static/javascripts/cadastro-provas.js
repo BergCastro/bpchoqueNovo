@@ -20,7 +20,7 @@ $(function () {
    	 	$.getScript('/javascripts/formata-campo-tempo.js');
     }
     
-    $("form").submit(function(){
+   /* $("form").submit(function(){
     
     	
     	
@@ -30,7 +30,7 @@ $(function () {
     			$(this).val(input);
     		});	
         
-    });
+    });*/
     
     $('#tipo').on('change', function (event) {
         

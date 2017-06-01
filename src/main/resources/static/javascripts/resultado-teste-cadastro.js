@@ -26,7 +26,7 @@ BpChoque.ResultadoCadastro = (function() {
 	function onModalShow() {
 		this.inputParticipante.focus();
 		$('.input-prova').val('0');
-		$('.js-time').val('0"00');
+		$('.js-time').val('00"00');
 		
 	}
 
@@ -53,7 +53,7 @@ BpChoque.ResultadoCadastro = (function() {
 		
 		$('.input-prova').each(function() {
 			
-			var input = $(this).val().replace('"', '.');
+			var input = $(this).val();
 			inputValorProvas.push(input);
 		});
 		$('.input-id-prova').each(function() {

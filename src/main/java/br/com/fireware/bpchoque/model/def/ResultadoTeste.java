@@ -37,7 +37,7 @@ public class ResultadoTeste {
 
 	private String tipoPontuacaoProva1;
 
-	private Double valorProva1;
+	private String valorProva1;
 
 	private Double pontuacaoProva1;
 
@@ -45,7 +45,7 @@ public class ResultadoTeste {
 
 	private String tipoPontuacaoProva2;
 
-	private Double valorProva2;
+	private String valorProva2;
 
 	private Double pontuacaoProva2;
 
@@ -53,7 +53,7 @@ public class ResultadoTeste {
 
 	private String tipoPontuacaoProva3;
 
-	private Double valorProva3;
+	private String valorProva3;
 
 	private Double pontuacaoProva3;
 
@@ -61,7 +61,7 @@ public class ResultadoTeste {
 
 	private String tipoPontuacaoProva4;
 
-	private Double valorProva4;
+	private String valorProva4;
 
 	private Double pontuacaoProva4;
 
@@ -69,7 +69,7 @@ public class ResultadoTeste {
 
 	private String tipoPontuacaoProva5;
 
-	private Double valorProva5;
+	private String valorProva5;
 
 	private Double pontuacaoProva5;
 

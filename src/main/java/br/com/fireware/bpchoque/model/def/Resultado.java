@@ -14,7 +14,7 @@ public class Resultado {
 
 	private List<Long> provas;
 
-	private List<Double> valores;
+	private List<String> valores;
 
 	@PrePersist
 	@PreUpdate

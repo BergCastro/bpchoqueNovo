@@ -51,15 +51,15 @@ public class Prova {
 
 	// private BigDecimal valorProva;
 
-	private Double refInicialMasc;
+	private String refInicialMasc;
 
-	private Double refFinalMasc;
+	private String refFinalMasc;
 
-	private Double refInicialFem;
+	private String refInicialFem;
 
-	private Double refFinalFem;
+	private String refFinalFem;
 
-	private Double intervaloRef;
+	private String intervaloRef;
 
 	private Integer idadeInicial;
 
@@ -99,23 +99,21 @@ public class Prova {
 	}
 
 	public enum AptoInapto {
-		APTO(1.00, "Apto"), INAPTO(0.00, "Inapto");
+		APTO("Apto"), INAPTO("Inapto");
 
-		private Double valor;
+		
 		private String descricao;
 
-		AptoInapto(Double valor, String descricao) {
+		AptoInapto(String descricao) {
 			this.descricao = descricao;
-			this.valor = valor;
+			
 		}
 
 		public String getDescricao() {
 			return descricao;
 		}
 
-		public Double getValor() {
-			return valor;
-		}
+		
 
 	}
 
