@@ -26,7 +26,7 @@ Brewer.MaskTimeMin = (function() {
 	}
 	
 	MaskTimeMin.prototype.enable = function() {
-		this.inputTimeMin.mask("00'00''00");
+		this.inputTimeMin.mask("00'00");
 	}
 	
 	return MaskTimeMin;

@@ -153,47 +153,62 @@
 
 												<td th:text="${resultado.valorProva1}"
 													th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva1}=='INTEIRO'">Nome</td>
-												<td th:text="(${resultado.valorProva1}==1 ? APTO : INAPTO)"
+												<td th:text="${resultado.valorProva1}"
 													th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva1}=='APTOINAPTO'">Nome</td>
 
 
 												<td
 													th:text="${resultado.valorProva1}"
 													th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva1}=='TEMPO'">Nome</td>
+												<td
+													th:text="${resultado.valorProva1}"
+													th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva1}=='TEMPO_MIN'">Nome</td>
 
 												<td th:text="${resultado.valorProva2}"
 													th:if="${tipo.qtdProvas}>=2 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva2}=='INTEIRO'">Nome</td>
-												<td th:text="(${resultado.valorProva2}==1 ? APTO : INAPTO)"
+												<td th:text="${resultado.valorProva2}"
 													th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva2}=='APTOINAPTO'">Nome</td>
 												<td
 													th:text="${resultado.valorProva2}"
 													th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva2}=='TEMPO'">Nome</td>
+												<td
+													th:text="${resultado.valorProva2}"
+													th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva2}=='TEMPO_MIN'">Nome</td>
 
 												<td th:text="${resultado.valorProva3}"
 													th:if="${tipo.qtdProvas}>=3 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva3}=='INTEIRO'">Nome</td>
-												<td th:text="(${resultado.valorProva3}==1 ? APTO : INAPTO)"
+												<td th:text="${resultado.valorProva3}"
 													th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva3}=='APTOINAPTO'">Nome</td>
 												<td
 													th:text="${resultado.valorProva3}"
 													th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva3}=='TEMPO'">Nome</td>
+												<td
+													th:text="${resultado.valorProva3}"
+													th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva3}=='TEMPO_MIN'">Nome</td>
 
 												<td th:text="${resultado.valorProva4}"
 													th:if="${tipo.qtdProvas}>=4 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva4}=='INTEIRO'">Nome</td>
-												<td th:text="(${resultado.valorProva4}==1 ? APTO : INAPTO)"
+												<td th:text="${resultado.valorProva4}"
 													th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva4}=='APTOINAPTO'">Nome</td>
 												<td
 													th:text="${resultado.valorProva4}"
 													th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva4}=='TEMPO'">Nome</td>
+												<td
+													th:text="${resultado.valorProva4}"
+													th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva4}=='TEMPO_MIN'">Nome</td>
 
 
 												<td th:text="${resultado.valorProva5}"
 													th:if="${tipo.qtdProvas}>=5 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva5}=='INTEIRO'">Nome</td>
-												<td th:text="(${resultado.valorProva5}==1 ? APTO : INAPTO)"
+												<td th:text="${resultado.valorProva5}"
 													th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva5}=='APTOINAPTO'">Nome</td>
 												<td
 													th:text="${resultado.valorProva5}"
 													th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva5}=='TEMPO'">Nome</td>
-
+												<td
+													th:text="${resultado.valorProva5}"
+													th:if="${tipo.qtdProvas}>=1 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva5}=='TEMPO_MIN'">Nome</td>
+													
 
 												<td th:if="${resultado.tipoTeste.id}==${tipo.id}"
 													th:text="${resultado.notaFinal}">Nota</td>
@@ -302,6 +317,14 @@
 														th:id="${iterProva.index}" type="text"
 														class="input-prova form-control js-time">
 												</div>
+												<div th:if="${prova.tipo.descricao}=='Tempo (m)'">
+													<input th:id="${iter.index}" type="hidden"
+														class="input-id-prova form-control" th:value="${prova.id}">
+													<label class="control-label" th:for="${prova.id}"
+														th:text="${prova.nome}"></label> <input
+														th:id="${iterProva.index}" type="text"
+														class="input-prova form-control js-time-min">
+												</div>
 												<div th:if="${prova.tipo.descricao}=='Apto / Inapto'">
 													<input th:id="${iter.index}" type="hidden"
 														class="input-id-prova form-control" th:value="${prova.id}">
@@ -311,7 +334,7 @@
 														class="input-prova form-control">
 														<option value="">Selecione uma opção</option>
 														<option th:each="resultado : ${resultadosBooleanos}"
-															th:value="${resultado.valor}"
+															th:value="${resultado.descricao}"
 															th:text="${resultado.descricao}"></option>
 													</select>
 												</div>

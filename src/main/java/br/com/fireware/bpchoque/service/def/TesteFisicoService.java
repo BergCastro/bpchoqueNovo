@@ -85,7 +85,14 @@ public class TesteFisicoService {
 			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
 				prova = provaService.findById(resultado.getProvas().get(idProvas));
 				resultadoPronto.setTipoPontuacaoProva1(prova.getTipo() + "");
-				resultadoPronto.setValorProva1(resultado.getValores().get(idProvas));
+				if(prova.getTipo() == CampoTipo.TEMPO_MIN){
+					resultadoPronto.setValorProva1(resultado.getValores().get(idProvas)+"''");
+				}else{
+					resultadoPronto.setValorProva1(resultado.getValores().get(idProvas));
+				}
+				
+				
+				
 
 				if (prova.getTipo() == CampoTipo.APTOINAPTO) {
 					if (resultadoPronto.getValorProva1().equals("Apto")) {
@@ -104,7 +111,12 @@ public class TesteFisicoService {
 			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
 				prova = provaService.findById(resultado.getProvas().get(idProvas));
 				resultadoPronto.setTipoPontuacaoProva2(prova.getTipo() + "");
-				resultadoPronto.setValorProva2(resultado.getValores().get(idProvas));
+				
+				if(prova.getTipo() == CampoTipo.TEMPO_MIN){
+					resultadoPronto.setValorProva2(resultado.getValores().get(idProvas)+"''");
+				}else{
+					resultadoPronto.setValorProva2(resultado.getValores().get(idProvas));
+				}
 
 				if (prova.getTipo() == CampoTipo.APTOINAPTO) {
 					if (resultadoPronto.getValorProva2().equals("Apto")) {
@@ -123,7 +135,11 @@ public class TesteFisicoService {
 			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
 				prova = provaService.findById(resultado.getProvas().get(idProvas));
 				resultadoPronto.setTipoPontuacaoProva3(prova.getTipo() + "");
-				resultadoPronto.setValorProva3(resultado.getValores().get(idProvas));
+				if(prova.getTipo() == CampoTipo.TEMPO_MIN){
+					resultadoPronto.setValorProva3(resultado.getValores().get(idProvas)+"''");
+				}else{
+					resultadoPronto.setValorProva3(resultado.getValores().get(idProvas));
+				}
 
 				if (prova.getTipo() == CampoTipo.APTOINAPTO) {
 					if (resultadoPronto.getValorProva3().equals("Apto")) {
@@ -142,7 +158,11 @@ public class TesteFisicoService {
 			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
 				prova = provaService.findById(resultado.getProvas().get(idProvas));
 				resultadoPronto.setTipoPontuacaoProva4(prova.getTipo() + "");
-				resultadoPronto.setValorProva4(resultado.getValores().get(idProvas));
+				if(prova.getTipo() == CampoTipo.TEMPO_MIN){
+					resultadoPronto.setValorProva4(resultado.getValores().get(idProvas)+"''");
+				}else{
+					resultadoPronto.setValorProva4(resultado.getValores().get(idProvas));
+				}
 
 				if (prova.getTipo() == CampoTipo.APTOINAPTO) {
 					if (resultadoPronto.getValorProva4().equals("Apto")) {
@@ -161,7 +181,11 @@ public class TesteFisicoService {
 			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
 				prova = provaService.findById(resultado.getProvas().get(idProvas));
 				resultadoPronto.setTipoPontuacaoProva5(prova.getTipo() + "");
-				resultadoPronto.setValorProva5(resultado.getValores().get(idProvas));
+				if(prova.getTipo() == CampoTipo.TEMPO_MIN){
+					resultadoPronto.setValorProva5(resultado.getValores().get(idProvas)+"''");
+				}else{
+					resultadoPronto.setValorProva5(resultado.getValores().get(idProvas));
+				}
 
 				if (prova.getTipo() == CampoTipo.APTOINAPTO) {
 					if (resultadoPronto.getValorProva5().equals("Apto")) {
@@ -211,7 +235,7 @@ public class TesteFisicoService {
 			Double auxReferencia = 3.00;
 			Integer auxIdade = idadeInicial;
 			Double auxMaxRefIdade = referenciaFinalMasc;
-			System.out.println("valor é: " + valor);
+			
 			Boolean paraLoop = false;
 			for (int j = 0; j < 7; j++) {
 				if (paraLoop) {
@@ -239,7 +263,7 @@ public class TesteFisicoService {
 						break;
 
 					} else if ((idade >= auxIdade && idade < auxIdade + intervaloIdade)) {
-						System.out.println("entrou if resultado");
+						
 
 						if (valorFormatado < auxReferencia) {
 							resultado = 0.00;
@@ -298,7 +322,7 @@ public class TesteFisicoService {
 			Double auxReferencia = 26.00;
 			Integer auxIdade = idadeInicial;
 			Double auxMaxRefIdade = referenciaFinalMasc;
-			System.out.println("valor é: " + valor);
+			
 			Boolean paraLoop = false;
 			for (int j = 0; j < 7; j++) {
 				if (paraLoop) {
@@ -326,7 +350,7 @@ public class TesteFisicoService {
 						break;
 
 					} else if ((idade >= auxIdade && idade < auxIdade + intervaloIdade)) {
-						System.out.println("entrou if resultado");
+						
 
 						if (valorFormatado < auxReferencia) {
 							resultado = 0.00;
@@ -383,7 +407,7 @@ public class TesteFisicoService {
 			Double auxReferencia = 30.00;
 			Integer auxIdade = idadeInicial;
 			Double auxMaxRefIdade = referenciaFinalMasc;
-			System.out.println("valor é: " + valor);
+			
 			Boolean paraLoop = false;
 			for (int j = 0; j < 7; j++) {
 				if (paraLoop) {
@@ -411,7 +435,7 @@ public class TesteFisicoService {
 						break;
 
 					} else if ((idade >= auxIdade && idade < auxIdade + intervaloIdade)) {
-						System.out.println("entrou if resultado");
+						
 
 						if (valorFormatado < auxReferencia) {
 							resultado = 0.00;
@@ -468,7 +492,7 @@ public class TesteFisicoService {
 			Double auxReferencia = 2000.00;
 			Integer auxIdade = idadeInicial;
 			Double auxMaxRefIdade = referenciaFinalMasc;
-			System.out.println("valor é: " + valor);
+			
 			Boolean paraLoop = false;
 			for (int j = 0; j < 7; j++) {
 				if (paraLoop) {
@@ -496,7 +520,7 @@ public class TesteFisicoService {
 						break;
 
 					} else if ((idade >= auxIdade && idade < auxIdade + intervaloIdade)) {
-						System.out.println("entrou if resultado");
+						
 
 						if (valorFormatado < auxReferencia) {
 							resultado = 0.00;
@@ -553,7 +577,7 @@ public class TesteFisicoService {
 			Double auxReferencia = 9.00;
 			Integer auxIdade = idadeInicial;
 			Double auxMaxRefIdade = referenciaFinalMasc;
-			System.out.println("valor é: " + valor);
+			
 			Boolean paraLoop = false;
 			for (int j = 0; j < 7; j++) {
 				if (paraLoop) {
@@ -561,12 +585,7 @@ public class TesteFisicoService {
 				}
 				for (int i = faixaInicioPontuacao; i <= (referenciaInicialMasc
 						- (referenciaFinalMasc - intervaloReferencia)) / intervaloReferencia; i++) {
-					System.out.println("Valor: " + valor);
-					System.out.println("Idade: " + idade);
-					System.out.println("FaixaIdade: " + auxIdade + "-" + (auxIdade + intervaloIdade));
-					System.out.println("AuxReferencia: " + auxReferencia);
-					System.out.println("AuxResultado: " + auxResultado);
-					System.out.println("AuxMaxREferencia: " + auxMaxRefIdade);
+					
 
 					if (valorFormatado <= referenciaFinalMasc) {
 						resultado = 100.00;
@@ -574,7 +593,7 @@ public class TesteFisicoService {
 						break;
 
 					} else if ((idade >= auxIdade && idade < auxIdade + intervaloIdade)) {
-						System.out.println("entrou if resultado");
+						
 
 						if (valorFormatado > auxReferencia) {
 							resultado = 0.00;
@@ -633,11 +652,11 @@ public class TesteFisicoService {
 			
 				for (int i = 1;i<10; i++) {
 					
-					 System.out.println("Valor: " + valor);
+					// System.out.println("Valor: " + valor);
 					 
 					
-					 System.out.println("AuxReferencia: " + auxReferencia);
-					 System.out.println("AuxResultado: " + auxResultado);
+					// System.out.println("AuxReferencia: " + auxReferencia);
+					// System.out.println("AuxResultado: " + auxResultado);
 					
 					 
 					if (valorFormatado.compareTo(0.00) == 0 ? true : false) {
@@ -677,11 +696,6 @@ public class TesteFisicoService {
 			
 				for (int i = 1;i<10; i++) {
 					
-					 System.out.println("Valor: " + valor);
-					 
-					
-					 System.out.println("AuxReferencia: " + auxReferencia);
-					 System.out.println("AuxResultado: " + auxResultado);
 					
 					 if (valorFormatado > referenciaInicialMasc) {
 							resultado = 0.00;
@@ -707,11 +721,83 @@ public class TesteFisicoService {
 				
 				
 			}
+		if (prova.getId() >= 5 && prova.getTipo()==CampoTipo.TEMPO_MIN && prova.getIdadeInicial()==null) {//GENÉRICA , SEM IDADE, TEMPO MINUTOS
+			referenciaInicialMasc = formataMinutos(prova.getRefInicialMasc());
+			referenciaFinalMasc = formataMinutos(prova.getRefFinalMasc());
+			referenciaInicialFem = formataMinutos(prova.getRefInicialFem());
+			referenciaFinalFem = formataMinutos(prova.getRefFinalFem());
+			intervaloReferencia = formataMinutos(prova.getIntervaloRef());
+			valorFormatado = formataMinutos(valor);
+			faixaInicioPontuacao = 1;
+			Double auxResultado = 10.00;
+			Double auxReferencia = referenciaInicialMasc;
+			
+				System.out.println("ReferenciaInicialMasc: "+referenciaInicialMasc);
+				System.out.println("ReferenciaFinalMasc: "+referenciaFinalMasc);
+				System.out.println("ReferenciaInicialFem: "+referenciaInicialFem);
+				System.out.println("ReferenciaFinalFem: "+referenciaFinalFem);
+				System.out.println("IntervaloReferencia: "+intervaloReferencia);
+				System.out.println("ValorFormatado: "+valorFormatado);
+				for (int i = 1;i<10; i++) {
+					
+					
+					
+					 if (valorFormatado > referenciaInicialMasc) {
+							resultado = 0.00;
+							
+							break;
 
+					}else if (valorFormatado <= referenciaFinalMasc) {
+						resultado = 100.00;
+						
+						break;
+
+					} else if ((valorFormatado > auxReferencia - intervaloReferencia && valorFormatado <= auxReferencia)) {
+						resultado = auxResultado;
+						
+						break;
+					}
+
+					auxResultado += 10;
+					auxReferencia -= intervaloReferencia;
+
+				}
+				
+				
+				
+			}
 		
 
 		return resultado;
 
+	}
+
+	private Double formataMinutos(String valor) {
+		if(valor.equals("0")){
+			valor = "00'00''00";
+		}
+		String soNumeros = valor.replace("'", "");
+		
+		String minutos = soNumeros.substring(0,2);
+		
+		String segundos = soNumeros.substring(2, 4);
+		
+		String segundosToDecimal;
+		if(!segundos.equals("00")){
+			segundosToDecimal = ((Integer.parseInt(segundos) * 100)/60)+"";
+		}else{
+			segundosToDecimal = "00";
+		}
+		Double resultado;
+		if(Integer.parseInt(segundosToDecimal) > 0 && Integer.parseInt(segundosToDecimal) < 10){
+			resultado = Double.parseDouble(minutos+("0"+segundosToDecimal));
+		}else{
+			resultado = Double.parseDouble(minutos+segundosToDecimal);
+		}
+		
+		//System.out.println("Resultado: "+resultado);		
+		
+		return resultado;
 	}
 
 	private Double formataSegundos(String valor) {
