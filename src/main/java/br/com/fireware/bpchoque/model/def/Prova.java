@@ -60,12 +60,20 @@ public class Prova {
 	private String refFinalFem;
 
 	private String intervaloRef;
+	
+	private String valorTentativa1;
+	
+	private String valorTentativa2;
+	
+	private String valorTentativa3;
 
 	private Integer idadeInicial;
 
 	private Integer idadeFinal;
 
 	private Integer intervaloIdade;
+	
+	
 
 	/*
 	 * @OneToMany(mappedBy="prova") private List<ResultadoTeste> resultados;
@@ -84,7 +92,8 @@ public class Prova {
 	}
 
 	public enum CampoTipo {
-		INTEIRO("Inteiro"), APTOINAPTO("Apto / Inapto"), TEMPO("Tempo (s)"), TEMPO_MIN("Tempo (m)");
+		INTEIRO("Inteiro"), APTOINAPTO("Apto / Inapto"), TEMPO("Tempo (s)"),
+		TEMPO_MIN("Tempo (m)"), TENTATIVA("Tentativa");
 
 		private String descricao;
 

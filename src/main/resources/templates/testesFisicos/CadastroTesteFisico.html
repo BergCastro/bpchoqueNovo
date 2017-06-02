@@ -309,6 +309,18 @@
 														th:id="${iterProva.index}" type="text"
 														class="input-prova form-control">
 												</div>
+												<div th:if="${prova.tipo.descricao}=='Tentativa'">
+													<input th:id="${iter.index}" type="hidden"
+														class="input-id-prova form-control" th:value="${prova.id}">
+													<label class="control-label" th:for="${prova.id}"
+														th:text="${prova.nome}"></label> 
+														<div class="form-control">
+														<label class="radio-inline"><input type="radio" name="optradio" >Tentativa 1</label>
+														<label class="radio-inline"><input type="radio" name="optradio">Tentativa 2</label>
+														<label class="radio-inline"><input type="radio" name="optradio">Tentativa 3</label>
+														<label class="radio-inline"><input type="radio" name="optradio">Inapto</label>
+														</div>
+												</div>
 												<div th:if="${prova.tipo.descricao}=='Tempo (s)'">
 													<input th:id="${iter.index}" type="hidden"
 														class="input-id-prova form-control" th:value="${prova.id}">

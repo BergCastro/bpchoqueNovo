@@ -34,6 +34,9 @@ CREATE TABLE provas(
 	refInicialFem VARCHAR(20) DEFAULT '0',
 	refFinalFem VARCHAR(20) DEFAULT '0',
 	intervaloRef VARCHAR(20) DEFAULT '0',
+	valorTentativa1 VARCHAR(20) DEFAULT '0',
+	valorTentativa2 VARCHAR(20) DEFAULT '0',
+	valorTentativa3 VARCHAR(20) DEFAULT '0',
 	idadeInicial INT(3),
 	idadeFinal INT(3),
 	intervaloIdade INT(3)	
