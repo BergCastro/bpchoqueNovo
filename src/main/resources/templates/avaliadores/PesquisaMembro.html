@@ -7,7 +7,7 @@
 	xmlns:data="http://www.thymeleaf.org/extras/data">
 
 <head>
-<title>Pesquisa de Avaliadores</title>
+<title>Pesquisa de Membros</title>
 <th:block layout:fragment="css-extra">
 	<link rel="stylesheet" type="text/css"
 		th:href="@{/stylesheets/datatable/dataTables.bootstrap.min.css}" />
@@ -21,14 +21,14 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-10">
-						<h1>Pesquisa de Avaliadores</h1>
+						<h1>Pesquisa de Membros</h1>
 					</div>
 
 					<div class="col-xs-2">
 						<div class="aw-page-header-controls">
 							<a class="btn  btn-primary" th:href="@{/avaliadores/novo}"> <i
 								class="glyphicon  glyphicon-plus-sign"></i> <span
-								class="hidden-xs  hidden-sm">Novo Avaliador</span>
+								class="hidden-xs  hidden-sm">Novo Membro</span>
 							</a>
 						</div>
 					</div>
@@ -49,6 +49,7 @@
 							<th>Número</th>
 							<th>Post./Grad.</th>
 							<th>Nome</th>
+							
 							<th>CREF</th>
 							<th>Título</th>
 							<th></th>
@@ -57,21 +58,22 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="avaliador : ${avaliadores}">
-							<td th:text="${avaliador?.id}">1</td>
-							<td th:text="${avaliador?.pessoadef.matricula}">Matricula</td>
-							<td th:text="${avaliador?.pessoadef.numero_pm}">numero</td>
-							<td th:text="${avaliador?.pessoadef.cargo.abreviacao}">cargo</td>
-							<td th:text="${avaliador?.pessoadef.nome_guerra}">nome</td>
-							<td th:text="${avaliador?.cref}">cref</td>
-							<td th:text="${avaliador?.escolaridade.descricao}">cref</td>
+						<tr th:each="membro : ${membros}">
+							<td th:text="${membro?.id}">1</td>
+							<td th:text="${membro?.pessoadef.matricula}">Matricula</td>
+							<td th:text="${membro?.pessoadef.numero_pm}">numero</td>
+							<td th:text="${membro?.pessoadef.cargo.abreviacao}">cargo</td>
+							<td th:text="${membro?.pessoadef.nome_guerra}">nome</td>
+							
+							<td th:text="${membro?.cref}">cref</td>
+							<td th:text="${membro?.escolaridade.descricao}">cref</td>
 							<td class="text-center"><a class="btn btn-link btn-xs"
-								th:href="@{/avaliadores/{id}(id=${avaliador.id})}" title="Editar"
+								th:href="@{/avaliadores/{id}(id=${membro.id})}" title="Editar"
 								rel="tooltip" data-placement="top"> <span
 									class="glyphicon glyphicon-pencil"></span>
 							</a> <a class="btn btn-link btn-xs" data-toggle="modal"
 								data-target="#myModalExclusao"
-								th:attr="data-id=${avaliador.id}, data-nome=${avaliador.pessoadef.nome}"
+								th:attr="data-id=${membro.id}, data-nome=${membro.pessoadef.nome}"
 								title="Excluir" rel="tooltip" data-placement="top"> <span
 									class="glyphicon glyphicon-remove"></span>
 							</a></td>
@@ -88,7 +90,7 @@
 			data-keyboard="false" data-backdrop="static">
 			<div class="modal-dialog">
 				<form
-					th:attr="data-url-base=@{/avaliadores/delete/}, data-tipo='a avaliador '"
+					th:attr="data-url-base=@{/avaliadores/delete/}, data-tipo='o membro '"
 					method="get">
 
 
@@ -98,7 +100,7 @@
 						</div>
 
 						<div class="modal-body">
-							<span>Tem certeza que deseja apagar o avaliador?</span>
+							<span>Tem certeza que deseja apagar o membro?</span>
 						</div>
 
 						<div class="modal-footer">

@@ -41,6 +41,8 @@ import br.com.fireware.bpchoque.model.def.Prova;
 import br.com.fireware.bpchoque.model.def.Resultado;
 import br.com.fireware.bpchoque.model.def.ResultadoTeste;
 import br.com.fireware.bpchoque.model.def.TesteFisico;
+import br.com.fireware.bpchoque.service.def.AvaliadorService;
+import br.com.fireware.bpchoque.service.def.ComissaoService;
 import br.com.fireware.bpchoque.service.def.PessoaDefService;
 import br.com.fireware.bpchoque.service.def.ProvaService;
 import br.com.fireware.bpchoque.service.def.ResultadoTesteService;
@@ -68,6 +70,12 @@ public class TesteFisicoController {
 
 	@Autowired
 	private ProvaService provaService;
+	
+	@Autowired
+	private AvaliadorService avaliadorService;
+	
+	@Autowired
+	private ComissaoService comissaoService;
 
 	private List<TipoTeste> tiposTestes;
 
@@ -255,6 +263,7 @@ public class TesteFisicoController {
 		
 		mv.addObject("resultadosBooleanos", AptoInapto.values());
 		mv.addObject("temTipo", temTipo);
+		mv.addObject("comissao", comissaoService.findByTesteFisico(testeFisico));
 
 		return mv;
 	}

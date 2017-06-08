@@ -27,10 +27,10 @@ import br.com.fireware.bpchoque.service.def.AvaliadorService;
 import br.com.fireware.bpchoque.service.def.PessoaDefService;
 
 @Controller
-@RequestMapping("/avaliadores")
-public class AvaliadorController {
+@RequestMapping("/comissao")
+public class ComissaoController {
 
-	private static final String CADASTRO_MEMBRO = "avaliadores/CadastroMembro";
+	private static final String CADASTRO_MEMBRO = "/CadastroMembro";
 	private static final String PESQUISA_COMISSAO = "avaliadores/PesquisaMembro";
 
 	@Autowired

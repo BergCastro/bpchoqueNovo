@@ -7,7 +7,7 @@ CREATE TABLE avaliadores(
     cref VARCHAR(20),
     escolaridade VARCHAR(20),
     pessoadef BIGINT(20) NOT NULL,
-	FOREIGN KEY (pessoadef) REFERENCES pessoasdef(id)
+    FOREIGN KEY (pessoadef) REFERENCES pessoasdef(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

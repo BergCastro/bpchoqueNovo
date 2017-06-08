@@ -131,4 +131,8 @@ BpChoque.ResultadoCadastro = (function() {
 $(function() {
 	var resultadoCadastro = new BpChoque.ResultadoCadastro();
 	resultadoCadastro.iniciar();
+	
+	
 });
+
+

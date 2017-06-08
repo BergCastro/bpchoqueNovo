@@ -29,13 +29,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.fireware.bpchoque.model.def.PessoaDef;
 import br.com.fireware.bpchoque.model.Estilo;
 import br.com.fireware.bpchoque.model.def.AvaliacaoIndividual;
-
-
+import br.com.fireware.bpchoque.model.def.Avaliador;
 import br.com.fireware.bpchoque.model.def.AvaliacaoIndividual.Duracao;
 import br.com.fireware.bpchoque.model.def.AvaliacaoIndividual.Frequencia;
 import br.com.fireware.bpchoque.model.def.AvaliacaoIndividual.Objetivos;
 import br.com.fireware.bpchoque.model.def.AvaliacaoIndividual.Problemas;
-import br.com.fireware.bpchoque.model.def.Avaliador;
+
 import br.com.fireware.bpchoque.model.def.MedicaoAvaliacaoIndividual;
 import br.com.fireware.bpchoque.service.def.PessoaDefService;
 import br.com.fireware.bpchoque.service.def.AvaliacaoIndividualService;

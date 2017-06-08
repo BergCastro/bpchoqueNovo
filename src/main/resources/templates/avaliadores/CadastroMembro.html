@@ -40,7 +40,7 @@
 
 	<div class="container-fluid">
 
-		<form method="POST" th:object="${avaliador}" th:action="@{/avaliadores}">
+		<form method="POST" th:object="${membro}" th:action="@{/avaliadores}">
 			<brewer:message/>
 			
 
@@ -50,9 +50,9 @@
 			<div class="row">
 				<div class="form-group  col-sm-4  bw-required"
 					brewer:classforerror="pessoadef">
-					<label for="avaliador" class="control-label">Avaliador</label> 
+					<label for="membro" class="control-label">Membro da Comissão</label> 
 					<select
-						data-placeholder="Pesquisar" th:field="*{pessoadef}" id="avaliador"
+						data-placeholder="Pesquisar" th:field="*{pessoadef}" id="membro"
 						class="chosen-select form-control" tabindex="7">
 						<option value=""></option>
 						<option th:each="pessoa : ${pessoas}" th:value="${pessoa.id}"
@@ -60,6 +60,7 @@
 
 					</select>
 				</div>
+				
 				<div class="form-group  col-sm-4">
 					<label for="telefone">CREF</label> <input type="text"
 						class="form-control" id="cref"

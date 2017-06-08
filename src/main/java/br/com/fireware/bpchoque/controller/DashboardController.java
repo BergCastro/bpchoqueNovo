@@ -15,6 +15,7 @@ import br.com.fireware.bpchoque.model.def.AvaliacaoIndividual;
 import br.com.fireware.bpchoque.model.def.PessoaDef;
 import br.com.fireware.bpchoque.model.def.ResultadoTeste;
 import br.com.fireware.bpchoque.model.def.TesteFisico;
+
 import br.com.fireware.bpchoque.repository.Cervejas;
 import br.com.fireware.bpchoque.repository.Clientes;
 import br.com.fireware.bpchoque.repository.Vendas;
@@ -72,6 +73,8 @@ public class DashboardController {
 		
 	 
 	}
+	
+	
 	
 	public Integer calculaPessoasAvaliadas(){
 		Set<PessoaDef> pessoas = new HashSet<>();

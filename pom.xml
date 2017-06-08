@@ -212,6 +212,13 @@
 			<version>${jasperreports-fonts.version}</version>
 			<scope>compile</scope>
 		</dependency>
+		
+	
+	
+	
+		
+		
+		
 
 	</dependencies>
 

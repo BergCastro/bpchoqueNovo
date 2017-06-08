@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.fireware.bpchoque.dto.PeriodoRelatorio;
 
+
 @Controller
 @RequestMapping("/relatorios")
 public class RelatoriosController {
@@ -24,6 +25,18 @@ public class RelatoriosController {
 		ModelAndView mv = new ModelAndView("relatorio/RelatorioVendasEmitidas");
 		mv.addObject(new PeriodoRelatorio());
 		return mv;
+	}
+	
+	@GetMapping("/testes")
+	public ModelAndView testes() {
+		Map<String, Object> parametros = new HashMap<>();
+		
+		
+		
+		parametros.put("format", "pdf");
+		
+		
+		return new ModelAndView("relatorio_teste", parametros);
 	}
 	
 	@PostMapping("/vendasEmitidas")

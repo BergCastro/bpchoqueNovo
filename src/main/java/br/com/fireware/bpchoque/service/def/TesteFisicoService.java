@@ -199,7 +199,7 @@ public class TesteFisicoService {
 			}
 			resultadoPronto.setNotaFinal(((resultadoPronto.getPontuacaoProva1() + resultadoPronto.getPontuacaoProva2()
 					+ resultadoPronto.getPontuacaoProva3() + resultadoPronto.getPontuacaoProva4()
-					+ resultadoPronto.getPontuacaoProva5()) / qtdCalculoMedia) / 10);
+					+ resultadoPronto.getPontuacaoProva5()) / qtdCalculoMedia));
 
 			resultadoTesteService.save(resultadoPronto);
 		}
@@ -680,8 +680,8 @@ public class TesteFisicoService {
 																											// TEMPO
 			referenciaInicialMasc = formataSegundos(prova.getRefInicialMasc());
 			referenciaFinalMasc = formataSegundos(prova.getRefFinalMasc());
-			referenciaInicialFem = formataSegundos(prova.getRefInicialFem());
-			referenciaFinalFem = formataSegundos(prova.getRefFinalFem());
+			//referenciaInicialFem = formataSegundos(prova.getRefInicialFem()==null?prova.getRefInicialFem() :"0''00");
+			//referenciaFinalFem = formataSegundos(prova.getRefFinalFem());
 			intervaloReferencia = formataSegundos(prova.getIntervaloRef());
 			valorFormatado = formataSegundos(valor);
 			faixaInicioPontuacao = 1;
@@ -720,8 +720,8 @@ public class TesteFisicoService {
 																												// MINUTOS
 			referenciaInicialMasc = formataMinutos(prova.getRefInicialMasc());
 			referenciaFinalMasc = formataMinutos(prova.getRefFinalMasc());
-			referenciaInicialFem = formataMinutos(prova.getRefInicialFem());
-			referenciaFinalFem = formataMinutos(prova.getRefFinalFem());
+			//referenciaInicialFem = formataMinutos(prova.getRefInicialFem());
+			//referenciaFinalFem = formataMinutos(prova.getRefFinalFem());
 			intervaloReferencia = formataMinutos(prova.getIntervaloRef());
 			valorFormatado = formataMinutos(valor);
 			faixaInicioPontuacao = 1;
@@ -762,12 +762,12 @@ public class TesteFisicoService {
 																												// ,
 																												// SEM
 																												// IDADE,
-			if(valor.equals("1")){
+			if(valor.equals("Apto - 1ª tentativa")){
 				resultado = Double.parseDouble(prova.getValorTentativa1());
-			}else if(valor.equals("2")){
+			}else if(valor.equals("Apto - 2ª tentativa")){
 				resultado = Double.parseDouble(prova.getValorTentativa2());
 				
-			}else if(valor.equals("3")){
+			}else if(valor.equals("Apto - 3ª tentativa")){
 				resultado = Double.parseDouble(prova.getValorTentativa3());
 			}else{
 				resultado = 0.0;

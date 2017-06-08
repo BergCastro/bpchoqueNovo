@@ -23,7 +23,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView;
 import org.springframework.web.servlet.view.jasperreports.JasperReportsViewResolver;
 
+
 import br.com.fireware.bpchoque.thymeleaf.BrewerDialect;
+
 
 @Configuration
 @EnableSpringDataWebSupport
@@ -43,6 +45,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		return resolver;
 	}
 	
+	  
 	@Bean
 	public BrewerDialect brewerDialect() {
 		return new BrewerDialect();
