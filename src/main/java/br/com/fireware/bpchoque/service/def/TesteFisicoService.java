@@ -80,6 +80,7 @@ public class TesteFisicoService {
 			resultadoPronto.setPontuacaoProva3(0.00);
 			resultadoPronto.setPontuacaoProva4(0.00);
 			resultadoPronto.setPontuacaoProva5(0.00);
+			resultadoPronto.setPontuacaoProva6(0.00);
 
 			Integer qtdCalculoMedia = testeFisico.getTipos().get(i).getQtdProvasMedia();
 			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
@@ -197,9 +198,31 @@ public class TesteFisicoService {
 				idProvas++;
 				auxProvas++;
 			}
+			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
+				prova = provaService.findById(resultado.getProvas().get(idProvas));
+				resultadoPronto.setTipoPontuacaoProva6(prova.getTipo() + "");
+				if (prova.getTipo() == CampoTipo.TEMPO_MIN) {
+					resultadoPronto.setValorProva6(resultado.getValores().get(idProvas) + "''");
+				} else {
+					resultadoPronto.setValorProva6(resultado.getValores().get(idProvas));
+				}
+
+				if (prova.getTipo() == CampoTipo.APTOINAPTO) {
+					if (resultadoPronto.getValorProva6().equals("Apto")) {
+						resultadoPronto.setPontuacaoProva6(100.00);
+					} else {
+						resultadoPronto.setPontuacaoProva6(0.00);
+					}
+				} else {
+					resultadoPronto.setPontuacaoProva6(calculaPontuacao(prova, resultadoPronto.getValorProva6(), 35));
+				}
+
+				idProvas++;
+				auxProvas++;
+			}
 			resultadoPronto.setNotaFinal(((resultadoPronto.getPontuacaoProva1() + resultadoPronto.getPontuacaoProva2()
 					+ resultadoPronto.getPontuacaoProva3() + resultadoPronto.getPontuacaoProva4()
-					+ resultadoPronto.getPontuacaoProva5()) / qtdCalculoMedia));
+					+ resultadoPronto.getPontuacaoProva5()+resultadoPronto.getPontuacaoProva6()) / testeFisico.getTipos().get(i).getProvas().size()));
 			// System.out.println("calculaMédia: "+qtdCalculoMedia);
 			resultadoTesteService.save(resultadoPronto);
 		}

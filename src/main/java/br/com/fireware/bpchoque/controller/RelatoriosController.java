@@ -76,6 +76,7 @@ public class RelatoriosController {
 		String prova3 = "";
 		String prova4 = "";
 		String prova5 = "";
+		String prova6 = "";
 		
 		if(provas.size() > 0 ){
 			prova1 = provas.get(0);
@@ -92,6 +93,9 @@ public class RelatoriosController {
 		if(provas.size() > 4){
 			prova5 = provas.get(4);
 		}
+		if(provas.size() > 5){
+			prova6 = provas.get(5);
+		}
 		
 		
 		
@@ -100,12 +104,65 @@ public class RelatoriosController {
 		parametros.put("prova3", prova3);
 		parametros.put("prova4", prova4);
 		parametros.put("prova5", prova5);
+		parametros.put("prova6", prova6);
 		parametros.put("format", "pdf");
 		parametros.put("teste", idTeste);
 		parametros.put("tipo", idTipo);
 		parametros.put("notaAprovacao", teste.getNotaAprovacao());
 		parametros.put("nomeTipo", tipo.getNome());
 		return new ModelAndView("relatorio_teste_tipo", parametros);
+	}
+	
+	@GetMapping("/testeGeral/{idTeste}")
+	public ModelAndView testeGeral(@PathVariable("idTeste") Long idTeste) {
+		Map<String, Object> parametros = new HashMap<>();
+		
+		
+		TesteFisico teste = testeFisicoService.findById(idTeste);
+		
+		List<String> tipos = new ArrayList<>();
+		for(TipoTeste tipo : teste.getTipos()){
+			tipos.add(tipo.getNome());
+		}
+		
+		
+		String tipo1 = "";
+		String tipo2 = "";
+		String tipo3 = "";
+		String tipo4 = "";
+		String tipo5 = "";
+		
+		
+		if(tipos.size() > 0 ){
+			tipo1 = tipos.get(0);
+		}
+		if(tipos.size() > 1){
+			tipo2 = tipos.get(1);
+		}
+		if(tipos.size() > 2){
+			tipo3 = tipos.get(2);
+		}
+		if(tipos.size() > 3){
+			tipo4 = tipos.get(3);
+		}
+		if(tipos.size() > 4){
+			tipo5 = tipos.get(4);
+		}
+		
+		
+		
+		
+		parametros.put("tipo1", tipo1);
+		parametros.put("tipo2", tipo2);
+		parametros.put("tipo3", tipo3);
+		parametros.put("tipo4", tipo4);
+		parametros.put("tipo5", tipo5);
+		parametros.put("format", "pdf");
+		parametros.put("teste", idTeste);
+		
+		parametros.put("notaAprovacao", teste.getNotaAprovacao());
+		parametros.put("objetivo", teste.getObjetivo());
+		return new ModelAndView("relatorio_teste_geral", parametros);
 	}
 	
 	@PostMapping("/vendasEmitidas")
