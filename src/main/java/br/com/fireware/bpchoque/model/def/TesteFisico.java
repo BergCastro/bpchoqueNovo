@@ -60,7 +60,7 @@ public class TesteFisico {
 	 * ="pessoaId")) private List<PessoaDef> pessoas;
 	 */
 
-	private BigDecimal notaAprovacao;
+	private Double notaAprovacao;
 
 	@PrePersist
 	@PreUpdate

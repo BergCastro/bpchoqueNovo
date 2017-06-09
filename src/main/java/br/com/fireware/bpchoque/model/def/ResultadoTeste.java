@@ -72,6 +72,15 @@ public class ResultadoTeste {
 	private String valorProva5;
 
 	private Double pontuacaoProva5;
+	
+	private Long prova6;
+
+	private String tipoPontuacaoProva6;
+
+	private String valorProva6;
+
+	private Double pontuacaoProva6;
+
 
 	private Double notaFinal;
 

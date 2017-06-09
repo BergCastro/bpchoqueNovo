@@ -54,7 +54,13 @@
 						<td th:text="${teste?.id}">1</td>
 						<td th:text="${{teste?.data}}">Data</td>
 						<td th:text="${{teste?.objetivo}}">Objetivo</td>
-						<td class="text-center"><a class="btn btn-link btn-xs"
+						<td class="text-center">
+						<a class="btn btn-link btn-xs"
+							th:href="@{/relatorios/testes/{id}(id=${teste.id})}" title="Relatório"
+							rel="tooltip" data-placement="top"> <span
+								class="glyphicon glyphicon-print"></span>
+						</a>
+						<a class="btn btn-link btn-xs"
 							th:href="@{/testesFisicos/{id}(id=${teste.id})}" title="Editar"
 							rel="tooltip" data-placement="top"> <span
 								class="glyphicon glyphicon-pencil"></span>

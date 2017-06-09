@@ -200,7 +200,7 @@ public class TesteFisicoService {
 			resultadoPronto.setNotaFinal(((resultadoPronto.getPontuacaoProva1() + resultadoPronto.getPontuacaoProva2()
 					+ resultadoPronto.getPontuacaoProva3() + resultadoPronto.getPontuacaoProva4()
 					+ resultadoPronto.getPontuacaoProva5()) / qtdCalculoMedia));
-
+			// System.out.println("calculaMédia: "+qtdCalculoMedia);
 			resultadoTesteService.save(resultadoPronto);
 		}
 
@@ -680,8 +680,10 @@ public class TesteFisicoService {
 																											// TEMPO
 			referenciaInicialMasc = formataSegundos(prova.getRefInicialMasc());
 			referenciaFinalMasc = formataSegundos(prova.getRefFinalMasc());
-			//referenciaInicialFem = formataSegundos(prova.getRefInicialFem()==null?prova.getRefInicialFem() :"0''00");
-			//referenciaFinalFem = formataSegundos(prova.getRefFinalFem());
+			// referenciaInicialFem =
+			// formataSegundos(prova.getRefInicialFem()==null?prova.getRefInicialFem()
+			// :"0''00");
+			// referenciaFinalFem = formataSegundos(prova.getRefFinalFem());
 			intervaloReferencia = formataSegundos(prova.getIntervaloRef());
 			valorFormatado = formataSegundos(valor);
 			faixaInicioPontuacao = 1;
@@ -720,40 +722,64 @@ public class TesteFisicoService {
 																												// MINUTOS
 			referenciaInicialMasc = formataMinutos(prova.getRefInicialMasc());
 			referenciaFinalMasc = formataMinutos(prova.getRefFinalMasc());
-			//referenciaInicialFem = formataMinutos(prova.getRefInicialFem());
-			//referenciaFinalFem = formataMinutos(prova.getRefFinalFem());
+			// referenciaInicialFem = formataMinutos(prova.getRefInicialFem());
+			// referenciaFinalFem = formataMinutos(prova.getRefFinalFem());
 			intervaloReferencia = formataMinutos(prova.getIntervaloRef());
 			valorFormatado = formataMinutos(valor);
 			faixaInicioPontuacao = 1;
 			Double auxResultado = 10.00;
 			Double auxReferencia = referenciaInicialMasc;
 
-			System.out.println("ReferenciaInicialMasc: " + referenciaInicialMasc);
-			System.out.println("ReferenciaFinalMasc: " + referenciaFinalMasc);
-			System.out.println("ReferenciaInicialFem: " + referenciaInicialFem);
-			System.out.println("ReferenciaFinalFem: " + referenciaFinalFem);
-			System.out.println("IntervaloReferencia: " + intervaloReferencia);
-			System.out.println("ValorFormatado: " + valorFormatado);
-			for (int i = 1; i < 10; i++) {
-
-				if (valorFormatado > referenciaInicialMasc) {
+			if (prova.getId() == 12) {
+				if (valorFormatado > 6000) {
 					resultado = 0.00;
-
-					break;
-
-				} else if (valorFormatado <= referenciaFinalMasc) {
+				} else if (valorFormatado >= 5850 && valorFormatado <= 6000) {
+					resultado = 10.00;
+				} else if (valorFormatado >= 5750 && valorFormatado < 5850) {
+					resultado = 20.00;
+				} else if (valorFormatado >= 5650 && valorFormatado < 5750) {
+					resultado = 30.00;
+				} else if (valorFormatado >= 5550 && valorFormatado < 5650) {
+					resultado = 40.00;
+				} else if (valorFormatado >= 5450 && valorFormatado < 5550) {
+					resultado = 50.00;
+				} else if (valorFormatado >= 5350 && valorFormatado < 5450) {
+					resultado = 60.00;
+				} else if (valorFormatado >= 5250 && valorFormatado < 5350) {
+					resultado = 70.00;
+				} else if (valorFormatado >= 5150 && valorFormatado < 5250) {
+					resultado = 80.00;
+				} else if (valorFormatado >= 5050 && valorFormatado < 5150) {
+					resultado = 90.00;
+				} else if (valorFormatado < 5050) {
 					resultado = 100.00;
-
-					break;
-
-				} else if ((valorFormatado > auxReferencia - intervaloReferencia && valorFormatado <= auxReferencia)) {
-					resultado = auxResultado;
-
-					break;
 				}
 
-				auxResultado += 10;
-				auxReferencia -= intervaloReferencia;
+			} else {
+
+				for (int i = 1; i < 10; i++) {
+
+					if (valorFormatado > referenciaInicialMasc) {
+						resultado = 0.00;
+
+						break;
+
+					} else if (valorFormatado <= referenciaFinalMasc) {
+						resultado = 100.00;
+
+						break;
+
+					} else if ((valorFormatado > auxReferencia - intervaloReferencia
+							&& valorFormatado <= auxReferencia)) {
+						resultado = auxResultado;
+
+						break;
+					}
+
+					auxResultado += 10;
+					auxReferencia -= intervaloReferencia;
+
+				}
 
 			}
 
@@ -762,20 +788,19 @@ public class TesteFisicoService {
 																												// ,
 																												// SEM
 																												// IDADE,
-			if(valor.equals("Apto - 1ª tentativa")){
+			if (valor.equals("Apto - 1ª")) {
 				resultado = Double.parseDouble(prova.getValorTentativa1());
-			}else if(valor.equals("Apto - 2ª tentativa")){
+			} else if (valor.equals("Apto - 2ª")) {
 				resultado = Double.parseDouble(prova.getValorTentativa2());
-				
-			}else if(valor.equals("Apto - 3ª tentativa")){
+
+			} else if (valor.equals("Apto - 3ª")) {
 				resultado = Double.parseDouble(prova.getValorTentativa3());
-			}else{
+			} else {
 				resultado = 0.0;
-			}																									// TENTATIVA
-																												
-			
-		}	
-			
+			} // TENTATIVA
+
+		}
+
 		return resultado;
 
 	}

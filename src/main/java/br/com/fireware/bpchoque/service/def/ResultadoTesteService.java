@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.fireware.bpchoque.model.def.PessoaDef;
 import br.com.fireware.bpchoque.model.def.ResultadoTeste;
 import br.com.fireware.bpchoque.model.def.TesteFisico;
+import br.com.fireware.bpchoque.model.def.TipoTeste;
 import br.com.fireware.bpchoque.repository.def.ResultadoTesteRepository;
 
 @Service
@@ -46,6 +47,12 @@ public class ResultadoTesteService {
 	public List<ResultadoTeste> findByTeste(TesteFisico testeFisico) {
 
 		return repository.findByTeste(testeFisico);
+
+	}
+	
+	public List<ResultadoTeste> findByTipoTeste(TipoTeste tipo) {
+
+		return repository.findByTipoTeste(tipo);
 
 	}
 
