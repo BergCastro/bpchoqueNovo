@@ -56,8 +56,8 @@
 						<td th:text="${{teste?.objetivo}}">Objetivo</td>
 						<td class="text-center">
 						<a class="btn btn-link btn-xs"
-							th:href="@{/relatorios/testes/{id}(id=${teste.id})}" title="Relatório"
-							rel="tooltip" data-placement="top"> <span
+							th:href="@{/relatorios/testeGeral/{id}(id=${teste.id})}" title="Relatório"
+							rel="tooltip" data-placement="top" target="_blank"> <span
 								class="glyphicon glyphicon-print"></span>
 						</a>
 						<a class="btn btn-link btn-xs"

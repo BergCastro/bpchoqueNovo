@@ -47,7 +47,7 @@ public class TesteFisico {
 	private LocalDate data;
 
 	private String objetivo;
-
+	
 	@ManyToMany()
 	@JoinTable(name = "testes_tipos", joinColumns = @JoinColumn(name = "testeFisicoId"), inverseJoinColumns = @JoinColumn(name = "tipoTesteId"))
 	private List<TipoTeste> tipos;

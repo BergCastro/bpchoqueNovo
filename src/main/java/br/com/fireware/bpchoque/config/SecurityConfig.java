@@ -48,6 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.loginPage("/login")
 				.permitAll()
 				.and()
+				
 			.logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.and()
@@ -55,8 +56,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.accessDeniedPage("/403")
 				.and()
 			.sessionManagement()
-				.invalidSessionUrl("/login");
+				.invalidSessionUrl("/login")
+				;
+				
+			
+			
 	}
+	
+	 
+     protected void configure2(HttpSecurity http) throws Exception {
+             http.authorizeRequests().anyRequest().hasRole("USER").and().formLogin()
+                             .permitAll().and().sessionManagement().maximumSessions(1)
+                             .expiredUrl("/login?expired");
+     }
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {

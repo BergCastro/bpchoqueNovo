@@ -119,10 +119,10 @@ public class RelatoriosController {
 		
 		
 		TesteFisico teste = testeFisicoService.findById(idTeste);
-		
-		List<String> tipos = new ArrayList<>();
+		Integer qtdTipos = teste.getTipos().size();
+		List<TipoTeste> tipos = new ArrayList<TipoTeste>();
 		for(TipoTeste tipo : teste.getTipos()){
-			tipos.add(tipo.getNome());
+			tipos.add(tipo);
 		}
 		
 		
@@ -130,24 +130,31 @@ public class RelatoriosController {
 		String tipo2 = "";
 		String tipo3 = "";
 		String tipo4 = "";
-		String tipo5 = "";
 		
+		
+		Long idTipo1 = 0L;
+		Long idTipo2 = 0L;
+		Long idTipo3 = 0L;
+		Long idTipo4 = 0L;
 		
 		if(tipos.size() > 0 ){
-			tipo1 = tipos.get(0);
+			tipo1 = tipos.get(0).getNome();
+			idTipo1 = tipos.get(0).getId();
+			
 		}
 		if(tipos.size() > 1){
-			tipo2 = tipos.get(1);
+			tipo2 = tipos.get(1).getNome();
+			idTipo2 = tipos.get(1).getId();
 		}
 		if(tipos.size() > 2){
-			tipo3 = tipos.get(2);
+			tipo3 = tipos.get(2).getNome();
+			idTipo3 = tipos.get(2).getId();
 		}
 		if(tipos.size() > 3){
-			tipo4 = tipos.get(3);
+			tipo4 = tipos.get(3).getNome();
+			idTipo4 = tipos.get(3).getId();
 		}
-		if(tipos.size() > 4){
-			tipo5 = tipos.get(4);
-		}
+		
 		
 		
 		
@@ -156,7 +163,12 @@ public class RelatoriosController {
 		parametros.put("tipo2", tipo2);
 		parametros.put("tipo3", tipo3);
 		parametros.put("tipo4", tipo4);
-		parametros.put("tipo5", tipo5);
+		parametros.put("idTipo1", idTipo1);
+		parametros.put("idTipo2", idTipo2);
+		parametros.put("idTipo3", idTipo3);
+		parametros.put("idTipo4", idTipo4);
+		parametros.put("qtdTipos", qtdTipos);
+		
 		parametros.put("format", "pdf");
 		parametros.put("teste", idTeste);
 		

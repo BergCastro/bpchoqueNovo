@@ -20,8 +20,8 @@
 		<flyway-maven-plugin.version>4.0.2</flyway-maven-plugin.version>
 		<mysql-connector-java.version>5.1.39</mysql-connector-java.version>
 
-		<!-- Spring MVC -->
-		<spring-framework.version>4.3.0.RELEASE</spring-framework.version>
+		<!-- Spring MVC 4.3.0.RELEASE-->
+		<spring-framework.version>4.3.9.RELEASE</spring-framework.version>
 
 		<!-- Servlet API -->
 		<servlet.version>3.1.0</servlet.version>
@@ -61,8 +61,8 @@
 		<!-- Apache Bean Utils -->
 		<commons-beanutils.version>1.9.2</commons-beanutils.version>
 
-		<!-- Spring Security -->
-		<spring-security.version>4.1.1.RELEASE</spring-security.version>
+		<!-- Spring Security 4.1.1.RELEASE-->
+		<spring-security.version>4.2.0.RELEASE</spring-security.version>
 
 		<!-- Thymeleaf - Extras Spring Security -->
 		<thymeleaf-extras-springsecurity4.version>3.0.0.RELEASE</thymeleaf-extras-springsecurity4.version>
@@ -91,11 +91,11 @@
 			</plugin>
 		</plugins>
 	</build>
-
+      <!-- 1.4.1 -->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.1.RELEASE</version>
+		<version>1.5.4.RELEASE</version>
 	</parent>
 
 	<dependencies>

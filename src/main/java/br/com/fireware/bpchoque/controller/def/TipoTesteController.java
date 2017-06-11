@@ -122,18 +122,20 @@ public class TipoTesteController {
 	}
 
 	@RequestMapping(value = "/provaNovo", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
-	public ModelAndView salvarDetalhe(@RequestBody @Valid Prova prova, BindingResult result, RedirectAttributes attributes,
+	public @ResponseBody ResponseEntity<?> salvarDetalhe(@RequestBody @Valid Prova prova, BindingResult result, RedirectAttributes attributes,
 			Errors errors, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
-		System.out.println(prova.toString());
-		ModelAndView mv = new ModelAndView();
+		//System.out.println(prova.toString());
+		
 		
 		// detalhe.setTipoTeste(tipoTeste);
 		prova = provaService.findById(prova.getId());
 		
 		
-		
-		tipoTeste.getProvas().add(prova);
-		mv.addObject("tipoTeste", tipoTeste);
+		if(tipoTeste.getProvas().size() < 6){
+			
+			try{
+			tipoTeste.getProvas().add(prova);
+			//mv.addObject("tipoTeste", tipoTeste);
 	
 		//provas = tipoTeste.getProvas();
 		
@@ -142,9 +144,15 @@ public class TipoTesteController {
 			tipoTesteService.save(tipoTeste);
 			
 
-			attributes.addFlashAttribute("mensagem", "Tipo salvo com sucesso!");
-			mv.setViewName("redirect:/tiposTeste/" + tipoTeste.getId());
-			return mv;
+			
+			}catch (Exception e) {
+				//mv.setViewName(CADASTRO_TIPO_TESTE);
+			}
+		}else{
+			return ResponseEntity.badRequest().body("O número máximo de provas por tipo é 6!");
+		}
+		
+			return ResponseEntity.ok(prova);
 		
 		
 	}
