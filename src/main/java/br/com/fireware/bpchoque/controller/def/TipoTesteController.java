@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -157,6 +158,16 @@ public class TipoTesteController {
 		
 	}
 
+	
+	@RequestMapping("/atualizaProvas")
+	public String ajaxBrands(Model model) {
+		List<Prova> provas = tipoTeste.getProvas();
+		System.out.println("Entrou no ajaxProvas");
+		model.addAttribute("provas", provas);
+		//model.addAttribute("tipos", testeFisico.getTipos());
+		//model.addAttribute("pessoasIncluir", testeFisicoService.pessoasIncluir(resultados));
+		return "tiposTeste/CadastroTipoTeste :: provasFragment";
+	}
 	
 
 	@RequestMapping("{id}")

@@ -54,6 +54,12 @@ Brewer.ProvaTipoCadastro = (function() {
 	}
 	
 	function onEstiloSalvo(estilo) {
+		this.modal.modal('hide');
+		var corpoTabela = $('#tabelaProvasBlock');
+		$("#tabelaProvasBlock").load('/tiposTeste/atualizaProvas');
+		//$.getScript('/layout/javascripts/algaworks.min.js');
+		
+		
 		/*var comboEstilo = $('#listaDetalhe');
 		comboEstilo.append(
 				           '<tr style="background:#ffb3b3;">'+
@@ -67,8 +73,8 @@ Brewer.ProvaTipoCadastro = (function() {
 								'</td>'+
 								'</tr>');
 		comboEstilo.val(estilo.id);*/
-		this.modal.modal('hide');
-		location.reload();
+		
+		//location.reload();
 	}
 	
 	return ProvaTipoCadastro;

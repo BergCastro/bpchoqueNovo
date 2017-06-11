@@ -27,6 +27,7 @@ BpChoque.ResultadoCadastro = (function() {
 		this.inputParticipante.focus();
 		$('.input-prova').val('0');
 		$('.js-time').val('00"00');
+		$('.js-time-min').val("00'00");
 		
 	}
 
