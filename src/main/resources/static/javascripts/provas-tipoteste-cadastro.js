@@ -4,6 +4,7 @@ Brewer.ProvaTipoCadastro = (function() {
 	
 	function ProvaTipoCadastro() {
 		this.modal = $('#modalCadastroProvaTipo');
+		this.modalBody = $('#modalCadastroProvaTipo .modal-body');
 		this.botaoSalvar = this.modal.find('.js-modal-cadastro-prova-salvar-btn');
 		this.form = this.modal.find('form');
 		this.url = this.form.attr('action');
@@ -15,13 +16,14 @@ Brewer.ProvaTipoCadastro = (function() {
 	
 	ProvaTipoCadastro.prototype.iniciar = function() {
 		this.form.on('submit', function(event) { event.preventDefault() });
-		this.modal.on('shown.bs.modal', onModalShow.bind(this));
+		this.modal.on('show.bs.modal', onModalShow.bind(this));
 		this.modal.on('hide.bs.modal', onModalClose.bind(this))
 		this.botaoSalvar.on('click', onBotaoSalvarClick.bind(this));
 	}
 	
 	function onModalShow() {
 		this.inputProva.focus();
+		
 	}
 	
 	function onModalClose() {
@@ -30,6 +32,10 @@ Brewer.ProvaTipoCadastro = (function() {
 		
 		this.containerMensagemErro.addClass('hidden');
 		this.form.find('.form-group').removeClass('has-error');
+		this.modal.modal('toggle');
+		
+		
+       
 	}
 	
 	function onBotaoSalvarClick() {
@@ -44,6 +50,9 @@ Brewer.ProvaTipoCadastro = (function() {
 			error: onErroSalvandoEstilo.bind(this),
 			success: onEstiloSalvo.bind(this)
 		});
+		
+		
+	   
 	}
 	
 	function onErroSalvandoEstilo(obj) {
@@ -54,9 +63,20 @@ Brewer.ProvaTipoCadastro = (function() {
 	}
 	
 	function onEstiloSalvo(estilo) {
-		this.modal.modal('hide');
+		
 		var corpoTabela = $('#tabelaProvasBlock');
 		$("#tabelaProvasBlock").load('/tiposTeste/atualizaProvas');
+		$("#blocoModalProva").load('/tiposTeste/atualizaModal');
+		
+		
+		//this.modal.modal('hide');
+
+	    
+	    // Delegated events because we make a copy, and the copied button does not exist onDomReady
+		 	
+	    
+		$.getScript('/javascripts/dialogo-excluir-ajax.js');
+	
 		//$.getScript('/layout/javascripts/algaworks.min.js');
 		
 		
@@ -100,3 +120,25 @@ $(function() {
 	    return false;
 	  }
 	})(jQuery);
+
+
+
+
+
+// Delegated events because we make a copy, and the copied button does not exist onDomReady
+/*$('#butaoAdicionar').on('click',function(e) {
+	
+	var modal = $('#modalCadastroProvaTipo'), modalBody = $('#modalCadastroProvaTipo .modal-body');
+	
+	modal.modal('show');
+	
+	modal
+     .on('show.bs.modal', function () {
+         modalBody.load(e.currentTarget.href)
+     })
+     .modal();
+	e.preventDefault();
+	//$("#blocoModalProva").load('/tiposTeste/atualizaModal');
+   //console.log("clicou");
+
+});*/

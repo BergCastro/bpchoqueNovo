@@ -30,7 +30,7 @@ import br.com.fireware.bpchoque.service.OpmOrgaoService;
 public class OpmOrgaoController {
 	
 	private static final String CADASTRO_OPM = "OpmsOrgaos/CadastroOpmOrgao";
-	
+	private static final String OPMS = "OpmsOrgaos/OpmsOrgaos";
 	
 	
 	@Autowired
@@ -40,7 +40,7 @@ public class OpmOrgaoController {
 	@RequestMapping
 	public ModelAndView opms() {
 		Iterable<OpmOrgao> todasOpms = opmOrgaoService.findAll();
-		ModelAndView mv = new ModelAndView("OpmsOrgaos/OpmsOrgaos");
+		ModelAndView mv = new ModelAndView(OPMS);
 		mv.addObject("opms", todasOpms);
 		
 		return mv;

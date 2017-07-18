@@ -121,7 +121,7 @@ public class ProvaController {
 	@RequestMapping(value="/delete/{id}")
 	public String excluir(@PathVariable Long id) {
 		provaService.delete(id);
-		System.out.println("Entrou no delete");
+		
 		
 		
 		return "redirect:/provas";

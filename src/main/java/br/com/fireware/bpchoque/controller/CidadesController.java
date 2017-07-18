@@ -45,9 +45,12 @@ public class CidadesController {
 	@Autowired
 	private CadastroCidadeService cadastroCidadeService;
 	
-	@RequestMapping("/nova")
+	private static final String CADASTRO_VIEW = "cidades/CadastroCidade";
+	private static final String CIDADES = "cidades/PesquisaCidades";
+	
+	@RequestMapping("/novo")
 	public ModelAndView nova(Cidade cidade) {
-		ModelAndView mv = new ModelAndView("cidade/CadastroCidade");
+		ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
 		mv.addObject("estados", estados.findAll());
 		return mv;
 	}
@@ -84,13 +87,13 @@ public class CidadesController {
 		}
 		
 		attributes.addFlashAttribute("mensagem", "Cidade salva com sucesso!");
-		return new ModelAndView("redirect:/cidades/nova");
+		return new ModelAndView("redirect:/cidades");
 	}
 	
 	@GetMapping
 	public ModelAndView pesquisar(CidadeFilter cidadeFilter, BindingResult result
 			, @PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
-		ModelAndView mv = new ModelAndView("cidade/PesquisaCidades");
+		ModelAndView mv = new ModelAndView(CIDADES);
 		mv.addObject("estados", estados.findAll());
 		
 		PageWrapper<Cidade> paginaWrapper = new PageWrapper<>(cidades.filtrar(cidadeFilter, pageable)

@@ -21,15 +21,15 @@ import br.com.fireware.bpchoque.service.CargoService;
 @RequestMapping("/cargos")
 public class CargoController {
 	
-	private static final String CADASTRO_VIEW = "Cargos/CadastroCargo";
-	
+	private static final String CADASTRO_VIEW = "cargos/CadastroCargo";
+	private static final String CARGOS_VIEW = "cargos/Cargos";
 	@Autowired
 	private CargoService cargoService;
 	
 	@RequestMapping
 	public ModelAndView cargos() {
 		Iterable<Cargo> todosCargos = cargoService.findAll();
-		ModelAndView mv = new ModelAndView("Cargos/Cargos");
+		ModelAndView mv = new ModelAndView(CARGOS_VIEW);
 		mv.addObject("cargos", todosCargos);
 		
 		return mv;

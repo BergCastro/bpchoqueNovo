@@ -42,6 +42,7 @@ import br.com.fireware.bpchoque.service.def.PessoaDefService;
 public class PessoaDefController {
 	
 	private static final String CADASTRO_PESSOA = "pessoasdef/CadastroPessoa";
+	private static final String PESSOAS = "pessoasdef/PesquisaPessoas";
 		
 	@Autowired
 	private PessoaDefService pessoaDefService;
@@ -57,7 +58,7 @@ public class PessoaDefController {
 	@RequestMapping
 	public ModelAndView pessoas() {
 		Iterable<PessoaDef> todosPessoas = pessoaDefService.findAll();
-		ModelAndView mv = new ModelAndView("pessoasdef/PesquisaPessoas");
+		ModelAndView mv = new ModelAndView(PESSOAS);
 		mv.addObject("pessoas", todosPessoas);
 		
 		return mv;
@@ -73,7 +74,7 @@ public class PessoaDefController {
 	@RequestMapping("/novo")
 	public ModelAndView novo(@AuthenticationPrincipal UsuarioSistema usuarioSistema) {
 		
-		ModelAndView mv = new ModelAndView("pessoasdef/CadastroPessoa");
+		ModelAndView mv = new ModelAndView(CADASTRO_PESSOA);
 		PessoaDef pessoaDef = new PessoaDef();
 		
 		
@@ -126,7 +127,7 @@ public class PessoaDefController {
 		ModelAndView mv = new ModelAndView();
 		
 			System.out.println("entrou em edição");
-			mv.setViewName("pessoasdef/CadastroPessoa");
+			mv.setViewName(CADASTRO_PESSOA);
 		
 			
 		

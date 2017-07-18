@@ -18,7 +18,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 
 import org.springframework.web.bind.annotation.PathVariable;
-
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,7 +42,7 @@ import br.com.fireware.bpchoque.service.def.DoacaoService;
 public class DoacaoController {
 	
 	private static final String CADASTRO_DOACAO = "doacoes/CadastroDoacoes";
-	
+	private static final String DOACOES = "doacoes/Doacoes";
 	
 	@Autowired
 	private DoacaoService doacaoService;
@@ -59,7 +59,7 @@ public class DoacaoController {
 		
 		
 		Iterable<Doacao> todosDoacoes = doacaoService.findAll();
-		ModelAndView mv = new ModelAndView("doacoes/Doacoes");
+		ModelAndView mv = new ModelAndView(DOACOES);
 		mv.addObject("doacoes", todosDoacoes);
 		
 		
@@ -120,8 +120,7 @@ public class DoacaoController {
 			return CADASTRO_DOACAO;
 		}
 	}
-	
-	@RequestMapping(value="/detalheNovo", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
+	@PostMapping(value="/detalheNovo", consumes={ MediaType.APPLICATION_JSON_VALUE })
 	public @ResponseBody ResponseEntity<?> salvarDetalhe(@RequestBody @Valid DoacaoDetalhe detalhe , BindingResult result) {
 		
 		if(result.getFieldValue("tipo").equals("VAZIO")){

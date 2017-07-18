@@ -3,6 +3,8 @@ package br.com.fireware.bpchoque.model.def;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -53,7 +55,7 @@ public class TipoTeste {
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tiposteste_provas", joinColumns = @JoinColumn(name = "tipoTesteId"), inverseJoinColumns = @JoinColumn(name = "provaId"))
-	private List<Prova> provas;
+	private Set<Prova> provas;
 
 	/*
 	 * @OneToMany(mappedBy="tipoTeste", fetch = FetchType.EAGER) private

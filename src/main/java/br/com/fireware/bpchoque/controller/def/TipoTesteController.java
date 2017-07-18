@@ -3,7 +3,9 @@ package br.com.fireware.bpchoque.controller.def;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -18,7 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
-
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,6 +41,7 @@ import br.com.fireware.bpchoque.service.def.ProvaService;
 import br.com.fireware.bpchoque.service.def.ResultadoTesteService;
 import br.com.fireware.bpchoque.service.def.TesteFisicoService;
 import br.com.fireware.bpchoque.service.def.TipoTesteService;
+import br.com.fireware.bpchoque.util.RemoveColecao;
 
 @Controller
 @RequestMapping("/tiposTeste")
@@ -125,33 +128,31 @@ public class TipoTesteController {
 	@RequestMapping(value = "/provaNovo", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public @ResponseBody ResponseEntity<?> salvarDetalhe(@RequestBody @Valid Prova prova, BindingResult result, RedirectAttributes attributes,
 			Errors errors, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
-		//System.out.println(prova.toString());
+		
 		
 		
 		// detalhe.setTipoTeste(tipoTeste);
-		prova = provaService.findById(prova.getId());
-		
+		Set<Prova> provas = new HashSet<Prova>();
+		Prova provaNova = provaService.findById(prova.getId());
+		provas.addAll(tipoTeste.getProvas());
+		provas.add(provaNova);
 		
 		if(tipoTeste.getProvas().size() < 6){
 			
 			try{
-			tipoTeste.getProvas().add(prova);
-			//mv.addObject("tipoTeste", tipoTeste);
-	
-		//provas = tipoTeste.getProvas();
-		
-			
+			tipoTeste.setProvas(provas);
 			
 			tipoTesteService.save(tipoTeste);
 			
 
 			
 			}catch (Exception e) {
-				//mv.setViewName(CADASTRO_TIPO_TESTE);
+			
 			}
 		}else{
 			return ResponseEntity.badRequest().body("O número máximo de provas por tipo é 6!");
 		}
+		attributes.addFlashAttribute("provasIncluir", atualizarProvasIncluir());
 		
 			return ResponseEntity.ok(prova);
 		
@@ -160,13 +161,28 @@ public class TipoTesteController {
 
 	
 	@RequestMapping("/atualizaProvas")
-	public String ajaxBrands(Model model) {
-		List<Prova> provas = tipoTeste.getProvas();
-		System.out.println("Entrou no ajaxProvas");
+	public String ajaxBrands2(Model model) {
+		Set<Prova> provas = tipoTeste.getProvas();
+		
 		model.addAttribute("provas", provas);
-		//model.addAttribute("tipos", testeFisico.getTipos());
-		//model.addAttribute("pessoasIncluir", testeFisicoService.pessoasIncluir(resultados));
+		
 		return "tiposTeste/CadastroTipoTeste :: provasFragment";
+	}
+	@RequestMapping("/atualizaProvas2")
+	public ModelAndView ajaxBrands(Model model) {
+		ModelAndView mv = new ModelAndView("tiposTeste/CadastroProvaTipo");
+		Set<Prova> provas = tipoTeste.getProvas();
+		
+		model.addAttribute("provas", provas);
+		mv.addObject("provas", provas);
+		return mv;
+	}
+	
+	@RequestMapping("/atualizaModal")
+	public String atualizaModal(Model model) {
+		System.out.println("entrou no atualiza modal");
+		model.addAttribute("provasIncluir", atualizarProvasIncluir());
+		return "tiposTeste/CadastroTipoTeste :: modalFragment";
 	}
 	
 
@@ -174,34 +190,19 @@ public class TipoTesteController {
 	public ModelAndView edicao(@PathVariable("id") TipoTeste tipoTeste) {
 		ModelAndView mv = new ModelAndView(CADASTRO_TIPO_TESTE);
 		this.tipoTeste = tipoTeste;
-		System.out.println("entrou edição");
+		
 		mv.addObject(tipoTeste);
-		
-		List<Prova> provasIncluir = provaService.findAll();
-		
-		System.out.println("Tipo TestProvas: "+tipoTeste.getProvas().size());
-		for(int i = 0; i <  provasIncluir.size(); i++){
-			for(int j = 0; j < tipoTeste.getProvas().size();j++){
-				System.out.println("J: "+j+" Id prova inclusa: "+tipoTeste.getProvas().get(j).getId());
-				//System.out.println("I: "+i+" Id prova incluir: "+provasIncluir.get(i).getId());
-				try {
-					if(tipoTeste.getProvas().get(j).getId() == provasIncluir.get(i).getId()){
-						provasIncluir.remove(i);
-					}
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-				
-			}
-		}
+						
 		testeFisicoSalvo = true;
-		//provasIncluir.remove(tipoTeste.getProvas());
-		System.out.println("Provas incluir: "+provasIncluir.size());
-		mv.addObject("provasIncluir", provasIncluir);
+				
+		mv.addObject("provasIncluir", atualizarProvasIncluir());
 		mv.addObject("testeFisicoSalvo", testeFisicoSalvo);
+		mv.addObject("provas", tipoTeste.getProvas());
 		
 		return mv;
 	}
+
+	
 
 	public List<Prova> listaDetalhes() {
 		return provas;
@@ -210,27 +211,35 @@ public class TipoTesteController {
 	@RequestMapping(value = "/delete/{id}")
 	public String excluir(@PathVariable Long id) {
 		TipoTeste tipoTeste = tipoTesteService.findById(id);
-		// provaService.deleteByTipoTeste(tipoTeste);
+		
 		tipoTesteService.delete(id);
 
 		return "redirect:/tiposTeste";
 	}
 
-	@RequestMapping(value = "/deleteProva/{id}")
-	public ModelAndView excluirProva(@PathVariable Long id) {
-		ModelAndView mv = new ModelAndView();
+	@DeleteMapping(value = "/deleteProva/{id}")
+	public @ResponseBody ResponseEntity<?> excluirProva(@PathVariable Long id) {
 		
 		
+		System.out.println("Entrou no deleteProva");
 		Prova provaRemover = provaService.findById(id); 
 		
 		tipoTeste.getProvas().remove(provaRemover);
 		
 		tipoTesteService.save(tipoTeste);
+		System.out.println("Entrou no deleteProva e deletou");
 		
 		
-		mv.addObject("tipoTeste", tipoTeste);
-		mv.setViewName("redirect:/tiposTeste/" + tipoTeste.getId());
-		return mv;
+		return ResponseEntity.ok(tipoTeste);
 	}
+	
+	private List<Prova> atualizarProvasIncluir() {
+		List<Prova> provasIncluir = provaService.findAll();
+		Set<Prova> remover = tipoTeste.getProvas();
+		RemoveColecao.removeOfThis(provasIncluir, remover);
+		return provasIncluir;
+	}
+	
+	
 
 }

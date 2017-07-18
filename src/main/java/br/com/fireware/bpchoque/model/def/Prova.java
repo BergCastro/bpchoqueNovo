@@ -2,6 +2,8 @@
 package br.com.fireware.bpchoque.model.def;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,6 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -73,7 +76,8 @@ public class Prova {
 
 	private Integer intervaloIdade;
 	
-	
+	 //@ManyToMany(mappedBy="provas")
+	 //private List<TipoTeste> tiposTeste;
 
 	/*
 	 * @OneToMany(mappedBy="prova") private List<ResultadoTeste> resultados;

@@ -1,12 +1,12 @@
 package br.com.fireware.bpchoque.controller.def;
 
-import java.math.BigDecimal;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
+
 import java.util.List;
-import java.util.Set;
+
 
 import javax.validation.Valid;
 
@@ -20,7 +20,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,11 +33,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.fireware.bpchoque.model.def.TipoTeste;
 import br.com.fireware.bpchoque.model.def.Prova.AptoInapto;
-import br.com.fireware.bpchoque.model.def.Prova.CampoTipo;
+
 import br.com.fireware.bpchoque.security.UsuarioSistema;
-import br.com.fireware.bpchoque.dto.VendaMes;
+
 import br.com.fireware.bpchoque.model.def.PessoaDef;
-import br.com.fireware.bpchoque.model.def.Prova;
+
 import br.com.fireware.bpchoque.model.def.Resultado;
 import br.com.fireware.bpchoque.model.def.ResultadoTeste;
 import br.com.fireware.bpchoque.model.def.TesteFisico;
