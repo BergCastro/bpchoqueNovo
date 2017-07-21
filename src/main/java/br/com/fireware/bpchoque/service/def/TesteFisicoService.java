@@ -2,7 +2,10 @@ package br.com.fireware.bpchoque.service.def;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -14,6 +17,7 @@ import br.com.fireware.bpchoque.model.def.Resultado;
 import br.com.fireware.bpchoque.model.def.ResultadoTeste;
 import br.com.fireware.bpchoque.model.def.TesteFisico;
 import br.com.fireware.bpchoque.repository.def.TesteFisicoRepository;
+import br.com.fireware.bpchoque.util.RemoveColecao;
 
 @Service
 @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
@@ -869,12 +873,14 @@ public class TesteFisicoService {
 	public List<PessoaDef> pessoasIncluir(List<ResultadoTeste> resultados) {
 		List<PessoaDef> pessoasIncluir = pessoaDefService.findAll();
 
-		List<PessoaDef> pessoas = new ArrayList<>(); // Não Permite objetos
+		Set<PessoaDef> pessoas = new HashSet<>(); // Não Permite objetos
 														// repetidos
 		for (ResultadoTeste resultado : resultados) {
 			pessoas.add(resultado.getPessoa());
 		}
-
+		
+		RemoveColecao.removeOfThis(pessoasIncluir, pessoas);
+		/*
 		if (pessoasIncluir.size() > 0) {
 
 			for (int i = 0; i < pessoasIncluir.size(); i++) {
@@ -885,7 +891,7 @@ public class TesteFisicoService {
 				}
 			}
 
-		}
+		}*/
 
 		return pessoasIncluir;
 	}

@@ -140,6 +140,7 @@
 											<tr>
 												<th>MATRÍCULA</th>
 												<th>NOME</th>
+												<th>SEXO</th>
 												<th>IDADE</th>
 
 												<th th:each="prova, iterProvas : ${tipo.provas}"><span
@@ -157,6 +158,8 @@
 													th:if="${resultado.tipoTeste.id}==${tipo.id}">Matricula</td>
 												<td th:text="${resultado.pessoa.nome}"
 													th:if="${resultado.tipoTeste.id}==${tipo.id}">Nome</td>
+												<td th:text="${resultado.pessoa.sexo.abreviacao}"
+													th:if="${resultado.tipoTeste.id}==${tipo.id}">Sexo</td>
 												<td th:text="${resultado.idade}"
 													th:if="${resultado.tipoTeste.id}==${tipo.id}">Idade</td>
 
