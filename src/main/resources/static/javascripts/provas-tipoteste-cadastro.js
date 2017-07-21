@@ -32,7 +32,7 @@ Brewer.ProvaTipoCadastro = (function() {
 		
 		this.containerMensagemErro.addClass('hidden');
 		this.form.find('.form-group').removeClass('has-error');
-		this.modal.modal('toggle');
+		this.modal.modal('hide');
 		
 		
        
@@ -65,8 +65,8 @@ Brewer.ProvaTipoCadastro = (function() {
 	function onEstiloSalvo(estilo) {
 		
 		var corpoTabela = $('#tabelaProvasBlock');
-		$("#tabelaProvasBlock").load('/tiposTeste/atualizaProvas');
-		$("#blocoModalProva").load('/tiposTeste/atualizaModal');
+		//$("#tabelaProvasBlock").load('/tiposTeste/atualizaProvas');
+		//$("#blocoModalProva").load('/tiposTeste/atualizaModal');
 		
 		
 		//this.modal.modal('hide');
@@ -75,7 +75,7 @@ Brewer.ProvaTipoCadastro = (function() {
 	    // Delegated events because we make a copy, and the copied button does not exist onDomReady
 		 	
 	    
-		$.getScript('/javascripts/dialogo-excluir-ajax.js');
+		//$.getScript('/javascripts/dialogo-excluir-ajax.js');
 	
 		//$.getScript('/layout/javascripts/algaworks.min.js');
 		
@@ -94,7 +94,7 @@ Brewer.ProvaTipoCadastro = (function() {
 								'</tr>');
 		comboEstilo.val(estilo.id);*/
 		
-		//location.reload();
+		location.reload();
 	}
 	
 	return ProvaTipoCadastro;

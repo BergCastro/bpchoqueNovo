@@ -80,6 +80,8 @@ public class ResultadoTeste {
 	private String valorProva6;
 
 	private Double pontuacaoProva6;
+	
+	private Integer idade;
 
 
 	private Double notaFinal;

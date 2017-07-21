@@ -1,5 +1,6 @@
 package br.com.fireware.bpchoque.service.def;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +67,7 @@ public class TesteFisicoService {
 		Prova prova;
 		Integer idProvas = 0;
 		Integer auxProvas = 0;
+		Integer idadeDoAno = PessoaDef.idadeAvaliacao(pessoa.getDatanasc());
 		// System.out.println("Teste Fisico: "+testeFisico.getTipos());
 		for (int i = 0; i < testeFisico.getTipos().size(); i++) {
 			auxProvas = 0;
@@ -81,6 +83,8 @@ public class TesteFisicoService {
 			resultadoPronto.setPontuacaoProva4(0.00);
 			resultadoPronto.setPontuacaoProva5(0.00);
 			resultadoPronto.setPontuacaoProva6(0.00);
+			resultadoPronto.setIdade(idadeDoAno);
+			
 
 			Integer qtdCalculoMedia = testeFisico.getTipos().get(i).getQtdProvasMedia();
 			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
@@ -99,7 +103,7 @@ public class TesteFisicoService {
 						resultadoPronto.setPontuacaoProva1(0.00);
 					}
 				} else {
-					resultadoPronto.setPontuacaoProva1(calculaPontuacao(prova, resultadoPronto.getValorProva1(), 35));
+					resultadoPronto.setPontuacaoProva1(calculaPontuacao(prova, resultadoPronto.getValorProva1(), idadeDoAno));
 				}
 
 				idProvas++;
@@ -123,7 +127,7 @@ public class TesteFisicoService {
 						resultadoPronto.setPontuacaoProva2(0.00);
 					}
 				} else {
-					resultadoPronto.setPontuacaoProva2(calculaPontuacao(prova, resultadoPronto.getValorProva2(), 35));
+					resultadoPronto.setPontuacaoProva2(calculaPontuacao(prova, resultadoPronto.getValorProva2(), idadeDoAno));
 				}
 
 				idProvas++;
@@ -146,7 +150,7 @@ public class TesteFisicoService {
 						resultadoPronto.setPontuacaoProva3(0.00);
 					}
 				} else {
-					resultadoPronto.setPontuacaoProva3(calculaPontuacao(prova, resultadoPronto.getValorProva3(), 35));
+					resultadoPronto.setPontuacaoProva3(calculaPontuacao(prova, resultadoPronto.getValorProva3(), idadeDoAno));
 				}
 
 				idProvas++;
@@ -169,7 +173,7 @@ public class TesteFisicoService {
 						resultadoPronto.setPontuacaoProva4(0.00);
 					}
 				} else {
-					resultadoPronto.setPontuacaoProva4(calculaPontuacao(prova, resultadoPronto.getValorProva4(), 35));
+					resultadoPronto.setPontuacaoProva4(calculaPontuacao(prova, resultadoPronto.getValorProva4(), idadeDoAno));
 				}
 
 				idProvas++;
@@ -192,7 +196,7 @@ public class TesteFisicoService {
 						resultadoPronto.setPontuacaoProva5(0.00);
 					}
 				} else {
-					resultadoPronto.setPontuacaoProva5(calculaPontuacao(prova, resultadoPronto.getValorProva5(), 35));
+					resultadoPronto.setPontuacaoProva5(calculaPontuacao(prova, resultadoPronto.getValorProva5(), idadeDoAno));
 				}
 
 				idProvas++;
@@ -214,7 +218,7 @@ public class TesteFisicoService {
 						resultadoPronto.setPontuacaoProva6(0.00);
 					}
 				} else {
-					resultadoPronto.setPontuacaoProva6(calculaPontuacao(prova, resultadoPronto.getValorProva6(), 35));
+					resultadoPronto.setPontuacaoProva6(calculaPontuacao(prova, resultadoPronto.getValorProva6(), idadeDoAno));
 				}
 
 				idProvas++;
@@ -222,7 +226,7 @@ public class TesteFisicoService {
 			}
 			resultadoPronto.setNotaFinal(((resultadoPronto.getPontuacaoProva1() + resultadoPronto.getPontuacaoProva2()
 					+ resultadoPronto.getPontuacaoProva3() + resultadoPronto.getPontuacaoProva4()
-					+ resultadoPronto.getPontuacaoProva5()+resultadoPronto.getPontuacaoProva6()) / testeFisico.getTipos().get(i).getProvas().size()));
+					+ resultadoPronto.getPontuacaoProva5()+resultadoPronto.getPontuacaoProva6()) / testeFisico.getTipos().get(i).getQtdProvasMedia()));
 			// System.out.println("calculaMédia: "+qtdCalculoMedia);
 			resultadoTesteService.save(resultadoPronto);
 		}
@@ -263,16 +267,7 @@ public class TesteFisicoService {
 				}
 				for (int i = faixaInicioPontuacao; i <= (referenciaFinalMasc - (referenciaInicialMasc - 1))
 						/ intervaloReferencia; i++) {
-					/*
-					 * System.out.println("Valor: " + valor);
-					 * System.out.println("Idade: " + idade);
-					 * System.out.println("FaixaIdade: " +
-					 * auxIdade+"-"+(auxIdade+intervaloIdade) );
-					 * System.out.println("AuxReferencia: " + auxReferencia);
-					 * System.out.println("AuxResultado: " + auxResultado);
-					 * System.out.println("AuxMaxREferencia: " +
-					 * auxMaxRefIdade);
-					 */
+					
 					if (valor.equals("0")) {
 						resultado = 0.00;
 						paraLoop = true;
@@ -593,7 +588,7 @@ public class TesteFisicoService {
 			valorFormatado = formataSegundos(valor);
 			faixaInicioPontuacao = 7;
 			Double auxResultado = 10.00;
-			Double auxReferencia = 9.00;
+			Double auxReferencia = 900.00;
 			Integer auxIdade = idadeInicial;
 			Double auxMaxRefIdade = referenciaFinalMasc;
 
@@ -604,7 +599,16 @@ public class TesteFisicoService {
 				}
 				for (int i = faixaInicioPontuacao; i <= (referenciaInicialMasc
 						- (referenciaFinalMasc - intervaloReferencia)) / intervaloReferencia; i++) {
-
+					
+					 System.out.println("Valor: " + valor);
+					 System.out.println("Idade: " + idade);
+					 System.out.println("FaixaIdade: " +
+					 auxIdade+"-"+(auxIdade+intervaloIdade) );
+					 System.out.println("AuxReferencia: " + auxReferencia);
+					 System.out.println("AuxResultado: " + auxResultado);
+					 System.out.println("AuxMaxREferencia: " +
+					  auxMaxRefIdade);
+					 
 					if (valorFormatado <= referenciaFinalMasc) {
 						resultado = 100.00;
 						paraLoop = true;

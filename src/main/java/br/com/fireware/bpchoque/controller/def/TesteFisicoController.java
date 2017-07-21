@@ -89,8 +89,10 @@ public class TesteFisicoController {
 	public ModelAndView tiposTeste() {
 
 		Iterable<TesteFisico> todosTestes = testeFisicoService.findAll();
+		
 		ModelAndView mv = new ModelAndView("testesFisicos/TestesFisicos");
 		mv.addObject("testes", todosTestes);
+		
 
 		return mv;
 	}

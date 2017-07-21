@@ -41,8 +41,8 @@ Bpchoque.DialogoExcluir = (function() {
 	}
 	
 	function onExcluidoSucesso() {
-		$("#tabelaProvasBlock").load('/tiposTeste/atualizaProvas');
-		$.getScript('/javascripts/dialogo-excluir-ajax.js');
+		//$("#tabelaProvasBlock").load('/tiposTeste/atualizaProvas');
+		//$.getScript('/javascripts/dialogo-excluir-ajax.js');
 		/*var urlAtual = window.location.href;
 		var separador = urlAtual.indexOf('?') > -1 ? '&' : '?';
 		var novaUrl = urlAtual.indexOf('excluido') > -1 ? urlAtual : urlAtual + separador + 'excluido';
@@ -50,7 +50,7 @@ Bpchoque.DialogoExcluir = (function() {
 		window.location = novaUrl;*/
 		//$("#resultsBlock").load('/testesFisicos/resultados');
 		//$("#javascriptBloco").load('/testesFisicos/atualizaJavaScript');
-		//location.reload();
+		location.reload();
 		
 	}
 	
