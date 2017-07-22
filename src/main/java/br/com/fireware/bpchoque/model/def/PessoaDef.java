@@ -113,7 +113,7 @@ public class PessoaDef {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate datanasc;
 
-	@NotNull(message = "A altura não pode estar em branco")
+	//@NotNull(message = "A altura não pode estar em branco")
 	private Double altura;
 
 	@Email(message = "Insira um email válido!")
@@ -126,7 +126,7 @@ public class PessoaDef {
 	@Column(name = "tipo")
 	private TipoPessoa tipo;
 
-	@NotNull(message = "Uma etnia deve ser selecionada!")
+	//@NotNull(message = "Uma etnia deve ser selecionada!")
 	@Enumerated(EnumType.STRING)
 	@Column(name = "etnia")
 	private Etnia etnia;
