@@ -1,1 +1,0 @@
-ALTER TABLE resultados_teste ADD idade INT(10);  

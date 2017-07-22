@@ -15,12 +15,13 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import br.com.fireware.bpchoque.model.Cerveja;
-import br.com.fireware.bpchoque.repository.Cervejas;
+import br.com.fireware.bpchoque.model.Cargo;
+
+
 
 @Configuration
-@ComponentScan(basePackageClasses = Cervejas.class)
-@EnableJpaRepositories(basePackageClasses = Cervejas.class, enableDefaultTransactions = false)
+@ComponentScan(basePackageClasses = Cargo.class)
+@EnableJpaRepositories(basePackageClasses = Cargo.class, enableDefaultTransactions = false)
 @EnableTransactionManagement
 public class JPAConfig {
 
@@ -39,7 +40,7 @@ public class JPAConfig {
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 		factory.setDataSource(dataSource);
 		factory.setJpaVendorAdapter(jpaVendorAdapter);
-		factory.setPackagesToScan(Cerveja.class.getPackage().getName());
+		factory.setPackagesToScan(Cargo.class.getPackage().getName());
 		factory.setMappingResources("sql/consultas-nativas.xml");
 		factory.afterPropertiesSet();
 		return factory.getObject();

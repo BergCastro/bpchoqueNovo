@@ -16,9 +16,9 @@ import br.com.fireware.bpchoque.model.def.PessoaDef;
 import br.com.fireware.bpchoque.model.def.ResultadoTeste;
 import br.com.fireware.bpchoque.model.def.TesteFisico;
 
-import br.com.fireware.bpchoque.repository.Cervejas;
+
 import br.com.fireware.bpchoque.repository.Clientes;
-import br.com.fireware.bpchoque.repository.Vendas;
+
 import br.com.fireware.bpchoque.repository.def.AvaliacaoIndividualRepository;
 import br.com.fireware.bpchoque.repository.def.AvaliadorRepository;
 import br.com.fireware.bpchoque.repository.def.DoacaoRepository;
@@ -29,11 +29,7 @@ import br.com.fireware.bpchoque.repository.def.TesteFisicoRepository;
 @Controller
 public class DashboardController {
 
-	@Autowired
-	private Vendas vendas;
 	
-	@Autowired
-	private Cervejas cervejas;
 	
 	@Autowired
 	private PessoaDefRepository pessoas;
@@ -57,11 +53,7 @@ public class DashboardController {
 	public ModelAndView dashboard() {
 		ModelAndView mv = new ModelAndView("Dashboard");
 		
-		mv.addObject("vendasNoAno", vendas.valorTotalNoAno());
-		mv.addObject("vendasNoMes", vendas.valorTotalNoMes());
-		mv.addObject("ticketMedio", vendas.valorTicketMedioNoAno());
 		
-		mv.addObject("valorItensEstoque", cervejas.valorItensEstoque());
 		mv.addObject("totalPessoas", pessoas.count());
 		mv.addObject("testesColetivos", testeFisicoRepository.count());
 		mv.addObject("testesIndividuais", testesIndividuais.count());

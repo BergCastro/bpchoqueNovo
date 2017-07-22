@@ -22,6 +22,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
@@ -131,10 +132,7 @@ public class PessoaDef {
 	private Etnia etnia;
 
 	@NotEmpty(message = "A matrícula não pode estar vazia!")
-	// @Digits(integer = 9, fraction = 0, message = "Digite apenas números neste
-	// campo!")
-	// @Length(max = 10, min = 10, message = "A matrícula tem que ter {max}
-	// caracteres")
+	
 	@Column(name = "matricula", nullable = false, length = 15, unique = true)
 	private String matricula;
 

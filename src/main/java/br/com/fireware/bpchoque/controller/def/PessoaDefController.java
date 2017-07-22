@@ -90,6 +90,18 @@ public class PessoaDefController {
 			
 			return CADASTRO_PESSOA;
 		}
+		PessoaDef pessoaIncluir = pessoa;
+		List<PessoaDef> pessoasCadastradas = pessoaDefService.findAll();
+		for(int i =0; i < pessoasCadastradas.size(); i++){
+			if(pessoasCadastradas.get(i).getMatricula().equals(pessoaIncluir.getMatricula())){
+				
+				errors.rejectValue("matricula", null, "Matrícula já cadastrada!");
+				return CADASTRO_PESSOA;
+			}
+			
+		}
+		
+		
 		
 	/*	Locale BRAZIL = new Locale("pt", "BR");
 		LocalDate dataNascimento = LocalDate.parse(data.toString(), DateTimeFormatter.ofPattern("dd/MM/yyyy").withLocale(BRAZIL));

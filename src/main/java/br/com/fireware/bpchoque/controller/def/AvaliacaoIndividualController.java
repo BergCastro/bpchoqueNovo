@@ -27,7 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import br.com.fireware.bpchoque.model.def.PessoaDef;
-import br.com.fireware.bpchoque.model.Estilo;
+
 import br.com.fireware.bpchoque.model.def.AvaliacaoIndividual;
 import br.com.fireware.bpchoque.model.def.Avaliador;
 import br.com.fireware.bpchoque.model.def.AvaliacaoIndividual.Duracao;
