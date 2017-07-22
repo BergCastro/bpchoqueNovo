@@ -37,6 +37,7 @@ INSERT INTO opms_orgaos(criadopor, nome, tipo, localizacao) VALUES ('fireberg250
 INSERT INTO opms_orgaos(criadopor, nome, tipo, localizacao) VALUES ('fireberg2500@hotmail.com','4ªCIA-CPCAES/BPChoque', 'MILITAR', "");
 INSERT INTO opms_orgaos(criadopor, nome, tipo, localizacao) VALUES ('fireberg2500@hotmail.com','5ªCIA-COTAR/BPChoque', 'MILITAR', "");
 
+
 INSERT INTO opms_orgaos(criadopor, nome, tipo, localizacao) VALUES ('fireberg2500@hotmail.com','1ªCIA/BPTUR', 'MILITAR', "");
 INSERT INTO opms_orgaos(criadopor, nome, tipo, localizacao) VALUES ('fireberg2500@hotmail.com','2ªCIA/BPTUR', 'MILITAR', "");
 INSERT INTO opms_orgaos(criadopor, nome, tipo, localizacao) VALUES ('fireberg2500@hotmail.com','3ªCIA/BPTUR', 'MILITAR', "");
@@ -166,3 +167,7 @@ INSERT INTO opms_orgaos(criadopor, nome, tipo, localizacao) VALUES ('fireberg250
 INSERT INTO opms_orgaos(criadopor, nome, tipo, localizacao) VALUES ('fireberg2500@hotmail.com','CGP', 'MILITAR', "");
 INSERT INTO opms_orgaos(criadopor, nome, tipo, localizacao) VALUES ('fireberg2500@hotmail.com','CIOPS', 'MILITAR', "");
 INSERT INTO opms_orgaos(criadopor, nome, tipo, localizacao) VALUES ('fireberg2500@hotmail.com','DIVISAS', 'MILITAR', "");
+
+INSERT INTO opms_orgaos(criadopor, nome, tipo, localizacao) VALUES ('fireberg2500@hotmail.com','PCS/BPCHOQUE', 'MILITAR', "");
+
+INSERT INTO opms_orgaos(criadopor, nome, tipo, localizacao) VALUES ('fireberg2500@hotmail.com','CPE', 'MILITAR', "");
