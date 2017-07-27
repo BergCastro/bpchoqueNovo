@@ -52,6 +52,10 @@ public class TipoTeste {
 	private String descricao;
 	@NotNull(message="O número de provas para a média não pode está vazio!")
 	private Integer qtdProvasMedia;
+	
+	private Boolean variaIdade;
+	
+	private Boolean variaSexo;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "tiposteste_provas", joinColumns = @JoinColumn(name = "tipoTesteId"), inverseJoinColumns = @JoinColumn(name = "provaId"))

@@ -95,6 +95,7 @@ public class TesteFisicoService {
 			Integer qtdCalculoMedia = testeFisico.getTipos().get(i).getQtdProvasMedia();
 			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
 				prova = provaService.findById(resultado.getProvas().get(idProvas));
+				//resultadoPronto.setProva1(prova.getId());
 				resultadoPronto.setTipoPontuacaoProva1(prova.getTipo() + "");
 				if (prova.getTipo() == CampoTipo.TEMPO_MIN) {
 					resultadoPronto.setValorProva1(resultado.getValores().get(idProvas) + "''");
@@ -119,6 +120,7 @@ public class TesteFisicoService {
 			}
 			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
 				prova = provaService.findById(resultado.getProvas().get(idProvas));
+				//resultadoPronto.setProva2(prova.getId());
 				resultadoPronto.setTipoPontuacaoProva2(prova.getTipo() + "");
 
 				if (prova.getTipo() == CampoTipo.TEMPO_MIN) {
@@ -144,6 +146,7 @@ public class TesteFisicoService {
 
 			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
 				prova = provaService.findById(resultado.getProvas().get(idProvas));
+				//resultadoPronto.setProva3(prova.getId());
 				resultadoPronto.setTipoPontuacaoProva3(prova.getTipo() + "");
 				if (prova.getTipo() == CampoTipo.TEMPO_MIN) {
 					resultadoPronto.setValorProva3(resultado.getValores().get(idProvas) + "''");
@@ -168,6 +171,7 @@ public class TesteFisicoService {
 			}
 			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
 				prova = provaService.findById(resultado.getProvas().get(idProvas));
+				//resultadoPronto.setProva4(prova.getId());
 				resultadoPronto.setTipoPontuacaoProva4(prova.getTipo() + "");
 				if (prova.getTipo() == CampoTipo.TEMPO_MIN) {
 					resultadoPronto.setValorProva4(resultado.getValores().get(idProvas) + "''");
@@ -192,6 +196,7 @@ public class TesteFisicoService {
 
 			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
 				prova = provaService.findById(resultado.getProvas().get(idProvas));
+				//resultadoPronto.setProva5(prova.getId());
 				resultadoPronto.setTipoPontuacaoProva5(prova.getTipo() + "");
 				if (prova.getTipo() == CampoTipo.TEMPO_MIN) {
 					resultadoPronto.setValorProva5(resultado.getValores().get(idProvas) + "''");
@@ -215,6 +220,7 @@ public class TesteFisicoService {
 			}
 			if (testeFisico.getTipos().get(i).getProvas().size() >= auxProvas + 1) {
 				prova = provaService.findById(resultado.getProvas().get(idProvas));
+				//resultadoPronto.setProva6(idProvas:L);
 				resultadoPronto.setTipoPontuacaoProva6(prova.getTipo() + "");
 				if (prova.getTipo() == CampoTipo.TEMPO_MIN) {
 					resultadoPronto.setValorProva6(resultado.getValores().get(idProvas) + "''");

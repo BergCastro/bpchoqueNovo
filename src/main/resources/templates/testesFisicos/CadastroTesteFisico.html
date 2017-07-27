@@ -92,8 +92,8 @@
 
 									<td class="text-center"><a class="btn btn-link btn-xs"
 										th:href="@{/relatorios/testesPorTipo/{idTeste}/{idTipo}(idTipo=${tipo.id}, idTeste=*{id})}"
-										title="Relatório" rel="tooltip" data-placement="top" target="_blank"> <span
-											class="glyphicon glyphicon-print"></span>
+										title="Relatório" rel="tooltip" data-placement="top"
+										target="_blank"> <span class="glyphicon glyphicon-print"></span>
 									</a><a class="btn btn-link btn-xs" data-toggle="modal"
 										data-target="#myModalExclusaoTipo"
 										th:attr="data-id=${tipo.id}, data-nome=${tipo.nome}"
@@ -140,8 +140,8 @@
 											<tr>
 												<th>MATRÍCULA</th>
 												<th>NOME</th>
-												<th>SEXO</th>
-												<th>IDADE</th>
+												<th th:if=${tipo.variaSexo}>SEXO</th>
+												<th th:if=${tipo.variaIdade}>IDADE</th>
 
 												<th th:each="prova, iterProvas : ${tipo.provas}"><span
 													th:utext="${prova.nome}"></span></th>
@@ -158,10 +158,10 @@
 													th:if="${resultado.tipoTeste.id}==${tipo.id}">Matricula</td>
 												<td th:text="${resultado.pessoa.nome}"
 													th:if="${resultado.tipoTeste.id}==${tipo.id}">Nome</td>
-												<td th:text="${resultado.pessoa.sexo.abreviacao}"
-													th:if="${resultado.tipoTeste.id}==${tipo.id}">Sexo</td>
+												<td  th:text="${resultado.pessoa.sexo.abreviacao}"
+													th:if="${resultado.tipoTeste.id}==${tipo.id} and ${tipo.variaSexo}">Sexo</td>
 												<td th:text="${resultado.idade}"
-													th:if="${resultado.tipoTeste.id}==${tipo.id}">Idade</td>
+													th:if="${resultado.tipoTeste.id}==${tipo.id} and ${tipo.variaIdade}">Idade</td>
 
 												<td
 													th:text="|${resultado.valorProva1} -- ${resultado.pontuacaoProva1} pts|"
@@ -245,8 +245,8 @@
 												<td
 													th:text="|${resultado.valorProva5} -- ${resultado.pontuacaoProva5} pts|"
 													th:if="${tipo.qtdProvas}>=5 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva5}=='TENTATIVA'">Nome</td>
-												
-												
+
+
 												<td
 													th:text="|${resultado.valorProva6} -- ${resultado.pontuacaoProva6} pts|"
 													th:if="${tipo.qtdProvas}>=6 and ${resultado.tipoTeste.id}==${tipo.id} and ${resultado.tipoPontuacaoProva6}=='INTEIRO'">Nome</td>
@@ -266,7 +266,10 @@
 												<td th:if="${resultado.tipoTeste.id}==${tipo.id}"
 													th:text="${resultado.notaFinal}">Nota</td>
 												<td class="text-center"
-													th:if="${resultado.tipoTeste.id}==${tipo.id}"><a
+													th:if="${resultado.tipoTeste.id}==${tipo.id}"><a class="btn-editar"
+													href="#" th:attr="data-resultado=${resultado.id}"> <i
+														class="glyphicon  glyphicon-pencil"></i>
+												</a> <a
 													class="btn  btn-link  btn-xs  js-tooltip  js-exclusao-btn"
 													th:title="Excluir" href="#"
 													th:attr="data-url=@{/testesFisicos/deleteResultado/{id}(id=${resultado.id})}, data-objeto=|o resultado de ${resultado.pessoa.nome}|">
@@ -327,8 +330,8 @@
 									</table>
 									<div class="bw-field-action__icon">
 										<a href="#" data-toggle="modal"
-											data-target="#modalAdicionaMembroComissao">
-											<i class="glyphicon  glyphicon-plus-sign"></i> <span
+											data-target="#modalAdicionaMembroComissao"> <i
+											class="glyphicon  glyphicon-plus-sign"></i> <span
 											class="hidden-xs  hidden-sm">Adicionar Membro</span>
 										</a>
 									</div>
@@ -358,123 +361,14 @@
 		</div>
 
 		<div th:replace="testesFisicos/AdicionaTipoTeste :: modalAdicionaTipo"></div>
-		<!-- <div th:replace="testesFisicos/EditaResultado :: modalEditaResultado"></div> -->
+		<div th:replace="testesFisicos/AdicionaResultado :: modalAdicionaResultado"></div>
+		
+		
+		<div   th:replace="testesFisicos/EditaResultado :: modalEditaResultado"></div>
+		
+		
 
-
-		<div class="modal fade" id="modalAdicionaResultado" tabindex="-1"
-			role="dialog">
-			<div class="modal-dialog  ">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h4 class="modal-title">Inclusão de Resultado</h4>
-					</div>
-
-					<div class="modal-body">
-						<div
-							class="alert  alert-danger  hidden  js-mensagem-cadastro-prova"
-							role="alert"></div>
-
-						<form th:action="@{/testesFisicos/resultadoNovo}" method="post">
-							<div class="row">
-								<div id="modaisBloco">
-									<div th:fragment="modaisFrag">
-										<div class="form-group col-sm-12">
-											<label for="participante" class="control-label">PARTICIPANTE</label>
-											<select title="Selecione um participante..."
-												id="participante" class="form-control"
-												th:classappend="selectpicker" data-live-search="true">
-												<option value=""></option>
-												<option th:each="pessoa : ${pessoasIncluir}"
-													th:value="${pessoa.id}"
-													th:text="|${pessoa.matricula} - ${pessoa.nome}|"></option>
-
-											</select>
-
-
-										</div>
-										<div class="form-group col-sm-12">
-											<input th:id="qtdProvas" type="hidden" class="form-control"
-												th:value="${qtdProvas}">
-										</div>
-										<div th:each="tipo, iter : ${tipos}">
-											<div class="form-group col-sm-12"
-												th:each="prova, iterProva : ${tipo.provas}">
-												<div th:if="${prova.tipo.descricao}=='Inteiro'">
-													<input th:id="${iter.index}" type="hidden"
-														class="input-id-prova form-control" th:value="${prova.id}">
-													<label class="control-label" th:for="${prova.id}"
-														th:text="${prova.nome}"></label> <input
-														th:id="${iterProva.index}" type="text"
-														class="input-prova form-control">
-												</div>
-												<div th:if="${prova.tipo.descricao}=='Tentativa'">
-													<input th:id="${iter.index}" type="hidden"
-														class="input-id-prova form-control" th:value="${prova.id}">
-													<label class="control-label" th:for="${prova.id}"
-														th:text="${prova.nome}"></label> <select
-														title="Selecione um participante..."
-														th:id="${iterProva.index}"
-														class="input-prova form-control">
-														<option value="Apto - 1ª">Apto -
-															Primeira Tentativa</option>
-														<option value="Apto - 2ª">Apto -
-															Segunda Tentativa</option>
-														<option value="Apto - 3ª">Apto -
-															Terceira Tentativa</option>
-														<option value="Inapto">Inapto</option>
-
-													</select>
-												</div>
-												<div th:if="${prova.tipo.descricao}=='Tempo (s)'">
-													<input th:id="${iter.index}" type="hidden"
-														class="input-id-prova form-control" th:value="${prova.id}">
-													<label class="control-label" th:for="${prova.id}"
-														th:text="${prova.nome}"></label> <input
-														th:id="${iterProva.index}" type="text"
-														class="input-prova form-control js-time">
-												</div>
-												<div th:if="${prova.tipo.descricao}=='Tempo (m)'">
-													<input th:id="${iter.index}" type="hidden"
-														class="input-id-prova form-control" th:value="${prova.id}">
-													<label class="control-label" th:for="${prova.id}"
-														th:text="${prova.nome}"></label> <input
-														th:id="${iterProva.index}" type="text"
-														class="input-prova form-control js-time-min">
-												</div>
-												<div th:if="${prova.tipo.descricao}=='Apto / Inapto'">
-													<input th:id="${iter.index}" type="hidden"
-														class="input-id-prova form-control" th:value="${prova.id}">
-													<label th:for="${prova.id}" class="control-label"
-														th:text="${prova.nome}"> </label> <select
-														th:id="${iter.index}" name="tipoCampo"
-														class="input-prova form-control">
-														<option value="">Selecione uma opção</option>
-														<option th:each="resultado : ${resultadosBooleanos}"
-															th:value="${resultado.descricao}"
-															th:text="${resultado.descricao}"></option>
-													</select>
-												</div>
-
-
-											</div>
-										</div>
-
-									</div>
-								</div>
-							</div>
-						</form>
-
-						<button type="button"
-							class="btn  btn-primary  js-modal-cadastro-resultado-salvar-btn">Adicionar</button>
-						<button type="button" class="btn  btn-default"
-							data-dismiss="modal">Cancelar</button>
-					</div>
-				</div>
-			</div>
-		</div>
+		
 		<!-- fim do modal -->
 
 
@@ -495,6 +389,7 @@
 		<script th:src="@{/javascripts/vendors/uikit.min.js}"></script>
 		<script th:src="@{/javascripts/provas-tipoteste-cadastro.js}"></script>
 		<script th:src="@{/javascripts/resultado-teste-cadastro.js}"></script>
+		<script th:src="@{/javascripts/resultado-edita.js}"></script>
 		<script th:src="@{/javascripts/bpchoque.js}"></script>
 		<script th:src="@{/javascripts/pesquisa/bootstrap-select.js}"></script>
 		<script th:src="@{/javascripts/formata-campo-tempo.js}"></script>

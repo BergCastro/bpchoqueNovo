@@ -20,7 +20,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
-
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,7 +37,7 @@ import br.com.fireware.bpchoque.model.def.Prova.AptoInapto;
 import br.com.fireware.bpchoque.security.UsuarioSistema;
 
 import br.com.fireware.bpchoque.model.def.PessoaDef;
-
+import br.com.fireware.bpchoque.model.def.Prova;
 import br.com.fireware.bpchoque.model.def.Resultado;
 import br.com.fireware.bpchoque.model.def.ResultadoTeste;
 import br.com.fireware.bpchoque.model.def.TesteFisico;
@@ -152,16 +152,79 @@ public class TesteFisicoController {
 		return "testesFisicos/CadastroTesteFisico :: resultadosFrag";
 	}
 	
-	@RequestMapping("/atualizaModais")
-	public String atualizaModais(Model model) {
-		System.out.println("Entrou no atualiza modais");
-		List<ResultadoTeste> resultados = resultadoTesteService.findByTeste(testeFisico);
-		System.out.println("Entrou no atualizaModais");
-		model.addAttribute("resultados", resultados);
+	@GetMapping("/atualizaEditaResultado/{id}")
+	public String atualizaEditaResultado(Model model, @PathVariable Long id) {
+		System.out.println("Entrou no atualiza edita resultado");
+		System.out.println("teste"+id);
+		ResultadoTeste resultado = resultadoTesteService.findById(id);
+		Prova prova1 = null;
+		Prova prova2 = null;
+		Prova prova3 = null;
+		Prova prova4 = null;
+		Prova prova5 = null;
+		Prova prova6 = null;
+		List<String> valores = new ArrayList<String>();
+		valores.add(resultado.getValorProva1());
+		
+		if(resultado.getProva1() != null){
+			prova1 = provaService.findById(resultado.getProva1());
+			model.addAttribute("nomeProva1", prova1.getNome());
+			model.addAttribute("valorProva1", resultado.getValorProva1());
+		}else{
+			model.addAttribute("nomeProva1", "");
+			model.addAttribute("valorProva1", "");
+		}
+		if(resultado.getProva2() != null){
+			prova2 = provaService.findById(resultado.getProva2());
+			model.addAttribute("nomeProva2", prova2.getNome());
+			model.addAttribute("valorProva2", resultado.getValorProva2());
+		}else{
+			model.addAttribute("nomeProva2", "");
+			model.addAttribute("valorProva2", "");
+		}
+		if(resultado.getProva3() != null){
+			prova3 = provaService.findById(resultado.getProva3());
+			model.addAttribute("nomeProva3", prova3.getNome());
+			model.addAttribute("valorProva3", resultado.getValorProva3());
+		}else{
+			model.addAttribute("nomeProva3", "");
+			model.addAttribute("valorProva3", "");
+		}
+		if(resultado.getProva4() != null){
+			prova4 = provaService.findById(resultado.getProva4());
+			model.addAttribute("nomeProva4", prova4.getNome());
+			model.addAttribute("valorProva4", resultado.getValorProva4());
+		}else{
+			model.addAttribute("nomeProva4", "");
+			model.addAttribute("valorProva4", "");
+		}
+		if(resultado.getProva5() != null){
+			prova5 = provaService.findById(resultado.getProva5());
+			model.addAttribute("nomeProva5", prova5.getNome());
+			model.addAttribute("valorProva5", resultado.getValorProva5());
+		}else{
+			model.addAttribute("nomeProva5", "");
+			model.addAttribute("valorProva5", "");
+		}
+		if(resultado.getProva6() != null){
+			prova6 = provaService.findById(resultado.getProva6());
+			model.addAttribute("nomeProva6", prova6.getNome());
+			model.addAttribute("valorProva6", resultado.getValorProva6());
+		}else{
+			model.addAttribute("nomeProva6", "");
+			model.addAttribute("valorProva6", "");
+		}
+		
+		
+		
+		model.addAttribute("resultado", resultado);
+		
+		
+		
 		model.addAttribute("tipos", testeFisico.getTipos());
-		model.addAttribute("pessoasIncluir", testeFisicoService.pessoasIncluir(resultados));
-		System.out.println(testeFisicoService.pessoasIncluir(resultados).size());
-		return "testesFisicos/CadastroTesteFisico :: modaisFrag";
+		
+		
+		return "testesFisicos/EditaResultado :: corpoModalEditaFrag";
 	}
 	
 	@RequestMapping("/atualizaJavaScript")
