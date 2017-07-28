@@ -54,6 +54,7 @@ import br.com.fireware.bpchoque.service.def.TipoTesteService;
 public class TesteFisicoController {
 
 	private static final String CADASTRO_TESTE_FISICO = "testesFisicos/CadastroTesteFisico";
+	private static final String EDITAR_RESULTADO = "testesFisicos/EditaResultadoSemModal";
 	
 
 	@Autowired
@@ -382,6 +383,21 @@ public class TesteFisicoController {
 		mv.addObject("resultadosBooleanos", AptoInapto.values());
 		mv.addObject("temTipo", temTipo);
 
+		return mv;
+	}
+	
+	@GetMapping("/editaResultadoTemp/{id}")
+	public ModelAndView editaResultadoTemp(@PathVariable Long id) {
+		ModelAndView mv = new ModelAndView(EDITAR_RESULTADO);
+		
+		ResultadoTeste resultado = resultadoTesteService.findById(id);
+		
+		
+		
+		mv.addObject("resultado", resultado);
+		
+		
+		
 		return mv;
 	}
 

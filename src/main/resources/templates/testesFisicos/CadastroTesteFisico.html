@@ -266,8 +266,8 @@
 												<td th:if="${resultado.tipoTeste.id}==${tipo.id}"
 													th:text="${resultado.notaFinal}">Nota</td>
 												<td class="text-center"
-													th:if="${resultado.tipoTeste.id}==${tipo.id}"><a class="btn-editar"
-													href="#" th:attr="data-resultado=${resultado.id}"> <i
+													th:if="${resultado.tipoTeste.id}==${tipo.id}"><a class="btn-editar2"
+													th:href="@{/testesFisicos/editaResultadoTemp/{id}(id=${resultado.id})}" th:attr="data-resultado=${resultado.id}"> <i
 														class="glyphicon  glyphicon-pencil"></i>
 												</a> <a
 													class="btn  btn-link  btn-xs  js-tooltip  js-exclusao-btn"

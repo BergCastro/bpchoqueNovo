@@ -109,6 +109,7 @@ public class RelatoriosController {
 		parametros.put("teste", idTeste);
 		parametros.put("tipo", idTipo);
 		parametros.put("notaAprovacao", teste.getNotaAprovacao());
+		parametros.put("objetivo", teste.getObjetivo());
 		parametros.put("nomeTipo", tipo.getNome());
 		return new ModelAndView("relatorio_teste_tipo", parametros);
 	}

@@ -17,6 +17,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.persistence.JoinColumn;
 
@@ -51,6 +52,7 @@ public class TipoTeste {
 	//@NotBlank(message="Uma descrição deve ser inserida!")
 	private String descricao;
 	@NotNull(message="O número de provas para a média não pode está vazio!")
+	@Min(value=1, message="O valor não pode ser abaixo 1")
 	private Integer qtdProvasMedia;
 	
 	private Boolean variaIdade;
