@@ -245,7 +245,7 @@ public class TesteFisicoService {
 			resultadoPronto.setNotaFinal(((resultadoPronto.getPontuacaoProva1() + resultadoPronto.getPontuacaoProva2()
 					+ resultadoPronto.getPontuacaoProva3() + resultadoPronto.getPontuacaoProva4()
 					+ resultadoPronto.getPontuacaoProva5() + resultadoPronto.getPontuacaoProva6())
-					/ testeFisico.getTipos().get(i).getQtdProvasMedia()));
+					/ (testeFisico.getTipos().get(i).getQtdProvasMedia()*10)));
 			// System.out.println("calculaMédia: "+qtdCalculoMedia);
 			resultadoTesteService.save(resultadoPronto);
 		}
@@ -790,6 +790,9 @@ public class TesteFisicoService {
 
 					if (valorFormatado <= referenciaFinal) {
 						resultado = 100.00;
+						if(valorFormatado == 0.00){
+							resultado = 0.00;
+						}
 						paraLoop = true;
 						break;
 
@@ -1041,7 +1044,12 @@ public class TesteFisicoService {
 
 	private Double formataSegundos(String valor) {
 		Double resultado = 0.00;
-		resultado = Double.parseDouble(valor.replace("''", ""));
+		System.out.println(valor);
+		if(valor.equals("00''00")){
+			resultado = 0.00;
+		}else{
+			resultado = Double.parseDouble(valor.replace("''", ""));
+		}
 		return resultado;
 	}
 
