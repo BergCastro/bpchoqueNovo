@@ -111,6 +111,10 @@ public class RelatoriosController {
 		parametros.put("notaAprovacao", teste.getNotaAprovacao());
 		parametros.put("objetivo", teste.getObjetivo());
 		parametros.put("nomeTipo", tipo.getNome());
+		if(tipo.getQtdProvas() == 5){
+			return new ModelAndView("relatorio_teste_tipo_5_provas", parametros);
+		}
+		
 		return new ModelAndView("relatorio_teste_tipo", parametros);
 	}
 	
